@@ -9,9 +9,11 @@ import java.util.ArrayList;
 public class RouteCollection {
 
     private ArrayList<Route> routeCollection;
+    private ArrayList<Route> hiddenRouteCollection;
 
     public RouteCollection(){
         routeCollection = new ArrayList<>();
+        hiddenRouteCollection = new ArrayList<>();
     }
 
     public void addRoute(Route route){
@@ -23,16 +25,15 @@ public class RouteCollection {
         for (Route r : routeCollection){
             if (r.getName().equals(route.getName())){
                 r.setHidden(true);
+                hiddenRouteCollection.add(r);
+                routeCollection.remove(r);
             }
         }
     }
 
-    public void deleteRoute(Route route){
-        for (Route r : routeCollection){
-            if (r.getName().equals(route.getName())){
-                routeCollection.remove(r);
-            }
-        }
+    public void editRoute(Route route, int index){
+        routeCollection.remove(index);
+        routeCollection.add(index, route);
     }
 
 

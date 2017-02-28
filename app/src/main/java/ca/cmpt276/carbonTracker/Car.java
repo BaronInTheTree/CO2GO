@@ -66,7 +66,7 @@ public class Car {
         return isHidden;
     }
 
-    public void setIsHidden(boolean hidden){
+    public void setHidden(boolean hidden){
         this.isHidden = hidden;
     }
 }

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 public class CarCollection {
     private ArrayList<Car> carCollection;
+    private ArrayList<Car> hiddenCarCollections;
 
     public CarCollection(){
         carCollection = new ArrayList<>();
+        hiddenCarCollections = new ArrayList<>();
     }
 
     public void addCar(Car car){
@@ -23,17 +25,15 @@ public class CarCollection {
     public void hideCar(Car car){
         for (Car c : carCollection){
             if (c.getNickname().equals(car.getNickname())){
-                c.setIsHidden(true);
+                c.setHidden(true);
+                hiddenCarCollections.add(c);
+                carCollection.remove(c);
             }
         }
     }
 
-    // When editing a car, create new Car from dropdown menu selections and delete old car.
-    public void deleteCar(Car car){
-        for (Car c : carCollection){
-            if (c.getNickname().equals(car.getNickname())){
-                carCollection.remove(c);
-            }
-        }
+    public void editCar(Car car, int index){
+        carCollection.remove(index);
+        carCollection.add(index, car);
     }
 }
