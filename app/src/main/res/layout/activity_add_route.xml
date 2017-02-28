@@ -10,4 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.cmpt276.carbonTracker.AddRouteActivity">
 
+    <Button
+        android:text="Save and Use this Route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveRoute_btn"
+        android:layout_marginBottom="47dp"
+        android:layout_above="@+id/useRoute_btn"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Use this Route without Saving"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/useRoute_btn"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

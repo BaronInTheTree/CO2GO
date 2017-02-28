@@ -8,19 +8,21 @@ import android.widget.Button;
 
 import com.example.sasha.carbontracker.R;
 
-public class WelcomePageActivity extends AppCompatActivity {
+public class SelectRouteActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_page);
+        setContentView(R.layout.activity_select_route);
 
-        Button btn = (Button) findViewById(R.id.enter_btn);
+        Button btn = (Button) findViewById(R.id.addRoute_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WelcomePageActivity.this, MainMenuActivity.class));
+                startActivity(new Intent(SelectRouteActivity.this, AddRouteActivity.class));
             }
         });
     }
+
 
 }
