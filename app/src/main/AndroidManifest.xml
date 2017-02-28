@@ -20,8 +20,10 @@
         <activity android:name="ca.cmpt276.carbonTracker.AddCarActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.AddRouteActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.JourneyInfoActicity" />
-        <activity android:name="ca.cmpt276.carbonTracker.FootprintTableActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.FootprintGraphActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.FootprintTableActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name="ca.cmpt276.carbonTracker.FootprintGraphActivity"
+            android:screenOrientation="landscape"/>
         <activity android:name="ca.cmpt276.carbonTracker.SelectRouteActivity"></activity>
     </application>
 

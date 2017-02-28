@@ -17,7 +17,7 @@
         android:weightSum="1">
 
         <TextView
-            android:text="Route      Distance     Vehicle     CO2 Emitted"
+            android:text="Trip Date                Route               Distance(km)           Vehicle              CO2(g)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tableTitle"
