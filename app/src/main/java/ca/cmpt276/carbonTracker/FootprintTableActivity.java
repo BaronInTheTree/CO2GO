@@ -19,14 +19,15 @@ public class FootprintTableActivity extends AppCompatActivity {
 
         populateListView();
 
-        setUpButtons();
+        setupButtons();
     }
 
-    private void setUpButtons() {
+    private void setupButtons() {
         Button toGraph_btn = (Button) findViewById(R.id.toGraph_btn);
         toGraph_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 startActivity(new Intent(FootprintTableActivity.this, FootprintGraphActivity.class));
             }
         });
