@@ -1,6 +1,7 @@
 package ca.cmpt276.carbonTracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by song on 2017-02-27.
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 
 public class RouteCollection {
 
-    private ArrayList<Route> routeCollection;
-    private ArrayList<Route> hiddenRouteCollection;
+    private List<Route> routeCollection;
+    private List<Route> hiddenRouteCollection;
 
     public RouteCollection(){
         routeCollection = new ArrayList<>();

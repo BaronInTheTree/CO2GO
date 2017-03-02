@@ -1,14 +1,15 @@
 package ca.cmpt276.carbonTracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by song on 2017-02-27.
  */
 
 public class CarCollection {
-    private ArrayList<Car> carCollection;
-    private ArrayList<Car> hiddenCarCollections;
+    private List<Car> carCollection;
+    private List<Car> hiddenCarCollections;
 
     public CarCollection(){
         carCollection = new ArrayList<>();

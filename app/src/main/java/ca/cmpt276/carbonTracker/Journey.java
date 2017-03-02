@@ -21,6 +21,7 @@ public class Journey {
         this.car = car;
         this.route = route;
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        calculateEmissions();
     }
 
     public Car getCar() {

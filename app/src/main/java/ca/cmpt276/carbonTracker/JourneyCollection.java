@@ -3,13 +3,14 @@ package ca.cmpt276.carbonTracker;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by song on 2017-02-27.
  */
 
 public class JourneyCollection {
-    private ArrayList<Journey> journeyCollection;
+    private List<Journey> journeyCollection;
 
     public JourneyCollection(){
         journeyCollection = new ArrayList<>();
