@@ -10,4 +10,131 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.cmpt276.carbonTracker.JourneyInfoActicity">
 
+    <TextView
+        android:text="Journey Summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/journeySum"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <TextView
+        android:text="Route: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/route"
+        android:layout_below="@+id/car"
+        android:layout_alignLeft="@+id/date"
+        android:layout_alignStart="@+id/date"
+        android:layout_marginTop="37dp"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="Vehicle:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:id="@+id/car"
+        android:textSize="18sp"
+        android:layout_below="@+id/date"
+        android:layout_alignLeft="@+id/route"
+        android:layout_alignStart="@+id/route" />
+
+    <TextView
+        android:text="Emission(g):"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/emission"
+        android:textSize="18sp"
+        android:layout_below="@+id/distance"
+        android:layout_alignLeft="@+id/distance"
+        android:layout_alignStart="@+id/distance" />
+
+    <Button
+        android:text="Confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:id="@+id/confirm" />
+
+    <TextView
+        android:text="test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/car"
+        android:layout_alignLeft="@+id/date_entry"
+        android:layout_alignStart="@+id/date_entry"
+        android:id="@+id/vehicle_entry"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/distance"
+        android:layout_alignLeft="@+id/vehicle_entry"
+        android:layout_alignStart="@+id/vehicle_entry"
+        android:id="@+id/route_entry"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/emission"
+        android:layout_alignLeft="@+id/distance_entry"
+        android:layout_alignStart="@+id/distance_entry"
+        android:id="@+id/emission_entry"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="Distance(km):"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/distance"
+        android:layout_marginTop="39dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/route"
+        android:layout_alignLeft="@+id/route"
+        android:layout_alignStart="@+id/route" />
+
+    <TextView
+        android:text="test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/distance_entry"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/distance"
+        android:layout_alignBottom="@+id/distance"
+        android:layout_alignLeft="@+id/route_entry"
+        android:layout_alignStart="@+id/route_entry" />
+
+    <TextView
+        android:text="Date:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="38dp"
+        android:id="@+id/date"
+        android:textSize="18sp"
+        android:layout_below="@+id/journeySum"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_entry"
+        android:textSize="18sp"
+        android:text="test"
+        android:layout_above="@+id/car"
+        android:layout_toRightOf="@+id/distance"
+        android:layout_toEndOf="@+id/distance"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp" />
+
 </RelativeLayout>
