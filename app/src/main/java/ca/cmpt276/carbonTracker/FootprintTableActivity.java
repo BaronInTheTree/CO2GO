@@ -45,7 +45,7 @@ public class FootprintTableActivity extends AppCompatActivity {
     private void populateListView() {
 
         /*
-         need a getJourneyDescriptionTableFormat() function: returns an array of strings.
+         Need a getJourneyDescriptionTableFormat() function: returns an array of strings.
          Each string contains: Trip date, routeName, Distance, Car NickName, Emission.
          Each section of the string has a specific length and 4 spaces in between :
          Number of characters of corresponding section: 10, 18, 10, 18, 8). This implies the length requirement:
