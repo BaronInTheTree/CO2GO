@@ -53,4 +53,8 @@ public class Route {
     public double getCityDistanceMiles() {
         return cityDistanceMiles;
     }
+
+    public double getTotalDistanceKM(){
+        return highwayDistanceKM + cityDistanceKM;
+    }
 }
