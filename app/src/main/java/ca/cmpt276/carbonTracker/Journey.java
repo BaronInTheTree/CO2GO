@@ -1,5 +1,8 @@
 package ca.cmpt276.carbonTracker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by song on 2017-02-27.
  */
@@ -10,12 +13,14 @@ public class Journey {
 
     private Car car;
     private Route route;
+    private String date;
     private double emissionsMiles;
     private double emissionsKM;
 
     public Journey(Car car, Route route) {
         this.car = car;
         this.route = route;
+        this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     }
 
     public Car getCar() {
@@ -24,6 +29,10 @@ public class Journey {
 
     public Route getRoute() {
         return route;
+    }
+
+    public String getDate(){
+        return date;
     }
 
     // Incomplete. Consulting Brian on how exactly to do this

@@ -1,6 +1,8 @@
 package ca.cmpt276.carbonTracker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by song on 2017-02-27.
@@ -67,8 +69,7 @@ public class JourneyCollection {
                 emission+=" ";
             }
 
-            // need to figure out how to get date in journey class, then update the following code.
-            String date = "2017-01-01";
+            String date = journey.getDate();
 
             descriptions[i]=date+"    "+route+"    "+distance+"    "+car+"    "+emission;
         }
@@ -85,8 +86,7 @@ public class JourneyCollection {
             String route = journey.getRoute().getName();
             String distance = "" + journey.getRoute().getTotalDistanceKM();
             String emission = "" + journey.getEmissionsKM();
-            // need to figure out how to get date in journey class, then update the following code.
-            String date = "2017-01-01";
+            String date = journey.getDate();
 
             descriptions[i]=date+", "+route+", "+distance+", "+car+", "+emission;
         }
