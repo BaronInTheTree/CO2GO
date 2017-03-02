@@ -39,6 +39,10 @@ public class JourneyCollection {
         return totalEmissions;
     }
 
+    public Journey getLatestJourney(){
+        return journeyCollection.get(journeyCollection.size()-1);
+    }
+
     public int getNumberJourneys(){
         return journeyCollection.size();
     }
