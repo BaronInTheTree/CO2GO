@@ -21,27 +21,27 @@ public class Car {
     private double cityMPG;
     private double highwayMPG;
 
-    public Car(String make, String model, int year, String nickname, double highwayMPG, double cityMPG){
+    public Car(String make, String model, int year, String nickname, double highwayMPG, double cityMPG) {
         this.make = make;
         this.model = model;
         this.year = year;
         this.nickname = nickname;
         this.highwayMPG = highwayMPG;
         this.cityMPG = cityMPG;
-        this.co2GramsPerMile_Highway = calcCO2PerMile(highwayMPG);
-        this.co2GramsPerMile_City = calcCO2PerMile(cityMPG);
-        this.co2GramsPerKM_Highway = calcCO2PerKM(highwayMPG);
-        this.co2GramsPerKM_City = calcCO2PerKM(cityMPG);
-        this.isHidden = false;
+        setEmissions();
     }
 
     // Used to populate an arrayList of cars directly from .csv file at runtime
-    public Car(String make, String model, int year, double highwayMPG, double cityMPG){
+    public Car(String make, String model, int year, double highwayMPG, double cityMPG) {
         this.make = make;
         this.model = model;
         this.year = year;
         this.highwayMPG = highwayMPG;
         this.cityMPG = cityMPG;
+        setEmissions();
+    }
+
+    private void setEmissions() {
         this.co2GramsPerMile_Highway = calcCO2PerMile(highwayMPG);
         this.co2GramsPerMile_City = calcCO2PerMile(cityMPG);
         this.co2GramsPerKM_Highway = calcCO2PerKM(highwayMPG);
@@ -49,14 +49,12 @@ public class Car {
         this.isHidden = false;
     }
 
-
-
     // 8500g or 8.5kg/gallon averaged from multiple gov't sources
-    private double calcCO2PerMile(double mpg){
+    private double calcCO2PerMile(double mpg) {
         return (8500 / mpg);
     }
 
-    private double calcCO2PerKM(double mpg){
+    private double calcCO2PerKM(double mpg) {
         return (8500 / mpg * 0.621371);
     }
 
@@ -84,11 +82,11 @@ public class Car {
         return co2GramsPerKM_Highway;
     }
 
-    public boolean isHidden(){
+    public boolean isHidden() {
         return isHidden;
     }
 
-    public void setHidden(boolean hidden){
+    public void setHidden(boolean hidden) {
         this.isHidden = hidden;
     }
 
