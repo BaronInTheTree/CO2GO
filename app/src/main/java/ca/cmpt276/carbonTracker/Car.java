@@ -35,6 +35,22 @@ public class Car {
         this.isHidden = false;
     }
 
+    // Used to populate an arrayList of cars directly from .csv file at runtime
+    public Car(String make, String model, int year, double highwayMPG, double cityMPG){
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.highwayMPG = highwayMPG;
+        this.cityMPG = cityMPG;
+        this.co2GramsPerMile_Highway = calcCO2PerMile(highwayMPG);
+        this.co2GramsPerMile_City = calcCO2PerMile(cityMPG);
+        this.co2GramsPerKM_Highway = calcCO2PerKM(highwayMPG);
+        this.co2GramsPerKM_City = calcCO2PerKM(cityMPG);
+        this.isHidden = false;
+    }
+
+
+
     // 8500g or 8.5kg/gallon averaged from multiple gov't sources
     private double calcCO2PerMile(double mpg){
         return (8500 / mpg);
