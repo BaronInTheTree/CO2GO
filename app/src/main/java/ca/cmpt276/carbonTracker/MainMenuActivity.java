@@ -14,15 +14,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainMenuActivity extends AppCompatActivity {
+
+    CarbonModel modelInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        modelInstance = CarbonModel.getInstance();
 
         readVehicleDate();
 
@@ -33,12 +34,11 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void readVehicleDate() {
-        InputStream is = getResources().openRawResource(R.raw.vehicles);
+        InputStream is = getResources().openRawResource(R.raw.vehiclesnew); // CHANGED
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
 
-        List<Car> carList = new ArrayList<>();
         String line = "";
         try {
             // Step over headers
@@ -55,14 +55,21 @@ public class MainMenuActivity extends AppCompatActivity {
                 int year = Integer.parseInt(tokens[2]);
                 int highwayMPG = Integer.parseInt(tokens[3]);
                 int cityMPG = Integer.parseInt(tokens[4]);
-                Car car = new Car(make, model, year, highwayMPG, cityMPG);
-                carList.add(car);
+                String trany = tokens[5];
+                int cylinders = Integer.parseInt(tokens[6]);
+                double displacement = Double.parseDouble(tokens[7]);
+                String fuelType = tokens[8];
+                Car car = new Car(make, model, year, highwayMPG, cityMPG, trany, cylinders, displacement, fuelType);
+                modelInstance.getCarData().getCarDataList().add(car);
             }
         } catch (IOException e) {
             Log.i("MyActivity", "Error reading data from file on line" + line, e);
             e.printStackTrace();
         }
-        System.out.println("carList size: " + carList.size());
+        modelInstance.getCarData().initializeMakeList();
+        modelInstance.getCarData().updateModelList("Toyota");
+        modelInstance.getCarData().updateYearList("Toyota", "Yaris");
+        System.out.println("carList size: " + modelInstance.getCarData().getCarDataList().size());
     }
 
     public void newJourneyButton() {
