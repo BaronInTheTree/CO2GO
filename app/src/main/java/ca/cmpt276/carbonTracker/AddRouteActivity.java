@@ -15,13 +15,14 @@ import com.example.sasha.carbontracker.R;
 
 public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     private Route route;
+    private CarbonModel carbonmodel = CarbonModel.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
 
-        // todo: get carbon model instance
+
         setupSaveRouteButton();
         setupUseRouteButton();
         setupTextListeners();
@@ -32,7 +33,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         saveRoute_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: add to carbonmodel routecollection
+                carbonmodel.getRouteCollection().addRoute(route);
                 startActivity(new Intent(AddRouteActivity.this, JourneyInfoActivity.class));
             }
         });
@@ -53,6 +54,14 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         EditText cityInput = (EditText) findViewById(R.id.cityDistance);
         EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
 
+        String routeName;
+        try {
+            routeName = total.getText().toString();
+        } catch (NullPointerException e) {
+            total.setText("Route"); // if no route input, set default name as "Route".
+            return;
+        }
+
         int city;
         try {
             city = Integer.parseInt(cityInput.getText().toString());
@@ -72,6 +81,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         int totalDistance = city + highway;
 
         total.setText("" + totalDistance);
+        route = new Route(routeName, highway, city);
     }
 
     private void setupTextListeners() {
