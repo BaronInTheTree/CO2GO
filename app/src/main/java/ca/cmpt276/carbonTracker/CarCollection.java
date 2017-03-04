@@ -40,4 +40,8 @@ public class CarCollection {
     public void setHiddenCarCollections(List<Car> cars) {
         hiddenCarCollections = cars;
     }
+
+    public int getListSize(){
+        return carCollection.size();
+    }
 }
