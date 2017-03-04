@@ -27,14 +27,14 @@ public class MainMenuActivity extends AppCompatActivity {
 
         readVehicleDate();
 
-        newJourneyButton();
+        selectTransportationButton();
 
         footPrintButton();
 
     }
 
     public void readVehicleDate() {
-        InputStream is = getResources().openRawResource(R.raw.vehiclesnew); // CHANGED
+        InputStream is = getResources().openRawResource(R.raw.vehicles); // CHANGED
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
@@ -55,12 +55,14 @@ public class MainMenuActivity extends AppCompatActivity {
                 int year = Integer.parseInt(tokens[2]);
                 int highwayMPG = Integer.parseInt(tokens[3]);
                 int cityMPG = Integer.parseInt(tokens[4]);
+/*
                 String trany = tokens[5];
                 int cylinders = Integer.parseInt(tokens[6]);
                 double displacement = Double.parseDouble(tokens[7]);
                 String fuelType = tokens[8];
                 Car car = new Car(make, model, year, highwayMPG, cityMPG, trany, cylinders, displacement, fuelType);
                 modelInstance.getCarData().getCarDataList().add(car);
+*/
             }
         } catch (IOException e) {
             Log.i("MyActivity", "Error reading data from file on line" + line, e);
@@ -72,7 +74,7 @@ public class MainMenuActivity extends AppCompatActivity {
         System.out.println("carList size: " + modelInstance.getCarData().getCarDataList().size());
     }
 
-    public void newJourneyButton() {
+    public void selectTransportationButton() {
         Button journey_btn = (Button) findViewById(R.id.newJourney_btn);
         journey_btn.setOnClickListener(new View.OnClickListener() {
             @Override
