@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.sasha.carbontracker.R;
 
-public class JourneyInfoActicity extends AppCompatActivity {
+public class JourneyInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

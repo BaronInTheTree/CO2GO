@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">CarbonTracker</string>
+    <string name="route_name">Route Name</string>
+    <string name="highway_distance">Highway Distance (km)</string>
+    <string name="city_distance">City Distance (km)</string>
+    <string name="total_distance">Total Distance (km)</string>
+    <string name="max_length_18_chars">Max Length: 18 Chars</string>
+    <string name="distance_km">Total Distance</string>
+    <string name="save_and_use_this_route">Save and Use this Route</string>
+    <string name="use_this_route_without_saving">Use this Route without Saving</string>
 </resources>
