@@ -10,50 +10,64 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.cmpt276.carbonTracker.FootprintTableActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1">
-
-        <TextView
-            android:text="Trip Date                Route               Distance(km)           Vehicle              CO2(g)"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tableTitle"
-            android:textSize="16sp"
-            android:textStyle="normal|bold"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="399dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="0.19"
-            android:id="@+id/tableFP" />
-
-    </LinearLayout>
-
-    <Button
-        android:text="Back to Main Page"
+    <HorizontalScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/back_btn"
-        android:layout_alignBaseline="@+id/toGraph_btn"
-        android:layout_alignBottom="@+id/toGraph_btn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <TextView
+                android:text="Trip Date                Route               Distance(km)           Vehicle              CO2(g)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableTitle"
+                android:textSize="16sp"
+                android:textStyle="normal|bold"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="367dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/tableFP" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <Button
-        android:text="See Graph View"
+        android:text="@string/see_graph_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/toGraph_btn"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="@string/back_to_main_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/back_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/note"
+        android:text="@string/notes"
+        android:layout_above="@+id/toGraph_btn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp" />
 
 </RelativeLayout>

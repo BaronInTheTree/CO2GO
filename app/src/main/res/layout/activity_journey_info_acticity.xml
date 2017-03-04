@@ -11,7 +11,7 @@
     tools:context="ca.cmpt276.carbonTracker.JourneyInfoActicity">
 
     <TextView
-        android:text="Journey Summary"
+        android:text="@string/journey_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/journeySum"
@@ -19,7 +19,7 @@
         android:textSize="24sp" />
 
     <TextView
-        android:text="Route: "
+        android:text="@string/route"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/route"
@@ -30,7 +30,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:text="Vehicle:"
+        android:text="@string/vehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="41dp"
@@ -41,7 +41,7 @@
         android:layout_alignStart="@+id/route" />
 
     <TextView
-        android:text="Emission(g):"
+        android:text="@string/emission_g"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -52,7 +52,7 @@
         android:layout_alignStart="@+id/distance" />
 
     <Button
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -61,7 +61,7 @@
         android:id="@+id/confirm" />
 
     <TextView
-        android:text="test"
+        android:text="@string/testcar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/car"
@@ -71,7 +71,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:text="test"
+        android:text="@string/testroute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/distance"
@@ -81,7 +81,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:text="test"
+        android:text="@string/testemission"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/emission"
@@ -91,7 +91,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:text="Distance(km):"
+        android:text="@string/distance_km"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/distance"
@@ -102,7 +102,7 @@
         android:layout_alignStart="@+id/route" />
 
     <TextView
-        android:text="test"
+        android:text="@string/testdistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/distance_entry"
@@ -113,7 +113,7 @@
         android:layout_alignStart="@+id/route_entry" />
 
     <TextView
-        android:text="Date:"
+        android:text="@string/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
@@ -130,7 +130,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/date_entry"
         android:textSize="18sp"
-        android:text="test"
+        android:text="@string/testdate"
         android:layout_above="@+id/car"
         android:layout_toRightOf="@+id/distance"
         android:layout_toEndOf="@+id/distance"

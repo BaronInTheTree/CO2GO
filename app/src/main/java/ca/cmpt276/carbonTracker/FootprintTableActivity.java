@@ -7,8 +7,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.sasha.carbontracker.R;
+
+import org.w3c.dom.Text;
 
 public class FootprintTableActivity extends AppCompatActivity {
 
@@ -18,8 +21,13 @@ public class FootprintTableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_footprint_table);
 
         populateListView();
-
         setupButtons();
+        setupNote();
+    }
+
+    private void setupNote() {
+        TextView note = (TextView) findViewById(R.id.note);
+        note.setText("In portrait view, scroll sideways to read full content.");
     }
 
     private void setupButtons() {
@@ -49,7 +57,7 @@ public class FootprintTableActivity extends AppCompatActivity {
          Each string contains: Trip date, routeName, Distance, Car NickName, Emission.
          Each section of the string has a specific length and 4 spaces in between :
          Number of characters of corresponding section: 10, 18, 10, 18, 8). This implies the length requirement:
-         Route: max 18 chars, Distance: max 9999999.99, carName: max 18 chars, emission: 99999.99 (emission TBD)
+         Route: max 18 chars, Distance: max 9999999.99, carName: max 18 chars, emission: 99999.99 (emission unit TBD)
           */
         String[] allJourneys = {"2017-01-01    Home_to_Work_Route     1234567890     my_Vehicle_Informa    12345678"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

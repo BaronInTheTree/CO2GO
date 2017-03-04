@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">CarbonTracker</string>
+    <string name="see_table_view">See Table View</string>
+    <string name="see_graph_view">See Graph View</string>
+    <string name="back_to_main_page">Back to Main Page</string>
+    <string name="notes">notes</string>
+    <string name="journey_summary">Journey Summary</string>
+    <string name="route">Route:</string>
+    <string name="vehicle">Vehicle:</string>
+    <string name="emission_g">Emission(g):</string>
+    <string name="confirm">Confirm</string>
+    <string name="distance_km">Distance(km):</string>
+    <string name="date">Date:</string>
+    <string name="test">test</string>
+    <string name="testdate">testDate</string>
+    <string name="testdistance">testDistance</string>
+    <string name="testemission">testEmission</string>
+    <string name="testroute">testRoute</string>
+    <string name="testcar">testCar</string>
 </resources>
