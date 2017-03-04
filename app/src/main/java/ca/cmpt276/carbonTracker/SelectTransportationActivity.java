@@ -38,15 +38,15 @@ public class SelectTransportationActivity extends AppCompatActivity {
         });
     }
 
-    // TODO: implement proper function for current "outputCollectionToString"
+    // TODO: implement proper function for current "outputCarCollectionToString"
     private void populateListView() {
         // Create list of items
         CarbonModel model = CarbonModel.getInstance();
-        List<String> cars = model.outputCollectionToString();
+        List<String> cars = model.outputCarCollectionToString();
         // Build adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,           // Context for activity
-                R.layout.visible_cars,  // Layout to use (create)
+                R.layout.listview_format,  // Layout to use (create)
                 cars);       // Items to be displayed
 
         // config list view

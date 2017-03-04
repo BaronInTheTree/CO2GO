@@ -49,12 +49,24 @@ public class CarbonModel {
         return carCollection;
     }
 
-    // TODO: replace with a collection of cars that user has
-    public List<String> outputCollectionToString() {
+    // TODO: replace with a collection of cars that user owns
+    public List<String> outputCarCollectionToString() {
         List<String> list = new ArrayList<>();
 /*
         for (Car car: carCollection) {
             String str = car.toString();
+            list.add(str);
+        }
+*/
+        return list;
+    }
+
+    // TODO: replace with a collection of routes that user uses
+    public List<String> outputRouteCollectionToString() {
+        List<String> list = new ArrayList<>();
+/*
+        for (Route route: routeCollection) {
+            String str = route.toString();
             list.add(str);
         }
 */
