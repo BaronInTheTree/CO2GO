@@ -20,24 +20,23 @@ public class Car {
     private boolean isHidden;
     private double cityMPG;
     private double highwayMPG;
-
-    public Car(String make, String model, int year, String nickname, double highwayMPG, double cityMPG) {
-        this.make = make;
-        this.model = model;
-        this.year = year;
-        this.nickname = nickname;
-        this.highwayMPG = highwayMPG;
-        this.cityMPG = cityMPG;
-        setEmissions();
-    }
+    private String trany;
+    private int cylinders;
+    private double displacement;
+    private String fuelType;
 
     // Used to populate an arrayList of cars directly from .csv file at runtime
-    public Car(String make, String model, int year, double highwayMPG, double cityMPG) {
+    public Car(String make, String model, int year, double highwayMPG, double cityMPG, String trany,
+               int cylinders, double displacement, String fuelType) {
         this.make = make;
         this.model = model;
         this.year = year;
         this.highwayMPG = highwayMPG;
         this.cityMPG = cityMPG;
+        this.trany = trany;
+        this.displacement = displacement;
+        this.cylinders = cylinders;
+        this.fuelType = fuelType;
         setEmissions();
     }
 
@@ -96,5 +95,25 @@ public class Car {
 
     public double getCo2GramsPerKM_City() {
         return co2GramsPerKM_City;
+    }
+
+    public void setNickname(String nickname){
+        this.nickname = nickname;
+    }
+
+    public String getTrany() {
+        return trany;
+    }
+
+    public int getCylinders() {
+        return cylinders;
+    }
+
+    public double getDisplacement() {
+        return displacement;
+    }
+
+    public String getFuelType() {
+        return fuelType;
     }
 }
