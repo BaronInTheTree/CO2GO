@@ -1,5 +1,8 @@
 package ca.cmpt276.carbonTracker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by song on 2017-02-27.
  */
@@ -10,13 +13,15 @@ public class Journey {
 
     private Car car;
     private Route route;
+    private String date;
     private double emissionsMiles;
     private double emissionsKM;
-
 
     public Journey(Car car, Route route) {
         this.car = car;
         this.route = route;
+        this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        calculateEmissions();
     }
 
     public Car getCar() {
@@ -27,10 +32,15 @@ public class Journey {
         return route;
     }
 
-    // Incomplete. Consulting Brian on how exactly to do this
-    private void calculateEmissions(){
-        double co2GramsPerMile = car.getCo2GramsPerMile();
-        double co2GramsPerKM = car.getCo2GramsPerKM();
+    public String getDate() {
+        return date;
+    }
+
+    private void calculateEmissions() {
+        emissionsKM = (car.getCo2GramsPerKM_City() * route.getCityDistanceKM())
+                + (car.getCo2GramsPerKM_Highway() * route.getHighwayDistanceKM());
+        emissionsMiles = (car.getCo2GramsPerMile_City() * route.getCityDistanceMiles())
+                + (car.getCo2GramsPerMile_Highway() * route.getHighwayDistanceMiles());
     }
 
     public double getEmissionsMiles() {
