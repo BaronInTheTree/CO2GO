@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
@@ -27,14 +28,24 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         setupTextListeners();
     }
 
+    private void refreshTotalDistance(int city, int highway) {
+        TextView totalDistance = (TextView) findViewById(R.id.totalDistance);
+        totalDistance.setText("" + (city + highway));
+    }
+
     private void setupSaveRouteButton() {
         Button saveRoute_btn = (Button) findViewById(R.id.saveRoute_btn);
         saveRoute_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                carbonModel.getRouteCollection().addRoute(route);
-                Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
-                startActivity(intent);
+                if (setupTotalText()) {
+                    carbonModel.getRouteCollection().addRoute(route);
+                    Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(AddRouteActivity.this, "Please fill out the form completely.",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -49,38 +60,44 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         });
     }
 
-    private void setupTotalText() {
+    private boolean setupTotalText() {
         EditText nameInput = (EditText) findViewById(R.id.routeName);
         EditText cityInput = (EditText) findViewById(R.id.cityDistance);
         EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
 
         String routeName;
         try {
-            routeName = nameInput.getText().toString();
+            if (nameInput.getText().toString().length() == 0) {
+                throw new NullPointerException("Route must be at least 1 character");
+            }
         } catch (NullPointerException e) {
-            return;
-        }
-
-        int city;
-        try {
-            city = Integer.parseInt(cityInput.getText().toString());
-        } catch (NumberFormatException e) {
-            nameInput.setText("" + 0);
-            return;
+            return false;
         }
 
         int highway;
         try {
-            highway = Integer.parseInt(highwayInput.getText().toString());
-        } catch (NumberFormatException e) {
-            nameInput.setText("" + 0);
-            return;
+            if (highwayInput.getText().toString().length() == 0) {
+                throw new NullPointerException("Highway distance must contain a value");
+            };
+        } catch (NullPointerException e) {
+            return false;
         }
 
-        int totalDistance = city + highway;
+        int city;
+        try {
+            if (cityInput.getText().toString().length() == 0) {
+                throw new NullPointerException("City distance must contain a value");
+            };
+        } catch (NullPointerException e) {
+            return false;
+        }
 
-        nameInput.setText("" + totalDistance);
+        routeName = nameInput.getText().toString();
+        city = Integer.parseInt(cityInput.getText().toString());
+        highway = Integer.parseInt(highwayInput.getText().toString());
+        refreshTotalDistance(city, highway);
         route = new Route(routeName, highway, city);
+        return true;
     }
 
     private void setupTextListeners() {

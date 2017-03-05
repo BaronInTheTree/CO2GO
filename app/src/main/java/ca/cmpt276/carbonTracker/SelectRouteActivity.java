@@ -23,6 +23,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         setupAddRouteButton();
         //todo: create dialog to confirm route to use
         updateListView();
+        registerClickCallback();
     }
 
     private void setupAddRouteButton() {
@@ -47,7 +48,14 @@ public class SelectRouteActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //todo: select route to use
+            }
+        });
 
+        list.setOnLongClickListener(new AdapterView.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
             }
         });
     }

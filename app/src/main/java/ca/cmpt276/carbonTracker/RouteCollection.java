@@ -65,7 +65,7 @@ public class RouteCollection {
 
             Route current = routeCollection.get(position);
             TextView routeText = (TextView) routeView.findViewById(R.id.routeListViewText);
-            routeText.setText("Route: " + current.getName() + "(Total Distance: " +
+            routeText.setText("Route: " + current.getName() + " (Total Distance: " +
                     current.getTotalDistanceKM() + " km)");
 
             return routeView;
