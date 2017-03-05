@@ -15,7 +15,7 @@ import com.example.sasha.carbontracker.R;
 
 public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     private Route route;
-    private CarbonModel carbonmodel = CarbonModel.getInstance();
+    private CarbonModel carbonModel = CarbonModel.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         saveRoute_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //carbonmodel.getRouteCollection().addRoute(route);
+                carbonModel.getRouteCollection().addRoute(route);
                 Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
                 startActivity(intent);
             }
@@ -50,15 +50,14 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     }
 
     private void setupTotalText() {
-        TextView total = (TextView) findViewById(R.id.totalDistance);
+        EditText nameInput = (EditText) findViewById(R.id.routeName);
         EditText cityInput = (EditText) findViewById(R.id.cityDistance);
         EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
 
         String routeName;
         try {
-            routeName = total.getText().toString();
+            routeName = nameInput.getText().toString();
         } catch (NullPointerException e) {
-            total.setText("Route"); // if no route input, set default name as "Route".
             return;
         }
 
@@ -66,7 +65,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         try {
             city = Integer.parseInt(cityInput.getText().toString());
         } catch (NumberFormatException e) {
-            total.setText("" + 0);
+            nameInput.setText("" + 0);
             return;
         }
 
@@ -74,13 +73,13 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         try {
             highway = Integer.parseInt(highwayInput.getText().toString());
         } catch (NumberFormatException e) {
-            total.setText("" + 0);
+            nameInput.setText("" + 0);
             return;
         }
 
         int totalDistance = city + highway;
 
-        total.setText("" + totalDistance);
+        nameInput.setText("" + totalDistance);
         route = new Route(routeName, highway, city);
     }
 

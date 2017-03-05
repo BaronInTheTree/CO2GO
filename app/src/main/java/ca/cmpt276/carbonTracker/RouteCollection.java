@@ -1,5 +1,14 @@
 package ca.cmpt276.carbonTracker;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import com.example.sasha.carbontracker.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,5 +46,29 @@ public class RouteCollection {
         routeCollection.add(index, route);
     }
 
+    public ArrayAdapter<Route> getArrayAdapter(Context context) {
+        RouteCollectionAdapter adapter = new RouteCollectionAdapter(context);
+        return adapter;
+    }
 
+    private class RouteCollectionAdapter extends ArrayAdapter<Route> {
+        RouteCollectionAdapter(Context context) {
+            super(context, R.layout.route_list, routeCollection);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View routeView = convertView; // Check if we have a view
+            if (routeView == null) {
+                routeView = LayoutInflater.from(getContext()).inflate(R.layout.route_list, parent, false);
+            }
+
+            Route current = routeCollection.get(position);
+            TextView routeText = (TextView) routeView.findViewById(R.id.routeListViewText);
+            routeText.setText("Route: " + current.getName() + "(Total Distance: " +
+                    current.getTotalDistanceKM() + " km)");
+
+            return routeView;
+        }
+    }
 }
