@@ -22,7 +22,6 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
 
-
         setupSaveRouteButton();
         setupUseRouteButton();
         setupTextListeners();
@@ -33,8 +32,9 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         saveRoute_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                carbonmodel.getRouteCollection().addRoute(route);
-                startActivity(new Intent(AddRouteActivity.this, JourneyInfoActivity.class));
+                //carbonmodel.getRouteCollection().addRoute(route);
+                Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -44,7 +44,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         useRoute_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddRouteActivity.this, JourneyInfoActivity.class));
+                startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
             }
         });
     }
@@ -85,9 +85,11 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     }
 
     private void setupTextListeners() {
+        EditText nameInput = (EditText) findViewById(R.id.routeName);
         EditText cityInput = (EditText) findViewById(R.id.cityDistance);
         EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
 
+        nameInput.addTextChangedListener(this);
         cityInput.addTextChangedListener(this);
         highwayInput.addTextChangedListener(this);
     }

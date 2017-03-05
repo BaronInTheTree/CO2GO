@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 import com.example.sasha.carbontracker.R;
 
-public class JourneyInfoActivity extends AppCompatActivity {
+public class JourneyInformationActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_journey_info_acticity);
+        setContentView(R.layout.activity_journey_information);
 
         setupInfo();
 
@@ -60,7 +60,7 @@ public class JourneyInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(JourneyInfoActivity.this,MainMenuActivity.class));
+                startActivity(new Intent(JourneyInformationActivity.this,MainMenuActivity.class));
             }
         });
     }

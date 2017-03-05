@@ -25,7 +25,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         modelInstance = CarbonModel.getInstance();
 
-        //readVehicleDate();
+        readVehicleDate();
 
         newJourneyButton();
 
@@ -33,44 +33,44 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
-//    public void readVehicleDate() {
-//        InputStream is = getResources().openRawResource(R.raw.vehiclesnew); // CHANGED
-//        BufferedReader reader = new BufferedReader(
-//                new InputStreamReader(is, Charset.forName("UTF-8"))
-//        );
-//
-//        String line = "";
-//        try {
-//            // Step over headers
-//            line = reader.readLine();
-//
-//            // Read in file until empty
-//            while ((line = reader.readLine()) != null) {
-//                // Split by ','
-//                String[] tokens = line.split(",");
-//
-//                // Read and store data
-//                String make = tokens[0];
-//                String model = tokens[1];
-//                int year = Integer.parseInt(tokens[2]);
-//                int highwayMPG = Integer.parseInt(tokens[3]);
-//                int cityMPG = Integer.parseInt(tokens[4]);
-//                String trany = tokens[5];
-//                int cylinders = Integer.parseInt(tokens[6]);
-//                double displacement = Double.parseDouble(tokens[7]);
-//                String fuelType = tokens[8];
-//                Car car = new Car(make, model, year, highwayMPG, cityMPG, trany, cylinders, displacement, fuelType);
-//                modelInstance.getCarData().getCarDataList().add(car);
-//            }
-//        } catch (IOException e) {
-//            Log.i("MyActivity", "Error reading data from file on line" + line, e);
-//            e.printStackTrace();
-//        }
-//        modelInstance.getCarData().initializeMakeList();
-//        modelInstance.getCarData().updateModelList("Toyota");
-//        modelInstance.getCarData().updateYearList("Toyota", "Yaris");
-//        System.out.println("carList size: " + modelInstance.getCarData().getCarDataList().size());
-//    }
+    public void readVehicleDate() {
+        InputStream is = getResources().openRawResource(R.raw.vehiclesnew); // CHANGED
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+
+        String line = "";
+        try {
+            // Step over headers
+            line = reader.readLine();
+
+            // Read in file until empty
+            while ((line = reader.readLine()) != null) {
+                // Split by ','
+                String[] tokens = line.split(",");
+
+                // Read and store data
+                String make = tokens[0];
+                String model = tokens[1];
+                int year = Integer.parseInt(tokens[2]);
+                int highwayMPG = Integer.parseInt(tokens[3]);
+                int cityMPG = Integer.parseInt(tokens[4]);
+                String trany = tokens[5];
+                int cylinders = Integer.parseInt(tokens[6]);
+                double displacement = Double.parseDouble(tokens[7]);
+                String fuelType = tokens[8];
+                Car car = new Car(make, model, year, highwayMPG, cityMPG, trany, cylinders, displacement, fuelType);
+                modelInstance.getCarData().getCarDataList().add(car);
+            }
+        } catch (IOException e) {
+            Log.i("MyActivity", "Error reading data from file on line" + line, e);
+            e.printStackTrace();
+        }
+        modelInstance.getCarData().initializeMakeList();
+        modelInstance.getCarData().updateModelList("Toyota");
+        modelInstance.getCarData().updateYearList("Toyota", "Yaris");
+        System.out.println("carList size: " + modelInstance.getCarData().getCarDataList().size());
+    }
 
     public void newJourneyButton() {
         Button journey_btn = (Button) findViewById(R.id.newJourney_btn);
