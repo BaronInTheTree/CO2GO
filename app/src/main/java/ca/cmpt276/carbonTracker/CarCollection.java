@@ -44,4 +44,9 @@ public class CarCollection {
     public int getListSize(){
         return carCollection.size();
     }
+
+    public Car getLatestCar() {
+        if (getListSize()>0) return carCollection.get(carCollection.size()-1);
+        else return null;
+    }
 }

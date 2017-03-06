@@ -71,4 +71,13 @@ public class RouteCollection {
             return routeView;
         }
     }
+
+    public int getListSize(){
+        return routeCollection.size();
+    }
+
+    public Route getLatestRoute() {
+        if (getListSize()>0) return routeCollection.get(routeCollection.size()-1);
+        else return null;
+    }
 }

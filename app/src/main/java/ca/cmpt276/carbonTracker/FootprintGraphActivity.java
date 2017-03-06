@@ -25,13 +25,12 @@ public class FootprintGraphActivity extends AppCompatActivity {
 
     private final String tableLabel = "CO2 Emission of Journeys (in gram)";
 
-    // Need a getJourneyDescription() function: returns an array of journey descriptions.
-    // This array is used to show Journey description when the corresponding "emission" is clicked in piechart.
+    // String journeys[] = getJourneyDescription();
     String journeys[] = {"#1: 2017-01-01, Home_to_Work_Route, 1234567890, my_Vehicle_Informa, 12345678","#2:date, routeName...","#3:date, routeName...",
             "#4:date, routeName...", "#5:date, routeName...","#6:date, routeName...", "#7:date, routeName..."};
 
-    // Need a getJourneyEmissions() function: returns an array of emission from each Journey.
-    double emissions[] = {23.4,5.8,56.12,189.46,70.77,23.5,94.23};
+    // int emissions[] = getJourneyEmission();
+    int emissions[] = {23,5,56,189,70,23,94};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

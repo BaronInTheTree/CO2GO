@@ -17,18 +17,20 @@ public class JourneyInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_information);
 
-        setupInfo();
+        // The following lines are commented out until real instance is created.
+        /*
+        CarbonModel currentInstance = CarbonModel.getInstance();
+        Car newCar = currentInstance.getCurrentCar();
+        Route newRoute = currentInstance.getCurrentRoute();
+        Journey currentJourney = new Journey (newCar, newRoute);
+        */
 
+        setupInfo();
         setupButtons();
     }
 
 
     private void setupInfo() {
-        // The following two lines are commented out until real instance is created.
-        /*
-        CarbonModel currentInstance = CarbonModel.getInstance();
-        Journey currentJourney = currentInstance.getCurrentJourney();
-        */
 
         //use testing data (the following three lines) now:
         Car test_car = new Car("Toyota","Camry", 2000, 40.0, 60.0, "Manual", 4, 5.0, "Regular Gasoline");
@@ -40,16 +42,24 @@ public class JourneyInformationActivity extends AppCompatActivity {
         date.setText(currentJourney.getDate());
 
         TextView vehicle = (TextView)findViewById(R.id.vehicle_entry);
-        vehicle.setText(currentJourney.getCar().getNickname());
+        String vehicleName = currentJourney.getCar().getNickname();
+        if (vehicleName.length()>18) vehicleName = vehicleName.substring(0,18);
+        vehicle.setText(vehicleName);
 
         TextView route = (TextView)findViewById(R.id.route_entry);
-        route.setText(currentJourney.getRoute().getName());
+        String routeName = currentJourney.getRoute().getName();
+        if (routeName.length()>18) routeName = routeName.substring(0,18);
+        route.setText(routeName);
 
         TextView distance = (TextView)findViewById(R.id.distance_entry);
-        distance.setText(""+currentJourney.getRoute().getTotalDistanceKM());
+        String distanceInfo = ""+currentJourney.getRoute().getTotalDistanceKM();
+        if (distanceInfo.length()>10) distanceInfo = distanceInfo.substring(0,10);
+        distance.setText(distanceInfo);
 
         TextView emission = (TextView)findViewById(R.id.emission_entry);
-        emission.setText(""+currentJourney.getEmissionsKM());
+        String emissionInfo = ""+currentJourney.getEmissionsKM();
+        if (emissionInfo.length()>8) emissionInfo = emissionInfo.substring(0,8);
+        emission.setText(emissionInfo);
 
     }
 
@@ -57,6 +67,17 @@ public class JourneyInformationActivity extends AppCompatActivity {
         Button confirm_btn = (Button) findViewById(R.id.confirm);
 
         confirm_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //currentInstance.addNewJourney(currentJourney); //uncomment until real data loaded.
+                finish();
+                startActivity(new Intent(JourneyInformationActivity.this,MainMenuActivity.class));
+            }
+        });
+
+        Button cancel_btn = (Button) findViewById(R.id.cancel);
+
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

@@ -26,10 +26,11 @@ public class CarbonModel {
         instance.journeys.addJourney(newJourney);
     }
 
-    public Journey getCurrentJourney(){
-        return journeys.getLatestJourney();
-    }
+    public Journey getCurrentJourney(){return journeys.getLatestJourney();}
 
+    public Route getCurrentRoute(){return routeCollection.getLatestRoute();}
+
+    public Car getCurrentCar(){return carCollection.getLatestCar();}
 
     public CarData getCarData(){
         return carData;

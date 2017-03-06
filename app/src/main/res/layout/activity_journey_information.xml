@@ -10,6 +10,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.cmpt276.carbonTracker.JourneyInformationActivity">
 
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/confirm"
+        android:layout_alignBottom="@+id/confirm"
+        android:layout_toEndOf="@+id/date_entry"
+        android:layout_toRightOf="@+id/date_entry"
+        android:text="Cancel" />
+
     <TextView
         android:id="@+id/journeySum"
         android:layout_width="match_parent"
@@ -55,10 +65,11 @@
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:text="@string/confirm"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
-        android:text="@string/confirm" />
+        android:layout_alignRight="@+id/distance"
+        android:layout_alignEnd="@+id/distance" />
 
     <TextView
         android:id="@+id/vehicle_entry"

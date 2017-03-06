@@ -52,13 +52,7 @@ public class FootprintTableActivity extends AppCompatActivity {
 
     private void populateListView() {
 
-        /*
-         Need a getJourneyDescriptionTableFormat() function: returns an array of strings.
-         Each string contains: Trip date, routeName, Distance, Car NickName, Emission.
-         Each section of the string has a specific length and 4 spaces in between :
-         Number of characters of corresponding section: 10, 18, 10, 18, 8). This implies the length requirement:
-         Route: max 18 chars, Distance: max 9999999.99, carName: max 18 chars, emission: 99999.99 (emission unit TBD)
-          */
+        // String[] allJourneys = getJourneyDescriptionsTableFormat();
         String[] allJourneys = {"2017-01-01    Home_to_Work_Route     1234567890     my_Vehicle_Informa    12345678"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.table_layout,allJourneys);
