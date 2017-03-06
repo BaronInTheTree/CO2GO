@@ -73,6 +73,17 @@ public class CarData {
         }
     }
 
+    public Car findCar(String make, String model, int year, int index){
+        ArrayList<Car> searchResults = new ArrayList<>();
+        for (Car car : carDataList){
+            if (car.getMake().equals(make) && car.getModel().equals(model)
+                    && car.getYear() == year){
+                searchResults.add(car);
+            }
+        }
+        return searchResults.get(index);
+    }
+
     public void initializeModelList(){
         modelList.add("Select Model");
     }
@@ -164,10 +175,10 @@ public class CarData {
                     && carDataList.get(i).getModel().equals(model)
                     && ("" + carDataList.get(i).getYear()).equals(year)){
                 Car car = carDataList.get(i);
-                specsList.add(car.getTrany() + "\n"
-                        + car.getCylinders() + "C\n"
-                        + car.getDisplacement() + "L\n"
-                        + "Fuel: " + car.getFuelType());
+                specsList.add(car.getTrany() + ", "
+                        + car.getCylinders() + "C, "
+                        + car.getDisplacement() + "L, "
+                        + car.getFuelType());
                 makeModelYearFound = true;
             }
 

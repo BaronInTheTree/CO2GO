@@ -40,6 +40,16 @@ public class Car {
         setEmissions();
     }
 
+    public String getInfo(){
+        return "Make: " + make
+                + "\nModel: " + model
+                + "\nYear: " + year
+                + "\nSpecs: " + trany
+                + ", " + cylinders
+                + "C, " + displacement
+                + "L, " + fuelType;
+    }
+
     private void setEmissions() {
         this.co2GramsPerMile_Highway = calcCO2PerMile(highwayMPG);
         this.co2GramsPerMile_City = calcCO2PerMile(cityMPG);

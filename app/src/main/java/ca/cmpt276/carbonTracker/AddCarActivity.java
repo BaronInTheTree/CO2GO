@@ -1,10 +1,16 @@
 package ca.cmpt276.carbonTracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.method.KeyListener;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -17,6 +23,7 @@ public class AddCarActivity extends AppCompatActivity {
     String selectedModel;
     String selectedYear;
     int selectedVariation;
+    String selectedNickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,8 @@ public class AddCarActivity extends AppCompatActivity {
         modelInstance = CarbonModel.getInstance();
 
         setupSelectMakeSpinner();
+        setupAddCarButton();
+        setupEnterNicknameEditText();
 
     }
 
@@ -124,12 +133,51 @@ public class AddCarActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedVariation = position;
-                Toast.makeText(AddCarActivity.this, "Position: " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddCarActivity.this, "Position: " + position, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+    }
+
+    private void setupEnterNicknameEditText(){
+        final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
+        enterNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void setupAddCarButton(){
+        Button addCar = (Button) findViewById(R.id.buttonAddCar);
+        final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
+        addCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNickname = enterNickname.getText().toString();
+                if (selectedNickname.equals("")){
+                    Toast.makeText(AddCarActivity.this,
+                            "Please enter a nickname for your car.",
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
+                            Integer.parseInt(selectedYear), selectedVariation);
+                    car.setNickname(selectedNickname);
+                    modelInstance.getCarCollection().addCar(car);
+                    Toast.makeText(AddCarActivity.this,
+                            modelInstance.getCarCollection().getLatestCar().getInfo(),
+                            Toast.LENGTH_SHORT).show();
+                    Intent intent = SelectTransportationActivity.makeIntent(AddCarActivity.this);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 

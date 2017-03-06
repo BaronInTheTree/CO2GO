@@ -1,5 +1,6 @@
 package ca.cmpt276.carbonTracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,10 @@ public class SelectTransportationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, SelectTransportationActivity.class);
     }
 
 }

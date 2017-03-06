@@ -22,12 +22,9 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Select Make"
+                android:text="@string/select_make"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:id="@+id/textViewSelectMake" />
         </TableRow>
 
@@ -36,9 +33,9 @@
             android:layout_height="match_parent" >
 
             <Spinner
+                android:id="@+id/spinnerSelectMake"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerSelectMake" />
+                android:layout_height="match_parent" />
         </TableRow>
 
         <TableRow
@@ -46,7 +43,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Select Model"
+                android:text="@string/select_model"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewSelectModel" />
@@ -57,9 +54,9 @@
             android:layout_height="match_parent" >
 
             <Spinner
+                android:id="@+id/spinnerSelectModel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerSelectModel" />
+                android:layout_height="match_parent" />
         </TableRow>
 
         <TableRow
@@ -67,7 +64,7 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Select Year"
+                android:text="@string/select_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewSelectYear" />
@@ -78,9 +75,9 @@
             android:layout_height="match_parent" >
 
             <Spinner
+                android:id="@+id/spinnerSelectYear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerSelectYear" />
+                android:layout_height="match_parent" />
         </TableRow>
 
         <TableRow
@@ -88,20 +85,65 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="Select Specifications"
+                android:text="@string/select_specifications"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewSelectSpecs" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/spinnerSelectSpecs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <Spinner
+            <TextView
+                android:id="@+id/textViewEnterNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_nickname" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <EditText
+                android:id="@+id/editTextEnterNickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinnerSelectSpecs" />
+                android:ems="10"
+                android:hint="@string/max_length_18_chars2"
+                android:inputType="textCapWords"
+                android:maxLength="18"
+                />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
     </TableLayout>
+
+    <Button
+        android:id="@+id/buttonAddCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_car"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
