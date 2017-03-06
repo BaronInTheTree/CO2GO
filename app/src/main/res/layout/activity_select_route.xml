@@ -11,7 +11,7 @@
     tools:context="ca.cmpt276.carbonTracker.SelectRouteActivity">
 
     <Button
-        android:text="@string/add_route"
+        android:text="Add Route"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addRoute_btn"
@@ -19,11 +19,31 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <ListView
-        android:id="@+id/routeListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:text="Select a route or add a new "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:id="@+id/textView2" />
+
+    <ListView
+        android:id="@+id/listOfRoutes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/addRoute_btn" />
+
+    <Button
+        android:text="Test for list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/testRouteBtn" />
+
 </RelativeLayout>

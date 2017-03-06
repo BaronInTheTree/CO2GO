@@ -15,22 +15,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addCar_btn"
-        android:layout_marginLeft="116dp"
-        android:layout_marginStart="116dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Test button while no cars in list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/testCarList_btn"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="144dp" />
+        android:textSize="12sp" />
 
-    <Button
-        android:text="Go To Select Route Page"
+    <TextView
+        android:text="Select a car you'd like to use or add a new one."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/toDelete_btn"
-        android:layout_marginBottom="80dp"
-        android:layout_above="@+id/addCar_btn"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="58dp"
-        android:layout_marginStart="58dp" />
+        android:id="@+id/textView" />
+
+    <ListView
+        android:id="@+id/listOfCars"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/addCar_btn" />
+
 </RelativeLayout>
