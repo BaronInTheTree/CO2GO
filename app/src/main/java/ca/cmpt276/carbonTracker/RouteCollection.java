@@ -79,4 +79,8 @@ public class RouteCollection {
         if (getListSize() > 0) return routeCollection.get(routeCollection.size() - 1);
         else return null;
     }
+
+    public Route getRouteAtIndex(int i) {
+        return routeCollection.get(i);
+    }
 }

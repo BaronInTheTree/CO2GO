@@ -1,8 +1,12 @@
 package ca.cmpt276.carbonTracker;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,8 +29,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         testButton();
 
         addRouteButton();
-
-        populateListView();
+        updateListView();
     }
 
     private void testButton() {
@@ -50,40 +53,64 @@ public class SelectRouteActivity extends AppCompatActivity {
     }
 
     // TODO: get the proper list of routes from "outputRouteCollectionToString"
-    private void populateListView() {
-        // Create list of items
-        CarbonModel model = CarbonModel.getInstance();
-        List<String> routes = model.outputRouteCollectionToString();
-        // Build adapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,           // Context for activity
-                R.layout.listview_format,  // Layout to use (create)
-                routes);       // Items to be displayed
+//    private void populateListView() {
+//        // Create list of items
+//        CarbonModel model = CarbonModel.getInstance();
+//        List<String> routes = model.outputRouteCollectionToString();
+//        // Build adapter
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+//                this,           // Context for activity
+//                R.layout.listview_format,  // Layout to use (create)
+//                routes);       // Items to be displayed
+//
+//        // config list view
+//        ListView list = (ListView) findViewById(R.id.listOfRoutes);
+//        list.setAdapter(adapter);
+//
+//        // Allows to click on list's items
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+//                startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
+//            }
+//        });
+//    }
 
-        // config list view
+    public void updateListView() {
+        CarbonModel carbonModel = CarbonModel.getInstance();
+        ArrayAdapter<Route> adapter = carbonModel.getRouteCollection().getArrayAdapter(SelectRouteActivity.this);
         ListView list = (ListView) findViewById(R.id.listOfRoutes);
+        list.clearChoices();
         list.setAdapter(adapter);
+        registerClickCallback();
+        registerForContextMenu(list);
+    }
 
-        // Allows to click on list's items
+    private void registerClickCallback() {
+        final CarbonModel model = CarbonModel.getInstance();
+        ListView list = (ListView) findViewById(R.id.listOfRoutes);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-                startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
+                AlertDialog.Builder builder = new AlertDialog.Builder(SelectRouteActivity.this);
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure you want to use Route " +
+                        model.getRouteCollection().getRouteAtIndex(i).getName() + "?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
+                        }
+                    });
+                builder.setNegativeButton("No", null);
+                builder.show();
             }
         });
     }
 
-    // TODO: check if code is needed and remove or keep
-   /* public void updateListView() {
-        ArrayAdapter<Route> adapter = carbonModel.getRouteCollection().getArrayAdapter(SelectRouteActivity.this);
-        ListView list = (ListView) findViewById(R.id.routeListView);
-        list.clearChoices();
-        list.setAdapter(adapter);
-        registerForContextMenu(list);
-    }
-
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
     }
 
 
@@ -97,5 +124,5 @@ public class SelectRouteActivity extends AppCompatActivity {
             updateListView();
         }
     }
-*/
+
 }
