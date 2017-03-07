@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Kyle on 3/3/2017.
+ * CarData class
  *
  * Note: Will refactor update methods below before iteration ends
- *
  */
 
 public class CarData {
@@ -18,7 +17,7 @@ public class CarData {
     private List<Car> carMatchList;
     private List<String> specsList;
 
-    public CarData(){
+    public CarData() {
         carDataList = new ArrayList<>();
         makeList = new ArrayList<>();
         modelList = new ArrayList<>();
@@ -54,75 +53,75 @@ public class CarData {
         return carMatchList;
     }
 
-    public void initializeMakeList(){
-        for (Car car : carDataList){
+    public void initializeMakeList() {
+        for (Car car : carDataList) {
             int counter = 0;
 
-            for (String make : makeList){
-                if (car.getMake().equals(make)){
+            for (String make : makeList) {
+                if (car.getMake().equals(make)) {
                     counter++;
                 }
             }
             // Avoiding duplicates in list
-            if (counter < 1){
+            if (counter < 1) {
                 makeList.add(car.getMake());
             }
         }
-        for (String make : makeList){
+        for (String make : makeList) {
             System.out.println("Make: " + make);
         }
     }
 
-    public Car findCar(String make, String model, int year, int index){
+    public Car findCar(String make, String model, int year, int index) {
         ArrayList<Car> searchResults = new ArrayList<>();
-        for (Car car : carDataList){
+        for (Car car : carDataList) {
             if (car.getMake().equals(make) && car.getModel().equals(model)
-                    && car.getYear() == year){
+                    && car.getYear() == year) {
                 searchResults.add(car);
             }
         }
         return searchResults.get(index);
     }
 
-    public void initializeModelList(){
+    public void initializeModelList() {
         modelList.add("Select Model");
     }
 
-    public void initializeYearList(){
+    public void initializeYearList() {
         yearList.add("Select Year");
     }
 
-    public void initializeSpecsList(){
+    public void initializeSpecsList() {
         specsList.add("Select Specifications");
     }
 
-    public void updateModelList(String make){
+    public void updateModelList(String make) {
         boolean makeFound = false;
 
         modelList.clear();
 
-        for (int i = 0; i < carDataList.size(); i++){
-            if (carDataList.get(i).getMake().equals(make)){
+        for (int i = 0; i < carDataList.size(); i++) {
+            if (carDataList.get(i).getMake().equals(make)) {
                 int counter = 0;
-                for (String model : modelList){
-                    if (carDataList.get(i).getModel().equals(model)){
+                for (String model : modelList) {
+                    if (carDataList.get(i).getModel().equals(model)) {
                         counter++;
                     }
                 }
                 // Avoiding duplicates in list
-                if (counter < 1){
+                if (counter < 1) {
                     modelList.add(carDataList.get(i).getModel());
                 }
                 makeFound = true;
             }
 
             // Else if reached end of sections of selected Make in data, exit loop
-            else if (makeFound == true){
+            else if (makeFound == true) {
                 makeFound = false;
                 i = carDataList.size();
             }
         }
-        for (String model : modelList){
+        for (String model : modelList) {
             System.out.println("Model: " + model);
         }
         yearList.clear();
@@ -131,49 +130,49 @@ public class CarData {
         initializeSpecsList();
     }
 
-    public void updateYearList(String make, String model){
+    public void updateYearList(String make, String model) {
         boolean makeModelFound = false;
 
         yearList.clear();
 
-        for (int i = 0; i < carDataList.size(); i++){
+        for (int i = 0; i < carDataList.size(); i++) {
             if (carDataList.get(i).getMake().equals(make) &&
-                    carDataList.get(i).getModel().equals(model)){
+                    carDataList.get(i).getModel().equals(model)) {
                 int counter = 0;
-                for (String year : yearList){
-                    if (("" + carDataList.get(i).getYear()).equals(year)){
+                for (String year : yearList) {
+                    if (("" + carDataList.get(i).getYear()).equals(year)) {
                         counter++;
                     }
                 }
                 // Avoiding duplicates in list
-                if (counter < 1){
+                if (counter < 1) {
                     yearList.add("" + carDataList.get(i).getYear());
                 }
                 makeModelFound = true;
             }
 
             // Else if reached end of sections of selected Make in data, exit loop
-            else if (makeModelFound == true){
+            else if (makeModelFound == true) {
                 makeModelFound = false;
                 i = carDataList.size();
             }
         }
-        for (String year : yearList){
+        for (String year : yearList) {
             System.out.println("Year: " + year);
         }
         specsList.clear();
         initializeSpecsList();
     }
 
-    public void updateSpecsList(String make, String model, String year){
+    public void updateSpecsList(String make, String model, String year) {
         boolean makeModelYearFound = false;
 
         specsList.clear();
 
-        for (int i = 0; i < carDataList.size(); i++){
+        for (int i = 0; i < carDataList.size(); i++) {
             if (carDataList.get(i).getMake().equals(make)
                     && carDataList.get(i).getModel().equals(model)
-                    && ("" + carDataList.get(i).getYear()).equals(year)){
+                    && ("" + carDataList.get(i).getYear()).equals(year)) {
                 Car car = carDataList.get(i);
                 specsList.add(car.getTrany() + ", "
                         + car.getCylinders() + "C, "
@@ -183,15 +182,13 @@ public class CarData {
             }
 
             // Else if reached end of sections of selected Make in data, exit loop
-            else if (makeModelYearFound == true){
+            else if (makeModelYearFound == true) {
                 makeModelYearFound = false;
                 i = carDataList.size();
             }
         }
-        for (String specs : specsList){
+        for (String specs : specsList) {
             System.out.println("Specs: " + year);
         }
     }
-
 }
-

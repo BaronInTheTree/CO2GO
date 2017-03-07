@@ -1,11 +1,7 @@
 package ca.cmpt276.carbonTracker;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.method.KeyListener;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,10 +30,9 @@ public class AddCarActivity extends AppCompatActivity {
         setupSelectMakeSpinner();
         setupAddCarButton();
         setupEnterNicknameEditText();
-
     }
 
-    private void setupSelectMakeSpinner(){
+    private void setupSelectMakeSpinner() {
         final Spinner selectMake = (Spinner) findViewById(R.id.spinnerSelectMake);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
@@ -54,12 +49,11 @@ public class AddCarActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
 
-    private void setupSelectModelSpinner(){
+    private void setupSelectModelSpinner() {
         Spinner selectModel = (Spinner) findViewById(R.id.spinnerSelectModel);
         Spinner selectMake = (Spinner) findViewById(R.id.spinnerSelectMake);
 
@@ -81,13 +75,11 @@ public class AddCarActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
     }
 
-    private void setupSelectYearSpinner(){
+    private void setupSelectYearSpinner() {
         Spinner selectModel = (Spinner) findViewById(R.id.spinnerSelectModel);
         Spinner selectYear = (Spinner) findViewById(R.id.spinnerSelectYear);
 
@@ -109,13 +101,11 @@ public class AddCarActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
     }
 
-    private void setupSelectSpecsSpinner(){
+    private void setupSelectSpecsSpinner() {
         Spinner selectYear = (Spinner) findViewById(R.id.spinnerSelectYear);
         Spinner selectSpecs = (Spinner) findViewById(R.id.spinnerSelectSpecs);
 
@@ -133,40 +123,35 @@ public class AddCarActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedVariation = position;
-                //Toast.makeText(AddCarActivity.this, "Position: " + position, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
     }
 
-    private void setupEnterNicknameEditText(){
+    private void setupEnterNicknameEditText() {
         final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
         enterNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
     }
 
-    private void setupAddCarButton(){
+    private void setupAddCarButton() {
         Button addCar = (Button) findViewById(R.id.buttonAddCar);
         final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
         addCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectedNickname = enterNickname.getText().toString();
-                if (selectedNickname.equals("")){
+                if (selectedNickname.equals("")) {
                     Toast.makeText(AddCarActivity.this,
                             "Please enter a nickname for your car.",
                             Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
                     Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
                             Integer.parseInt(selectedYear), selectedVariation);
                     car.setNickname(selectedNickname);
@@ -174,15 +159,9 @@ public class AddCarActivity extends AppCompatActivity {
                     Toast.makeText(AddCarActivity.this,
                             modelInstance.getCarCollection().getLatestCar().getInfo(),
                             Toast.LENGTH_SHORT).show();
-                    Intent intent = SelectTransportationActivity.makeIntent(AddCarActivity.this);
-                    startActivity(intent);
                     finish();
                 }
             }
         });
-
     }
-
-
-
 }

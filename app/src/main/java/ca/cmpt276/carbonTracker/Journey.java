@@ -4,12 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by song on 2017-02-27.
+ * Journey class
+ * <p>
+ * Immutable class. Once journey is added, it cannot be changed or removed.
  */
 
 public class Journey {
-
-    // Immutable class. Once journey is added, it cannot be changed or removed.
 
     private Car car;
     private Route route;

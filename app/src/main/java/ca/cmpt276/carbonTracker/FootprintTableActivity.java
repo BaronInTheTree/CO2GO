@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.example.sasha.carbontracker.R;
 
-import org.w3c.dom.Text;
-
 public class FootprintTableActivity extends AppCompatActivity {
 
     @Override
@@ -51,13 +49,11 @@ public class FootprintTableActivity extends AppCompatActivity {
 
 
     private void populateListView() {
-
         // String[] allJourneys = getJourneyDescriptionsTableFormat();
         String[] allJourneys = {"2017-01-01    Home_to_Work_Route     1234567890     my_Vehicle_Informa    12345678"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.table_layout,allJourneys);
-        ListView list = (ListView)findViewById(R.id.tableFP);
+                R.layout.table_layout, allJourneys);
+        ListView list = (ListView) findViewById(R.id.tableFP);
         list.setAdapter(adapter);
-
     }
 }

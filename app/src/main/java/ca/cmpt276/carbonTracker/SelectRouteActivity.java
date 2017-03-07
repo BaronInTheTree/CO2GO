@@ -1,22 +1,19 @@
 package ca.cmpt276.carbonTracker;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.sasha.carbontracker.R;
-
 import java.util.List;
 
+import com.example.sasha.carbontracker.R;
+
 public class SelectRouteActivity extends AppCompatActivity {
-    CarbonModel carbonModel = CarbonModel.getInstance();
     private static final int REQUEST_CODE_ADD_ROUTE = 1000;
 
     @Override
@@ -37,7 +34,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectRouteActivity.this, JourneyInfoActicity.class));
+                startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
             }
         });
     }
@@ -71,10 +68,12 @@ public class SelectRouteActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-                startActivity(new Intent(SelectRouteActivity.this, JourneyInfoActicity.class));
+                startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
             }
         });
     }
+
+    // TODO: check if code is needed and remove or keep
    /* public void updateListView() {
         ArrayAdapter<Route> adapter = carbonModel.getRouteCollection().getArrayAdapter(SelectRouteActivity.this);
         ListView list = (ListView) findViewById(R.id.routeListView);
@@ -85,7 +84,6 @@ public class SelectRouteActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
     }
 
 

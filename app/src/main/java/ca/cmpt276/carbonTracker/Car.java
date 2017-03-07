@@ -1,7 +1,7 @@
 package ca.cmpt276.carbonTracker;
 
 /**
- * Created by song on 2017-02-27.
+ * Car class
  */
 
 public class Car {
@@ -40,7 +40,7 @@ public class Car {
         setEmissions();
     }
 
-    public String getInfo(){
+    public String getInfo() {
         return "Make: " + make
                 + "\nModel: " + model
                 + "\nYear: " + year
@@ -91,10 +91,6 @@ public class Car {
         return co2GramsPerKM_Highway;
     }
 
-    public boolean isHidden() {
-        return isHidden;
-    }
-
     public void setHidden(boolean hidden) {
         this.isHidden = hidden;
     }
@@ -107,7 +103,7 @@ public class Car {
         return co2GramsPerKM_City;
     }
 
-    public void setNickname(String nickname){
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 

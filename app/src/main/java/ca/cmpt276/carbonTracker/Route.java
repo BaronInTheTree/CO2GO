@@ -1,7 +1,7 @@
 package ca.cmpt276.carbonTracker;
 
 /**
- * Created by song on 2017-02-27.
+ * Route class
  */
 
 public class Route {
@@ -22,7 +22,7 @@ public class Route {
         this.isHidden = false;
     }
 
-    private double convertKM_Miles(double miles){
+    private double convertKM_Miles(double miles) {
         return (miles * 0.621371);
     }
 
@@ -34,7 +34,7 @@ public class Route {
         return cityDistanceKM;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -54,7 +54,7 @@ public class Route {
         return cityDistanceMiles;
     }
 
-    public double getTotalDistanceKM(){
+    public double getTotalDistanceKM() {
         return highwayDistanceKM + cityDistanceKM;
     }
 }

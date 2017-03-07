@@ -7,33 +7,32 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.sasha.carbontracker.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by song on 2017-02-27.
- */
+import com.example.sasha.carbontracker.R;
 
+/**
+ * RouteCollection class
+ */
 public class RouteCollection {
 
     private List<Route> routeCollection;
     private List<Route> hiddenRouteCollection;
 
-    public RouteCollection(){
+    public RouteCollection() {
         routeCollection = new ArrayList<>();
         hiddenRouteCollection = new ArrayList<>();
     }
 
-    public void addRoute(Route route){
+    public void addRoute(Route route) {
         routeCollection.add(route);
     }
 
     // See CarCollection class for details
-    public void hideRoute(Route route){
-        for (Route r : routeCollection){
-            if (r.getName().equals(route.getName())){
+    public void hideRoute(Route route) {
+        for (Route r : routeCollection) {
+            if (r.getName().equals(route.getName())) {
                 r.setHidden(true);
                 hiddenRouteCollection.add(r);
                 routeCollection.remove(r);
@@ -41,7 +40,7 @@ public class RouteCollection {
         }
     }
 
-    public void editRoute(Route route, int index){
+    public void editRoute(Route route, int index) {
         routeCollection.remove(index);
         routeCollection.add(index, route);
     }
@@ -72,12 +71,12 @@ public class RouteCollection {
         }
     }
 
-    public int getListSize(){
+    public int getListSize() {
         return routeCollection.size();
     }
 
     public Route getLatestRoute() {
-        if (getListSize()>0) return routeCollection.get(routeCollection.size()-1);
+        if (getListSize() > 0) return routeCollection.get(routeCollection.size() - 1);
         else return null;
     }
 }

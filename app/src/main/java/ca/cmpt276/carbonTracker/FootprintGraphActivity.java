@@ -3,12 +3,15 @@ package ca.cmpt276.carbonTracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.sasha.carbontracker.R;
+
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -18,19 +21,17 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class FootprintGraphActivity extends AppCompatActivity {
 
     private final String tableLabel = "CO2 Emission of Journeys (in gram)";
 
     // String journeys[] = getJourneyDescription();
-    String journeys[] = {"#1: 2017-01-01, Home_to_Work_Route, 1234567890, my_Vehicle_Informa, 12345678","#2:date, routeName...","#3:date, routeName...",
-            "#4:date, routeName...", "#5:date, routeName...","#6:date, routeName...", "#7:date, routeName..."};
+    String journeys[] = {"#1: 2017-01-01, Home_to_Work_Route, 1234567890, my_Vehicle_Informa, 12345678", "#2:date, routeName...", "#3:date, routeName...",
+            "#4:date, routeName...", "#5:date, routeName...", "#6:date, routeName...", "#7:date, routeName..."};
 
     // int emissions[] = getJourneyEmission();
-    int emissions[] = {23,5,56,189,70,23,94};
+    int emissions[] = {23, 5, 56, 189, 70, 23, 94};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +40,15 @@ public class FootprintGraphActivity extends AppCompatActivity {
 
         setupPieChart();
         setupButtons();
-
     }
-
 
     private void setupPieChart() {
         List<PieEntry> pieEntries = new ArrayList<>();
-        for (int i=0;i<emissions.length;i++){
-            pieEntries.add(new PieEntry((float)emissions[i]));
+        for (int i = 0; i < emissions.length; i++) {
+            pieEntries.add(new PieEntry((float) emissions[i]));
         }
 
-        PieDataSet dataSet = new PieDataSet(pieEntries,tableLabel);
+        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setSliceSpace(2);
         dataSet.setValueTextSize(12);
@@ -66,21 +65,19 @@ public class FootprintGraphActivity extends AppCompatActivity {
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                if (e==null)
+                if (e == null)
                     return;
 
                 Toast.makeText(FootprintGraphActivity.this,
-                        journeys[(int)h.getX()],Toast.LENGTH_SHORT).show();
+                        journeys[(int) h.getX()], Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected() {
-
             }
         });
 
         chart.invalidate();
-
     }
 
     private void setupButtons() {

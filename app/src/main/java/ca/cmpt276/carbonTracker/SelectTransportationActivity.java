@@ -1,6 +1,5 @@
 package ca.cmpt276.carbonTracker;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.sasha.carbontracker.R;
-
 import java.util.List;
+
+import com.example.sasha.carbontracker.R;
 
 public class SelectTransportationActivity extends AppCompatActivity {
 
@@ -34,7 +33,7 @@ public class SelectTransportationActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            startActivity(new Intent(SelectTransportationActivity.this, ModifyCarActivity.class));
+                startActivity(new Intent(SelectTransportationActivity.this, ModifyCarActivity.class));
             }
         });
     }

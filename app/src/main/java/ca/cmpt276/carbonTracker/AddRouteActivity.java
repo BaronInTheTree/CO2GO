@@ -110,7 +110,6 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         } catch (NullPointerException e) {
             return false;
         }
-
         routeName = nameInput.getText().toString();
         route = new Route(routeName, highway, city);
         return true;
@@ -159,18 +158,16 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         return new Intent(context, AddRouteActivity.class);
     }
 
-    private boolean isEmptyEditText(EditText text){
+    private boolean isEmptyEditText(EditText text) {
         return (text.getText().toString().length() == 0);
     }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
     }
 
     @Override

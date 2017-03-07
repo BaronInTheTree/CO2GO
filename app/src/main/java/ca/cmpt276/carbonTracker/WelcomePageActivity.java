@@ -42,7 +42,7 @@ public class WelcomePageActivity extends AppCompatActivity {
         });
     }
 
-    public void readVehicleDate() {
+    private void readVehicleDate() {
         CarbonModel modelInstance = CarbonModel.getInstance();
 
         InputStream is = getResources().openRawResource(R.raw.vehiclesnew); // CHANGED

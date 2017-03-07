@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by song on 2017-02-27.
+ * CarbonModel class
  */
 
 public class CarbonModel {
@@ -29,13 +29,15 @@ public class CarbonModel {
         carData = new CarData();
     }
 
-    public void addNewJourney(Journey newJourney){
+    public void addNewJourney(Journey newJourney) {
         instance.journeys.addJourney(newJourney);
     }
 
-    public Journey getCurrentJourney(){return journeys.getLatestJourney();}
+    public Journey getCurrentJourney() {
+        return journeys.getLatestJourney();
+    }
 
-    public CarData getCarData(){
+    public CarData getCarData() {
         return carData;
     }
 

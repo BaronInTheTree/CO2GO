@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by song on 2017-02-27.
+ * CarCollection class
  */
 public class CarCollection {
     private List<Car> carCollection;
@@ -41,12 +41,12 @@ public class CarCollection {
         hiddenCarCollections = cars;
     }
 
-    public int getListSize(){
+    public int getListSize() {
         return carCollection.size();
     }
 
     public Car getLatestCar() {
-        if (getListSize()>0) return carCollection.get(carCollection.size()-1);
+        if (getListSize() > 0) return carCollection.get(carCollection.size() - 1);
         else return null;
     }
 }
