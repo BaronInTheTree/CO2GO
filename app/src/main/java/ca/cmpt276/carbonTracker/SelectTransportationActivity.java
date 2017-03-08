@@ -56,10 +56,6 @@ public class SelectTransportationActivity extends AppCompatActivity {
                 model.setSelectedCar(model.getCarCollection().getCarAtIndex(i));
                 Intent intent = ModifyCarActivity.makeIntent(SelectTransportationActivity.this);
                 intent.putExtra("Index", i);
-                Toast.makeText(SelectTransportationActivity.this,
-                        "Index " + i,
-                        Toast.LENGTH_LONG).show();
-
                 startActivity(intent);
                 finish();
             }
