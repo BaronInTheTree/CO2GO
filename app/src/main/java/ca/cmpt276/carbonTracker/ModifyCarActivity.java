@@ -37,6 +37,7 @@ public class ModifyCarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ModifyCarActivity.this, SelectRouteActivity.class));
+                finish();
             }
         });
     }

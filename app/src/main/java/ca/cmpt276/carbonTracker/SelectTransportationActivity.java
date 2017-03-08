@@ -22,24 +22,23 @@ public class SelectTransportationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_transportation);
 
         // Remove after getting list to work
-        testButton();
+        addBackButton();
 
         populateListView();
 
         addCarButton();
     }
 
-    public void testButton() {
-        Button btn = (Button) findViewById(R.id.testCarList_btn);
+    public void addBackButton() {
+        Button btn = (Button) findViewById(R.id.buttonBack);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectTransportationActivity.this, ModifyCarActivity.class));
+                finish();
             }
         });
     }
 
-    // TODO: implement proper function for current "outputCarCollectionToString"
     private void populateListView() {
         // Create list of items
         final CarbonModel model = CarbonModel.getInstance();
@@ -62,6 +61,7 @@ public class SelectTransportationActivity extends AppCompatActivity {
                 Intent intent = ModifyCarActivity.makeIntent(SelectTransportationActivity.this);
                 intent.putExtra("Index", i);
                 startActivity(intent);
+                finish();
             }
         });
     }

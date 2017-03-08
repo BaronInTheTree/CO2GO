@@ -140,7 +140,7 @@ public class EditCarActivity extends AppCompatActivity {
     }
 
     private void setupEnterNicknameEditText() {
-        final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNicknameEdit);
+        EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNicknameEdit);
         enterNickname.setText(modelInstance.getSelectedCar().getNickname());
         enterNickname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +168,7 @@ public class EditCarActivity extends AppCompatActivity {
                     modelInstance.getCarCollection().editCar(car, selectedIndex);
                     modelInstance.setSelectedCar(car);
 
-                    Intent intent = ModifyCarActivity.makeIntent(EditCarActivity.this);
+                    Intent intent = SelectTransportationActivity.makeIntent(EditCarActivity.this);
                     startActivity(intent);
                     finish();
                 }
