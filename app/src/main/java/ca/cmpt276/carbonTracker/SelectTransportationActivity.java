@@ -1,5 +1,6 @@
 package ca.cmpt276.carbonTracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,8 +42,8 @@ public class SelectTransportationActivity extends AppCompatActivity {
     // TODO: implement proper function for current "outputCarCollectionToString"
     private void populateListView() {
         // Create list of items
-        CarbonModel model = CarbonModel.getInstance();
-        List<String> cars = model.outputCarCollectionToString();
+        final CarbonModel model = CarbonModel.getInstance();
+        List<String> cars = model.getCarCollection().getUICollection();
         // Build adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,           // Context for activity
@@ -57,7 +58,10 @@ public class SelectTransportationActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-                startActivity(new Intent(SelectTransportationActivity.this, ModifyCarActivity.class));
+                model.setSelectedCar(model.getCarCollection().getCarAtIndex(i));
+                Intent intent = ModifyCarActivity.makeIntent(SelectTransportationActivity.this);
+                intent.putExtra("Index", i);
+                startActivity(intent);
             }
         });
     }
@@ -67,8 +71,14 @@ public class SelectTransportationActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectTransportationActivity.this, AddCarActivity.class));
+                Intent intent = AddCarActivity.makeIntent(SelectTransportationActivity.this);
+                startActivity(intent);
+                finish();
             }
         });
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, SelectTransportationActivity.class);
     }
 }

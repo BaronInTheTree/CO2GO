@@ -24,8 +24,8 @@ public class Car {
     private int cylinders;
     private double displacement;
     private String fuelType;
+    private double kgC02perGallon;
 
-    // Used to populate an arrayList of cars directly from .csv file at runtime
     public Car(String make, String model, int year, double highwayMPG, double cityMPG, String trany,
                int cylinders, double displacement, String fuelType) {
         this.make = make;
@@ -37,17 +37,24 @@ public class Car {
         this.displacement = displacement;
         this.cylinders = cylinders;
         this.fuelType = fuelType;
+        setKgC02();
         setEmissions();
     }
 
-    public String getInfo() {
-        return "Make: " + make
-                + "\nModel: " + model
-                + "\nYear: " + year
-                + "\nSpecs: " + trany
-                + ", " + cylinders
-                + "C, " + displacement
-                + "L, " + fuelType;
+    public String getBasicInfo() {
+        return nickname + ", " +  make + " " + model + ", " + year + ", ";
+    }
+
+    private void setKgC02(){
+        if (fuelType.equals("Gasoline")){
+            kgC02perGallon = 8890;
+        }
+        else if (fuelType.equals("Diesel")){
+            kgC02perGallon = 10160;
+        }
+        else if (fuelType.equals("Electric")){
+            kgC02perGallon = 0;
+        }
     }
 
     private void setEmissions() {
@@ -58,13 +65,18 @@ public class Car {
         this.isHidden = false;
     }
 
-    // 8500g or 8.5kg/gallon averaged from multiple gov't sources
     private double calcCO2PerMile(double mpg) {
-        return (8500 / mpg);
+        if (kgC02perGallon > 0){
+            return (kgC02perGallon / mpg);
+        }
+        else return 0;
     }
 
     private double calcCO2PerKM(double mpg) {
-        return (8500 / mpg * 0.621371);
+        if (kgC02perGallon > 0){
+            return (kgC02perGallon / mpg * 0.621371);
+        }
+        else return 0;
     }
 
     public String getMake() {

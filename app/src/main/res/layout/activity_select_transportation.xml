@@ -42,9 +42,10 @@
         android:id="@+id/listOfCars"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
+        android:layout_above="@+id/addCar_btn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/addCar_btn" />
+        android:layout_below="@+id/textView"
+        android:paddingTop="10dp" />
 
 </RelativeLayout>

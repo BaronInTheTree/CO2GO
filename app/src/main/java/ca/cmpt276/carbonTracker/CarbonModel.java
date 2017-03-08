@@ -13,6 +13,8 @@ public class CarbonModel {
     private CarCollection carCollection;
     private RouteCollection routeCollection;
     private CarData carData;
+    private Car selectedCar;
+    private Route selectedRoute;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -75,5 +77,21 @@ public class CarbonModel {
 
     public RouteCollection getRouteCollection() {
         return routeCollection;
+    }
+
+    public Car getSelectedCar() {
+        return selectedCar;
+    }
+
+    public void setSelectedCar(Car selectedCar) {
+        this.selectedCar = selectedCar;
+    }
+
+    public Route getSelectedRoute() {
+        return selectedRoute;
+    }
+
+    public void setSelectedRoute(Route selectedRoute) {
+        this.selectedRoute = selectedRoute;
     }
 }

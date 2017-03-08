@@ -1,5 +1,7 @@
 package ca.cmpt276.carbonTracker;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +32,7 @@ public class AddCarActivity extends AppCompatActivity {
         setupSelectMakeSpinner();
         setupAddCarButton();
         setupEnterNicknameEditText();
+        setupCancelButton();
     }
 
     private void setupSelectMakeSpinner() {
@@ -157,11 +160,29 @@ public class AddCarActivity extends AppCompatActivity {
                     car.setNickname(selectedNickname);
                     modelInstance.getCarCollection().addCar(car);
                     Toast.makeText(AddCarActivity.this,
-                            modelInstance.getCarCollection().getLatestCar().getInfo(),
+                            modelInstance.getCarCollection().getLatestCar().getBasicInfo(),
                             Toast.LENGTH_SHORT).show();
+                    Intent intent = SelectTransportationActivity.makeIntent(AddCarActivity.this);
+                    startActivity(intent);
                     finish();
                 }
             }
         });
+    }
+
+    private void setupCancelButton() {
+        Button cancel = (Button) findViewById(R.id.buttonCancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SelectTransportationActivity.makeIntent(AddCarActivity.this);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, AddCarActivity.class);
     }
 }

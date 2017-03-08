@@ -8,11 +8,13 @@ import java.util.List;
  */
 public class CarCollection {
     private List<Car> carCollection;
-    private List<Car> hiddenCarCollections;
+    private List<Car> hiddenCarCollection;
+    private List<String> uiCollection;
 
     public CarCollection() {
         carCollection = new ArrayList<>();
-        hiddenCarCollections = new ArrayList<>();
+        hiddenCarCollection = new ArrayList<>();
+        uiCollection = new ArrayList<>();
     }
 
     public void addCar(Car car) {
@@ -24,10 +26,9 @@ public class CarCollection {
     // (per Brian's advice on the Project page)
     public void hideCar(Car car) {
         for (Car c : carCollection) {
-            if (c.getNickname().equals(car.getNickname())) {
+            if (c.getNickname().equals(c.getNickname())) {
                 c.setHidden(true);
-                hiddenCarCollections.add(c);
-                carCollection.remove(c);
+                hiddenCarCollection.add(c);
             }
         }
     }
@@ -37,8 +38,20 @@ public class CarCollection {
         carCollection.add(index, car);
     }
 
-    public void setHiddenCarCollections(List<Car> cars) {
-        hiddenCarCollections = cars;
+    public void removeCar(int index) {
+        carCollection.remove(index);
+    }
+
+    public List<String> getUICollection(){
+        uiCollection.clear();
+        for (Car car : carCollection){
+            uiCollection.add(car.getBasicInfo());
+        }
+        return uiCollection;
+    }
+
+    public void setHiddenCarCollection(List<Car> cars) {
+        hiddenCarCollection = cars;
     }
 
     public int getListSize() {
@@ -48,5 +61,9 @@ public class CarCollection {
     public Car getLatestCar() {
         if (getListSize() > 0) return carCollection.get(carCollection.size() - 1);
         else return null;
+    }
+
+    public Car getCarAtIndex(int index){
+        return carCollection.get(index);
     }
 }
