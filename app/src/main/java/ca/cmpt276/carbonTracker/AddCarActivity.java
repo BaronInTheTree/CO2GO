@@ -159,14 +159,7 @@ public class AddCarActivity extends AppCompatActivity {
                             Integer.parseInt(selectedYear), selectedVariation);
                     car.setNickname(selectedNickname);
 
-                    Car clonedCar = null;
-                    try {
-                        clonedCar = (Car) car.clone();
-                    } catch (CloneNotSupportedException e) {
-                        // Display error toast message
-                    }
-
-                    modelInstance.getCarCollection().addCar(clonedCar);
+                    modelInstance.getCarCollection().addCar(car);
 
                     Toast.makeText(AddCarActivity.this,
                             modelInstance.getCarCollection().getLatestCar().getBasicInfo(),

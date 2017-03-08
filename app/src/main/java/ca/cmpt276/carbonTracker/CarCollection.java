@@ -18,7 +18,13 @@ public class CarCollection {
     }
 
     public void addCar(Car car) {
-        carCollection.add(car);
+        Car clonedCar = null;
+        try {
+            clonedCar = (Car) car.clone();
+        } catch (CloneNotSupportedException e) {
+        }
+
+        carCollection.add(clonedCar);
     }
 
     // Instead of removing the car from the list,
@@ -34,8 +40,14 @@ public class CarCollection {
     }
 
     public void editCar(Car car, int index) {
+        Car clonedCar = null;
+        try {
+            clonedCar = (Car) car.clone();
+        } catch (CloneNotSupportedException e) {
+        }
+
         carCollection.remove(index);
-        carCollection.add(index, car);
+        carCollection.add(index, clonedCar);
     }
 
     public void removeCar(int index) {

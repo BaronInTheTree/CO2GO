@@ -168,18 +168,9 @@ public class EditCarActivity extends AppCompatActivity {
                     Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
                             Integer.parseInt(selectedYear), selectedVariation);
 
-
                     car.setNickname(selectedNickname);
 
-                    Car clonedCar = null;
-                    try {
-                        clonedCar = (Car) car.clone();
-                    } catch (CloneNotSupportedException e) {
-                        // Display error message as toast
-                    }
-                    ;
-
-                    modelInstance.getCarCollection().editCar(clonedCar, selectedIndex);
+                    modelInstance.getCarCollection().editCar(car, selectedIndex);
                     modelInstance.setSelectedCar(car);
 
                     Intent intent = SelectTransportationActivity.makeIntent(EditCarActivity.this);
