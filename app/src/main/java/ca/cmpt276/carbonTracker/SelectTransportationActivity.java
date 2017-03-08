@@ -24,7 +24,7 @@ public class SelectTransportationActivity extends AppCompatActivity {
         // Remove after getting list to work
         addBackButton();
 
-        populateListView();
+        updateCarList();
 
         addCarButton();
     }
@@ -39,19 +39,14 @@ public class SelectTransportationActivity extends AppCompatActivity {
         });
     }
 
-    private void populateListView() {
-        // Create list of items
+    private void updateCarList() {
+        // Refreshes the list
         final CarbonModel model = CarbonModel.getInstance();
         List<String> cars = model.getCarCollection().getUICollection();
-        // Build adapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,           // Context for activity
-                R.layout.listview_format,  // Layout to use (create)
-                cars);       // Items to be displayed
-
-        // config list view
         ListView list = (ListView) findViewById(R.id.listOfCars);
-        list.setAdapter(adapter);
+        list.clearChoices();
+        list.setAdapter(new ArrayAdapter<>(this, R.layout.listview_format, cars));
+        registerForContextMenu(list);
 
         // Allows to click on list's items
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
