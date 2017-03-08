@@ -158,7 +158,16 @@ public class AddCarActivity extends AppCompatActivity {
                     Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
                             Integer.parseInt(selectedYear), selectedVariation);
                     car.setNickname(selectedNickname);
-                    modelInstance.getCarCollection().addCar(car);
+
+                    Car clonedCar = null;
+                    try {
+                        clonedCar = (Car) car.clone();
+                    } catch (CloneNotSupportedException e) {
+                        // Display error toast message
+                    }
+
+                    modelInstance.getCarCollection().addCar(clonedCar);
+
                     Toast.makeText(AddCarActivity.this,
                             modelInstance.getCarCollection().getLatestCar().getBasicInfo(),
                             Toast.LENGTH_SHORT).show();

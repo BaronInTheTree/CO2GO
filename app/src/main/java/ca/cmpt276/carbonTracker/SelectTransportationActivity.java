@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,11 +22,8 @@ public class SelectTransportationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_transportation);
 
-        // Remove after getting list to work
         addBackButton();
-
         populateListView();
-
         addCarButton();
     }
 
@@ -48,11 +46,9 @@ public class SelectTransportationActivity extends AppCompatActivity {
                 this,           // Context for activity
                 R.layout.listview_format,  // Layout to use (create)
                 cars);       // Items to be displayed
-
         // config list view
         ListView list = (ListView) findViewById(R.id.listOfCars);
         list.setAdapter(adapter);
-
         // Allows to click on list's items
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,6 +56,10 @@ public class SelectTransportationActivity extends AppCompatActivity {
                 model.setSelectedCar(model.getCarCollection().getCarAtIndex(i));
                 Intent intent = ModifyCarActivity.makeIntent(SelectTransportationActivity.this);
                 intent.putExtra("Index", i);
+                Toast.makeText(SelectTransportationActivity.this,
+                        "Index " + i,
+                        Toast.LENGTH_LONG).show();
+
                 startActivity(intent);
                 finish();
             }

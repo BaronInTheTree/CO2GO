@@ -4,7 +4,7 @@ package ca.cmpt276.carbonTracker;
  * Car class
  */
 
-public class Car {
+public class Car implements Cloneable {
 
     // nickname used as the primary key for Cars (unique identifying value, like a fingerprint)
     // If User tries to enter an already existing nickname, don't allow it, display message.
@@ -42,17 +42,15 @@ public class Car {
     }
 
     public String getBasicInfo() {
-        return nickname + ", " +  make + " " + model + ", " + year + ", ";
+        return nickname + ", " + make + " " + model + ", " + year;
     }
 
-    private void setKgC02(){
-        if (fuelType.equals("Gasoline")){
+    private void setKgC02() {
+        if (fuelType.equals("Gasoline")) {
             kgC02perGallon = 8890;
-        }
-        else if (fuelType.equals("Diesel")){
+        } else if (fuelType.equals("Diesel")) {
             kgC02perGallon = 10160;
-        }
-        else if (fuelType.equals("Electric")){
+        } else if (fuelType.equals("Electric")) {
             kgC02perGallon = 0;
         }
     }
@@ -66,17 +64,15 @@ public class Car {
     }
 
     private double calcCO2PerMile(double mpg) {
-        if (kgC02perGallon > 0){
+        if (kgC02perGallon > 0) {
             return (kgC02perGallon / mpg);
-        }
-        else return 0;
+        } else return 0;
     }
 
     private double calcCO2PerKM(double mpg) {
-        if (kgC02perGallon > 0){
+        if (kgC02perGallon > 0) {
             return (kgC02perGallon / mpg * 0.621371);
-        }
-        else return 0;
+        } else return 0;
     }
 
     public String getMake() {
@@ -133,5 +129,10 @@ public class Car {
 
     public String getFuelType() {
         return fuelType;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

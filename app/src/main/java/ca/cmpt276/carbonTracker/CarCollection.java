@@ -42,9 +42,9 @@ public class CarCollection {
         carCollection.remove(index);
     }
 
-    public List<String> getUICollection(){
+    public List<String> getUICollection() {
         uiCollection.clear();
-        for (Car car : carCollection){
+        for (Car car : carCollection) {
             uiCollection.add(car.getBasicInfo());
         }
         return uiCollection;
@@ -63,7 +63,7 @@ public class CarCollection {
         else return null;
     }
 
-    public Car getCarAtIndex(int index){
+    public Car getCarAtIndex(int index) {
         return carCollection.get(index);
     }
 }
