@@ -20,13 +20,13 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:text="Test button while no cars in list"
+        android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/testCarList_btn"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:text="Back"
         android:textSize="12sp" />
 
     <TextView
