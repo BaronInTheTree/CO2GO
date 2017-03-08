@@ -30,6 +30,9 @@ public class EditCarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_car);
         modelInstance = CarbonModel.getInstance();
 
+        Intent callingIntent = getIntent();
+        selectedIndex = callingIntent.getIntExtra("Index", 0);
+
         setupSelectMakeSpinner();
         setupSelectModelSpinner();
         setupSelectYearSpinner();
@@ -164,8 +167,19 @@ public class EditCarActivity extends AppCompatActivity {
                     modelInstance.getCarCollection().hideCar(modelInstance.getSelectedCar());
                     Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
                             Integer.parseInt(selectedYear), selectedVariation);
+
+
                     car.setNickname(selectedNickname);
-                    modelInstance.getCarCollection().editCar(car, selectedIndex);
+
+                    Car clonedCar = null;
+                    try {
+                        clonedCar = (Car) car.clone();
+                    } catch (CloneNotSupportedException e) {
+                        // Display error message as toast
+                    }
+                    ;
+
+                    modelInstance.getCarCollection().editCar(clonedCar, selectedIndex);
                     modelInstance.setSelectedCar(car);
 
                     Intent intent = SelectTransportationActivity.makeIntent(EditCarActivity.this);

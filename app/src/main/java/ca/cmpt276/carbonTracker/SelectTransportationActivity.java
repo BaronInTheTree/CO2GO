@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,11 +22,8 @@ public class SelectTransportationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_transportation);
 
-        // Remove after getting list to work
         addBackButton();
-
-        updateCarList();
-
+        populateListView();
         addCarButton();
     }
 
@@ -39,15 +37,18 @@ public class SelectTransportationActivity extends AppCompatActivity {
         });
     }
 
-    private void updateCarList() {
-        // Refreshes the list
+    private void populateListView() {
+        // Create list of items
         final CarbonModel model = CarbonModel.getInstance();
         List<String> cars = model.getCarCollection().getUICollection();
+        // Build adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this,           // Context for activity
+                R.layout.listview_format,  // Layout to use (create)
+                cars);       // Items to be displayed
+        // config list view
         ListView list = (ListView) findViewById(R.id.listOfCars);
-        list.clearChoices();
-        list.setAdapter(new ArrayAdapter<>(this, R.layout.listview_format, cars));
-        registerForContextMenu(list);
-
+        list.setAdapter(adapter);
         // Allows to click on list's items
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
