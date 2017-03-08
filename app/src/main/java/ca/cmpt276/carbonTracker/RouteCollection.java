@@ -32,12 +32,16 @@ public class RouteCollection {
     // See CarCollection class for details
     public void hideRoute(Route route) {
         for (Route r : routeCollection) {
-            if (r.getName().equals(route.getName())) {
+            if ((r.getName().equals(route.getName())) && (r.getCityDistanceKM() == route.getCityDistanceKM()) &&
+                    (r.getHighwayDistanceKM() == route.getHighwayDistanceKM())) {
                 r.setHidden(true);
                 hiddenRouteCollection.add(r);
-                routeCollection.remove(r);
             }
         }
+    }
+
+    public void removeRoute(int index) {
+        routeCollection.remove(index);
     }
 
     public void editRoute(Route route, int index) {

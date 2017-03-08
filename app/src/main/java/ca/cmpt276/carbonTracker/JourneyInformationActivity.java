@@ -32,7 +32,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
         //use testing data (the following three lines) now:
         Car test_car = new Car("Toyota", "Camry", 2000, 40.0, 60.0, "Manual", 4, 5.0, "Regular Gasoline");
         test_car.setNickname("test_car");
-        Route test_route = new Route("test_route", 100.0, 50.0);
+        Route test_route = new Route("test_route", 100, 50);
         Journey currentJourney = new Journey(test_car, test_route);
 
         TextView date = (TextView) findViewById(R.id.date_entry);

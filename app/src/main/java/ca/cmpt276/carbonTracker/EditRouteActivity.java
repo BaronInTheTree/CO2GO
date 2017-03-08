@@ -15,68 +15,62 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
+public class EditRouteActivity extends AppCompatActivity implements TextWatcher {
+    private int routeIndex;
     private Route route;
     private CarbonModel carbonModel = CarbonModel.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_route);
-
-        setupSaveRouteButton();
-        setupUseRouteButton();
+        setContentView(R.layout.activity_edit_route);
         setupTextListeners();
+        getExtraFromIntent();
+        setupTotalText();
+        setupEditRouteButton();
     }
 
-    private void setupSaveRouteButton() {
-        Button saveRoute_btn = (Button) findViewById(R.id.saveRoute_btn);
-        saveRoute_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (setupTotalText()) {
-                    if (!route.getName().equals("")) {
-                        carbonModel.getRouteCollection().addRoute(route);
-                        setResult(Activity.RESULT_OK);
-                        finish();
-                    } else {
-                        Toast.makeText(AddRouteActivity.this, "To save, enter a nickname.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(AddRouteActivity.this, "Please fill out the form completely.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
+    private void getExtraFromIntent() {
+        Intent intent = getIntent();
+        String routeString = intent.getStringExtra("RouteName");
+        int cityKM = intent.getIntExtra("RouteCityKM", 1);
+        String cityString = Integer.valueOf(cityKM).toString();
+        int highwayKM = intent.getIntExtra("RouteHighwayKM", 0);
+        String highwayString = Integer.valueOf(highwayKM).toString();
+        routeIndex = intent.getIntExtra("RouteIndex", 1);
 
-    private void setupUseRouteButton() {
-        Button useRoute_btn = (Button) findViewById(R.id.useRoute_btn);
-        useRoute_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText cityInput = (EditText) findViewById(R.id.cityDistance);
-                EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
-                if (setupTotalText()) {
-                    route.setHidden(true);
-                    carbonModel.getRouteCollection().addRoute(route);
-                    carbonModel.getRouteCollection().hideRoute(route);
-                    startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
-                    finish();
-                } else if ((isEmptyEditText(cityInput) || isEmptyEditText(highwayInput)) ||
-                        (!isEmptyEditText(cityInput) && !isEmptyEditText(highwayInput))) {
-                    Toast.makeText(AddRouteActivity.this, "Please enter both highway and city distance",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private boolean setupTotalText() {
         EditText nameInput = (EditText) findViewById(R.id.routeName);
         EditText cityInput = (EditText) findViewById(R.id.cityDistance);
         EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
+
+        nameInput.setText(routeString, TextView.BufferType.EDITABLE);
+        cityInput.setText(cityString, TextView.BufferType.EDITABLE);
+        highwayInput.setText(highwayString, TextView.BufferType.EDITABLE);
+    }
+
+    private void setupEditRouteButton() {
+        Button editButton = (Button) findViewById(R.id.editRouteButton);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (setupTotalText()) {
+                    carbonModel.setSelectedRoute(route);
+                    carbonModel.getRouteCollection().editRoute(route, routeIndex);
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                } else {
+                    Toast.makeText(EditRouteActivity.this, "Please fill out the form completely.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public boolean setupTotalText() {
+        EditText nameInput = (EditText) findViewById(R.id.routeName);
+        EditText cityInput = (EditText) findViewById(R.id.cityDistance);
+        EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
+
 
         int highway;
         try {
@@ -102,9 +96,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         String routeName;
         try {
             if (nameInput.getText().toString().length() == 0) {
-                routeName = "";
-                route = new Route(routeName, highway, city);
-                return true;
+                throw new NullPointerException("Must contain nickname");
             }
         } catch (NullPointerException e) {
             return false;
@@ -154,7 +146,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     }
 
     public static Intent makeIntent(Context context) {
-        return new Intent(context, AddRouteActivity.class);
+        return new Intent(context, EditRouteActivity.class);
     }
 
     private boolean isEmptyEditText(EditText text) {
@@ -174,3 +166,4 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         refreshTotalDistance();
     }
 }
+

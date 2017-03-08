@@ -6,14 +6,15 @@ package ca.cmpt276.carbonTracker;
 
 public class Route {
     private String name;
-    private double highwayDistanceKM;
-    private double cityDistanceKM;
-    private double highwayDistanceMiles;
-    private double cityDistanceMiles;
+    private int highwayDistanceKM;
+    private int cityDistanceKM;
+    private int highwayDistanceMiles;
+    private int  cityDistanceMiles;
     private boolean isHidden;
+    private static final double KM_TO_MILES_MULTIPLIER = 0.621371;
 
     // Constructor passing in km (assuming UI designed for metric system first)
-    public Route(String name, double highwayDistanceKM, double cityDistanceKM) {
+    public Route(String name, int highwayDistanceKM, int cityDistanceKM) {
         this.name = name;
         this.highwayDistanceKM = highwayDistanceKM;
         this.cityDistanceKM = cityDistanceKM;
@@ -22,15 +23,16 @@ public class Route {
         this.isHidden = false;
     }
 
-    private double convertKM_Miles(double miles) {
-        return (miles * 0.621371);
+    private int convertKM_Miles(double miles) {
+        Double retVal = miles * KM_TO_MILES_MULTIPLIER;
+        return retVal.intValue();
     }
 
-    public double getHighwayDistanceKM() {
+    public int getHighwayDistanceKM() {
         return highwayDistanceKM;
     }
 
-    public double getCityDistanceKM() {
+    public int getCityDistanceKM() {
         return cityDistanceKM;
     }
 
@@ -46,15 +48,15 @@ public class Route {
         isHidden = hidden;
     }
 
-    public double getHighwayDistanceMiles() {
+    public int getHighwayDistanceMiles() {
         return highwayDistanceMiles;
     }
 
-    public double getCityDistanceMiles() {
+    public int getCityDistanceMiles() {
         return cityDistanceMiles;
     }
 
-    public double getTotalDistanceKM() {
+    public int getTotalDistanceKM() {
         return highwayDistanceKM + cityDistanceKM;
     }
 }

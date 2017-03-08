@@ -7,18 +7,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.util.List;
-
 import com.example.sasha.carbontracker.R;
 
 public class SelectRouteActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ADD_ROUTE = 1000;
+    private static final int REQUEST_CODE_EDIT_ROUTE = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,19 +89,22 @@ public class SelectRouteActivity extends AppCompatActivity {
     private void registerClickCallback() {
         final CarbonModel model = CarbonModel.getInstance();
         ListView list = (ListView) findViewById(R.id.listOfRoutes);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+                final Route routeToUse = model.getRouteCollection().getRouteAtIndex(i);
                 AlertDialog.Builder builder = new AlertDialog.Builder(SelectRouteActivity.this);
                 builder.setTitle("Confirm");
                 builder.setMessage("Are you sure you want to use Route " +
-                        model.getRouteCollection().getRouteAtIndex(i).getName() + "?");
+                        routeToUse.getName() + "?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
-                        }
-                    });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        model.setSelectedRoute(routeToUse);
+                        startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
+                    }
+                });
                 builder.setNegativeButton("No", null);
                 builder.show();
             }
@@ -110,9 +113,33 @@ public class SelectRouteActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
+        if (R.id.listOfRoutes == v.getId()) {
+            menu.setHeaderTitle("Do what with route?");
+            menu.add("Edit");
+            menu.add("Delete");
+        }
     }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        CarbonModel cm = CarbonModel.getInstance();
+        AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int selectedRoutePosition = acmi.position;
+        cm.setSelectedRoute(cm.getRouteCollection().getRouteAtIndex(selectedRoutePosition));
+        if (item.toString().equals("Edit")) {
+            Intent editRouteIntent = EditRouteActivity.makeIntent(SelectRouteActivity.this);
+            editRouteIntent.putExtra("RouteName", cm.getSelectedRoute().getName());
+            editRouteIntent.putExtra("RouteCityKM", cm.getSelectedRoute().getCityDistanceKM());
+            editRouteIntent.putExtra("RouteHighwayKM", cm.getSelectedRoute().getHighwayDistanceKM());
+            editRouteIntent.putExtra("RouteIndex", selectedRoutePosition);
+            startActivityForResult(editRouteIntent, REQUEST_CODE_EDIT_ROUTE);
+        } else if (item.toString().equals("Delete")) {
+            cm.getRouteCollection().hideRoute(cm.getSelectedRoute());
+            cm.getRouteCollection().removeRoute(selectedRoutePosition);
+        }
+        updateListView();
+        return true;
+    }
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, SelectRouteActivity.class);
@@ -120,9 +147,8 @@ public class SelectRouteActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_ADD_ROUTE) {
+        if (requestCode == REQUEST_CODE_ADD_ROUTE || requestCode == REQUEST_CODE_EDIT_ROUTE) {
             updateListView();
         }
     }
-
 }
