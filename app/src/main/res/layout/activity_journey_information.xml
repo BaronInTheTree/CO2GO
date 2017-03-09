@@ -14,13 +14,11 @@
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Cancel"
         android:layout_alignBaseline="@+id/confirm"
         android:layout_alignBottom="@+id/confirm"
-        android:layout_alignLeft="@+id/emission_entry"
-        android:layout_alignStart="@+id/emission_entry"
-        android:layout_marginLeft="47dp"
-        android:layout_marginStart="47dp"
-        android:text="Cancel" />
+        android:layout_alignRight="@+id/emission"
+        android:layout_alignEnd="@+id/emission" />
 
     <TextView
         android:id="@+id/journeySum"
@@ -67,11 +65,13 @@
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/distance"
+        android:text="@string/confirm"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/distance"
-        android:layout_marginBottom="26dp"
-        android:text="@string/confirm" />
+        android:layout_alignLeft="@+id/emission_entry"
+        android:layout_alignStart="@+id/emission_entry"
+        android:layout_marginBottom="36dp" />
 
     <TextView
         android:id="@+id/vehicle_entry"
