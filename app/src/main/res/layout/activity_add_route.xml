@@ -17,16 +17,17 @@
         android:id="@+id/saveRoute_btn"
         android:layout_marginBottom="26dp"
         android:layout_above="@+id/buttonSaveUseRoute"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="@string/use_this_route_without_saving"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/useRoute_btn"
-        android:layout_marginBottom="25dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:id="@+id/routeName"
@@ -127,8 +128,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_and_use_route"
+        android:layout_marginBottom="21dp"
         android:layout_above="@+id/useRoute_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/backButtonRoute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/saveRoute_btn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/back" />
 
 </RelativeLayout>

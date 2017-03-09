@@ -28,6 +28,7 @@ public class EditRouteActivity extends AppCompatActivity implements TextWatcher 
         getExtraFromIntent();
         setupTotalText();
         setupEditRouteButton();
+        setupBackButton();
     }
 
     private void getExtraFromIntent() {
@@ -62,6 +63,18 @@ public class EditRouteActivity extends AppCompatActivity implements TextWatcher 
                     Toast.makeText(EditRouteActivity.this, "Please fill out the form completely.",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    private void setupBackButton() {
+        Button cancel = (Button) findViewById(R.id.backButtonEditRoute);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent selectRouteIntent = SelectRouteActivity.makeIntent(EditRouteActivity.this);
+                startActivity(selectRouteIntent);
+                finish();
             }
         });
     }
