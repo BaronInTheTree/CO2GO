@@ -46,4 +46,22 @@
     <string name="new_journey">New Journey</string>
     <string name="view_footprint">View Footprint</string>
     <string name="cancel">Cancel</string>
+    <string name="cancel2">Cancel</string>
+    <string name="car_details">Car Details</string>
+    <string name="nickname">Nickname:</string>
+    <string name="nickname2">Nickname</string>
+    <string name="make">Make:</string>
+    <string name="make2">Make</string>
+    <string name="model">Model:</string>
+    <string name="model2">Model</string>
+    <string name="year2">Year:</string>
+    <string name="year">Year</string>
+    <string name="transmission">Transmission:</string>
+    <string name="transmission2">Transmission</string>
+    <string name="cylinders">Cylinders:</string>
+    <string name="cylinders2">Cylinders</string>
+    <string name="displacement">Displacement:</string>
+    <string name="displacement2">Displacement</string>
+    <string name="fuel_type">Fuel Type:</string>
+    <string name="fuel_type2">Fuel Type</string>
 </resources>

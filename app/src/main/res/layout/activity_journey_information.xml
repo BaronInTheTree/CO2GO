@@ -14,7 +14,7 @@
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/cancel2"
         android:layout_alignBaseline="@+id/confirm"
         android:layout_alignBottom="@+id/confirm"
         android:layout_alignRight="@+id/emission"
