@@ -28,6 +28,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         setupUseRouteButton();
         setupTextListeners();
         setupSaveUseButton();
+        setupBackButton();
     }
 
     private void setupSaveRouteButton() {
@@ -58,7 +59,21 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         saveUseRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (setupTotalText()) {
+                    if (!route.getName().equals("")) {
+                        carbonModel.getRouteCollection().addRoute(route);
+                        carbonModel.setSelectedRoute(route);
+                        setResult(Activity.RESULT_OK);
+                        startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(AddRouteActivity.this, "To save, enter a nickname.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(AddRouteActivity.this, "Please fill out the form completely.",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -79,6 +94,18 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                     Toast.makeText(AddRouteActivity.this, "Please enter both highway and city distance",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    private void setupBackButton() {
+        Button cancel = (Button) findViewById(R.id.backButtonRoute);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent selectRouteIntent = SelectRouteActivity.makeIntent(AddRouteActivity.this);
+                startActivity(selectRouteIntent);
+                finish();
             }
         });
     }
