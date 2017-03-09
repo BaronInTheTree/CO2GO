@@ -45,7 +45,6 @@ public class CarCollection {
             clonedCar = (Car) car.clone();
         } catch (CloneNotSupportedException e) {
         }
-
         carCollection.remove(index);
         carCollection.add(index, clonedCar);
     }

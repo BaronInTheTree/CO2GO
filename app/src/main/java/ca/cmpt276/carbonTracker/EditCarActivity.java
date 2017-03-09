@@ -165,13 +165,16 @@ public class EditCarActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 } else {
                     modelInstance.getCarCollection().hideCar(modelInstance.getSelectedCar());
-                    Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
+                    Car editedCar = modelInstance.getCarData().findCar(selectedMake, selectedModel,
                             Integer.parseInt(selectedYear), selectedVariation);
 
-                    car.setNickname(selectedNickname);
+                    editedCar.setNickname(selectedNickname);
 
-                    modelInstance.getCarCollection().editCar(car, selectedIndex);
-                    modelInstance.setSelectedCar(car);
+                    //modelInstance.getCarCollection().editCar(car, selectedIndex);
+                    //modelInstance.setSelectedCar(car);
+                    modelInstance.getSelectedCar().editCar(editedCar);
+
+
 
                     Intent intent = SelectTransportationActivity.makeIntent(EditCarActivity.this);
                     startActivity(intent);

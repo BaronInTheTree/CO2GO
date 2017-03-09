@@ -41,8 +41,21 @@ public class Car implements Cloneable {
         setEmissions();
     }
 
+    public void editCar(Car car){
+        this.nickname = car.getNickname();
+        this.make = car.getMake();
+        this.model = car.getModel();
+        this.year = car.getYear();
+        this.trany = car.getTrany();
+        this.displacement = car.getDisplacement();
+        this.cylinders = car.getCylinders();
+        this.fuelType = car.getFuelType();
+        setKgC02();
+        setEmissions();
+    }
+
     public String getBasicInfo() {
-        return nickname + ", " + make + " " + model + ", " + year;
+        return nickname + ",\t" + make + ",\t" + model + ",\t" + year;
     }
 
     private void setKgC02() {

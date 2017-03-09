@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -136,6 +138,8 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void setupEnterNicknameEditText() {
         final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
+        enterNickname.setInputType(InputType.TYPE_CLASS_TEXT);
+        enterNickname.setImeOptions(EditorInfo.IME_ACTION_DONE);
         enterNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

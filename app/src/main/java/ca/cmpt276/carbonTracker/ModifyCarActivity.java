@@ -6,9 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
+
+import org.w3c.dom.Text;
 
 public class ModifyCarActivity extends AppCompatActivity {
 
@@ -25,13 +28,13 @@ public class ModifyCarActivity extends AppCompatActivity {
         modelInstance = CarbonModel.getInstance();
 
         selectRouteButton();
-
         editCarButton();
-
         deleteCarButton();
+        setupDisplayCarDetails();
+        setupBackButton();
     }
 
-    public void selectRouteButton() {
+    private void selectRouteButton() {
         Button btn = (Button) findViewById(R.id.selectRoutebtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +45,7 @@ public class ModifyCarActivity extends AppCompatActivity {
         });
     }
 
-    public void editCarButton() {
+    private void editCarButton() {
         Button btn = (Button) findViewById(R.id.editCarBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +59,19 @@ public class ModifyCarActivity extends AppCompatActivity {
         });
     }
 
-    public void deleteCarButton() {
+    private void setupBackButton(){
+        Button backButton = (Button) findViewById(R.id.buttonBackModCar);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SelectTransportationActivity.makeIntent(ModifyCarActivity.this);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void deleteCarButton() {
         Button btn = (Button) findViewById(R.id.deleteCarBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +83,32 @@ public class ModifyCarActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setupDisplayCarDetails(){
+        TextView displayNickname = (TextView) findViewById(R.id.textViewDisplayNickname);
+        displayNickname.setText("" + modelInstance.getSelectedCar().getNickname());
+
+        TextView displayMake = (TextView) findViewById(R.id.textViewDisplayMake);
+        displayMake.setText("" + modelInstance.getSelectedCar().getMake());
+
+        TextView displayModel = (TextView) findViewById(R.id.textViewDisplayModel);
+        displayModel.setText("" + modelInstance.getSelectedCar().getModel());
+
+        TextView displayYear = (TextView) findViewById(R.id.textViewDisplayYear);
+        displayYear.setText("" + modelInstance.getSelectedCar().getYear());
+
+        TextView displayTransmission = (TextView) findViewById(R.id.textViewDisplayTransmission);
+        displayTransmission.setText("" + modelInstance.getSelectedCar().getTrany());
+
+        TextView displayCylinders = (TextView) findViewById(R.id.textViewDisplayCylinders);
+        displayCylinders.setText("" + modelInstance.getSelectedCar().getCylinders());
+
+        TextView displayDisplacement = (TextView) findViewById(R.id.textViewDisplayDisplacement);
+        displayDisplacement.setText("" + modelInstance.getSelectedCar().getDisplacement() + "L");
+
+        TextView displayFuelType = (TextView) findViewById(R.id.textViewDisplayFuelType);
+        displayFuelType.setText("" + modelInstance.getSelectedCar().getFuelType());
     }
 
     public static Intent makeIntent(Context context) {
