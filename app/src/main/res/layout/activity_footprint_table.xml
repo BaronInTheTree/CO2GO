@@ -27,7 +27,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="Trip Date     Route                          Distance(km)     Vehicle                       CO2(g)"
+                android:text="Trip Date     Route                          Distance(km)     Vehicle                         CO2(g)  "
                 android:textSize="16sp"
                 android:textStyle="normal|bold" />
 
