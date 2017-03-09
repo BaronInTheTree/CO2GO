@@ -22,7 +22,7 @@
                 android:id="@+id/textViewSelectMakeEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Make" />
+                android:text="@string/select_make" />
         </TableRow>
 
         <TableRow
@@ -43,7 +43,7 @@
                 android:id="@+id/textViewSelectModelEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Model" />
+                android:text="@string/select_model" />
         </TableRow>
 
         <TableRow
@@ -64,7 +64,7 @@
                 android:id="@+id/textViewSelectYearEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Year" />
+                android:text="@string/select_year" />
         </TableRow>
 
         <TableRow
@@ -85,7 +85,7 @@
                 android:id="@+id/textViewSelectSpecsEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Specifications" />
+                android:text="@string/select_specifications" />
         </TableRow>
 
         <TableRow
@@ -106,7 +106,7 @@
                 android:id="@+id/textViewEnterNicknameEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter Nickname" />
+                android:text="@string/enter_nickname" />
         </TableRow>
 
         <TableRow
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Max Length: 18 Chars"
+                android:hint="@string/max_length_18_chars"
                 android:inputType="textPersonName" />
         </TableRow>
     </TableLayout>
@@ -130,7 +130,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="Edit Car" />
+        android:text="@string/edit_car" />
 
     <Button
         android:id="@+id/buttonCancelEdit"
@@ -139,5 +139,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="Cancel" />
+        android:text="@string/cancel" />
 </RelativeLayout>

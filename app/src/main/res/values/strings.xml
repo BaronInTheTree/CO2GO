@@ -22,13 +22,12 @@
     <string name="highway_distance">Highway Distance (km)</string>
     <string name="city_distance">City Distance (km)</string>
     <string name="total_distance">Total Distance (km)</string>
-    <string name="max_length_18_chars">Max Length: 18 Chars</string>
-    <string name="save_and_use_this_route">Save and Use this Route</string>
+    <string name="save_route">Save Route</string>
     <string name="use_this_route_without_saving">Use this Route without Saving</string>
     <string name="title_activity_journey_info_activity">journey_info_activity</string>
     <string name="title_activity_journey_information">JourneyInformationActivity</string>
     <string name="add_route">Add Route</string>
-    <string name="max_length_18_chars2">Max Length: 18 Chars</string>
+    <string name="max_length_18_chars">Max Length: 18 Chars</string>
     <string name="enter_nickname">Enter Nickname</string>
     <string name="select_specifications">Select Specifications</string>
     <string name="select_year">Select Year</string>
@@ -37,4 +36,14 @@
     <string name="add_car">Add Car</string>
     <string name="edit_route">Edit Route</string>
     <string name="max_9999km">Max: 9999 km</string>
+    <string name="select_a_route_or_add_a_new">Select a route or add a new</string>
+    <string name="back">Back</string>
+    <string name="select_a_car_you_d_like_to_use_or_add_a_new_one">Select a car you\'d like to use or add a new one.</string>
+    <string name="enter">Enter</string>
+    <string name="delete_car">Delete Car</string>
+    <string name="edit_car">Edit Car</string>
+    <string name="select_route">Select Route</string>
+    <string name="new_journey">New Journey</string>
+    <string name="view_footprint">View Footprint</string>
+    <string name="cancel">Cancel</string>
 </resources>

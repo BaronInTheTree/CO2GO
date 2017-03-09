@@ -11,7 +11,7 @@
     tools:context="ca.cmpt276.carbonTracker.MainMenuActivity">
 
     <Button
-        android:text="New Journey"
+        android:text="@string/new_journey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newJourney_btn"
@@ -23,7 +23,7 @@
         android:layout_marginTop="112dp" />
 
     <Button
-        android:text="View Footprint"
+        android:text="@string/view_footprint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

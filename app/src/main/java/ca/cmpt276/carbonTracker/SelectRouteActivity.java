@@ -25,19 +25,17 @@ public class SelectRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
 
-        // to be removed later
-        testButton();
-
+        setupBackButton();
         addRouteButton();
         updateListView();
     }
 
-    private void testButton() {
-        Button btn = (Button) findViewById(R.id.testRouteBtn);
-        btn.setOnClickListener(new View.OnClickListener() {
+    private void setupBackButton() {
+        Button backButton = (Button) findViewById(R.id.backButtonRoute);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
+                finish();
             }
         });
     }

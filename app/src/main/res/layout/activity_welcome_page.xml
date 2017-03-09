@@ -12,7 +12,7 @@
     tools:context="ca.cmpt276.carbonTracker.WelcomePageActivity">
 
     <Button
-        android:text="Enter"
+        android:text="@string/enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/enter_btn"

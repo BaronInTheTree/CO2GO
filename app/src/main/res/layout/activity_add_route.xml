@@ -11,7 +11,7 @@
     tools:context="ca.cmpt276.carbonTracker.AddRouteActivity">
 
     <Button
-        android:text="@string/save_and_use_this_route"
+        android:text="@string/save_route"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/saveRoute_btn"

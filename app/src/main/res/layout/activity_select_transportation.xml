@@ -11,7 +11,7 @@
     tools:context="ca.cmpt276.carbonTracker.SelectTransportationActivity">
 
     <Button
-        android:text="Add Car"
+        android:text="@string/add_car"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addCar_btn"
@@ -26,11 +26,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="Back"
+        android:text="@string/back"
         android:textSize="12sp" />
 
     <TextView
-        android:text="Select a car you'd like to use or add a new one."
+        android:text="@string/select_a_car_you_d_like_to_use_or_add_a_new_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

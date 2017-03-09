@@ -59,9 +59,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                 EditText cityInput = (EditText) findViewById(R.id.cityDistance);
                 EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
                 if (setupTotalText()) {
-                    route.setHidden(true);
-                    carbonModel.getRouteCollection().addRoute(route);
-                    carbonModel.getRouteCollection().hideRoute(route);
+                    carbonModel.setSelectedRoute(route);
                     startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
                     finish();
                 } else if ((isEmptyEditText(cityInput) || isEmptyEditText(highwayInput)) ||
