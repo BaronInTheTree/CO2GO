@@ -27,6 +27,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         setupSaveRouteButton();
         setupUseRouteButton();
         setupTextListeners();
+        setupSaveUseButton();
     }
 
     private void setupSaveRouteButton() {
@@ -48,6 +49,16 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                     Toast.makeText(AddRouteActivity.this, "Please fill out the form completely.",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    private void setupSaveUseButton() {
+        Button saveUseRoute = (Button) findViewById(R.id.buttonSaveUseRoute);
+        saveUseRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

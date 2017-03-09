@@ -35,6 +35,7 @@ public class AddCarActivity extends AppCompatActivity {
         setupAddCarButton();
         setupEnterNicknameEditText();
         setupCancelButton();
+        setupSaveUseButton();
     }
 
     private void setupSelectMakeSpinner() {
@@ -164,10 +165,34 @@ public class AddCarActivity extends AppCompatActivity {
 
                     modelInstance.getCarCollection().addCar(car);
 
-                    Toast.makeText(AddCarActivity.this,
-                            modelInstance.getCarCollection().getLatestCar().getBasicInfo(),
-                            Toast.LENGTH_SHORT).show();
                     Intent intent = SelectTransportationActivity.makeIntent(AddCarActivity.this);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void setupSaveUseButton() {
+        Button saveUseCar = (Button) findViewById(R.id.buttonSaveAndUseCar);
+        final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
+        saveUseCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedNickname = enterNickname.getText().toString();
+                if (selectedNickname.equals("")) {
+                    Toast.makeText(AddCarActivity.this,
+                            "Please enter a nickname for your car.",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
+                            Integer.parseInt(selectedYear), selectedVariation);
+                    car.setNickname(selectedNickname);
+
+                    modelInstance.getCarCollection().addCar(car);
+                    modelInstance.setSelectedCar(modelInstance.getCarCollection().getLatestCar());
+
+                    Intent intent = ModifyCarActivity.makeIntent(AddCarActivity.this);
                     startActivity(intent);
                     finish();
                 }

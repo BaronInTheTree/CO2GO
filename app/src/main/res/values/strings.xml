@@ -64,4 +64,7 @@
     <string name="displacement2">Displacement</string>
     <string name="fuel_type">Fuel Type:</string>
     <string name="fuel_type2">Fuel Type</string>
+    <string name="save_car">Save Car</string>
+    <string name="save_and_use_car">Save and Use Car</string>
+    <string name="save_and_use_route">Save and Use Route</string>
 </resources>

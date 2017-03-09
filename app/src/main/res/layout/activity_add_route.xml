@@ -15,8 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/saveRoute_btn"
-        android:layout_marginBottom="47dp"
-        android:layout_above="@+id/useRoute_btn"
+        android:layout_marginBottom="26dp"
+        android:layout_above="@+id/buttonSaveUseRoute"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/useRoute_btn"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="25dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -121,5 +121,14 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/totalDistanceText"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buttonSaveUseRoute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_and_use_route"
+        android:layout_above="@+id/useRoute_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp" />
 
 </RelativeLayout>
