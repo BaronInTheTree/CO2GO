@@ -72,8 +72,6 @@ public class EditRouteActivity extends AppCompatActivity implements TextWatcher 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selectRouteIntent = SelectRouteActivity.makeIntent(EditRouteActivity.this);
-                startActivity(selectRouteIntent);
                 finish();
             }
         });
