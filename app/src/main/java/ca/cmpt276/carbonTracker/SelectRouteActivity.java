@@ -35,6 +35,8 @@ public class SelectRouteActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = ModifyCarActivity.makeIntent(SelectRouteActivity.this);
+                startActivity(intent);
                 finish();
             }
         });
@@ -49,30 +51,6 @@ public class SelectRouteActivity extends AppCompatActivity {
             }
         });
     }
-
-    // TODO: get the proper list of routes from "outputRouteCollectionToString"
-//    private void populateListView() {
-//        // Create list of items
-//        CarbonModel model = CarbonModel.getInstance();
-//        List<String> routes = model.outputRouteCollectionToString();
-//        // Build adapter
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                this,           // Context for activity
-//                R.layout.listview_format,  // Layout to use (create)
-//                routes);       // Items to be displayed
-//
-//        // config list view
-//        ListView list = (ListView) findViewById(R.id.listOfRoutes);
-//        list.setAdapter(adapter);
-//
-//        // Allows to click on list's items
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-//                startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
-//            }
-//        });
-//    }
 
     public void updateListView() {
         CarbonModel carbonModel = CarbonModel.getInstance();
@@ -101,6 +79,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         model.setSelectedRoute(routeToUse);
                         startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
+                        finish();
                     }
                 });
                 builder.setNegativeButton("No", null);

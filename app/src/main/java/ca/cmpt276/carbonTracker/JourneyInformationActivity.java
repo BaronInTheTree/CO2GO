@@ -53,13 +53,12 @@ public class JourneyInformationActivity extends AppCompatActivity {
 
     private void setupButtons() {
         Button confirm_btn = (Button) findViewById(R.id.confirm);
-
         confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currentInstance.addNewJourney(currentJourney);
+//                startActivity(new Intent(JourneyInformationActivity.this, MainMenuActivity.class));
                 finish();
-                startActivity(new Intent(JourneyInformationActivity.this, MainMenuActivity.class));
             }
         });
 
@@ -67,8 +66,8 @@ public class JourneyInformationActivity extends AppCompatActivity {
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(JourneyInformationActivity.this, SelectRouteActivity.class));
                 finish();
-                startActivity(new Intent(JourneyInformationActivity.this, MainMenuActivity.class));
             }
         });
     }
