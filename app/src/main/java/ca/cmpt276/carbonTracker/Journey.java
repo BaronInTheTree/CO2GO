@@ -36,7 +36,7 @@ public class Journey {
         return date;
     }
 
-    private void calculateEmissions() {
+    public void calculateEmissions() {
         emissionsKM = (car.getCo2GramsPerKM_City() * route.getCityDistanceKM())
                 + (car.getCo2GramsPerKM_Highway() * route.getHighwayDistanceKM());
         emissionsMiles = (car.getCo2GramsPerMile_City() * route.getCityDistanceMiles())
