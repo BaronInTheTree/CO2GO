@@ -14,9 +14,10 @@
         android:id="@+id/deleteCarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tableLayout"
+        android:layout_alignBaseline="@+id/editCarBtn"
+        android:layout_alignBottom="@+id/editCarBtn"
+        android:layout_toLeftOf="@+id/selectRoutebtn"
+        android:layout_toStartOf="@+id/selectRoutebtn"
         android:maxWidth="110dp"
         android:minWidth="110dp"
         android:text="@string/delete_car" />
@@ -25,9 +26,10 @@
         android:id="@+id/editCarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonBackModCar"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="128dp"
         android:maxWidth="110dp"
         android:minWidth="110dp"
         android:text="@string/edit_car" />
@@ -36,199 +38,12 @@
         android:id="@+id/selectRoutebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="130dp"
-        android:minWidth="130dp"
-        android:text="@string/select_route"
         android:layout_below="@+id/deleteCarBtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp" />
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tableLayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/editCarBtn">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/textViewCarDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/car_details"
-                android:textAlignment="center"
-                android:textSize="24sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/textViewNameLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="150dp"
-                android:text="@string/nickname"
-                android:textStyle="bold|italic" />
-
-            <TextView
-                android:id="@+id/textViewDisplayNickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nickname2"
-                android:textAlignment="viewStart"
-                android:layout_gravity="start"
-                android:textSize="14sp"
-                android:textStyle="bold|italic" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/textViewMakeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="150dp"
-                android:text="@string/make" />
-
-            <TextView
-                android:id="@+id/textViewDisplayMake"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/make2"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/textViewModelLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="150dp"
-                android:text="@string/model" />
-
-            <TextView
-                android:id="@+id/textViewDisplayModel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/model2"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/textViewYearLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="150dp"
-                android:text="@string/year2" />
-
-            <TextView
-                android:id="@+id/textViewDisplayYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/year"
-                android:textSize="14sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/textViewTranyLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="150dp"
-                android:text="@string/transmission" />
-
-            <TextView
-                android:id="@+id/textViewDisplayTransmission"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/transmission2"
-                android:textSize="14sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/textViewCylinderLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="150dp"
-                android:text="@string/cylinders" />
-
-            <TextView
-                android:id="@+id/textViewDisplayCylinders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cylinders2" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/textViewDisplacementLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="150dp"
-                android:text="@string/displacement" />
-
-            <TextView
-                android:id="@+id/textViewDisplayDisplacement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/displacement2" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/textViewFuelTypeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="150dp"
-                android:text="@string/fuel_type" />
-
-            <TextView
-                android:id="@+id/textViewDisplayFuelType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fuel_type2" />
-        </TableRow>
-    </TableLayout>
+        android:layout_marginTop="32dp"
+        android:maxWidth="130dp"
+        android:minWidth="130dp"
+        android:text="@string/select_route" />
 
     <Button
         android:id="@+id/buttonBackModCar"
@@ -240,5 +55,201 @@
         android:maxWidth="130dp"
         android:minWidth="130dp"
         android:text="@string/back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/deleteCarBtn">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/deleteCarBtn"
+                android:weightSum="1">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewCarDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Car Details"
+                        android:textAlignment="center"
+                        android:textSize="24sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textViewNameLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="150dp"
+                        android:text="Nickname:"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/textViewDisplayNickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nickname"
+                        android:textSize="14sp"
+                        android:textStyle="bold|italic" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textViewMakeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="150dp"
+                        android:text="Make:" />
+
+                    <TextView
+                        android:id="@+id/textViewDisplayMake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Make"
+                        android:textSize="14sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textViewModelLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="150dp"
+                        android:text="Model:" />
+
+                    <TextView
+                        android:id="@+id/textViewDisplayModel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Model"
+                        android:textSize="14sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textViewYearLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="150dp"
+                        android:text="Year:" />
+
+                    <TextView
+                        android:id="@+id/textViewDisplayYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Year"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textViewTranyLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="150dp"
+                        android:text="Transmission:" />
+
+                    <TextView
+                        android:id="@+id/textViewDisplayTransmission"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Transmission"
+                        android:textSize="14sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textViewCylinderLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="150dp"
+                        android:text="Cylinders:" />
+
+                    <TextView
+                        android:id="@+id/textViewDisplayCylinders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cylinders" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textViewDisplacementLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="150dp"
+                        android:text="Displacement:" />
+
+                    <TextView
+                        android:id="@+id/textViewDisplayDisplacement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Displacement" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textViewFuelTypeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="150dp"
+                        android:text="Fuel Type:" />
+
+                    <TextView
+                        android:id="@+id/textViewDisplayFuelType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fuel Type" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
