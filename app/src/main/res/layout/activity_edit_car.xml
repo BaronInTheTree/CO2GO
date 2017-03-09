@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/max_length_18_chars"
-                android:inputType="textPersonName" />
+                android:inputType="textCapWords" />
         </TableRow>
     </TableLayout>
 

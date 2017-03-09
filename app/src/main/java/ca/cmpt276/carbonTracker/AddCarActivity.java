@@ -138,7 +138,6 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void setupEnterNicknameEditText() {
         final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
-        enterNickname.setInputType(InputType.TYPE_CLASS_TEXT);
         enterNickname.setImeOptions(EditorInfo.IME_ACTION_DONE);
         enterNickname.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -55,7 +55,7 @@ public class Car implements Cloneable {
     }
 
     public String getBasicInfo() {
-        return nickname + ",\t" + make + ",\t" + model + ",\t" + year;
+        return nickname + "\n" + make + " " + model + ",\t" + year;
     }
 
     private void setKgC02() {
