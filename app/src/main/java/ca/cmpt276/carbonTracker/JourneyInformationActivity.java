@@ -14,7 +14,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
     CarbonModel currentInstance = CarbonModel.getInstance();
     Car newCar = currentInstance.getSelectedCar();
     Route newRoute = currentInstance.getSelectedRoute();
-    Journey currentJourney = new Journey (newCar, newRoute);
+    Journey currentJourney = new Journey(newCar, newRoute);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
