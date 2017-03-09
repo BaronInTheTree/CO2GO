@@ -57,7 +57,6 @@ public class JourneyInformationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentInstance.addNewJourney(currentJourney);
-//                startActivity(new Intent(JourneyInformationActivity.this, MainMenuActivity.class));
                 finish();
             }
         });

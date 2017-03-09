@@ -48,6 +48,7 @@ public class SelectRouteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(SelectRouteActivity.this, AddRouteActivity.class), REQUEST_CODE_ADD_ROUTE);
+                finish();
             }
         });
     }

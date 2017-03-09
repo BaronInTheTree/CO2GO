@@ -38,6 +38,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                     if (!route.getName().equals("")) {
                         carbonModel.getRouteCollection().addRoute(route);
                         setResult(Activity.RESULT_OK);
+                        startActivity(new Intent(AddRouteActivity.this, SelectRouteActivity.class));
                         finish();
                     } else {
                         Toast.makeText(AddRouteActivity.this, "To save, enter a nickname.",
