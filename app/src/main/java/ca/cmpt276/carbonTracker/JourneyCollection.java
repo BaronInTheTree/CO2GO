@@ -53,7 +53,7 @@ public class JourneyCollection {
         for (int i = 0; i < NumJourneys; i++) {
             Journey journey = journeyCollection.get(i);
 
-            String car = journey.getCar().getNickname();
+            String car = journey.getTransportation().getNickname();
             for (int j = car.length(); j < 18; j++) {
                 car += "  ";
             }
@@ -87,7 +87,7 @@ public class JourneyCollection {
         String[] descriptions = new String[NumJourneys];
         for (int i = 0; i < NumJourneys; i++) {
             Journey journey = journeyCollection.get(i);
-            String car = journey.getCar().getNickname();
+            String car = journey.getTransportation().getNickname();
             String route = journey.getRoute().getName();
             String distance = "" + journey.getRoute().getTotalDistanceKM();
             String emission = "" + journey.getEmissionsKM();

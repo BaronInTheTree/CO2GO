@@ -15,6 +15,7 @@ public class CarbonModel {
     private CarData carData;
     private Car selectedCar;
     private Route selectedRoute;
+    private String selectedTransportType;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -93,5 +94,35 @@ public class CarbonModel {
 
     public void setSelectedRoute(Route selectedRoute) {
         this.selectedRoute = selectedRoute;
+    }
+
+    public String getSelectedTransportType() {
+        return selectedTransportType;
+    }
+
+    public void setSelectedTransportType(String selectedTransportType) {
+        this.selectedTransportType = selectedTransportType;
+    }
+
+    public Journey createJourney() {
+        if (getSelectedTransportType().equals("Car")){
+            Journey journey = new Journey(getSelectedCar(), getSelectedRoute());
+            return journey;
+        }
+        else if (getSelectedTransportType().equals("WalkBike")){
+            WalkBike walkBike = new WalkBike();
+            Journey journey = new Journey(walkBike, getSelectedRoute());
+            return journey;
+        }
+        else if (getSelectedTransportType().equals("Bus")){
+            Bus bus = new Bus();
+            Journey journey = new Journey(bus, getSelectedRoute());
+            return journey;
+        }
+        else {
+            Skytrain skytrain = new Skytrain();
+            Journey journey = new Journey(skytrain, getSelectedRoute());
+            return journey;
+        }
     }
 }
