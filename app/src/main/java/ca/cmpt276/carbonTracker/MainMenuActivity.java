@@ -7,22 +7,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
 public class MainMenuActivity extends AppCompatActivity {
+
+    private CarbonModel modelInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        newJourneyButton();
+        modelInstance = CarbonModel.getInstance();
 
-        footPrintButton();
+        setUpButtons();
+
     }
 
-    private void newJourneyButton() {
+    private void setUpButtons() {
         Button journey_btn = (Button) findViewById(R.id.newJourney_btn);
         journey_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,9 +34,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MainMenuActivity.this, SelectTransportationActivity.class));
             }
         });
-    }
 
-    private void footPrintButton() {
         Button footprint_btn = (Button) findViewById(R.id.footprint_btn);
         footprint_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +42,17 @@ public class MainMenuActivity extends AppCompatActivity {
                 startActivity(new Intent(MainMenuActivity.this, FootprintTableActivity.class));
             }
         });
+
+        Button tip_btn = (Button) findViewById(R.id.tip_btn);
+        tip_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = modelInstance.getTips().getGeneralTip();
+                Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
 
     @Override
     public void onBackPressed() {

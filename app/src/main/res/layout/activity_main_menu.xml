@@ -32,4 +32,14 @@
         android:layout_marginBottom="123dp"
         android:id="@+id/footprint_btn" />
 
+    <Button
+        android:id="@+id/tip_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="22dp"
+        android:text="View Tip" />
+
 </RelativeLayout>

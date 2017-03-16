@@ -50,4 +50,11 @@ public class Journey {
     public double getEmissionsKM() {
         return emissionsKM;
     }
+
+    public int getDistance() {
+        return route.getTotalDistanceKM();
+    }
+    public int getEmissionPerKM() {
+        return (int)emissionsKM/route.getCityDistanceKM();
+    }
 }
