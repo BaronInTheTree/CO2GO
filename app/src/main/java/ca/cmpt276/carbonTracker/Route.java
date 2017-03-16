@@ -9,7 +9,7 @@ public class Route {
     private int highwayDistanceKM;
     private int cityDistanceKM;
     private int highwayDistanceMiles;
-    private int  cityDistanceMiles;
+    private int cityDistanceMiles;
     private boolean isHidden;
     private static final double KM_TO_MILES_MULTIPLIER = 0.621371;
 

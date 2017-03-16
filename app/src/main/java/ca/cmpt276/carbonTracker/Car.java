@@ -4,7 +4,7 @@ package ca.cmpt276.carbonTracker;
  * Car class
  */
 
-public class Car implements Cloneable {
+public class Car extends Transportation implements Cloneable {
 
     // nickname used as the primary key for Cars (unique identifying value, like a fingerprint)
     // If User tries to enter an already existing nickname, don't allow it, display message.
@@ -12,11 +12,6 @@ public class Car implements Cloneable {
     private String make;
     private String model;
     private int year;
-    private String nickname;
-    private double co2GramsPerMile_Highway;
-    private double co2GramsPerKM_Highway;
-    private double co2GramsPerMile_City;
-    private double co2GramsPerKM_City;
     private boolean isHidden;
     private double cityMPG;
     private double highwayMPG;
@@ -100,28 +95,8 @@ public class Car implements Cloneable {
         return year;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public double getCo2GramsPerMile_Highway() {
-        return co2GramsPerMile_Highway;
-    }
-
-    public double getCo2GramsPerKM_Highway() {
-        return co2GramsPerKM_Highway;
-    }
-
     public void setHidden(boolean hidden) {
         this.isHidden = hidden;
-    }
-
-    public double getCo2GramsPerMile_City() {
-        return co2GramsPerMile_City;
-    }
-
-    public double getCo2GramsPerKM_City() {
-        return co2GramsPerKM_City;
     }
 
     public void setNickname(String nickname) {

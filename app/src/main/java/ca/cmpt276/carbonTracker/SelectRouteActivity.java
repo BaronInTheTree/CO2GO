@@ -19,11 +19,13 @@ import com.example.sasha.carbontracker.R;
 public class SelectRouteActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ADD_ROUTE = 1000;
     private static final int REQUEST_CODE_EDIT_ROUTE = 2000;
+    CarbonModel modelInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
+        modelInstance = CarbonModel.getInstance();
 
         setupBackButton();
         addRouteButton();
@@ -35,7 +37,13 @@ public class SelectRouteActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = ModifyCarActivity.makeIntent(SelectRouteActivity.this);
+                Intent intent;
+                if (modelInstance.getSelectedTransportType().equals("Car")) {
+                    intent = ModifyCarActivity.makeIntent(SelectRouteActivity.this);
+                }
+                else {
+                    intent = SelectTransportationActivity.makeIntent(SelectRouteActivity.this);
+                }
                 startActivity(intent);
                 finish();
             }

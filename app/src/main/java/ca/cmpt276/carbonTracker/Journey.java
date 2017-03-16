@@ -11,21 +11,21 @@ import java.util.Date;
 
 public class Journey {
 
-    private Car car;
+    private Transportation transport;
     private Route route;
     private String date;
     private double emissionsMiles;
     private double emissionsKM;
 
-    public Journey(Car car, Route route) {
-        this.car = car;
+    public Journey(Transportation transport, Route route) {
+        this.transport = transport;
         this.route = route;
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         calculateEmissions();
     }
 
-    public Car getCar() {
-        return car;
+    public Transportation getTransportation() {
+        return transport;
     }
 
     public Route getRoute() {
@@ -37,10 +37,10 @@ public class Journey {
     }
 
     public void calculateEmissions() {
-        emissionsKM = (car.getCo2GramsPerKM_City() * route.getCityDistanceKM())
-                + (car.getCo2GramsPerKM_Highway() * route.getHighwayDistanceKM());
-        emissionsMiles = (car.getCo2GramsPerMile_City() * route.getCityDistanceMiles())
-                + (car.getCo2GramsPerMile_Highway() * route.getHighwayDistanceMiles());
+        emissionsKM = (transport.getCo2GramsPerKM_City() * route.getCityDistanceKM())
+                + (transport.getCo2GramsPerKM_Highway() * route.getHighwayDistanceKM());
+        emissionsMiles = (transport.getCo2GramsPerMile_City() * route.getCityDistanceMiles())
+                + (transport.getCo2GramsPerMile_Highway() * route.getHighwayDistanceMiles());
     }
 
     public double getEmissionsMiles() {
