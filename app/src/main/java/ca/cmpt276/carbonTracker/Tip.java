@@ -5,7 +5,8 @@ package ca.cmpt276.carbonTracker;
  */
 
 public class Tip {
-    private String tipContent;
+    private String tipContent;  // the actual content of tip
+
     public Tip(String content){
         tipContent = content;
     }

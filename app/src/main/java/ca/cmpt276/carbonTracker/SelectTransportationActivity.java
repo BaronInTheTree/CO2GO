@@ -75,6 +75,7 @@ public class SelectTransportationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = AddCarActivity.makeIntent(SelectTransportationActivity.this);
+                modelInstance.setSelectedTransportType("Car");
                 startActivity(intent);
                 finish();
             }

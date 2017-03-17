@@ -13,8 +13,6 @@ import com.example.sasha.carbontracker.R;
 public class JourneyInformationActivity extends AppCompatActivity {
 
     CarbonModel currentInstance = CarbonModel.getInstance();
-    Car newCar = currentInstance.getSelectedCar();
-    Route newRoute = currentInstance.getSelectedRoute();
     Journey currentJourney = currentInstance.createJourney();
 
     @Override
@@ -58,9 +56,10 @@ public class JourneyInformationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentInstance.addNewJourney(currentJourney);
-                // int type = getJourneyType(journeyType);
-                // String message = currentInstance.getTips().getJourneyTip(type, currentJourney);
-                // Toast.makeText(JourneyInformationActivity.this, message, Toast.LENGTH_LONG).show();
+                int type = currentJourney.getTransportType();
+                // create tip based on the type of transportation and the information within current Journey.
+                String message = currentInstance.getTips().getJourneyTip(type, currentJourney);
+                Toast.makeText(JourneyInformationActivity.this, message, Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -74,7 +73,5 @@ public class JourneyInformationActivity extends AppCompatActivity {
             }
         });
     }
-
-    // Todo: write getJourneyType() function
 
 }
