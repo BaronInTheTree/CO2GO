@@ -15,7 +15,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
     CarbonModel currentInstance = CarbonModel.getInstance();
     Car newCar = currentInstance.getSelectedCar();
     Route newRoute = currentInstance.getSelectedRoute();
-    Journey currentJourney = new Journey(newCar, newRoute);
+    Journey currentJourney = currentInstance.createJourney();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
         date.setText(currentJourney.getDate());
 
         TextView vehicle = (TextView) findViewById(R.id.vehicle_entry);
-        String vehicleName = currentJourney.getCar().getNickname();
+        String vehicleName = currentJourney.getTransportation().getNickname();
         if (vehicleName.length() > 18) vehicleName = vehicleName.substring(0, 18);
         vehicle.setText(vehicleName);
 

@@ -17,17 +17,23 @@ import com.example.sasha.carbontracker.R;
 
 public class SelectTransportationActivity extends AppCompatActivity {
 
+    CarbonModel modelInstance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_transportation);
+        modelInstance = CarbonModel.getInstance();
 
         addBackButton();
         populateListView();
         addCarButton();
+        addWalkBikeButton();
+        addBusButton();
+        addSkytrainButton();
     }
 
-    public void addBackButton() {
+    private void addBackButton() {
         Button btn = (Button) findViewById(R.id.buttonBack);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,18 +62,58 @@ public class SelectTransportationActivity extends AppCompatActivity {
                 model.setSelectedCar(model.getCarCollection().getCarAtIndex(i));
                 Intent intent = ModifyCarActivity.makeIntent(SelectTransportationActivity.this);
                 intent.putExtra("Index", i);
+                modelInstance.setSelectedTransportType("Car");
                 startActivity(intent);
                 finish();
             }
         });
     }
 
-    public void addCarButton() {
+    private void addCarButton() {
         Button btn = (Button) findViewById(R.id.addCar_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = AddCarActivity.makeIntent(SelectTransportationActivity.this);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void addWalkBikeButton() {
+        Button walkBike = (Button) findViewById(R.id.buttonWalkBike);
+        walkBike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SelectRouteActivity.makeIntent(SelectTransportationActivity.this);
+                modelInstance.setSelectedTransportType("WalkBike");
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void addBusButton() {
+        Button bus = (Button) findViewById(R.id.buttonBus);
+        bus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SelectRouteActivity.makeIntent(SelectTransportationActivity.this);
+                modelInstance.setSelectedTransportType("Bus");
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void addSkytrainButton() {
+        Button skytrain = (Button) findViewById(R.id.buttonSkyTrain);
+        skytrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SelectRouteActivity.makeIntent(SelectTransportationActivity.this);
+                modelInstance.setSelectedTransportType("Skytrain");
                 startActivity(intent);
                 finish();
             }
