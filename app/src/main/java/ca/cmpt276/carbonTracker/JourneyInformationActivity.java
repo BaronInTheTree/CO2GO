@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
 public class JourneyInformationActivity extends AppCompatActivity {
 
     CarbonModel currentInstance = CarbonModel.getInstance();
-    Car newCar = currentInstance.getSelectedCar();
-    Route newRoute = currentInstance.getSelectedRoute();
     Journey currentJourney = currentInstance.createJourney();
 
     @Override
@@ -57,6 +56,10 @@ public class JourneyInformationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentInstance.addNewJourney(currentJourney);
+                int type = currentJourney.getTransportType();
+                // create tip based on the type of transportation and the information within current Journey.
+                String message = currentInstance.getTips().getJourneyTip(type, currentJourney);
+                Toast.makeText(JourneyInformationActivity.this, message, Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -70,4 +73,5 @@ public class JourneyInformationActivity extends AppCompatActivity {
             }
         });
     }
+
 }

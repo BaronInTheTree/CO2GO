@@ -15,6 +15,7 @@ public class CarbonModel {
     private CarData carData;
     private Car selectedCar;
     private Route selectedRoute;
+    private TipCollection tips;
     private String selectedTransportType;
 
     public static CarbonModel getInstance() {
@@ -30,6 +31,8 @@ public class CarbonModel {
         carCollection = new CarCollection();
         routeCollection = new RouteCollection();
         carData = new CarData();
+        tips = new TipCollection();
+
     }
 
     public void addNewJourney(Journey newJourney) {
@@ -95,6 +98,8 @@ public class CarbonModel {
     public void setSelectedRoute(Route selectedRoute) {
         this.selectedRoute = selectedRoute;
     }
+
+    public TipCollection getTips(){return tips;}
 
     public String getSelectedTransportType() {
         return selectedTransportType;

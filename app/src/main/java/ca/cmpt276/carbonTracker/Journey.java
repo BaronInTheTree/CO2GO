@@ -28,6 +28,14 @@ public class Journey {
         return transport;
     }
 
+    public int getTransportType(){
+        String transportContent = transport.getNickname();
+        if (transportContent.equals("Bus")) return 1;
+        else if (transportContent.equals("Skytrain")) return 2;
+        else if (transportContent.equals("Walking / Biking")) return 3;
+        else return 0;
+    }
+
     public Route getRoute() {
         return route;
     }
@@ -49,5 +57,13 @@ public class Journey {
 
     public double getEmissionsKM() {
         return emissionsKM;
+    }
+
+    public int getDistance() {
+        return route.getTotalDistanceKM();
+    }
+
+    public int getEmissionPerKM() {
+        return (int)emissionsKM/route.getCityDistanceKM();
     }
 }
