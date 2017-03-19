@@ -79,6 +79,10 @@ public class RouteCollection {
         return routeCollection.size();
     }
 
+    public int getHiddenListSize() {
+        return hiddenRouteCollection.size();
+    }
+
     public Route getLatestRoute() {
         if (getListSize() > 0) return routeCollection.get(routeCollection.size() - 1);
         else return null;
@@ -87,4 +91,9 @@ public class RouteCollection {
     public Route getRouteAtIndex(int i) {
         return routeCollection.get(i);
     }
+
+    public Route getHiddenRouteAtIndex(int i) {
+        return hiddenRouteCollection.get(i);
+    }
+
 }
