@@ -11,10 +11,13 @@ import org.json.JSONObject;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Writer;
+import java.nio.Buffer;
 
 /**
  * Created by Adriel on 2017-03-18.
@@ -33,11 +36,14 @@ public class SaveData extends JSONObject  {
                 routeObject.put("RouteCityKM"+i, route.getCityDistanceKM());
                 routeObject.put("RouteHighwayKM"+i, route.getHighwayDistanceKM());
 
-                File file = new File(String.valueOf(Environment.getExternalStorageDirectory()));
+                File file = new File("data/data/ca.cmpt276.carbonTracker/Routes.json");
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(routeObject.toString());
                 writer.close();
-                Log.i("written", "written");
+                Log.i("File status", "written");
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -61,7 +67,7 @@ public class SaveData extends JSONObject  {
                 Writer writer = new BufferedWriter(new FileWriter(file));
                 writer.write(routeObject.toString());
                 writer.close();
-                Log.i("written", "written");
+                Log.i("File status", "written");
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (IOException e) {
