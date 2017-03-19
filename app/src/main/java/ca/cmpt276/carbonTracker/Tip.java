@@ -2,6 +2,8 @@ package ca.cmpt276.carbonTracker;
 
 /**
  * Created by song on 2017-03-15.
+ *
+ * Tip Class: Each Tip contains a tip message.
  */
 
 public class Tip {
