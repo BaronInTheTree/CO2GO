@@ -39,7 +39,6 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                 if (setupTotalText()) {
                     if (!route.getName().equals("")) {
                         carbonModel.getRouteCollection().addRoute(route);
-                        SaveData.saveRoutes();
                         setResult(Activity.RESULT_OK);
                         startActivity(new Intent(AddRouteActivity.this, SelectRouteActivity.class));
                         finish();

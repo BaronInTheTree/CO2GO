@@ -29,6 +29,10 @@ public class RouteCollection {
         routeCollection.add(route);
     }
 
+    public void addHiddenRoute(Route route) {
+        hiddenRouteCollection.add(route);
+    }
+
     // See CarCollection class for details
     public void hideRoute(Route route) {
         for (Route r : routeCollection) {

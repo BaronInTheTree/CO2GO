@@ -16,7 +16,7 @@ import android.widget.ListView;
 
 import com.example.sasha.carbontracker.R;
 
-import static ca.cmpt276.carbonTracker.SaveData.loadAllRoutes;
+import static ca.cmpt276.carbonTracker.SaveData.*;
 
 public class SelectRouteActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ADD_ROUTE = 1000;
@@ -31,8 +31,8 @@ public class SelectRouteActivity extends AppCompatActivity {
 
         setupBackButton();
         addRouteButton();
+        loadRoutes(this);
         updateListView();
-        loadAllRoutes();
     }
 
     private void setupBackButton() {
@@ -72,6 +72,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         list.setAdapter(adapter);
         registerClickCallback();
         registerForContextMenu(list);
+        saveRoutes(this);
     }
 
     private void registerClickCallback() {
