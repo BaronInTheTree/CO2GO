@@ -1,17 +1,27 @@
 package ca.cmpt276.carbonTracker;
 
 /*
- * UtilityCollection class contains a list of utilities.
+ * UtilityCollection class contains a list of utilities and a list of resources used.
  */
 import java.util.ArrayList;
 import java.util.List;
 
 public class UtilityCollection {
 
+    private static final String NATURAL_GAS = "Natural Gas";
+    private static final String ELECTRICITY = "Electricity";
     private List<Utility> utilityList;
+    private List<String> utilityData;
 
     public UtilityCollection() {
         utilityList = new ArrayList<>();
+        utilityData = new ArrayList<>();
+        populateUtilityData();
+    }
+
+    private void populateUtilityData() {
+        utilityData.add(NATURAL_GAS);
+        utilityData.add(ELECTRICITY);
     }
 
     public void addUtility(Utility utility) {
@@ -32,5 +42,9 @@ public class UtilityCollection {
             totalEmissions = totalEmissions + utility.getUsageForPeriod(days);
         }
         return totalEmissions;
+    }
+
+    public List<String> getUtilityData() {
+        return utilityData;
     }
 }

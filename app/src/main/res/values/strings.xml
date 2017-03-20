@@ -67,4 +67,9 @@
     <string name="save_car">Save Car</string>
     <string name="save_and_use_car">Save and Use Car</string>
     <string name="save_and_use_route">Save and Use Route</string>
+    <string name="select_fuel_type">Select Fuel Type</string>
+    <string name="utility_starting_date">Starting Date</string>
+    <string name="utility_ending_date">Ending Date</string>
+    <string name="utility_num_People_in_home">Number of People in Home</string>
+    <string name="save_bill">Save Bill</string>
 </resources>

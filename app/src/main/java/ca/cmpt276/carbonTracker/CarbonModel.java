@@ -1,6 +1,5 @@
 package ca.cmpt276.carbonTracker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +20,7 @@ public class CarbonModel {
     private Route selectedRoute;
     private TipCollection tips;
     private String selectedTransportType;
+    private UtilityCollection utilityCollection;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -36,7 +36,7 @@ public class CarbonModel {
         routeCollection = new RouteCollection();
         carData = new CarData();
         tips = new TipCollection();
-
+        utilityCollection = new UtilityCollection();
     }
 
     public void addNewJourney(Journey newJourney) {
@@ -57,30 +57,6 @@ public class CarbonModel {
 
     public CarCollection getCarCollection() {
         return carCollection;
-    }
-
-    // TODO: replace with a collection of cars that user owns
-    public List<String> outputCarCollectionToString() {
-        List<String> list = new ArrayList<>();
-/*
-        for (Car car: carCollection) {
-            String str = car.toString();
-            list.add(str);
-        }
-*/
-        return list;
-    }
-
-    // TODO: replace with a collection of routes that user uses
-    public List<String> outputRouteCollectionToString() {
-        List<String> list = new ArrayList<>();
-/*
-        for (Route route: routeCollection) {
-            String str = route.toString();
-            list.add(str);
-        }
-*/
-        return list;
     }
 
     public RouteCollection getRouteCollection() {
@@ -133,5 +109,9 @@ public class CarbonModel {
             Journey journey = new Journey(skytrain, getSelectedRoute());
             return journey;
         }
+    }
+
+    public List<String> getUtilityData() {
+        return utilityCollection.getUtilityData();
     }
 }
