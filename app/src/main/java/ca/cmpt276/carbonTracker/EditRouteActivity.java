@@ -15,6 +15,14 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+/**
+ * Executed when clicking "Edit" from the context menu in SelectRouteActivity, the user is able to
+ * modify an existing route and then return back to the list of routes that the can select (which
+ * is SelectRouteActivity).
+ *
+ * @author Team Teal
+ */
+
 public class EditRouteActivity extends AppCompatActivity implements TextWatcher {
     private int routeIndex;
     private Route route;

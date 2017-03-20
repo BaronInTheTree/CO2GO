@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JourneyCollection class
+ * The JourneyCollection class stores journeys that the user has created and they are then displayed
+ * in the Footprint activities.
+ *
+ * @author Team Teal
  */
 
 public class JourneyCollection {

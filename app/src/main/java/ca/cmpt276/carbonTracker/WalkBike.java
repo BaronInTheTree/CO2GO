@@ -1,7 +1,10 @@
 package ca.cmpt276.carbonTracker;
 
 /**
- * Created by Kyle on 3/15/2017.
+ * The WalkBike class is-a type of transportation with no CO2 usage. It has all preset values
+ * so the user can select this type of transportation and move on to edit other things (such as route).
+ *
+ * @author Team Teal
  */
 
 public class WalkBike extends Transportation {

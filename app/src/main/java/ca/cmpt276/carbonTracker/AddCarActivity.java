@@ -16,6 +16,13 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+/**
+ The AddCarActivity is accessed when the user picks their mode of transportation and they can
+ select from multiple spinners the type of car that they want to take on their journey.
+
+ @author Team Teal
+ */
+
 public class AddCarActivity extends AppCompatActivity {
 
     CarbonModel modelInstance;

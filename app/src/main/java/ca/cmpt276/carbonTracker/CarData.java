@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * CarData class
+ * CarData class is a simple class which stores all the information read from the csv file
+ * that we input and read.
  *
- * Note: Will refactor update methods below before iteration ends
+ * @author Team Teal
  */
 
 public class CarData {

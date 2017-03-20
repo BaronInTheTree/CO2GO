@@ -1,7 +1,9 @@
 package ca.cmpt276.carbonTracker;
 
 /**
- * Created by Kyle on 3/15/2017.
+ * The Transportation class is an abstract class which extends to Bus, Skytrain, and WalkBike classes.
+ *
+ * @author Team Teal
  */
 
 public abstract class Transportation {

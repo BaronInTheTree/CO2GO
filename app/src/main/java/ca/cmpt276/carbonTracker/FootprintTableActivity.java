@@ -12,7 +12,13 @@ import android.widget.TextView;
 import com.example.sasha.carbontracker.R;
 
 import org.w3c.dom.Text;
-
+/**
+ * FootprintTableActivity displays the journey collection in a side-by-side comparison so that the
+ * user and see and compare how much CO2 they have used when doing the journeys they have created.
+ * The user is also able to see a graph view of this by clicking a button to open a new activity.
+ *
+ * @author Team Teal
+ */
 public class FootprintTableActivity extends AppCompatActivity {
 
     @Override

@@ -20,6 +20,14 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+/**
+ * The FootprintGraphActivity takes all journeys from the JourneyCollection in the Carbon Model
+ * and creates a graph that the user is able to interact with and view the output in a more visual
+ * representation.
+ *
+ * @author Team Teal
+ */
+
 public class FootprintGraphActivity extends AppCompatActivity {
 
     private final String tableLabel = "CO2 Emission of Journeys (in gram)";

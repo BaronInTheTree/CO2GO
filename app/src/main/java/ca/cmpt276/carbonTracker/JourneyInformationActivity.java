@@ -9,7 +9,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
-
+/**
+ * JourneyInformationActivity displays a quick summary of the users current journey that they
+ * have created.
+ *
+ * @author Team Teal
+ */
 public class JourneyInformationActivity extends AppCompatActivity {
 
     CarbonModel currentInstance = CarbonModel.getInstance();

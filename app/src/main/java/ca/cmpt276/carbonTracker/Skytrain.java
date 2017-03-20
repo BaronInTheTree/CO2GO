@@ -1,7 +1,10 @@
 package ca.cmpt276.carbonTracker;
 
 /**
- * Created by Kyle on 3/15/2017.
+ * The Skytrain class is-a mode of transportation that the user may select which has a set output
+ * of daily CO2 usage. It has preset values that will be added in to the user's journey.
+ *
+ * @author Team Teal
  */
 
 public class Skytrain extends Transportation {

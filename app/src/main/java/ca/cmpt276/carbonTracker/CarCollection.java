@@ -3,8 +3,14 @@ package ca.cmpt276.carbonTracker;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * CarCollection class
+ * The CarCollection class is the basis for storing three car collections: a visible (main)
+ * car collection, a hidden car collection which stores the cars the user deletes, and also a special
+ * UI collection where the basic details are shown in the SelectTransportationActivity so the user
+ * can tell easily which car they made if they have multiple.
+ *
+ * @author Team Teal
  */
 public class CarCollection {
     private List<Car> carCollection;

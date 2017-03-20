@@ -11,6 +11,12 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+/**
+ * From the MainMenuActivity, the user is able to view tips, start a new journey, or view a collection
+ * of journeys that they created onto a graph.
+ *
+ * @author Team Teal
+ */
 public class MainMenuActivity extends AppCompatActivity {
 
     private CarbonModel modelInstance;

@@ -15,6 +15,14 @@ import java.util.List;
 
 import com.example.sasha.carbontracker.R;
 
+/**
+ * SelectTransportationActivity lists the different types of cars that user has created
+ * in a ListView and also the options to use Walking/Biking, Skytrain, or Bus. They are also
+ * able to add a car into the carCollection in the Carbon Model here as well.
+ *
+ * @author Team Teal
+ */
+
 public class SelectTransportationActivity extends AppCompatActivity {
 
     CarbonModel modelInstance;
