@@ -10,6 +10,7 @@ import android.widget.Spinner;
 
 import com.example.sasha.carbontracker.R;
 
+
 public class AddBillActivity extends AppCompatActivity {
 
     @Override
@@ -20,8 +21,7 @@ public class AddBillActivity extends AppCompatActivity {
         CarbonModel model = CarbonModel.getInstance();
 
         selectFuelSpinner(model);
-        startingDateButton();
-        endingDateButton();
+        saveBillButton();
         cancelButton();
     }
 
@@ -48,22 +48,12 @@ public class AddBillActivity extends AppCompatActivity {
         });
     }
 
-    private void startingDateButton() {
-        Button startDate = (Button) findViewById(R.id.buttonUtilityStartingDate);
-        startDate.setOnClickListener(new View.OnClickListener() {
+    private void saveBillButton() {
+        Button saveBtn = (Button) findViewById(R.id.buttonAddBillSave);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // go to selecting date page
-            }
-        });
-    }
-
-    private void endingDateButton() {
-        Button endDate = (Button) findViewById(R.id.buttonUtilityEndingDate);
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // go to selecting date page
+                // Create a Utility, jump to Utility list and finish activity
             }
         });
     }
@@ -73,7 +63,7 @@ public class AddBillActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // to go utility list and finish activity
+                // go to utility list and finish activity
             }
         });
     }

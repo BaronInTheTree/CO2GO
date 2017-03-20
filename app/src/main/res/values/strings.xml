@@ -72,4 +72,10 @@
     <string name="utility_ending_date">Ending Date</string>
     <string name="utility_num_People_in_home">Number of People in Home</string>
     <string name="save_bill">Save Bill</string>
+    <string name="billStartYear">Save Bill</string>
+    <string name="billStartMonth">Save Bill</string>
+    <string name="billStartDay">Save Bill</string>
+    <string name="billEndYear">Save Bill</string>
+    <string name="billEndMonth">Save Bill</string>
+    <string name="billEndDay">Save Bill</string>
 </resources>
