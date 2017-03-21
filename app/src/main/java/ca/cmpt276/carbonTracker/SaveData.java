@@ -2,21 +2,11 @@ package ca.cmpt276.carbonTracker;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 
 import static android.content.Context.MODE_PRIVATE;
 /**
@@ -28,21 +18,12 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class SaveData extends JSONObject  {
-
-    public static void saveAllRoutes(Context context) {
-        //saveRoutes(context);
-        saveHiddenRoutes(context);
-    }
-
     public static void loadAllRoutes(Context context) {
         loadRoutes(context);
         loadHiddenRoutes(context);
     }
 
-    private static void loadHiddenRoutes(Context context) {
-    }
-
-    public static void loadRoutes(Context context) {
+    private static void loadRoutes(Context context) {
         CarbonModel model = CarbonModel.getInstance();
         RouteCollection rc = model.getRouteCollection();
         int index = 0;
@@ -58,6 +39,26 @@ public class SaveData extends JSONObject  {
             String jsonRouteData = prefs.getString("Route" + index, null);
             Route route = routeData.fromJson(jsonRouteData, Route.class);
             rc.addRoute(route);
+            index++;
+        }
+    }
+
+    private static void loadHiddenRoutes(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        RouteCollection rc = model.getRouteCollection();
+        int index = 0;
+        while (index < rc.getHiddenListSize()) {
+            rc.removeHiddenRoute(index);
+        }
+
+        SharedPreferences prefs = context.getSharedPreferences("HiddenRouteCollection", MODE_PRIVATE);
+
+        while (!prefs.getString("HiddenRoute"+index, "").equals("")) {
+            Log.i("loadHidden",index+"");
+            Gson routeData = new Gson();
+            String jsonRouteData = prefs.getString("HiddenRoute" + index, null);
+            Route route = routeData.fromJson(jsonRouteData, Route.class);
+            rc.addHiddenRoute(route);
             index++;
         }
     }
@@ -81,8 +82,7 @@ public class SaveData extends JSONObject  {
     public static void saveHiddenRoutes(Context context) {
         CarbonModel model = CarbonModel.getInstance();
         RouteCollection rc = model.getRouteCollection();
-
-        SharedPreferences prefs = context.getSharedPreferences("RouteCollection", MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences("HiddenRouteCollection", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         for (int i = 0; i < rc.getHiddenListSize(); i++) {
@@ -90,8 +90,9 @@ public class SaveData extends JSONObject  {
             String jsonRouteData = routeData.toJson(rc.getHiddenRouteAtIndex(i));
             editor.putString("HiddenRoute"+i, jsonRouteData);
         }
+        editor.commit();
         editor.apply();
     }
 
-    //todo: save utilities, journey, cars, tip history
+    //todo: save utilities, journey, cars
 }

@@ -28,7 +28,7 @@ public class SelectRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
-        loadRoutes(this);
+        loadAllRoutes(this);
         modelInstance = CarbonModel.getInstance();
 
         setupBackButton();
@@ -128,6 +128,7 @@ public class SelectRouteActivity extends AppCompatActivity {
             cm.getRouteCollection().hideRoute(cm.getSelectedRoute());
             cm.getRouteCollection().removeRoute(selectedRoutePosition);
             saveRoutes(SelectRouteActivity.this);
+            saveHiddenRoutes(SelectRouteActivity.this);
         }
         updateListView();
         return true;

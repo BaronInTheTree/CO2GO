@@ -48,6 +48,10 @@ public class RouteCollection {
         routeCollection.remove(index);
     }
 
+    public void removeHiddenRoute(int index) {
+        hiddenRouteCollection.remove(index);
+    }
+
     public void editRoute(Route route, int index) {
         routeCollection.remove(index);
         routeCollection.add(index, route);
