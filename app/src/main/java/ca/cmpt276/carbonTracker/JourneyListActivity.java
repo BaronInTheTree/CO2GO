@@ -43,10 +43,12 @@ public class JourneyListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int i, long l) {
                 Intent intent = new Intent(JourneyListActivity.this, EditJourneyActivity.class);
-                intent.putExtra("Index", list.getSelectedItemPosition());
+                intent.putExtra("Index", i);
+                System.out.println("Index: " + i);
                 startActivity(intent);
                 finish();
             }
+
         });
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

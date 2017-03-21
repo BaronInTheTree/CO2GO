@@ -28,6 +28,7 @@ public class RouteCollection {
     public RouteCollection() {
         routeCollection = new ArrayList<>();
         hiddenRouteCollection = new ArrayList<>();
+        uiCollection = new ArrayList<>();
     }
 
     public void addRoute(Route route) {

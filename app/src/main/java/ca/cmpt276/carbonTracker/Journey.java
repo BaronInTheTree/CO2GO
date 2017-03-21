@@ -95,8 +95,9 @@ public class Journey implements Comparable<Journey> {
         calculateEmissions();
     }
 
-    public void setDate(String dateString) {
+    public void setDate(int year, int month, int day) {
         try {
+            String dateString = year + "-" + month + "-" + day;
             this.dateString = dateString;
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             this.dateTime = formatter.parse(dateString);

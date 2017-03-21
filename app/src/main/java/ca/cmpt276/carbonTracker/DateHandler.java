@@ -27,7 +27,7 @@ public class DateHandler {
 
     // TODO: replace 2017 with method to get current date
     private void initializeYearList() {
-        for (int year = 1970; year <= 2017; year++) {
+        for (int year = 2017; year >= 1970; year--) {
             yearList.add("" + year);
         }
     }
@@ -39,7 +39,7 @@ public class DateHandler {
     }
 
     public void initializeDayList(int year, int month) {
-        Calendar calendar = new GregorianCalendar(year, month, 1);
+        Calendar calendar = new GregorianCalendar(year, month - 1, 1);
         dayList.clear();
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         for (int day = 1; day <= daysInMonth; day++) {

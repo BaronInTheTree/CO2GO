@@ -20,7 +20,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textViewJourneyList" />
+        android:layout_below="@+id/textViewJourneyList"
+        android:layout_above="@+id/buttonBack_journeyList" />
 
     <Button
         android:id="@+id/buttonBack_journeyList"
@@ -28,9 +29,8 @@
         android:layout_height="wrap_content"
         android:text="Back"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp" />
+        android:layout_toLeftOf="@+id/textViewJourneyList"
+        android:layout_toStartOf="@+id/textViewJourneyList"
+        android:layout_marginBottom="14dp" />
 
 </RelativeLayout>

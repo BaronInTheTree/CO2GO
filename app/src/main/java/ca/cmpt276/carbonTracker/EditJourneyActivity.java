@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.sasha.carbontracker.R;
@@ -34,9 +35,11 @@ public class EditJourneyActivity extends AppCompatActivity {
 
         setupSelectTransportSpinner();
         setupSelectRouteSpinner();
-        //setupSelectYearSpinner();
-        //setupSelectMonthSpinner();
-        //setupSelectDaySpinner();
+        setupSelectYearSpinner();
+        setupSelectMonthSpinner();
+        setupSelectDaySpinner();
+        setupEditJourneyButton();
+        setupBackButton();
     }
 
     private void setupSelectTransportSpinner() {
@@ -159,7 +162,34 @@ public class EditJourneyActivity extends AppCompatActivity {
         });
     }
 
+    private void setupEditJourneyButton() {
+        Button editJourney = (Button) findViewById(R.id.buttonEditJourney);
+        editJourney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modelInstance.getJourneyCollection().getJourneyAtIndex(selectedJourneyIndex).
+                        setTransport(selectedTransport);
+                modelInstance.getJourneyCollection().getJourneyAtIndex(selectedJourneyIndex).
+                        setRoute(selectedRoute);
+                modelInstance.getJourneyCollection().getJourneyAtIndex(selectedJourneyIndex).
+                        setDate(selectedYear, selectedMonth, selectedDay);
+                startActivity(new Intent(EditJourneyActivity.this, JourneyListActivity.class));
+                finish();
 
+            }
+        });
+    }
+
+    private void setupBackButton() {
+        Button back = (Button) findViewById(R.id.buttonBack_EditJourney);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditJourneyActivity.this, JourneyListActivity.class));
+                finish();
+            }
+        });
+    }
 
 
 }

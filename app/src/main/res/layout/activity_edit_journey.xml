@@ -71,24 +71,16 @@
 
             <Spinner
                 android:id="@+id/spinnerSelectYear"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:dropDownWidth="40dp"
-                android:minWidth="40dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <Spinner
                 android:id="@+id/spinnerSelectMonth"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:dropDownWidth="40dp"
-                android:minWidth="40dp" />
+                android:layout_height="wrap_content" />
 
             <Spinner
                 android:id="@+id/spinnerSelectDay"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:dropDownWidth="40dp"
-                android:minWidth="40dp" />
+                android:layout_height="wrap_content" />
 
         </TableRow>
     </TableLayout>
@@ -97,21 +89,23 @@
         android:id="@+id/buttonBack_EditJourney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:text="Back"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp"
-        android:text="Back" />
+        android:layout_marginBottom="19dp" />
 
     <Button
         android:id="@+id/buttonEditJourney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:text="Edit"
+        android:layout_alignBaseline="@+id/buttonBack_EditJourney"
+        android:layout_alignBottom="@+id/buttonBack_EditJourney"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:text="Edit" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
