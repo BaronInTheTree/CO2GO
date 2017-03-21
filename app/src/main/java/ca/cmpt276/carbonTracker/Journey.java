@@ -1,28 +1,33 @@
 package ca.cmpt276.carbonTracker;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
  * The Journey class is immutable (once a journey is added, it cannot be changed or removed). It
- * holds the mode of transportation, route, and date that the journey was created all encompassed
+ * holds the mode of transportation, route, and dateString that the journey was created all encompassed
  * into one class.
  *
  * @author Team Teal
  */
 
-public class Journey {
+public class Journey implements Comparable<Journey> {
 
     private Transportation transport;
     private Route route;
-    private String date;
+    private String dateString;
+    private Date dateTime;
     private double emissionsMiles;
     private double emissionsKM;
 
-    public Journey(Transportation transport, Route route) {
+    public Journey(Transportation transport, Route route, Date dateTime) {
         this.transport = transport;
         this.route = route;
-        this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        this.dateString = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        this.dateTime = dateTime;
         calculateEmissions();
     }
 
@@ -38,12 +43,23 @@ public class Journey {
         else return 0;
     }
 
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    @Override
+    public int compareTo(Journey journey) {
+        if (getDateTime() == null || journey.getDateTime() == null)
+            return 0;
+        return getDateTime().compareTo(journey.getDateTime());
+    }
+
     public Route getRoute() {
         return route;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateString() {
+        return dateString;
     }
 
     public void calculateEmissions() {
@@ -68,4 +84,27 @@ public class Journey {
     public int getEmissionPerKM() {
         return (int)emissionsKM/route.getCityDistanceKM();
     }
+
+    public void setTransport(Transportation transport) {
+        this.transport = transport;
+        calculateEmissions();
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+        calculateEmissions();
+    }
+
+    public void setDate(String dateString) {
+        try {
+            this.dateString = dateString;
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            this.dateTime = formatter.parse(dateString);
+        }
+        catch(ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

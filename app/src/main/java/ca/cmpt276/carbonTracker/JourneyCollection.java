@@ -1,6 +1,8 @@
 package ca.cmpt276.carbonTracker;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -19,11 +21,21 @@ public class JourneyCollection {
 
     public void addJourney(Journey journey) {
         journeyCollection.add(journey);
+        sortJourneysByDate();
     }
 
-    public void deleteJourney(Journey journey) {
-        journeyCollection.remove(journey);
+    public void deleteJourney(int index) {
+        journeyCollection.remove(index);
     }
+
+    private void sortJourneysByDate() {
+        Collections.sort(journeyCollection);
+    }
+
+    public void editJourney(int index) {
+        journeyCollection.get(index);
+    }
+
 
     public double getTotalEmissionsKM() {
         double totalEmissions = 0;
@@ -78,7 +90,7 @@ public class JourneyCollection {
 
             if (emission.length() > 10) emission = emission.substring(0, 10);
 
-            String date = journey.getDate();
+            String date = journey.getDateString();
 
             descriptions[i] = date + "    " + route + "    " + distance + "                     " + car + "    " + emission;
         }
@@ -94,7 +106,7 @@ public class JourneyCollection {
             String route = journey.getRoute().getName();
             String distance = "" + journey.getRoute().getTotalDistanceKM();
             String emission = "" + journey.getEmissionsKM();
-            String date = journey.getDate();
+            String date = journey.getDateString();
 
             descriptions[i] = date + ", " + route + ", " + distance + ", " + car + ", " + emission;
         }
@@ -110,5 +122,21 @@ public class JourneyCollection {
             emissions[i] = emission;
         }
         return emissions;
+    }
+
+    public List<String> getJourneyList() {
+        List<String> journeys = new ArrayList<>();
+
+        for (Journey journey : journeyCollection) {
+            journeys.add(journey.getDateString()
+                    + "\n" + journey.getTransportation().getNickname()
+                    + "\n" + journey.getRoute().getTotalDistanceKM() + "km"
+                    + "\n" + journey.getEmissionsKM() + "g CO2");
+        }
+        return journeys;
+    }
+
+    public Journey getJourneyAtIndex(int index) {
+        return journeyCollection.get(index);
     }
 }

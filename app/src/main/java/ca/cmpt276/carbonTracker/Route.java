@@ -32,6 +32,10 @@ public class Route {
         return retVal.intValue();
     }
 
+    public String getBasicInfo() {
+        return name + ": " + (cityDistanceKM + highwayDistanceKM) + "km";
+    }
+
     public int getHighwayDistanceKM() {
         return highwayDistanceKM;
     }

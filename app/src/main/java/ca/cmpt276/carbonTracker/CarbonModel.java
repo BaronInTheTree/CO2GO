@@ -1,11 +1,12 @@
 package ca.cmpt276.carbonTracker;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * The CarbonModel is the singleton class that is the main facade of the CarbonTracker app. It
- * stores everything the user needs for accessing their journeys (such as routes and cars) and also
+ * stores everything the user needs for accessing their journeyCollection (such as routes and cars) and also
  * a collection of tips.
  *
  * @author Team Teal
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class CarbonModel {
     private static CarbonModel instance = new CarbonModel();
-    private JourneyCollection journeys;
+    private JourneyCollection journeyCollection;
     private CarCollection carCollection;
     private RouteCollection routeCollection;
     private CarData carData;
@@ -21,6 +22,7 @@ public class CarbonModel {
     private Route selectedRoute;
     private TipCollection tips;
     private String selectedTransportType;
+    private DateHandler dateHandler;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -31,28 +33,28 @@ public class CarbonModel {
     }
 
     private CarbonModel() {
-        journeys = new JourneyCollection();
+        journeyCollection = new JourneyCollection();
         carCollection = new CarCollection();
         routeCollection = new RouteCollection();
         carData = new CarData();
         tips = new TipCollection();
-
+        dateHandler = new DateHandler();
     }
 
     public void addNewJourney(Journey newJourney) {
-        instance.journeys.addJourney(newJourney);
+        instance.journeyCollection.addJourney(newJourney);
     }
 
     public Journey getCurrentJourney() {
-        return journeys.getLatestJourney();
+        return journeyCollection.getLatestJourney();
     }
 
     public CarData getCarData() {
         return carData;
     }
 
-    public JourneyCollection getJourneys() {
-        return journeys;
+    public JourneyCollection getJourneyCollection() {
+        return journeyCollection;
     }
 
     public CarCollection getCarCollection() {
@@ -113,25 +115,48 @@ public class CarbonModel {
         this.selectedTransportType = selectedTransportType;
     }
 
+    public DateHandler getDateHandler() {
+        return dateHandler;
+    }
+
     public Journey createJourney() {
         if (getSelectedTransportType().equals("Car")){
-            Journey journey = new Journey(getSelectedCar(), getSelectedRoute());
+            Journey journey = new Journey(getSelectedCar(), getSelectedRoute(), new Date());
             return journey;
         }
         else if (getSelectedTransportType().equals("WalkBike")){
             WalkBike walkBike = new WalkBike();
-            Journey journey = new Journey(walkBike, getSelectedRoute());
+            Journey journey = new Journey(walkBike, getSelectedRoute(), new Date());
             return journey;
         }
         else if (getSelectedTransportType().equals("Bus")){
             Bus bus = new Bus();
-            Journey journey = new Journey(bus, getSelectedRoute());
+            Journey journey = new Journey(bus, getSelectedRoute(), new Date());
             return journey;
         }
         else {
             Skytrain skytrain = new Skytrain();
-            Journey journey = new Journey(skytrain, getSelectedRoute());
+            Journey journey = new Journey(skytrain, getSelectedRoute(), new Date());
             return journey;
         }
+    }
+
+    public List<String> getTransportationOptions() {
+        List<String> options = new ArrayList<>();
+        for (String string : carCollection.getUICollection()) {
+            options.add(string);
+        }
+        options.add("Walk/Bike");
+        options.add("Bus");
+        options.add("Skytrain");
+        return options;
+    }
+
+    public List<String> getRouteOptions() {
+        List<String> options = new ArrayList<>();
+        for (String string : routeCollection.getUICollection()) {
+            options.add(string);
+        }
+        return options;
     }
 }

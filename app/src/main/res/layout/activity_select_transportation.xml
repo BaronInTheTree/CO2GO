@@ -38,7 +38,7 @@
         android:text="@string/add_car" />
 
     <Button
-        android:id="@+id/buttonBack"
+        android:id="@+id/buttonBack_journeyList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -51,7 +51,7 @@
         android:id="@+id/buttonSkyTrain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buttonBack"
+        android:layout_above="@+id/buttonBack_journeyList"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="12dp"

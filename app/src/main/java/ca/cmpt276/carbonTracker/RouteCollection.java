@@ -23,6 +23,7 @@ public class RouteCollection {
 
     private List<Route> routeCollection;
     private List<Route> hiddenRouteCollection;
+    private List<String> uiCollection;
 
     public RouteCollection() {
         routeCollection = new ArrayList<>();
@@ -42,6 +43,14 @@ public class RouteCollection {
                 hiddenRouteCollection.add(r);
             }
         }
+    }
+
+    public List<String> getUICollection() {
+        uiCollection.clear();
+        for (Route route : routeCollection) {
+            uiCollection.add(route.getBasicInfo());
+        }
+        return uiCollection;
     }
 
     public void removeRoute(int index) {

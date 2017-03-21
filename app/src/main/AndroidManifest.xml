@@ -39,7 +39,9 @@
             android:screenOrientation="portrait" />
         <activity android:name="ca.cmpt276.carbonTracker.ModifyCarActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.EditCarActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.EditRouteActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.EditRouteActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.JourneyListActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.EditJourneyActivity"></activity>
     </application>
 
 </manifest>
