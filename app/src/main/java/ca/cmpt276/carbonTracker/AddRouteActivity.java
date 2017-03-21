@@ -40,6 +40,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                     if (!route.getName().equals("")) {
                         carbonModel.getRouteCollection().addRoute(route);
                         setResult(Activity.RESULT_OK);
+                        SaveData.saveRoutes(AddRouteActivity.this);
                         startActivity(new Intent(AddRouteActivity.this, SelectRouteActivity.class));
                         finish();
                     } else {
@@ -65,6 +66,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                         carbonModel.setSelectedRoute(route);
                         setResult(Activity.RESULT_OK);
                         startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
+                        SaveData.saveRoutes(AddRouteActivity.this);
                         finish();
                     } else {
                         Toast.makeText(AddRouteActivity.this, "To save, enter a nickname.",

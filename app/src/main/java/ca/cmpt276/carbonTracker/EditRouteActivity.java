@@ -57,6 +57,7 @@ public class EditRouteActivity extends AppCompatActivity implements TextWatcher 
                 if (setupTotalText()) {
                     carbonModel.setSelectedRoute(route);
                     carbonModel.getRouteCollection().editRoute(route, routeIndex);
+                    SaveData.saveRoutes(EditRouteActivity.this);
                     setResult(Activity.RESULT_OK);
                     finish();
                 } else {

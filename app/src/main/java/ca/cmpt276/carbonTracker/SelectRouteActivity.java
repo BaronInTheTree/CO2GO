@@ -3,6 +3,7 @@ package ca.cmpt276.carbonTracker;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,11 +28,11 @@ public class SelectRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
+        loadRoutes(this);
         modelInstance = CarbonModel.getInstance();
 
         setupBackButton();
         addRouteButton();
-        loadRoutes(this);
         updateListView();
     }
 
@@ -126,6 +127,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         } else if (item.toString().equals("Delete")) {
             cm.getRouteCollection().hideRoute(cm.getSelectedRoute());
             cm.getRouteCollection().removeRoute(selectedRoutePosition);
+            saveRoutes(SelectRouteActivity.this);
         }
         updateListView();
         return true;

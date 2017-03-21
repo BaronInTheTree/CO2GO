@@ -30,7 +30,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class SaveData extends JSONObject  {
 
     public static void saveAllRoutes(Context context) {
-        saveRoutes(context);
+        //saveRoutes(context);
         saveHiddenRoutes(context);
     }
 
@@ -46,19 +46,18 @@ public class SaveData extends JSONObject  {
         CarbonModel model = CarbonModel.getInstance();
         RouteCollection rc = model.getRouteCollection();
         int index = 0;
-//        while (index < rc.getListSize()) {
-//            rc.removeRoute(index);
-//        }
+        while (index < rc.getListSize()) {
+            rc.removeRoute(index);
+        }
 
         SharedPreferences prefs = context.getSharedPreferences("RouteCollection", MODE_PRIVATE);
-        index = 0;
 
-        while (prefs.getString("Route"+index, "") != "") {
+        while (!prefs.getString("Route"+index, "").equals("")) {
             Log.i("load",index+"");
             Gson routeData = new Gson();
             String jsonRouteData = prefs.getString("Route" + index, null);
             Route route = routeData.fromJson(jsonRouteData, Route.class);
-            rc.editRoute(route, index);
+            rc.addRoute(route);
             index++;
         }
     }
@@ -68,12 +67,12 @@ public class SaveData extends JSONObject  {
         RouteCollection rc = model.getRouteCollection();
         SharedPreferences prefs = context.getSharedPreferences("RouteCollection", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        //editor.clear();
+        editor.clear();
         for (int i = 0; i < rc.getListSize(); i++) {
             Gson routeData = new Gson();
             String jsonRouteData = routeData.toJson(rc.getRouteAtIndex(i));
             editor.putString("Route"+i, jsonRouteData);
-            Log.i("added", ""+i);
+            Log.i("added", ""+jsonRouteData);
         }
         editor.commit();
         editor.apply();
