@@ -22,7 +22,9 @@ public class WelcomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_page);
 
         enterButton();
-
+        SaveData.loadAllRoutes(this);
+        SaveData.loadAllCars(this);
+        //SaveData.loadJourneys(this);
         new Thread(new Runnable() {
             @Override
             public void run() {

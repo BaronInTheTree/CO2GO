@@ -142,20 +142,20 @@ public class SaveData extends JSONObject  {
 
     private static void loadCars(Context context) {
         CarbonModel model = CarbonModel.getInstance();
-        RouteCollection rc = model.getRouteCollection();
+        CarCollection cc = model.getCarCollection();
         int index = 0;
-        while (index < rc.getListSize()) {
-            rc.removeRoute(index);
+        while (index < cc.getListSize()) {
+            cc.removeCar(index);
         }
 
-        SharedPreferences prefs = context.getSharedPreferences("RouteCollection", MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences("CarCollection", MODE_PRIVATE);
 
-        while (!prefs.getString("Route"+index, "").equals("")) {
+        while (!prefs.getString("Car"+index, "").equals("")) {
             Log.i("load",index+"");
-            Gson routeData = new Gson();
-            String jsonRouteData = prefs.getString("Route" + index, null);
-            Route route = routeData.fromJson(jsonRouteData, Route.class);
-            rc.addRoute(route);
+            Gson carData = new Gson();
+            String jsonCarData = prefs.getString("Car" + index, null);
+            Car car = carData.fromJson(jsonCarData, Car.class);
+            cc.addCar(car);
             index++;
         }
     }
@@ -185,7 +185,7 @@ public class SaveData extends JSONObject  {
     // Saving Journey
     /////////////////
 
-    private static void loadJourneys(Context context) {
+    public static void loadJourneys(Context context) {
         CarbonModel model = CarbonModel.getInstance();
         JourneyCollection jc = model.getJourneys();
         int index = 0;

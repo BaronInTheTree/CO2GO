@@ -56,6 +56,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentInstance.addNewJourney(currentJourney);
+                SaveData.saveJourneys(JourneyInformationActivity.this);
                 int type = currentJourney.getTransportType();
                 // create tip based on the type of transportation and the information within current Journey.
                 String message = currentInstance.getTips().getJourneyTip(type, currentJourney);
