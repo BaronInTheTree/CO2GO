@@ -21,6 +21,9 @@ public class JourneyCollection {
     public void deleteJourney(Journey journey) {
         journeyCollection.remove(journey);
     }
+    public void deleteJourneyAtIndex(int index) {
+        journeyCollection.remove(index);
+    }
 
     public double getTotalEmissionsKM() {
         double totalEmissions = 0;
@@ -107,5 +110,9 @@ public class JourneyCollection {
             emissions[i] = emission;
         }
         return emissions;
+    }
+
+    public Journey getJourneyAtIndex(int index) {
+        return journeyCollection.get(index);
     }
 }

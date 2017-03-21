@@ -27,6 +27,16 @@ public class CarCollection {
         carCollection.add(clonedCar);
     }
 
+    public void addHiddenCar(Car car) {
+        Car clonedCar = null;
+        try {
+            clonedCar = (Car) car.clone();
+        } catch (CloneNotSupportedException e) {
+        }
+
+        hiddenCarCollection.add(clonedCar);
+    }
+
     // Instead of removing the car from the list,
     // we just set it to hidden so the GUI won't display it as an option
     // (per Brian's advice on the Project page)
@@ -52,6 +62,9 @@ public class CarCollection {
     public void removeCar(int index) {
         carCollection.remove(index);
     }
+    public void removeHiddenCar(int index) {
+        hiddenCarCollection.remove(index);
+    }
 
     public List<String> getUICollection() {
         uiCollection.clear();
@@ -68,6 +81,9 @@ public class CarCollection {
     public int getListSize() {
         return carCollection.size();
     }
+    public int getHiddenListSize() {
+        return hiddenCarCollection.size();
+    }
 
     public Car getLatestCar() {
         if (getListSize() > 0) return carCollection.get(carCollection.size() - 1);
@@ -76,5 +92,8 @@ public class CarCollection {
 
     public Car getCarAtIndex(int index) {
         return carCollection.get(index);
+    }
+    public Car getHiddenCarAtIndex(int index) {
+        return hiddenCarCollection.get(index);
     }
 }
