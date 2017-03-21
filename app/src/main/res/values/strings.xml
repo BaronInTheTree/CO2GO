@@ -79,4 +79,6 @@
     <string name="billEndMonth">Save Bill</string>
     <string name="billEndDay">Save Bill</string>
     <string name="utilityUsage">Utility Usage</string>
+    <string name="select_an_utility_or_add_a_new">Select an utility or add a new</string>
+    <string name="add_utility">Add utility</string>
 </resources>

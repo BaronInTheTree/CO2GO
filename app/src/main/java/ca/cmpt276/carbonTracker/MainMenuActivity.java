@@ -41,6 +41,14 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        Button utilities_btn = (Button) findViewById(R.id.button_UtilityList);
+        utilities_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenuActivity.this, UtilityListActivity.class));
+            }
+        });
+
         Button footprint_btn = (Button) findViewById(R.id.footprint_btn);
         footprint_btn.setOnClickListener(new View.OnClickListener() {
             @Override
