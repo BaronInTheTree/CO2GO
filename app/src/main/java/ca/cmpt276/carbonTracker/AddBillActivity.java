@@ -1,15 +1,16 @@
 package ca.cmpt276.carbonTracker;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
@@ -17,6 +18,7 @@ import java.util.Date;
 
 public class AddBillActivity extends AppCompatActivity {
 
+    private static final int INVALID_INPUT = 0;
     private CarbonModel model;
     private boolean naturalGas;
     private boolean electricity;
@@ -33,10 +35,8 @@ public class AddBillActivity extends AppCompatActivity {
         model = CarbonModel.getInstance();
 
         selectFuelSpinner();
-        getUsage();
         selectStartDateSpinner();
         selectEndDateSpinner();
-        getNumPeople();
         saveBillButton();
         cancelButton();
     }
@@ -75,7 +75,13 @@ public class AddBillActivity extends AppCompatActivity {
     private void getUsage() {
         final EditText editText = (EditText) findViewById(R.id.editText_Utility_Usage);
         String value = editText.getText().toString();
-        usage = Integer.parseInt(value);
+
+        // Check if editText is not empty
+        if (!value.equals("")) {
+            usage = Integer.parseInt(value);
+        } else {
+            usage = INVALID_INPUT;
+        }
     }
 
     // TODO: create spinners which display yyyy-mm-dd then get data for starting/ending dates
@@ -93,7 +99,13 @@ public class AddBillActivity extends AppCompatActivity {
     private void getNumPeople() {
         final EditText editText = (EditText) findViewById(R.id.editText_Utility_Num_People);
         String value = editText.getText().toString();
-        numPeople = Integer.parseInt(value);
+
+        // Check if editText is not empty
+        if (!value.equals("")) {
+            numPeople = Integer.parseInt(value);
+        } else {
+            numPeople = INVALID_INPUT;
+        }
     }
 
     private void saveBillButton() {
@@ -101,22 +113,45 @@ public class AddBillActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create a Utility
-                Utility utility = new Utility(naturalGas, electricity,
-                        startingDate, endingDate, usage, numPeople);
+                getUsage();
+                getNumPeople();
 
-                // Add to utility collection
-                UtilityCollection collection = model.getUtilityCollection();
-                collection.addUtility(utility);
+                // If empty input display toast message
+                if (emptyInput()) {
+                    Toast.makeText(
+                            AddBillActivity.this,
+                            "Please fill out the form completely.",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    // Create a Utility
+                    Utility utility = new Utility(naturalGas, electricity,
+                            startingDate, endingDate, usage, numPeople);
 
-                model.setUtilityCollection(collection);
+                    // Add to utility collection
+                    UtilityCollection collection = model.getUtilityCollection();
+                    collection.addUtility(utility);
 
-                // Return to utility list and close activity
-                Intent intent = new Intent (AddBillActivity.this, UtilityListActivity.class);
-                startActivity(intent);
-                finish();
+                    model.setUtilityCollection(collection);
+
+                    // Return to utility list and close activity
+                    Intent intent = new Intent(AddBillActivity.this, UtilityListActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
+    }
+
+    // Until dates are not done this will crash the activity upon clicking save button
+    private boolean emptyInput() {
+        boolean emptyDates = startingDate.equals(null) || endingDate.equals(null);
+        boolean emptyInput = usage == INVALID_INPUT || numPeople == INVALID_INPUT;
+
+        if (emptyDates || emptyInput) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void cancelButton() {
@@ -125,7 +160,7 @@ public class AddBillActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Return to utility list and close activity
-                Intent intent = new Intent (AddBillActivity.this, UtilityListActivity.class);
+                Intent intent = new Intent(AddBillActivity.this, UtilityListActivity.class);
                 startActivity(intent);
                 finish();
             }
