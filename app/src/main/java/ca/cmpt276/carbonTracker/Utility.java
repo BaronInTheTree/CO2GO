@@ -1,5 +1,7 @@
 package ca.cmpt276.carbonTracker;
 
+import java.util.Date;
+
 /*
  * Utility class contains data about the about resources used, for how long and
  * number of people in the house.
@@ -13,16 +15,22 @@ public class Utility {
 
     private boolean naturalGas;
     private boolean electricity;
-    private int daysOperational;
-    private int numResourcesConsumed;
+    private int timespanOfBill;
+    private Date startDate;
+    private Date endDate;
+    private int usage;
     private int numPeople;
 
-    public Utility(boolean naturalGas, boolean electricity, int daysOperational, int numResourcesConsumed, int numPeople) {
+    public Utility(boolean naturalGas, boolean electricity, Date startDate, Date endDate, int usage, int numPeople) {
         this.naturalGas = naturalGas;
         this.electricity = electricity;
-        this.daysOperational = daysOperational;
-        this.numResourcesConsumed = numResourcesConsumed;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.usage = usage;
         this.numPeople = numPeople;
+
+        // Convert difference in milliseconds to difference of days
+        timespanOfBill = (int) (startDate.getTime() - endDate.getTime()) / (1000 * 60 * 60 * 24);
     }
 
     public boolean isNaturalGas() {
@@ -41,30 +49,30 @@ public class Utility {
         this.electricity = electricity;
     }
 
-    public int getDaysOperational() {
-        return daysOperational;
+    public int getTimespanOfBill() {
+        return timespanOfBill;
     }
 
-    public void setDaysOperational(int daysOperational) {
-        this.daysOperational = daysOperational;
+    public void setTimespanOfBill(int timespanOfBill) {
+        this.timespanOfBill = timespanOfBill;
     }
 
     public int getUsage() {
-        return numResourcesConsumed;
+        return usage;
     }
 
     public int getUsageForPeriod(int days) {
-        return numResourcesConsumed / days;
+        return usage / days;
     }
 
     public int getUsagePerDay() {
-        return numResourcesConsumed / daysOperational;
+        return usage / timespanOfBill;
     }
 
     public void setUsage(int numResourcesConsumed, boolean naturalGas, boolean electricity) {
         this.naturalGas = naturalGas;
         this.electricity = electricity;
-        this.numResourcesConsumed = numResourcesConsumed;
+        this.usage = numResourcesConsumed;
     }
 
     public int getNumPeople() {
@@ -77,9 +85,9 @@ public class Utility {
 
     public double getC02PerPerson() {
         if (naturalGas) {
-            return numResourcesConsumed * NATURAL_GAS_CO2_EMISSION / numPeople;
+            return usage * NATURAL_GAS_CO2_EMISSION / numPeople;
         } else {
-            return numResourcesConsumed * ELECTRICITY_CO2_EMISSION / numPeople;
+            return usage * ELECTRICITY_CO2_EMISSION / numPeople;
         }
     }
 

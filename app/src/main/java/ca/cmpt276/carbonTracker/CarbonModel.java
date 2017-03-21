@@ -111,6 +111,14 @@ public class CarbonModel {
         }
     }
 
+    public UtilityCollection getUtilityCollection() {
+        return utilityCollection;
+    }
+
+    public void setUtilityCollection(UtilityCollection utilityCollection) {
+        this.utilityCollection = utilityCollection;
+    }
+
     public List<String> getUtilityData() {
         return utilityCollection.getUtilityData();
     }

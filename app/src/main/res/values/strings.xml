@@ -78,4 +78,5 @@
     <string name="billEndYear">Save Bill</string>
     <string name="billEndMonth">Save Bill</string>
     <string name="billEndDay">Save Bill</string>
+    <string name="utilityUsage">Utility Usage</string>
 </resources>

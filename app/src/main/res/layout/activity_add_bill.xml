@@ -53,6 +53,42 @@
             android:layout_height="match_parent" >
 
             <TextView
+                android:text="@string/utilityUsage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/utilityUsageText" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/editText_Utility_Usage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textCapWords"
+                android:maxLength="18"
+                />
+        </TableRow>
+
+
+        <!-- Additional space -->
+        <TableRow
+            android:layout_height="match_parent"
+            android:layout_width="match_parent" >
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
                 android:text="@string/utility_starting_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -183,7 +219,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editText_Utility_num_People"
+                android:id="@+id/editText_Utility_Num_People"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
