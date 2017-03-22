@@ -21,7 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SaveData extends JSONObject  {
     ////////////////////
-    // Saving Routes
+    // Saving Route
     ////////////////////
     public static void loadAllRoutes(Context context) {
         loadRoutes(context);
@@ -101,7 +101,7 @@ public class SaveData extends JSONObject  {
 
 
     //////////////////
-    // Saving Cars
+    // Saving Car
     /////////////////
 
     public static void saveCars(Context context) {
@@ -151,7 +151,6 @@ public class SaveData extends JSONObject  {
         SharedPreferences prefs = context.getSharedPreferences("CarCollection", MODE_PRIVATE);
 
         while (!prefs.getString("Car"+index, "").equals("")) {
-            Log.i("load",index+"");
             Gson carData = new Gson();
             String jsonCarData = prefs.getString("Car" + index, null);
             Car car = carData.fromJson(jsonCarData, Car.class);
@@ -171,7 +170,6 @@ public class SaveData extends JSONObject  {
         SharedPreferences prefs = context.getSharedPreferences("HiddenCarCollection", MODE_PRIVATE);
 
         while (!prefs.getString("HiddenCar"+index, "").equals("")) {
-            Log.i("loadHidden",index+"");
             Gson carData = new Gson();
             String jsonCarData = prefs.getString("HiddenCar" + index, null);
             Car car = carData.fromJson(jsonCarData, Car.class);
@@ -200,7 +198,6 @@ public class SaveData extends JSONObject  {
             String jsonJourneyData = prefs.getString("Journey" + index, null);
             Journey journey = journeyData.fromJson(jsonJourneyData, Journey.class);
             jc.addJourney(journey);
-            Log.i("load",jsonJourneyData+"");
             index++;
         }
     }
@@ -215,10 +212,51 @@ public class SaveData extends JSONObject  {
             Gson journeyData = new Gson();
             String jsonJourneyData = journeyData.toJson(jc.getJourneyAtIndex(i));
             editor.putString("Journey"+i, jsonJourneyData);
-            Log.i("added", ""+jsonJourneyData);
         }
         editor.commit();
         editor.apply();
     }
-    //todo: save utilities, tips
+
+    //////////////////
+    // Saving Utility
+    /////////////////
+
+//    public static void loadUtilities(Context context) {
+//        CarbonModel model = CarbonModel.getInstance();
+//        UtilityCollection uc = model.getUtilityCollection();
+//        int index = 0;
+//        while (index < uc.getNumberUtilities()) {
+//            uc.deleteUtility(index);
+//        }
+//
+//        SharedPreferences prefs = context.getSharedPreferences("UtilityCollection", MODE_PRIVATE);
+//
+//        while (!prefs.getString("Utility"+index, "").equals("")) {
+//            Gson utilityData = new Gson();
+//            String jsonUtilityData = prefs.getString("Utility" + index, null);
+//            Utility utility = utilityData.fromJson(jsonUtilityData, Utility.class);
+//            uc.addUtility(utility);
+//            Log.i("load",jsonUtilityData+"");
+//            index++;
+//        }
+//    }
+
+//    public static void saveUtilities(Context context) {
+//        CarbonModel model = CarbonModel.getInstance();
+//        UtilityCollection uc = model.getUtilityCollection();
+//        SharedPreferences prefs = context.getSharedPreferences("UtilityCollection", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        editor.clear();
+//        for (int i = 0; i < uc.getNumberUtilities(); i++) {
+//            Gson utilityData = new Gson();
+//            String jsonUtilityData = utilityData.toJson(uc.getUtility(i));
+//            editor.putString("Utility"+i, jsonUtilityData);
+//            Log.i("added", ""+jsonUtilityData);
+//        }
+//        editor.commit();
+//        editor.apply();
+//    }
+
+
+    //todo: tips
 }
