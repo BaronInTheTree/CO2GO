@@ -1,5 +1,7 @@
 package ca.cmpt276.carbonTracker;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /*
@@ -15,7 +17,7 @@ public class Utility {
 
     private boolean naturalGas;
     private boolean electricity;
-    private int timespanOfBill;
+    private int timespan;
     private String startDate;
     private String endDate;
     private int usage;
@@ -30,9 +32,24 @@ public class Utility {
         this.usage = usage;
         this.numPeople = numPeople;
 
-        // TODO: get difference in days
-        // Convert difference in milliseconds to difference of days
-//        timespanOfBill = (int) (startDate.getTime() - endDate.getTime()) / (1000 * 60 * 60 * 24);
+        computeTimeSpan();
+    }
+
+    private void computeTimeSpan() {
+        Date startingDay = null;
+        Date endingDay = null;
+
+        try {
+            startingDay = new SimpleDateFormat("yyyy-mm-dd").parse(getStartDate());
+            endingDay = new SimpleDateFormat("yyyy-mm-dd").parse(getEndDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long differenceInMilliSeconds = startingDay.getTime() - endingDay.getTime();
+
+        // Convert to days from milliseconds
+        timespan = (int) differenceInMilliSeconds / (1000 * 60 * 60 * 24);
     }
 
     public boolean isNaturalGas() {
@@ -51,12 +68,20 @@ public class Utility {
         this.electricity = electricity;
     }
 
-    public int getTimespanOfBill() {
-        return timespanOfBill;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setTimespanOfBill(int timespanOfBill) {
-        this.timespanOfBill = timespanOfBill;
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public int getTimespan() {
+        return timespan;
+    }
+
+    public void setTimespan(int timespan) {
+        this.timespan = timespan;
     }
 
     public int getUsage() {
@@ -68,7 +93,7 @@ public class Utility {
     }
 
     public int getUsagePerDay() {
-        return usage / timespanOfBill;
+        return usage / timespan;
     }
 
     public void setUsage(int numResourcesConsumed, boolean naturalGas, boolean electricity) {
