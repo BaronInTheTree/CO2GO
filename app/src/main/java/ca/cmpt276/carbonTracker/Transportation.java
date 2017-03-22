@@ -32,5 +32,4 @@ public abstract class Transportation {
     public double getCo2GramsPerKM_City() {
         return co2GramsPerKM_City;
     }
-
 }

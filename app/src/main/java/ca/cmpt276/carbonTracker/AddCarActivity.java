@@ -53,6 +53,7 @@ public class AddCarActivity extends AppCompatActivity {
                 modelInstance.getCarData().getMakeList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         selectMake.setAdapter(spinnerArrayAdapter);
+        selectMake.setSelection(0);
 
         selectMake.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/footprint_btn"
-        android:layout_marginBottom="109dp"
+        android:layout_marginBottom="63dp"
         android:layout_above="@+id/tip_btn"
         android:layout_centerHorizontal="true" />
 
@@ -36,5 +36,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:text="View Tips" />
+
+    <Button
+        android:id="@+id/viewJourneys_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="55dp"
+        android:text="View Journeys"
+        android:layout_above="@+id/footprint_btn"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
