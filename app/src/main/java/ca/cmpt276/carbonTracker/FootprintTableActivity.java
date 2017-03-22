@@ -19,6 +19,7 @@ import com.example.sasha.carbontracker.R;
  * @author Team Teal
  */
 public class FootprintTableActivity extends AppCompatActivity {
+    private static String userNotes = "In portrait view, scroll sideways to read full content.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class FootprintTableActivity extends AppCompatActivity {
 
     private void setupNote() {
         TextView note = (TextView) findViewById(R.id.note);
-        note.setText("In portrait view, scroll sideways to read full content.");
+        note.setText(userNotes);
     }
 
     private void setupButtons() {

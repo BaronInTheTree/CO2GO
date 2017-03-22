@@ -10,7 +10,7 @@ import java.util.List;
  * in collections and they are randomly cycled through with a unique one being displayed at least
  * once every seven times.
  *
- * @author Team Teal
+ * Song Xiao - Team Teal
  */
 
 public class TipCollection {
@@ -28,8 +28,7 @@ public class TipCollection {
     private List<Tip> busTips;
     private List<Tip> skyTrainTips;
     private List<Tip> bikeWalkTips;
-    private List<Tip> electricityTips;
-    private List<Tip> gasTips;
+    private List<Tip> utilityTips;
 
     // Collections of actual tip content of each category.
     private List<String> generalTipsContent;
@@ -37,8 +36,7 @@ public class TipCollection {
     private List<String> busTipsContent;
     private List<String> skyTrainTipsContent;
     private List<String> bikeWalkTipsContent;
-    private List<String> electricityTipsContent;
-    private List<String> gasTipsContent;
+    private List<String> utilityTipsContent;
 
     public TipCollection() {
         generalTips = new ArrayList<>();
@@ -48,20 +46,19 @@ public class TipCollection {
         busTips = new ArrayList<>();
         skyTrainTips = new ArrayList<>();
         bikeWalkTips = new ArrayList<>();
-        electricityTips = new ArrayList<>();
-        gasTips = new ArrayList<>();
+        utilityTips = new ArrayList<>();
 
         generalTipsContent = new ArrayList<>();
         carTipsContent = new ArrayList<>();
         busTipsContent = new ArrayList<>();
         skyTrainTipsContent = new ArrayList<>();
         bikeWalkTipsContent = new ArrayList<>();
-        electricityTipsContent = new ArrayList<>();
-        gasTipsContent  = new ArrayList<>();
+        utilityTipsContent  = new ArrayList<>();
 
-        updateGeneralTips();
+        updateGeneralTipsContent();
     }
 
+    // return a tip after the user clicks the "View Tips" button on the main page.
     public String getGeneralTip() {
         if (generalTips.size()== 0) {
             generalTipsInitialize();
@@ -76,7 +73,7 @@ public class TipCollection {
                     if (recentShownTips.size() == numTips) {
                         recentShownTips.remove(0);
                     }
-                    updateGeneralTips();
+                    updateGeneralTipsContent();
                     String currentTipContent = generalTipsContent.get(i);
                     Tip currentTip = new Tip(currentTipContent);
                     generalTips.set(i, currentTip);
@@ -89,6 +86,7 @@ public class TipCollection {
         return ERROR;
     }
 
+    // return a tip to user after a new journey is created.
     public String getJourneyTip(int journeyType, Journey currentJourney){
         List<Tip> tips = new ArrayList<>();
         if (journeyType== CAR) tips = carTips;
@@ -142,7 +140,36 @@ public class TipCollection {
         return ERROR;
     }
 
-    // Todo: similar to above, write getUtilityTip(). It depends on how electricity and gas are implemented.
+    // return a tip to the user after a new utility bill is entered.
+    public String getUtilityTip(Utility currentBill){
+        if (utilityTips.size()== 0) {
+            utilityTipsInitialize();
+        }
+
+        boolean findTip =false;
+
+        while (!findTip) {
+            for (int i = 0; i < numTips; i++) {
+                if (!recentShownTips.contains(utilityTips.get(i))) {
+                    findTip=true;
+                    if (recentShownTips.size() == numTips) {
+                        recentShownTips.remove(0);
+                    }
+                    updateUtilityTipsContent(currentBill);
+                    String currentTipContent = utilityTipsContent.get(i);
+                    Tip currentTip = new Tip(currentTipContent);
+                    utilityTips.set(i, currentTip);
+                    recentShownTips.add(utilityTips.get(i));
+                    return utilityTips.get(i).getTipContent();
+                }
+            }
+            if (!findTip) recentShownTips.remove(0);
+        }
+        return ERROR;
+    }
+
+
+    // Initialize collections of tips for each category.
 
     public void generalTipsInitialize(){
         for (int i = 0; i< numTips; i++){
@@ -150,8 +177,6 @@ public class TipCollection {
             generalTips.add(currentTip);
         }
     }
-
-    // Initialize collections of tips for each category.
 
     public void journeyInitialize(int journeyType){
         if (journeyType== CAR) {
@@ -180,23 +205,16 @@ public class TipCollection {
         }
     }
 
-    public void electricityTipsInitialize(){
+    public void utilityTipsInitialize(){
         for (int i = 0; i< numTips; i++){
-            Tip currentTip = new Tip(electricityTipsContent.get(i));
-            electricityTips.add(currentTip);
-        }
-    }
-
-    public void gasTipsInitialize(){
-        for (int i = 0; i< numTips; i++){
-            Tip currentTip = new Tip(gasTipsContent.get(i));
-            gasTips.add(currentTip);
+            Tip currentTip = new Tip(utilityTipsContent.get(i));
+            utilityTips.add(currentTip);
         }
     }
 
     // update tip contents for each category. Note: all contents need to be updated to reflect current user data.
 
-    public void updateGeneralTips(){
+    public void updateGeneralTipsContent(){
         if (generalTipsContent.size()!= 0) generalTipsContent.clear();
         // The following tips need getMonthDriveDistance(), getMonthDriveEmission() and other corresponding methods.
         generalTipsContent.add("Your total driving distance within last 4 weeks are getMonthDriveDistance(), consider to take more bus or skytrain to lower your driving distance in the future.");
@@ -258,9 +276,15 @@ public class TipCollection {
 
     }
 
-    // Todo: write similar functions for electricity and gas. Choose one of the following two templates.
-    // Your current monthly electricity usage is “getCurrentMonthElectricity()”...
-    // The CO2 emission from your current monthly eletricity usage is "getCO2EmissionByElectricity" ...
-
+    public void updateUtilityTipsContent(Utility currentBill){
+        if (utilityTipsContent.size()!=0) utilityTipsContent.clear();
+        utilityTipsContent.add("Your CO2 emission from the utility bill entered is ," + (int) currentBill.getC02PerPerson() + " g. If your heating equipment is old, consider to upgrade it to more efficient models." );
+        utilityTipsContent.add("Your CO2 emission from the utility bill entered is ," + (int) currentBill.getC02PerPerson() + " g. If you use air conditioner, consider to reduce its usage by creating better airflow in your home.");
+        utilityTipsContent.add("Your CO2 emission from the utility bill entered is ," + (int) currentBill.getC02PerPerson() + " g. Consider to turn off computers and other electronic devices when not being used.");
+        utilityTipsContent.add("Your CO2 emission from the utility bill entered is ," + (int) currentBill.getC02PerPerson() + " g. Consider to install a programmable thermostat to automatically reduce unnecessary heating." );
+        utilityTipsContent.add("Your CO2 emission from the utility bill entered is ,"+ (int) currentBill.getC02PerPerson() + " g. Avoid over heating your laundry and try to hang dry your laundry." );
+        utilityTipsContent.add("Your CO2 emission from the utility bill entered is ," + (int) currentBill.getC02PerPerson() + " g. If your fridge or stove is old, consider replace it with new ones with higher energy efficiency.");
+        utilityTipsContent.add("Your CO2 emission from the utility bill entered is ,"+ (int) currentBill.getC02PerPerson() + " g, Consider to use energy saving light bulbs wherever possible.");
+    }
 
 }
