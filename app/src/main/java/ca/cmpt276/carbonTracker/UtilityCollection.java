@@ -48,7 +48,7 @@ public class UtilityCollection {
         List<String> utilities = new ArrayList<>();
 
         for(Utility utility: utilityList) {
-            utilities.add(utility.toString());
+            utilities.add(utility.displayToList());
         }
         return utilities;
     }

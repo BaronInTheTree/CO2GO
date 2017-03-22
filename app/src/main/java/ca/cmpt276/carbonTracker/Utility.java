@@ -15,6 +15,7 @@ public class Utility {
     private static final int ELECTRICITY_CO2_EMISSION = 9000;   // per GWh
     private static final double NATURAL_GAS_CO2_EMISSION = 56.1;   // per GJ
 
+    private String nickname;
     private boolean naturalGas;
     private boolean electricity;
     private int timespan;
@@ -23,8 +24,9 @@ public class Utility {
     private int usage;
     private int numPeople;
 
-    public Utility(boolean naturalGas, boolean electricity, String startDate,
-                   String endDate, int usage, int numPeople) {
+    public Utility(String nickname, boolean naturalGas, boolean electricity,
+                   String startDate, String endDate, int usage, int numPeople) {
+        this.nickname = nickname;
         this.naturalGas = naturalGas;
         this.electricity = electricity;
         this.startDate = startDate;
@@ -127,20 +129,15 @@ public class Utility {
         }
     }
 
-    @Override
-    public String toString() {
-        String string = "";
+    public String displayToList() {
+        String string = nickname + " - ";
 
         // Select which fuel used
         if(naturalGas) {
-            string = usage + "GJ of Natural Gas ";
+            string = string + "Natural Gas";
         } else {
-            string = usage + "GWh of Electricity ";
+            string = string + "Electricity";
         }
-
-        string = string + "from " + startDate + " to " +
-                endDate + " with " + numPeople + " people. " +
-                "\n Utility produced " + getTotalC02(timespan) + ".";
 
         return string;
     }

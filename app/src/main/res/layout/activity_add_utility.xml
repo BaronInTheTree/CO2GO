@@ -38,14 +38,19 @@
                 android:layout_height="match_parent" />
         </TableRow>
 
-        <!-- Additional space -->
         <TableRow
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent" />
+            <EditText
+                android:id="@+id/addUtilityNickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/max_length_18_chars"
+                android:inputType="textCapWords"
+                android:maxLength="18"
+                />
         </TableRow>
 
         <TableRow
@@ -71,17 +76,6 @@
                 android:inputType="number"
                 android:maxLength="6"
                 />
-        </TableRow>
-
-
-        <!-- Additional space -->
-        <TableRow
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" >
-
-            <TextView
-                android:layout_height="match_parent"
-                android:layout_width="match_parent" />
         </TableRow>
 
         <TableRow
@@ -133,17 +127,6 @@
             </LinearLayout>
         </TableRow>
 
-        <!-- Additional space -->
-        <TableRow
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" >
-
-            <TextView
-                android:layout_height="match_parent"
-                android:layout_width="match_parent" />
-        </TableRow>
-
-
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
@@ -191,16 +174,6 @@
                     android:layout_weight="1"
                     android:prompt="@string/billEndDay" />
             </LinearLayout>
-        </TableRow>
-
-        <!-- Additional space -->
-        <TableRow
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" >
-
-            <TextView
-                android:layout_height="match_parent"
-                android:layout_width="match_parent" />
         </TableRow>
 
         <TableRow

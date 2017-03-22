@@ -24,6 +24,7 @@ public class AddUtilityActivity extends AppCompatActivity {
     private int endDay;
 
     private CarbonModel model;
+    private String nickname;
     private boolean naturalGas;
     private boolean electricity;
     private String startingDate;
@@ -34,7 +35,7 @@ public class AddUtilityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_bill);
+        setContentView(R.layout.activity_add_utility);
 
         model = CarbonModel.getInstance();
 
@@ -84,6 +85,18 @@ public class AddUtilityActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    private void getNickName() {
+        final EditText editText = (EditText) findViewById(R.id.addUtilityNickname);
+        String text = editText.getText().toString();
+
+        // Check if editText isn't empty
+        if (!text.equals("")) {
+            nickname = text;
+        } else {
+            nickname = null;
+        }
     }
 
     // Gets utility usage
@@ -247,6 +260,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getNickName();
                 getUsage();
                 getNumPeople();
 
@@ -258,7 +272,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     // Create a Utility
-                    Utility utility = new Utility(naturalGas, electricity,
+                    Utility utility = new Utility(nickname, naturalGas, electricity,
                             startingDate, endingDate, usage, numPeople);
 
                     // Add to utility collection
@@ -281,10 +295,11 @@ public class AddUtilityActivity extends AppCompatActivity {
         startingDate = startYear + "-" + startMonth + "-" + startDay;
         endingDate = endYear + "-" + endMonth + "-" + endDay;
 
-        boolean emptyDates = startingDate.equals(null) || endingDate.equals(null);
-        boolean emptyInput = usage == INVALID_INPUT || numPeople == INVALID_INPUT;
+        boolean emptyNickname = (nickname == null);
+        boolean emptyDates = (startingDate.equals(null) || endingDate.equals(null));
+        boolean emptyInput = (usage == INVALID_INPUT || numPeople == INVALID_INPUT);
 
-        if (emptyDates || emptyInput || negativeDates()) {
+        if (emptyNickname || emptyDates || emptyInput || negativeDates()) {
             return true;
         } else {
             return false;
