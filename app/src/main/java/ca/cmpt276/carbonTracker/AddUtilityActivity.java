@@ -276,7 +276,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                             AddUtilityActivity.this,
                             "Please fill out the form completely.",
                             Toast.LENGTH_SHORT).show();
-                } else if (identicalDate()) {
+                } else if (identicalDate() || negativeDates()) {
                     Toast.makeText(
                             AddUtilityActivity.this,
                             "Please check the dates. \n" +
@@ -312,7 +312,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         boolean emptyDates = (startingDate.equals(null) || endingDate.equals(null));
         boolean emptyInput = (usage == INVALID_INPUT || numPeople == INVALID_INPUT);
 
-        if (emptyNickname || emptyDates || emptyInput || negativeDates()) {
+        if (emptyNickname || emptyDates || emptyInput) {
             return true;
         } else {
             return false;
@@ -333,10 +333,10 @@ public class AddUtilityActivity extends AppCompatActivity {
     // Checks if starting date is later than ending date
     private boolean negativeDates() {
         boolean negativeYear = (startYear > endYear);
-        boolean negativeMonth = (startYear == endMonth && startMonth > endMonth);
+        boolean negativeMonth = (startYear == endYear && startMonth > endMonth);
         boolean negativeDay = (startYear == endYear &&
-                startMonth == endMonth &&
-                startDay > endDay);
+                                startMonth == endMonth &&
+                                startDay > endDay);
 
         if (negativeYear || negativeMonth || negativeDay) {
             return true;
