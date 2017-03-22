@@ -17,7 +17,7 @@ public class DateHandler {
     private List<String> yearList;
     private List<String> monthList;
     private List<String> dayList;
-    public final int MIN_YEAR = 1970;
+    public final int MIN_YEAR = 1970; // Earliest year that Java recognizes in the Date class.
     public final int MAX_YEAR = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
 
     public DateHandler() {
