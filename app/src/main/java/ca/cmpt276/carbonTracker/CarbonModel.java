@@ -21,6 +21,7 @@ public class CarbonModel {
     private TipCollection tips;
     private String selectedTransportType;
     private UtilityCollection utilityCollection;
+    private DateHandler dateHandler;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -37,6 +38,7 @@ public class CarbonModel {
         carData = new CarData();
         tips = new TipCollection();
         utilityCollection = new UtilityCollection();
+        dateHandler = new DateHandler();
     }
 
     public void addNewJourney(Journey newJourney) {
@@ -87,6 +89,10 @@ public class CarbonModel {
 
     public void setSelectedTransportType(String selectedTransportType) {
         this.selectedTransportType = selectedTransportType;
+    }
+
+    public DateHandler getDateHandler() {
+        return dateHandler;
     }
 
     public Journey createJourney() {

@@ -16,12 +16,13 @@ public class Utility {
     private boolean naturalGas;
     private boolean electricity;
     private int timespanOfBill;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private int usage;
     private int numPeople;
 
-    public Utility(boolean naturalGas, boolean electricity, Date startDate, Date endDate, int usage, int numPeople) {
+    public Utility(boolean naturalGas, boolean electricity, String startDate,
+                   String endDate, int usage, int numPeople) {
         this.naturalGas = naturalGas;
         this.electricity = electricity;
         this.startDate = startDate;
@@ -29,8 +30,9 @@ public class Utility {
         this.usage = usage;
         this.numPeople = numPeople;
 
+        // TODO: get difference in days
         // Convert difference in milliseconds to difference of days
-        timespanOfBill = (int) (startDate.getTime() - endDate.getTime()) / (1000 * 60 * 60 * 24);
+//        timespanOfBill = (int) (startDate.getTime() - endDate.getTime()) / (1000 * 60 * 60 * 24);
     }
 
     public boolean isNaturalGas() {
