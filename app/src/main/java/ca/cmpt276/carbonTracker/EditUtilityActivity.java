@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
@@ -22,6 +23,9 @@ public class EditUtilityActivity extends AppCompatActivity {
     private int endYear;
     private int endMonth;
     private int endDay;
+
+    private int index;
+    private Utility utility;
 
     private CarbonModel model;
     private String nickname;
@@ -36,7 +40,9 @@ public class EditUtilityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_utility);
+
         model = CarbonModel.getInstance();
+        utility = model.getUtilityCollection().getUtility(index);
 
         // Spinner requesting fuel
         selectFuelSpinner();
@@ -51,9 +57,108 @@ public class EditUtilityActivity extends AppCompatActivity {
         setupEndMonthSpinner();
         setupEndDaySpinner();
 
+        // Set utility's values for all fields
+        displayUtilityValues();
+
         // Save and cancel buttons
         setupEditBillButton();
         setupCancelButton();
+    }
+
+    private void displayUtilityValues() {
+        // Sets nickname
+        EditText nicknameText = (EditText) findViewById(R.id.editUtilityNickname);
+        nicknameText.setText(utility.getNickname(), TextView.BufferType.EDITABLE);
+
+        // Sets usage
+        EditText usageText = (EditText) findViewById(R.id.editText_Utility_Usage);
+        usageText.setText(utility.getUsage() + "", TextView.BufferType.EDITABLE);
+
+        // Sets num of people
+        EditText numPeopleText = (EditText) findViewById(R.id.editText_Utility_Num_People);
+        numPeopleText.setText(utility.getNumPeople() + "", TextView.BufferType.EDITABLE);
+
+        // Set fuel spinner
+
+        // Set start year spinner
+        Spinner startYearSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartYear);
+        ArrayAdapter<String> startYearSpinnerArrayAdapter = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                model.getDateHandler().getYearList());
+        startYearSpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        startYearSpinner.setAdapter(startYearSpinnerArrayAdapter);
+
+        String startYear = utility.getStartDate();
+        String[] strStartYear = startYear.split("-");
+        int startYearSpinnerPosition = startYearSpinnerArrayAdapter.getPosition(strStartYear[0]);
+        startYearSpinner.setSelection(startYearSpinnerPosition);
+
+        // Set start month spinner
+        Spinner startMonthSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartMonth);
+        ArrayAdapter<String> startMonthSpinnerArrayAdapter = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                model.getDateHandler().getMonthList());
+        startMonthSpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        startMonthSpinner.setAdapter(startMonthSpinnerArrayAdapter);
+
+        String[] strStartMonth = utility.getStartDate().split("-");
+        String startMonth = strStartMonth[1];
+        int startMonthSpinnerPosition = startMonthSpinnerArrayAdapter.getPosition(startMonth);
+        startMonthSpinner.setSelection(startMonthSpinnerPosition);
+
+        // doesn't work
+        // Set start day
+        Spinner startDaySpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartDay);
+        ArrayAdapter<String> startDaySpinnerArrayAdapter = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                model.getDateHandler().getDayList());
+        startDaySpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        startDaySpinner.setAdapter(startDaySpinnerArrayAdapter);
+
+        String startDay = utility.getStartDate();
+        String[] strStartDay = startDay.split("-");
+        int startDaySpinnerPosition = startDaySpinnerArrayAdapter.getPosition(strStartDay[2]);
+        startDaySpinner.setSelection(startDaySpinnerPosition+2);
+
+        // doesnt work
+        // Set end year spinner
+        Spinner endYearSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndYear);
+        ArrayAdapter<String> endYearSpinnerArrayAdapter = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                model.getDateHandler().getYearList());
+        endYearSpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        endYearSpinner.setAdapter(endYearSpinnerArrayAdapter);
+
+        String endYear = utility.getEndDate();
+        String[] strEndYear = endYear.split("-");
+        int endYearSpinnerPosition = startYearSpinnerArrayAdapter.getPosition(strEndYear[0]);
+        startYearSpinner.setSelection(endYearSpinnerPosition+3);
+
+        // Set end month spinner
+        Spinner endMonthSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndMonth);
+        ArrayAdapter<String> endMonthSpinnerArrayAdapter = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                model.getDateHandler().getMonthList());
+        endMonthSpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        endMonthSpinner.setAdapter(endMonthSpinnerArrayAdapter);
+
+        String endMonth = utility.getEndDate();
+        String[] strEndMonth = endMonth.split("-");
+        int endMonthSpinnerPosition = endMonthSpinnerArrayAdapter.getPosition(strEndMonth[1]);
+        endMonthSpinner.setSelection(endMonthSpinnerPosition);
+
+        // Set end day
+        Spinner endDaySpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndDay);
+        ArrayAdapter<String> endDaySpinnerArrayAdapter = new ArrayAdapter<String>(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                model.getDateHandler().getDayList());
+        endDaySpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        endDaySpinner.setAdapter(endDaySpinnerArrayAdapter);
+
+        String endDay = utility.getEndDate();
+        String[] strEndDay = endDay.split("-");
+        int endDaySpinnerPosition = endDaySpinnerArrayAdapter.getPosition(strEndDay[2]);
+        endDaySpinner.setSelection(endDaySpinnerPosition);  // day list starts from index 0
     }
 
     //todo: modify for editing/saving
@@ -114,7 +219,7 @@ public class EditUtilityActivity extends AppCompatActivity {
 
     // Following 3 methods get starting date
     private void setupStartYearSpinner() {
-        final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartYear);
+        final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartYear);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getYearList());
@@ -136,7 +241,7 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void setupStartMonthSpinner() {
-        final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartMonth);
+        final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartMonth);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getMonthList());
@@ -158,7 +263,7 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void setupStartDaySpinner() {
-        final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartDay);
+        final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartDay);
         model.getDateHandler().initializeDayList(startYear, startMonth);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
@@ -180,7 +285,7 @@ public class EditUtilityActivity extends AppCompatActivity {
 
     // Following 3 methods get ending date
     private void setupEndYearSpinner() {
-        final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndYear);
+        final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndYear);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getYearList());
@@ -202,7 +307,7 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void setupEndMonthSpinner() {
-        final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndMonth);
+        final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndMonth);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getMonthList());
@@ -224,7 +329,7 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void setupEndDaySpinner() {
-        final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndDay);
+        final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndDay);
         model.getDateHandler().initializeDayList(endYear, endMonth);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
