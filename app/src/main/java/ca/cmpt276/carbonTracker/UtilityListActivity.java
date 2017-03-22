@@ -1,8 +1,12 @@
 package ca.cmpt276.carbonTracker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +23,7 @@ import java.util.List;
  * Activity allows the user to add a new utility or return to main menu.
  */
 public class UtilityListActivity extends AppCompatActivity {
-
+private static final int REQUEST_CODE_EDIT_UTILITY = 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +32,9 @@ public class UtilityListActivity extends AppCompatActivity {
         populateListOfUtilities();
         addUtilityBtn();
         backBtn();
+        updateListView();
     }
 
-    // TODO: Add long press functionality
     private void populateListOfUtilities() {
         // Create list of items
         final CarbonModel model = CarbonModel.getInstance();
@@ -80,5 +84,40 @@ public class UtilityListActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void updateListView() {
+        CarbonModel carbonModel = CarbonModel.getInstance();
+        ArrayAdapter<Utility> adapter = carbonModel.getUtilityCollection().getArrayAdapter(UtilityListActivity.this);
+        ListView list = (ListView) findViewById(R.id.listOfUtilities);
+        list.clearChoices();
+        list.setAdapter(adapter);
+        registerForContextMenu(list);
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (R.id.listOfUtilities == v.getId()) {
+            menu.setHeaderTitle("Do what with utility?");
+            menu.add("Edit");
+            menu.add("Delete");
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        CarbonModel cm = CarbonModel.getInstance();
+        AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int selectedUtilityPosition = acmi.position;
+        if (item.toString().equals("Edit")) {
+            Intent editUtilityIntent = EditUtilityActivity.makeIntent(UtilityListActivity.this);
+            editUtilityIntent.putExtra("UtilityIndex", selectedUtilityPosition);
+            startActivityForResult(editUtilityIntent, REQUEST_CODE_EDIT_UTILITY);
+        } else if (item.toString().equals("Delete")) {
+            cm.getUtilityCollection().deleteUtility(selectedUtilityPosition);
+        }
+        updateListView();
+        return true;
     }
 }
