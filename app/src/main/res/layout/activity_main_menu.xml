@@ -41,10 +41,9 @@
         android:id="@+id/viewJourneys_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/footprint_btn"
-        android:layout_alignEnd="@+id/tip_btn"
-        android:layout_alignRight="@+id/tip_btn"
         android:layout_marginBottom="55dp"
-        android:text="Button" />
+        android:text="View Journeys"
+        android:layout_above="@+id/footprint_btn"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
