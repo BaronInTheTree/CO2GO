@@ -15,6 +15,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
+/**
+ * The WelcomePageActivity displays an image for the user at startup and allows them to proceed
+ * to the main menu of the application. It is automatically closed when the user does so.
+ *
+ * @author Team Teal
+ */
+
 public class WelcomePageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

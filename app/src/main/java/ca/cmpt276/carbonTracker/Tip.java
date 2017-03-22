@@ -1,7 +1,10 @@
 package ca.cmpt276.carbonTracker;
 
 /**
- * Created by song on 2017-03-15.
+ * The Tip class generates one of several tips for the user so that they will be able to
+ * learn new ways of reducing their CO2 output and other things.
+ *
+ * Song Xiao - Team Teal
  */
 
 public class Tip {

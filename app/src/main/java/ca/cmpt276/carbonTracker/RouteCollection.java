@@ -13,16 +13,22 @@ import java.util.List;
 import com.example.sasha.carbontracker.R;
 
 /**
- * RouteCollection class
+ * The RouteCollection class is the basis for storing two route collections: a visible (main)
+ * route collection and also a hidden route collection which stores the routes the user deletes
+ * so that subsequent journeys will be able to access them.
+ *
+ * @author Team Teal
  */
 public class RouteCollection {
 
     private List<Route> routeCollection;
     private List<Route> hiddenRouteCollection;
+    private List<String> uiCollection;
 
     public RouteCollection() {
         routeCollection = new ArrayList<>();
         hiddenRouteCollection = new ArrayList<>();
+        uiCollection = new ArrayList<>();
     }
 
     public void addRoute(Route route) {
@@ -42,6 +48,14 @@ public class RouteCollection {
                 hiddenRouteCollection.add(r);
             }
         }
+    }
+
+    public List<String> getUICollection() {
+        uiCollection.clear();
+        for (Route route : routeCollection) {
+            uiCollection.add(route.getBasicInfo());
+        }
+        return uiCollection;
     }
 
     public void removeRoute(int index) {
@@ -104,4 +118,13 @@ public class RouteCollection {
         return hiddenRouteCollection.get(i);
     }
 
+    public int getIndexOfRoute(Route route) {
+        int index = 0;
+        for (int i = 0; i < routeCollection.size(); i++) {
+            if (route.equals(routeCollection.get(i))) {
+                index = i;
+            }
+        }
+        return index;
+    }
 }

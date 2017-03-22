@@ -1,7 +1,11 @@
 package ca.cmpt276.carbonTracker;
 
 /**
- * Car class
+ * The Car class is able to store many details about the car a user selects in the AddCarActivity
+ * from the csv file. A collection of them is stored in the CarCollection class and users are able
+ * to pick from a list of spinners when adding or editing a car. It is-a mode of transportation.
+ *
+ * @author Team Teal
  */
 
 public class Car extends Transportation implements Cloneable {

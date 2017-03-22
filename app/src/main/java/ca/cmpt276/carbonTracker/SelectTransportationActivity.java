@@ -9,11 +9,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import com.example.sasha.carbontracker.R;
+
+/**
+ * SelectTransportationActivity lists the different types of cars that user has created
+ * in a ListView and also the options to use Walking/Biking, Skytrain, or Bus. They are also
+ * able to add a car into the carCollection in the Carbon Model here as well.
+ *
+ * @author Team Teal
+ */
 
 public class SelectTransportationActivity extends AppCompatActivity {
 
@@ -35,7 +42,7 @@ public class SelectTransportationActivity extends AppCompatActivity {
     }
 
     private void addBackButton() {
-        Button btn = (Button) findViewById(R.id.buttonBack);
+        Button btn = (Button) findViewById(R.id.buttonBack_journeyList);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

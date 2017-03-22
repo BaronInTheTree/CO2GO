@@ -15,6 +15,13 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+/**
+ * The EditCarActivity is similar to the AddCarActivity, however (as the title of the activity states)
+ * the user is able to edit an existing car rather than add a new one to the carCollection list.
+ *
+ * @author Team Teal
+ */
+
 public class EditCarActivity extends AppCompatActivity {
 
     CarbonModel modelInstance;

@@ -15,6 +15,13 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+/**
+    The AddRouteActivity is activated when the user click "Add" from SelectRouteActivity
+    and this will allow the user to input their route and be able to use it instantaneously
+    or save it to the route collection.
+
+    @author Team Teal
+ */
 public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     private Route route;
     private CarbonModel carbonModel = CarbonModel.getInstance();

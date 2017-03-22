@@ -19,6 +19,17 @@ import com.example.sasha.carbontracker.R;
 
 import static ca.cmpt276.carbonTracker.SaveData.*;
 
+/**
+ The SelectRouteActivity displays the current list of visible routes that the user has saved
+ and can use for their journey. It is opened when the user selects a mode of transportation
+ and they can go back to that page using the back button on the bottom left.
+
+ If there are any routes the user wishes to edit or delete, they can open a context menu by
+ long pressing on the route they desire to edit.
+
+ @author Team Teal
+ */
+
 public class SelectRouteActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ADD_ROUTE = 1000;
     private static final int REQUEST_CODE_EDIT_ROUTE = 2000;
