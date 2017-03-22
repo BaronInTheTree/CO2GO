@@ -7,39 +7,57 @@
     tools:context="ca.cmpt276.carbonTracker.UtilityListActivity">
 
     <Button
-        android:text="@string/add_utility"
+        android:id="@+id/addUtility_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addUtility_btn"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginRight="29dp"
+        android:text="@string/add_utility" />
 
     <TextView
-        android:text="@string/select_an_utility_or_add_a_new"
+        android:id="@+id/textViewUtilityList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/textViewUtilityList" />
+        android:layout_alignParentTop="true"
+        android:text="@string/select_an_utility_or_add_a_new" />
 
-    <ListView
-        android:id="@+id/listOfUtilities"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textViewUtilityList"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/addUtility_btn" />
+        android:layout_above="@+id/addUtility_btn"
+        android:layout_below="@+id/textViewUtilityList">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/listOfUtilities"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_above="@+id/addUtility_btn"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
-        android:text="@string/back"
+        android:id="@+id/backButtonUtilityList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBaseline="@+id/addUtility_btn"
+        android:layout_alignBottom="@+id/addUtility_btn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/backButtonUtilityList" />
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp"
+        android:text="@string/back" />
 
 </RelativeLayout>
