@@ -6,7 +6,7 @@ package ca.cmpt276.carbonTracker;
  * @author Team Teal
  */
 
-public abstract class Transportation {
+public class Transportation {
     protected double co2GramsPerMile_Highway;
     protected double co2GramsPerKM_Highway;
     protected double co2GramsPerMile_City;
