@@ -63,7 +63,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
                 this,
                 R.layout.support_simple_spinner_dropdown_item,
-                model.getUtilityData());
+                model.getUtilityFuel());
 
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         selectResource.setAdapter(spinnerArrayAdapter);
@@ -270,7 +270,14 @@ public class AddUtilityActivity extends AppCompatActivity {
                             AddUtilityActivity.this,
                             "Please fill out the form completely.",
                             Toast.LENGTH_SHORT).show();
-                } else {
+                } else if (identicalDate()) {
+                    Toast.makeText(
+                            AddUtilityActivity.this,
+                            "Please check the dates. \n" +
+                                    "Start date must be before end date.",
+                            Toast.LENGTH_LONG).show();
+
+                }else {
                     // Create a Utility
                     Utility utility = new Utility(nickname, naturalGas, electricity,
                             startingDate, endingDate, usage, numPeople);
@@ -291,7 +298,7 @@ public class AddUtilityActivity extends AppCompatActivity {
     }
 
     // Until dates are not done this will crash the activity upon clicking save button
-    private boolean invalidInput() {
+    private boolean invalidInput()  {
         startingDate = startYear + "-" + startMonth + "-" + startDay;
         endingDate = endYear + "-" + endMonth + "-" + endDay;
 
@@ -306,9 +313,24 @@ public class AddUtilityActivity extends AppCompatActivity {
         }
     }
 
+    private boolean identicalDate() {
+        if (startYear == endYear &&
+                startMonth == endMonth &&
+                startDay == endDay) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private boolean negativeDates() {
-        if (startYear > endYear || startMonth > endMonth ||
-                startMonth == endMonth && startDay > endDay) {
+        boolean negativeYear = (startYear > endYear);
+        boolean negativeMonth = (startYear == endMonth && startMonth > endMonth);
+        boolean negativeDay = (startYear == endYear &&
+                                startMonth == endMonth &&
+                                startDay > endDay);
+
+        if (negativeYear || negativeMonth || negativeDay) {
             return true;
         } else {
             return false;

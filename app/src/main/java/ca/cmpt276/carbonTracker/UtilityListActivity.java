@@ -25,7 +25,7 @@ public class UtilityListActivity extends AppCompatActivity {
         backBtn();
     }
 
-    // TODO: complete this
+    // TODO: Add long press functionality
     private void populateListOfUtilities() {
         // Create list of items
         final CarbonModel model = CarbonModel.getInstance();
@@ -47,9 +47,7 @@ public class UtilityListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> a, View v, int i, long l) {
                 model.getUtilityCollection().getUtility(i);
 
-                // TODO: Change destination of intent
-                Intent intent = new Intent(UtilityListActivity.this, AddUtilityActivity.class);
-
+                Intent intent = new Intent(UtilityListActivity.this, UtilitySummaryActivity.class);
                 intent.putExtra("Index", i);
                 startActivity(intent);
                 finish();

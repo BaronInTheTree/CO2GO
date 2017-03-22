@@ -125,7 +125,7 @@ public class CarbonModel {
         this.utilityCollection = utilityCollection;
     }
 
-    public List<String> getUtilityData() {
-        return utilityCollection.getUtilityData();
+    public List<String> getUtilityFuel() {
+        return utilityCollection.getUtilityFuel();
     }
 }

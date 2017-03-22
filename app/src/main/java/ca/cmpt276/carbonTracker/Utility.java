@@ -54,6 +54,14 @@ public class Utility {
         timespan = (int) differenceInMilliSeconds / (1000 * 60 * 60 * 24);
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public boolean isNaturalGas() {
         return naturalGas;
     }

@@ -11,17 +11,17 @@ public class UtilityCollection {
     private static final String NATURAL_GAS = "Natural Gas";
     private static final String ELECTRICITY = "Electricity";
     private List<Utility> utilityList;
-    private List<String> utilityData;
+    private List<String> utilityFuel;
 
     public UtilityCollection() {
         utilityList = new ArrayList<>();
-        utilityData = new ArrayList<>();
+        utilityFuel = new ArrayList<>();
         populateUtilityData();
     }
 
     private void populateUtilityData() {
-        utilityData.add(NATURAL_GAS);
-        utilityData.add(ELECTRICITY);
+        utilityFuel.add(NATURAL_GAS);
+        utilityFuel.add(ELECTRICITY);
     }
 
     public void addUtility(Utility utility) {
@@ -53,7 +53,7 @@ public class UtilityCollection {
         return utilities;
     }
 
-    public List<String> getUtilityData() {
-        return utilityData;
+    public List<String> getUtilityFuel() {
+        return utilityFuel;
     }
 }
