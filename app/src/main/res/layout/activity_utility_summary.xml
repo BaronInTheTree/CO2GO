@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ca.cmpt276.carbonTracker.UtilitySummaryActivity">
+
+    <TextView
+        android:id="@+id/utilitySummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/utility_summary"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/utilitySummaryNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="34dp"
+        android:text="@string/utilitySummaryNickname"
+        android:textSize="18sp"
+        android:layout_below="@+id/utilitySummary"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/utilityNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utility_nickname"
+        android:textSize="18sp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginStart="47dp"
+        android:layout_alignBaseline="@+id/utilitySummaryNickname"
+        android:layout_alignBottom="@+id/utilitySummaryNickname"
+        android:layout_toRightOf="@+id/utilityStartingDate"
+        android:layout_toEndOf="@+id/utilityStartingDate" />
+
+    <TextView
+        android:id="@+id/utilityFuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:text="@string/utilityFuel"
+        android:textSize="18sp"
+        android:layout_below="@+id/utilitySummaryNickname"
+        android:layout_alignLeft="@+id/utilitySummaryNickname"
+        android:layout_alignStart="@+id/utilitySummaryNickname" />
+
+    <TextView
+        android:id="@+id/utilitySummaryFuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utilitySummaryFuel"
+        android:textSize="18sp"
+        android:layout_above="@+id/utilityUsage"
+        android:layout_alignLeft="@+id/utilityNickname"
+        android:layout_alignStart="@+id/utilityNickname" />
+
+    <TextView
+        android:id="@+id/utilityUsage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utilitySummaryUsage"
+        android:textSize="18sp"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/utilityFuel"
+        android:layout_alignLeft="@+id/utilityFuel"
+        android:layout_alignStart="@+id/utilityFuel" />
+
+    <TextView
+        android:id="@+id/utilitySummaryUsage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utilitySummaryUsage"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/utilityUsage"
+        android:layout_alignBottom="@+id/utilityUsage"
+        android:layout_alignLeft="@+id/utilitySummaryFuel"
+        android:layout_alignStart="@+id/utilitySummaryFuel" />
+
+    <TextView
+        android:id="@+id/utilityStartingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utilityStartingDate"
+        android:textSize="18sp"
+        android:layout_below="@+id/utilityUsage"
+        android:layout_alignLeft="@+id/utilityUsage"
+        android:layout_alignStart="@+id/utilityUsage"
+        android:layout_marginTop="38dp" />
+
+    <TextView
+        android:id="@+id/utilitySummaryStartingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/utilityEndingDate"
+        android:layout_alignLeft="@+id/utilitySummaryFuel"
+        android:layout_alignStart="@+id/utilitySummaryFuel"
+        android:text="@string/utilitySummaryStartingDate"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/utilityEndingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utilityEndingDate"
+        android:textSize="18sp"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/utilityStartingDate"
+        android:layout_alignLeft="@+id/utilityStartingDate"
+        android:layout_alignStart="@+id/utilityStartingDate" />
+
+    <TextView
+        android:id="@+id/utilitySummaryEndingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/utilityEndingDate"
+        android:layout_alignBottom="@+id/utilityEndingDate"
+        android:layout_alignLeft="@+id/utilitySummaryStartingDate"
+        android:layout_alignStart="@+id/utilitySummaryStartingDate"
+        android:text="@string/utilitySummaryEndingDate"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/utilityNumPeople"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utilityNumPeople"
+        android:textSize="18sp"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/utilityEndingDate"
+        android:layout_alignLeft="@+id/utilityEndingDate"
+        android:layout_alignStart="@+id/utilityEndingDate" />
+
+    <TextView
+        android:id="@+id/utilitySummaryNumPeople"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/utilityNumPeople"
+        android:layout_alignLeft="@+id/utilitySummaryEndingDate"
+        android:layout_alignStart="@+id/utilitySummaryEndingDate"
+        android:text="@string/utilitySummaryNumPeople"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/utilitySummaryOkayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utilitySummaryOkay"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/utilityStartingDate"
+        android:layout_toEndOf="@+id/utilityStartingDate"
+        android:layout_marginBottom="48dp" />-->
+</RelativeLayout>
