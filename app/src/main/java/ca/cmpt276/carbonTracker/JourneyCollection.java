@@ -18,6 +18,8 @@ public class JourneyCollection {
     public static final int maxNickName = 18;
     public static final int maxDistance = 5;
     public static final int maxEmission = 10;
+    private static final String XsmallGap = "  ";
+    private static final String smallGap = "   ";
     private static final String regularGap = "    ";
     private static final String largeGap = "                     ";
 
@@ -78,22 +80,22 @@ public class JourneyCollection {
 
             String car = journey.getTransportation().getNickname();
             for (int j = car.length(); j < maxNickName; j++) {
-                car += "  ";
+                car += XsmallGap;
             }
 
             String route = journey.getRoute().getName();
             for (int j = route.length(); j < maxNickName; j++) {
-                route += "   ";
+                route += smallGap;
             }
 
             String distance = "" + journey.getRoute().getTotalDistanceKM();
             for (int j = distance.length(); j < maxDistance; j++) {
-                distance += "   ";
+                distance += smallGap;
             }
 
             String emission = "" + journey.getEmissionsKM();
             for (int j = emission.length(); j < maxEmission; j++) {
-                emission += "  ";
+                emission += XsmallGap;
             }
 
             if (emission.length() > maxEmission) emission = emission.substring(0, maxEmission);
