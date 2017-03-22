@@ -1,5 +1,6 @@
 package ca.cmpt276.carbonTracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,13 +14,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-/*
- * AddUtilityActivity allows the user to create a new utility by filling in all the data
- * from spinners and editTexts.
- * Stores data about the starting/ending dates and all necessary fields for an utility.
- */
-public class AddUtilityActivity extends AppCompatActivity {
-
+public class EditUtilityActivity extends AppCompatActivity {
     private static final int INVALID_INPUT = 0;
     private int startYear;
     private int startMonth;
@@ -40,8 +35,7 @@ public class AddUtilityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_utility);
-
+        setContentView(R.layout.activity_edit_utility);
         model = CarbonModel.getInstance();
 
         // Spinner requesting fuel
@@ -58,10 +52,11 @@ public class AddUtilityActivity extends AppCompatActivity {
         setupEndDaySpinner();
 
         // Save and cancel buttons
-        saveBillButton();
-        cancelButton();
+        setupEditBillButton();
+        setupCancelButton();
     }
 
+    //todo: modify for editing/saving
 
     private void selectFuelSpinner() {
         final Spinner selectResource = (Spinner) findViewById(R.id.spinnerSelectResource);
@@ -262,9 +257,9 @@ public class AddUtilityActivity extends AppCompatActivity {
         }
     }
 
-    private void saveBillButton() {
-        Button saveBtn = (Button) findViewById(R.id.buttonAddBillSave);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+    private void setupEditBillButton() {
+        Button editBtn = (Button) findViewById(R.id.buttonEditBillSave);
+        editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getNickName();
@@ -274,12 +269,12 @@ public class AddUtilityActivity extends AppCompatActivity {
                 // If empty input display toast message
                 if (invalidInput()) {
                     Toast.makeText(
-                            AddUtilityActivity.this,
+                            EditUtilityActivity.this,
                             "Please fill out the form completely.",
                             Toast.LENGTH_SHORT).show();
                 } else if (identicalDate() || negativeDates()) {
                     Toast.makeText(
-                            AddUtilityActivity.this,
+                            EditUtilityActivity.this,
                             "Please check the dates. \n" +
                                     "Start date must be before end date.",
                             Toast.LENGTH_LONG).show();
@@ -296,8 +291,6 @@ public class AddUtilityActivity extends AppCompatActivity {
                     model.setUtilityCollection(collection);
 
                     // Return to utility list and close activity
-                    Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
-                    startActivity(intent);
                     finish();
                 }
             }
@@ -336,8 +329,8 @@ public class AddUtilityActivity extends AppCompatActivity {
         boolean negativeYear = (startYear > endYear);
         boolean negativeMonth = (startYear == endYear && startMonth > endMonth);
         boolean negativeDay = (startYear == endYear &&
-                                startMonth == endMonth &&
-                                startDay > endDay);
+                startMonth == endMonth &&
+                startDay > endDay);
 
         if (negativeYear || negativeMonth || negativeDay) {
             return true;
@@ -346,16 +339,18 @@ public class AddUtilityActivity extends AppCompatActivity {
         }
     }
 
-    private void cancelButton() {
-        Button cancelBtn = (Button) findViewById(R.id.buttonAddBillCancel);
+    private void setupCancelButton() {
+        Button cancelBtn = (Button) findViewById(R.id.buttonCancelEditBill);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Return to utility list and close activity
-                Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, EditUtilityActivity.class);
     }
 }

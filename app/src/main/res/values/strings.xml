@@ -95,4 +95,5 @@
     <string name="utilitySummaryNumPeople"># of People</string>
     <string name="utilitySummaryOkay">Ok</string>
     <string name="utilityNickname">Utility Nickname</string>
+    <string name="edit_bill">Edit Bill</string>
 </resources>

@@ -6,6 +6,14 @@ package ca.cmpt276.carbonTracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import com.example.sasha.carbontracker.R;
 
 public class UtilityCollection {
 
@@ -56,5 +64,30 @@ public class UtilityCollection {
 
     public List<String> getUtilityFuel() {
         return utilityFuel;
+    }
+
+    private class UtilityCollectionAdapter extends ArrayAdapter<Utility> {
+        UtilityCollectionAdapter(Context context) {
+            super(context, R.layout.listview_format, utilityList);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View utilityView = convertView; // Check if we have a view
+            if (utilityView == null) {
+                utilityView = LayoutInflater.from(getContext()).inflate(R.layout.listview_format, parent, false);
+            }
+
+            Utility current = utilityList.get(position);
+            TextView utilityText = (TextView) utilityView.findViewById(R.id.routeListViewText);
+            utilityText.setText(current.displayToList());
+
+            return utilityView;
+        }
+    }
+
+    public ArrayAdapter<Utility> getArrayAdapter(Context context) {
+        UtilityCollectionAdapter adapter = new UtilityCollectionAdapter(context);
+        return adapter;
     }
 }
