@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by song on 2017-03-14.
+ * TipCollection, as the name implies, stores tips for the user to read. It is also able to maintain
+ * specific types of tips, such as ones for cars or utilities, and are displayed accordingly once
+ * the user has provided specific data for each of them. Specific types of tips are all stored
+ * in collections and they are randomly cycled through with a unique one being displayed at least
+ * once every seven times.
  *
- * TipCollection class. A tip collection is created for each type of events.
+ * @author Team Teal
  */
 
 public class TipCollection {

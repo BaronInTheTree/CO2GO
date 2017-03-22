@@ -1,7 +1,11 @@
 package ca.cmpt276.carbonTracker;
 
 /**
- * Route class
+ * The Route class stores vital information about a route, such as the name, distance driven in a city
+ * and distance driven in a highway. It is able to easily convert between the metric and imperial
+ * unit measuring systems as well.
+ *
+ * @author Team Teal
  */
 
 public class Route {

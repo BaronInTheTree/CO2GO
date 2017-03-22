@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * CarbonModel class
+ * The CarbonModel is the singleton class that is the main facade of the CarbonTracker app. It
+ * stores everything the user needs for accessing their journeys (such as routes and cars) and also
+ * a collection of tips.
+ *
+ * @author Team Teal
  */
 
 public class CarbonModel {

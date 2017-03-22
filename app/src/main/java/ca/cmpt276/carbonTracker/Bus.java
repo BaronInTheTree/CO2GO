@@ -1,7 +1,11 @@
 package ca.cmpt276.carbonTracker;
 
+
 /**
- * Created by Kyle on 3/15/2017.
+ * The Bus class is a type of transportation that the user may select which has a set output
+ * of daily CO2 usage. It is-a mode of transportation.
+ *
+ * @author Team Teal
  */
 
 public class Bus extends Transportation {

@@ -10,6 +10,14 @@ import android.widget.TextView;
 
 import com.example.sasha.carbontracker.R;
 
+/**
+ The ModifyCarActivity allows the user to view the statistics of the car they chose and be able
+ to delete or edit it by pressing the appropriate buttons. They can also navigate to the
+ SelectRouteActivity from here to continue adding to their journey, or go back and select another
+ car.
+
+ @author Team Teal
+ */
 public class ModifyCarActivity extends AppCompatActivity {
 
     int selectedCarIndex;

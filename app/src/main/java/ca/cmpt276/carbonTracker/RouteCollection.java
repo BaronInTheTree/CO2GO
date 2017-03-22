@@ -13,7 +13,11 @@ import java.util.List;
 import com.example.sasha.carbontracker.R;
 
 /**
- * RouteCollection class
+ * The RouteCollection class is the basis for storing two route collections: a visible (main)
+ * route collection and also a hidden route collection which stores the routes the user deletes
+ * so that subsequent journeys will be able to access them.
+ *
+ * @author Team Teal
  */
 public class RouteCollection {
 

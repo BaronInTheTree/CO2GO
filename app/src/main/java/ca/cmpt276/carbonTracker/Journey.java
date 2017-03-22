@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Journey class
- * <p>
- * Immutable class. Once journey is added, it cannot be changed or removed.
+ * The Journey class is immutable (once a journey is added, it cannot be changed or removed). It
+ * holds the mode of transportation, route, and date that the journey was created all encompassed
+ * into one class.
+ *
+ * @author Team Teal
  */
 
 public class Journey {
