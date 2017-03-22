@@ -44,6 +44,15 @@ public class UtilityCollection {
         return totalEmissions;
     }
 
+    public List<String> displayUtilityList() {
+        List<String> utilities = new ArrayList<>();
+
+        for(Utility utility: utilityList) {
+            utilities.add(utility.toString());
+        }
+        return utilities;
+    }
+
     public List<String> getUtilityData() {
         return utilityData;
     }

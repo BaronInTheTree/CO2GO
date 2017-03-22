@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-public class AddBillActivity extends AppCompatActivity {
+public class AddUtilityActivity extends AppCompatActivity {
 
     private static final int INVALID_INPUT = 0;
     private int startYear;
@@ -253,7 +253,7 @@ public class AddBillActivity extends AppCompatActivity {
                 // If empty input display toast message
                 if (invalidInput()) {
                     Toast.makeText(
-                            AddBillActivity.this,
+                            AddUtilityActivity.this,
                             "Please fill out the form completely.",
                             Toast.LENGTH_SHORT).show();
                 } else {
@@ -268,7 +268,7 @@ public class AddBillActivity extends AppCompatActivity {
                     model.setUtilityCollection(collection);
 
                     // Return to utility list and close activity
-                    Intent intent = new Intent(AddBillActivity.this, UtilityListActivity.class);
+                    Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -292,8 +292,8 @@ public class AddBillActivity extends AppCompatActivity {
     }
 
     private boolean negativeDates() {
-        if (startYear < endYear || startMonth < endMonth ||
-                startMonth == endMonth && startDay < endDay) {
+        if (startYear > endYear || startMonth > endMonth ||
+                startMonth == endMonth && startDay > endDay) {
             return true;
         } else {
             return false;
@@ -306,7 +306,7 @@ public class AddBillActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Return to utility list and close activity
-                Intent intent = new Intent(AddBillActivity.this, UtilityListActivity.class);
+                Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
                 startActivity(intent);
                 finish();
             }

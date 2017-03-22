@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.example.sasha.carbontracker.R;
+
+import java.util.List;
 
 public class UtilityListActivity extends AppCompatActivity {
 
@@ -22,6 +27,34 @@ public class UtilityListActivity extends AppCompatActivity {
 
     // TODO: complete this
     private void populateListOfUtilities() {
+        // Create list of items
+        final CarbonModel model = CarbonModel.getInstance();
+        List<String> utilities = model.getUtilityCollection().displayUtilityList();
+
+        // Build adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this,                       // Context for activity
+                R.layout.listview_format,   // Layout to use (create)
+                utilities);                 // Items to be displayed
+
+        // config list view
+        ListView list = (ListView) findViewById(R.id.listOfUtilities);
+        list.setAdapter(adapter);
+
+        // Allows to click on list's items
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+                model.getUtilityCollection().getUtility(i);
+
+                // TODO: Change destination of intent
+                Intent intent = new Intent(UtilityListActivity.this, AddUtilityActivity.class);
+
+                intent.putExtra("Index", i);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -30,7 +63,7 @@ public class UtilityListActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UtilityListActivity.this, AddBillActivity.class));
+                startActivity(new Intent(UtilityListActivity.this, AddUtilityActivity.class));
                 finish();
             }
         });

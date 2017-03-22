@@ -110,6 +110,7 @@ public class Utility {
         this.numPeople = numPeople;
     }
 
+    // TODO: C02 usage is not correctly computed
     public double getC02PerPerson() {
         if (naturalGas) {
             return usage * NATURAL_GAS_CO2_EMISSION / numPeople;
@@ -124,5 +125,23 @@ public class Utility {
         } else {
             return getUsageForPeriod(days) * ELECTRICITY_CO2_EMISSION;
         }
+    }
+
+    @Override
+    public String toString() {
+        String string = "";
+
+        // Select which fuel used
+        if(naturalGas) {
+            string = usage + "GJ of Natural Gas ";
+        } else {
+            string = usage + "GWh of Electricity ";
+        }
+
+        string = string + "from " + startDate + " to " +
+                endDate + " with " + numPeople + " people. " +
+                "\n Utility produced " + getTotalC02(timespan) + ".";
+
+        return string;
     }
 }
