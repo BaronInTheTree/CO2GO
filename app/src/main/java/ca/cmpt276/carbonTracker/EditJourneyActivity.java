@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
@@ -22,8 +23,7 @@ public class EditJourneyActivity extends AppCompatActivity {
     int selectedYear;
     int selectedMonth;
     int selectedDay;
-    Journey selectedJourney = modelInstance.getJourneyCollection().
-            getJourneyAtIndex(selectedJourneyIndex);
+    Journey selectedJourney;
 
 
     @Override
@@ -34,6 +34,8 @@ public class EditJourneyActivity extends AppCompatActivity {
         selectedJourneyIndex = callingIntent.getIntExtra("Index", 0);
         selectedYear = 2017;
         selectedMonth = 1;
+        selectedJourney = modelInstance.getJourneyCollection().
+                getJourneyAtIndex(selectedJourneyIndex);
 
         setupSelectTransportSpinner();
         setupSelectRouteSpinner();
@@ -42,6 +44,9 @@ public class EditJourneyActivity extends AppCompatActivity {
         setupSelectDaySpinner();
         setupEditJourneyButton();
         setupBackButton();
+
+        Toast.makeText(EditJourneyActivity.this, "Index: " + selectedJourneyIndex, Toast.LENGTH_LONG).show();
+
     }
 
     private void setupSelectTransportSpinner() {
@@ -56,15 +61,19 @@ public class EditJourneyActivity extends AppCompatActivity {
         if (selectedJourney.getType().equals(Journey.Type.CAR)) {
             transportSpinner.setSelection(modelInstance.getCarCollection().getIndexOfCar
                     (selectedJourney.getTransportation().getNickname()));
+            System.out.println("TPT - Car at Index: " + modelInstance.getCarCollection().getIndexOfCar(selectedJourney.getTransportation().getNickname()));
         }
         else if (selectedJourney.getType().equals(Journey.Type.WALK_BIKE)) {
             transportSpinner.setSelection(transportOptions.size() - 3);
+            System.out.println("TPT - Walk/Bike");
         }
         else if (selectedJourney.getType().equals(Journey.Type.BUS)) {
             transportSpinner.setSelection(transportOptions.size() - 2);
+            System.out.println("TPT - Bus");
         }
         else if (selectedJourney.getType().equals(Journey.Type.SKYTRAIN)) {
             transportSpinner.setSelection(transportOptions.size() - 1);
+            System.out.println("TPT - Skytrain");
         }
 
         transportSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -95,7 +104,7 @@ public class EditJourneyActivity extends AppCompatActivity {
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
-                modelInstance.getRouteOptions());
+                modelInstance.getRouteCollection().getUICollection());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         routeSpinner.setAdapter(spinnerArrayAdapter);
         routeSpinner.setSelection(modelInstance.getRouteCollection().

@@ -155,8 +155,4 @@ public class CarbonModel {
         options.add("Skytrain");
         return options;
     }
-
-    public List<String> getRouteOptions() {
-        return routeCollection.getUICollection();
-    }
 }

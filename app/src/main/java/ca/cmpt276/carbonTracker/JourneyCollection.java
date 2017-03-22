@@ -130,7 +130,9 @@ public class JourneyCollection {
         for (Journey journey : journeyCollection) {
             journeys.add(journey.getDateString()
                     + "\n" + journey.getTransportation().getNickname()
-                    + "\n" + journey.getRoute().getTotalDistanceKM() + "km"
+                    + ", " + journey.getType()
+                    + "\n" + journey.getRoute().getName() + ": "
+                    + journey.getRoute().getTotalDistanceKM() + "km"
                     + "\n" + journey.getEmissionsKM() + "g CO2");
         }
         return journeys;

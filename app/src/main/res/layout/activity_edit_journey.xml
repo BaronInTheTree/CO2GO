@@ -23,7 +23,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:gravity="right">
 
             <Spinner
                 android:id="@+id/spinnerSelectTransport"
@@ -44,7 +45,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:gravity="right">
 
             <Spinner
                 android:id="@+id/spinnerSelectRoute"
@@ -67,20 +69,28 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="right">
 
             <Spinner
                 android:id="@+id/spinnerSelectYear"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:dropDownWidth="80dp"
+                android:minWidth="80dp" />
 
             <Spinner
                 android:id="@+id/spinnerSelectMonth"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:dropDownWidth="80dp"
+                android:minWidth="80dp" />
 
             <Spinner
                 android:id="@+id/spinnerSelectDay"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:dropDownWidth="80dp"
+                android:minWidth="80dp" />
 
         </TableRow>
     </TableLayout>
