@@ -22,12 +22,15 @@ public class Journey implements Comparable<Journey> {
     private Date dateTime;
     private double emissionsMiles;
     private double emissionsKM;
+    public enum Type {WALK_BIKE, BUS, SKYTRAIN, CAR}
+    private Type type;
 
-    public Journey(Transportation transport, Route route, Date dateTime) {
+    public Journey(Transportation transport, Route route, Date dateTime, Type type) {
         this.transport = transport;
         this.route = route;
         this.dateString = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         this.dateTime = dateTime;
+        this.type = type;
         calculateEmissions();
     }
 
@@ -41,6 +44,10 @@ public class Journey implements Comparable<Journey> {
         else if (transportContent.equals("Skytrain")) return 2;
         else if (transportContent.equals("Walking / Biking")) return 3;
         else return 0;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public Date getDateTime() {
@@ -105,6 +112,18 @@ public class Journey implements Comparable<Journey> {
         catch(ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getYear() {
+        return new SimpleDateFormat("yyyy").format(dateTime);
+    }
+
+    public String getMonth() {
+        return new SimpleDateFormat("MM").format(dateTime);
+    }
+
+    public String getDay() {
+        return new SimpleDateFormat("dd").format(dateTime);
     }
 
 

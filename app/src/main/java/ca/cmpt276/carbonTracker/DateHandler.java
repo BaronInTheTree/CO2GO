@@ -1,5 +1,6 @@
 package ca.cmpt276.carbonTracker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +17,8 @@ public class DateHandler {
     private List<String> yearList;
     private List<String> monthList;
     private List<String> dayList;
+    public final int MIN_YEAR = 1970;
+    public final int MAX_YEAR = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
 
     public DateHandler() {
         yearList = new ArrayList<>();
@@ -25,9 +28,8 @@ public class DateHandler {
         initializeMonthList();
     }
 
-    // TODO: replace 2017 with method to get current date
     private void initializeYearList() {
-        for (int year = 2017; year >= 1970; year--) {
+        for (int year = MAX_YEAR; year >= MIN_YEAR; year--) {
             yearList.add("" + year);
         }
     }

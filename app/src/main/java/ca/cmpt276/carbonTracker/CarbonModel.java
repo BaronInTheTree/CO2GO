@@ -121,22 +121,26 @@ public class CarbonModel {
 
     public Journey createJourney() {
         if (getSelectedTransportType().equals("Car")){
-            Journey journey = new Journey(getSelectedCar(), getSelectedRoute(), new Date());
+            Journey journey = new Journey(getSelectedCar(), getSelectedRoute(), new Date(),
+                    Journey.Type.CAR);
             return journey;
         }
         else if (getSelectedTransportType().equals("WalkBike")){
             WalkBike walkBike = new WalkBike();
-            Journey journey = new Journey(walkBike, getSelectedRoute(), new Date());
+            Journey journey = new Journey(walkBike, getSelectedRoute(), new Date(),
+                    Journey.Type.WALK_BIKE);
             return journey;
         }
         else if (getSelectedTransportType().equals("Bus")){
             Bus bus = new Bus();
-            Journey journey = new Journey(bus, getSelectedRoute(), new Date());
+            Journey journey = new Journey(bus, getSelectedRoute(), new Date(),
+                    Journey.Type.BUS);
             return journey;
         }
         else {
             Skytrain skytrain = new Skytrain();
-            Journey journey = new Journey(skytrain, getSelectedRoute(), new Date());
+            Journey journey = new Journey(skytrain, getSelectedRoute(), new Date(),
+                    Journey.Type.SKYTRAIN);
             return journey;
         }
     }
@@ -153,10 +157,6 @@ public class CarbonModel {
     }
 
     public List<String> getRouteOptions() {
-        List<String> options = new ArrayList<>();
-        for (String string : routeCollection.getUICollection()) {
-            options.add(string);
-        }
-        return options;
+        return routeCollection.getUICollection();
     }
 }

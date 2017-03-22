@@ -22,6 +22,8 @@ public class EditJourneyActivity extends AppCompatActivity {
     int selectedYear;
     int selectedMonth;
     int selectedDay;
+    Journey selectedJourney = modelInstance.getJourneyCollection().
+            getJourneyAtIndex(selectedJourneyIndex);
 
 
     @Override
@@ -30,7 +32,7 @@ public class EditJourneyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_journey);
         Intent callingIntent = getIntent();
         selectedJourneyIndex = callingIntent.getIntExtra("Index", 0);
-        selectedYear = 1970;
+        selectedYear = 2017;
         selectedMonth = 1;
 
         setupSelectTransportSpinner();
@@ -51,6 +53,19 @@ public class EditJourneyActivity extends AppCompatActivity {
                 transportOptions);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         transportSpinner.setAdapter(spinnerArrayAdapter);
+        if (selectedJourney.getType().equals(Journey.Type.CAR)) {
+            transportSpinner.setSelection(modelInstance.getCarCollection().getIndexOfCar
+                    (selectedJourney.getTransportation().getNickname()));
+        }
+        else if (selectedJourney.getType().equals(Journey.Type.WALK_BIKE)) {
+            transportSpinner.setSelection(transportOptions.size() - 3);
+        }
+        else if (selectedJourney.getType().equals(Journey.Type.BUS)) {
+            transportSpinner.setSelection(transportOptions.size() - 2);
+        }
+        else if (selectedJourney.getType().equals(Journey.Type.SKYTRAIN)) {
+            transportSpinner.setSelection(transportOptions.size() - 1);
+        }
 
         transportSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -83,6 +98,8 @@ public class EditJourneyActivity extends AppCompatActivity {
                 modelInstance.getRouteOptions());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         routeSpinner.setAdapter(spinnerArrayAdapter);
+        routeSpinner.setSelection(modelInstance.getRouteCollection().
+                getIndexOfRoute(selectedJourney.getRoute()));
 
         routeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -104,6 +121,8 @@ public class EditJourneyActivity extends AppCompatActivity {
                 modelInstance.getDateHandler().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         yearSpinner.setAdapter(spinnerArrayAdapter);
+        yearSpinner.setSelection(Integer.parseInt(selectedJourney.getYear())
+                - modelInstance.getDateHandler().MAX_YEAR);
 
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -126,6 +145,7 @@ public class EditJourneyActivity extends AppCompatActivity {
                 modelInstance.getDateHandler().getMonthList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         monthSpinner.setAdapter(spinnerArrayAdapter);
+        monthSpinner.setSelection(Integer.parseInt(selectedJourney.getMonth()) - 1);
 
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -149,6 +169,7 @@ public class EditJourneyActivity extends AppCompatActivity {
                 modelInstance.getDateHandler().getDayList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         daySpinner.setAdapter(spinnerArrayAdapter);
+        daySpinner.setSelection(Integer.parseInt(selectedJourney.getDay()) - 1);
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -167,15 +188,11 @@ public class EditJourneyActivity extends AppCompatActivity {
         editJourney.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modelInstance.getJourneyCollection().getJourneyAtIndex(selectedJourneyIndex).
-                        setTransport(selectedTransport);
-                modelInstance.getJourneyCollection().getJourneyAtIndex(selectedJourneyIndex).
-                        setRoute(selectedRoute);
-                modelInstance.getJourneyCollection().getJourneyAtIndex(selectedJourneyIndex).
-                        setDate(selectedYear, selectedMonth, selectedDay);
+                selectedJourney.setTransport(selectedTransport);
+                selectedJourney.setRoute(selectedRoute);
+                selectedJourney.setDate(selectedYear, selectedMonth, selectedDay);
                 startActivity(new Intent(EditJourneyActivity.this, JourneyListActivity.class));
                 finish();
-
             }
         });
     }

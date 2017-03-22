@@ -101,4 +101,14 @@ public class RouteCollection {
     public Route getRouteAtIndex(int i) {
         return routeCollection.get(i);
     }
+
+    public int getIndexOfRoute(Route route) {
+        int index = 0;
+        for (int i = 0; i < routeCollection.size(); i++) {
+            if (route.equals(routeCollection.get(i))) {
+                index = i;
+            }
+        }
+        return index;
+    }
 }
