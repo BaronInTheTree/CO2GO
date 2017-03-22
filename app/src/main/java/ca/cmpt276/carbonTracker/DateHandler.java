@@ -38,6 +38,11 @@ public class DateHandler {
             dayList.add("" + day);
         }
     }
+
+    public int calcDateDifference() {
+        return 0;
+    }
+
     public List<String> getYearList() {
         return yearList;
     }

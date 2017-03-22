@@ -292,6 +292,9 @@ public class AddUtilityActivity extends AppCompatActivity {
                     UtilityCollection collection = model.getUtilityCollection();
                     collection.addUtility(utility);
 
+                    Toast.makeText(AddUtilityActivity.this, "Usage/Day: "
+                            + utility.getUsagePerDay(), Toast.LENGTH_LONG).show();
+
                     model.setUtilityCollection(collection);
 
                     // Return to utility list and close activity
