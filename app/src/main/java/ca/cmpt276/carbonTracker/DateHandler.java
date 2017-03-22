@@ -19,6 +19,9 @@ public class DateHandler {
     private List<String> dayList;
     public final int MIN_YEAR = 1970; // Earliest year that Java recognizes in the Date class.
     public final int MAX_YEAR = Integer.parseInt(new SimpleDateFormat("yyyy").format(new Date()));
+    private int currentYear;
+    private int currentMonth; // 0-11
+    private int currentDay;
 
     public DateHandler() {
         yearList = new ArrayList<>();
@@ -26,6 +29,13 @@ public class DateHandler {
         dayList = new ArrayList<>();
         initializeYearList();
         initializeMonthList();
+        initializeCurrentDate();
+    }
+
+    private void initializeCurrentDate() {
+        currentYear = MAX_YEAR;
+        currentMonth = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));
+        currentDay = Integer.parseInt(new SimpleDateFormat("dd").format(new Date()));
     }
 
     private void initializeYearList() {
@@ -59,5 +69,17 @@ public class DateHandler {
 
     public List<String> getDayList() {
         return dayList;
+    }
+
+    public int getCurrentYear() {
+        return currentYear;
+    }
+
+    public int getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public int getCurrentDay() {
+        return currentDay;
     }
 }

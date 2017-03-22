@@ -46,6 +46,21 @@ public class Journey implements Comparable<Journey> {
         else return 0;
     }
 
+    private void setType() {
+        if (transport instanceof Car) {
+            type = Type.CAR;
+        }
+        else if (transport instanceof  WalkBike) {
+            type = Type.WALK_BIKE;
+        }
+        else if (transport instanceof Bus) {
+            type = Type.BUS;
+        }
+        else if (transport instanceof Skytrain) {
+            type = Type.SKYTRAIN;
+        }
+    }
+
     public Type getType() {
         return type;
     }
@@ -95,6 +110,7 @@ public class Journey implements Comparable<Journey> {
     public void setTransport(Transportation transport) {
         this.transport = transport;
         calculateEmissions();
+        setType();
     }
 
     public void setRoute(Route route) {
@@ -114,16 +130,28 @@ public class Journey implements Comparable<Journey> {
         }
     }
 
-    public String getYear() {
+    public String getYearString() {
         return new SimpleDateFormat("yyyy").format(dateTime);
     }
 
-    public String getMonth() {
+    public int getYearInt() {
+        return Integer.parseInt(new SimpleDateFormat("yyyy").format(dateTime));
+    }
+
+    public String getMonthString() {
         return new SimpleDateFormat("MM").format(dateTime);
     }
 
-    public String getDay() {
+    public int getMonthInt() {
+        return Integer.parseInt(new SimpleDateFormat("MM").format(dateTime));
+    }
+
+    public String getDayString() {
         return new SimpleDateFormat("dd").format(dateTime);
+    }
+
+    public int getDayInt() {
+        return Integer.parseInt(new SimpleDateFormat("dd").format(dateTime));
     }
 
 

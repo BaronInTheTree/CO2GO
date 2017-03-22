@@ -14,6 +14,11 @@ import com.example.sasha.carbontracker.R;
 
 import java.util.List;
 
+/**
+ * EditJourney enables the user to change the Transportation, Route, and Date of any selected
+ * Journey.
+ */
+
 public class EditJourneyActivity extends AppCompatActivity {
 
     CarbonModel modelInstance = CarbonModel.getInstance();
@@ -33,7 +38,7 @@ public class EditJourneyActivity extends AppCompatActivity {
         Intent callingIntent = getIntent();
         selectedJourneyIndex = callingIntent.getIntExtra("Index", 0);
         selectedYear = 2017;
-        selectedMonth = 1;
+        selectedMonth = 0;
         selectedJourney = modelInstance.getJourneyCollection().
                 getJourneyAtIndex(selectedJourneyIndex);
 
@@ -130,8 +135,8 @@ public class EditJourneyActivity extends AppCompatActivity {
                 modelInstance.getDateHandler().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         yearSpinner.setAdapter(spinnerArrayAdapter);
-        yearSpinner.setSelection(Integer.parseInt(selectedJourney.getYear())
-                - modelInstance.getDateHandler().MAX_YEAR);
+        yearSpinner.setSelection(modelInstance.getDateHandler().MAX_YEAR
+                - selectedJourney.getYearInt());
 
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -154,7 +159,7 @@ public class EditJourneyActivity extends AppCompatActivity {
                 modelInstance.getDateHandler().getMonthList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         monthSpinner.setAdapter(spinnerArrayAdapter);
-        monthSpinner.setSelection(Integer.parseInt(selectedJourney.getMonth()) - 1);
+        monthSpinner.setSelection(selectedJourney.getMonthInt());
 
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -178,7 +183,7 @@ public class EditJourneyActivity extends AppCompatActivity {
                 modelInstance.getDateHandler().getDayList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         daySpinner.setAdapter(spinnerArrayAdapter);
-        daySpinner.setSelection(Integer.parseInt(selectedJourney.getDay()) - 1);
+        daySpinner.setSelection(selectedJourney.getDayInt() - 1);
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
