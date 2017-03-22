@@ -34,6 +34,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_information);
 
+        SaveData.saveJourneys(JourneyInformationActivity.this);
         setupInfo();
         setupButtons();
         setupSelectYearSpinner();

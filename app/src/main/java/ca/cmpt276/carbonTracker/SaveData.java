@@ -187,27 +187,27 @@ public class SaveData extends JSONObject  {
 
     public static void loadJourneys(Context context) {
         CarbonModel model = CarbonModel.getInstance();
-        JourneyCollection jc = model.getJourneys();
+        JourneyCollection jc = model.getJourneyCollection();
         int index = 0;
         while (index < jc.getNumberJourneys()) {
-            jc.deleteJourneyAtIndex(index);
+            jc.deleteJourney(index);
         }
 
         SharedPreferences prefs = context.getSharedPreferences("JourneyCollection", MODE_PRIVATE);
 
         while (!prefs.getString("Journey"+index, "").equals("")) {
-            Log.i("load",index+"");
             Gson journeyData = new Gson();
             String jsonJourneyData = prefs.getString("Journey" + index, null);
             Journey journey = journeyData.fromJson(jsonJourneyData, Journey.class);
             jc.addJourney(journey);
+            Log.i("load",jsonJourneyData+"");
             index++;
         }
     }
 
     public static void saveJourneys(Context context) {
         CarbonModel model = CarbonModel.getInstance();
-        JourneyCollection jc = model.getJourneys();
+        JourneyCollection jc = model.getJourneyCollection();
         SharedPreferences prefs = context.getSharedPreferences("JourneyCollection", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
@@ -220,5 +220,5 @@ public class SaveData extends JSONObject  {
         editor.commit();
         editor.apply();
     }
-    //todo: save utilities,
+    //todo: save utilities, tips
 }
