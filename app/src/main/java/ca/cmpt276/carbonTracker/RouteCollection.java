@@ -23,10 +23,12 @@ public class RouteCollection {
 
     private List<Route> routeCollection;
     private List<Route> hiddenRouteCollection;
+    private List<String> uiCollection;
 
     public RouteCollection() {
         routeCollection = new ArrayList<>();
         hiddenRouteCollection = new ArrayList<>();
+        uiCollection = new ArrayList<>();
     }
 
     public void addRoute(Route route) {
@@ -42,6 +44,14 @@ public class RouteCollection {
                 hiddenRouteCollection.add(r);
             }
         }
+    }
+
+    public List<String> getUICollection() {
+        uiCollection.clear();
+        for (Route route : routeCollection) {
+            uiCollection.add(route.getBasicInfo());
+        }
+        return uiCollection;
     }
 
     public void removeRoute(int index) {
@@ -90,5 +100,15 @@ public class RouteCollection {
 
     public Route getRouteAtIndex(int i) {
         return routeCollection.get(i);
+    }
+
+    public int getIndexOfRoute(Route route) {
+        int index = 0;
+        for (int i = 0; i < routeCollection.size(); i++) {
+            if (route.equals(routeCollection.get(i))) {
+                index = i;
+            }
+        }
+        return index;
     }
 }

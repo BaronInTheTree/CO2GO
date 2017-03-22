@@ -57,7 +57,17 @@ public class MainMenuActivity extends AppCompatActivity {
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
             }
         });
+
+        Button journeyList_btn = (Button) findViewById(R.id.viewJourneys_btn);
+        journeyList_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenuActivity.this, JourneyListActivity.class));
+            }
+        });
     }
+
+
 
 
     @Override

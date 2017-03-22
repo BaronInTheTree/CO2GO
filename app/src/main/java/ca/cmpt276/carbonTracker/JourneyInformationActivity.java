@@ -32,7 +32,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
     private void setupInfo() {
 
         TextView date = (TextView) findViewById(R.id.date_entry);
-        date.setText(currentJourney.getDate());
+        date.setText(currentJourney.getDateString());
 
         TextView vehicle = (TextView) findViewById(R.id.vehicle_entry);
         String vehicleName = currentJourney.getTransportation().getNickname();

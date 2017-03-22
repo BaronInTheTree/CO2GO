@@ -33,9 +33,9 @@ public class FootprintGraphActivity extends AppCompatActivity {
     private final String tableLabel = "CO2 Emission of Journeys (in gram)";
 
     CarbonModel currentInstance = CarbonModel.getInstance();
-    String journeys[] = currentInstance.getJourneys().getJourneyDescription();
+    String journeys[] = currentInstance.getJourneyCollection().getJourneyDescription();
 
-    int emissions[] = currentInstance.getJourneys().getJourneyEmission();
+    int emissions[] = currentInstance.getJourneyCollection().getJourneyEmission();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
