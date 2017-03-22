@@ -9,6 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
+
+import static ca.cmpt276.carbonTracker.JourneyCollection.maxEmission;
+
 /**
  * JourneyInformationActivity displays a quick summary of the users current journey that they
  * have created.
@@ -36,22 +39,19 @@ public class JourneyInformationActivity extends AppCompatActivity {
 
         TextView vehicle = (TextView) findViewById(R.id.vehicle_entry);
         String vehicleName = currentJourney.getTransportation().getNickname();
-        if (vehicleName.length() > 18) vehicleName = vehicleName.substring(0, 18);
         vehicle.setText(vehicleName);
 
         TextView route = (TextView) findViewById(R.id.route_entry);
         String routeName = currentJourney.getRoute().getName();
-        if (routeName.length() > 18) routeName = routeName.substring(0, 18);
         route.setText(routeName);
 
         TextView distance = (TextView) findViewById(R.id.distance_entry);
         String distanceInfo = "" + currentJourney.getRoute().getTotalDistanceKM();
-        if (distanceInfo.length() > 5) distanceInfo = distanceInfo.substring(0, 5);
         distance.setText(distanceInfo);
 
         TextView emission = (TextView) findViewById(R.id.emission_entry);
         String emissionInfo = "" + currentJourney.getEmissionsKM();
-        if (emissionInfo.length() > 10) emissionInfo = emissionInfo.substring(0, 10);
+        if (emissionInfo.length() > maxEmission) emissionInfo = emissionInfo.substring(0, maxEmission);
         emission.setText(emissionInfo);
     }
 

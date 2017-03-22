@@ -12,7 +12,17 @@ import java.util.List;
  * @author Team Teal
  */
 
+
+
 public class JourneyCollection {
+    public static final int maxNickName = 18;
+    public static final int maxDistance = 5;
+    public static final int maxEmission = 10;
+    private static final String XsmallGap = "  ";
+    private static final String smallGap = "   ";
+    private static final String regularGap = "    ";
+    private static final String largeGap = "                     ";
+
     private List<Journey> journeyCollection;
 
     public JourneyCollection() {
@@ -69,30 +79,31 @@ public class JourneyCollection {
             Journey journey = journeyCollection.get(i);
 
             String car = journey.getTransportation().getNickname();
-            for (int j = car.length(); j < 18; j++) {
-                car += "  ";
+            for (int j = car.length(); j < maxNickName; j++) {
+                car += XsmallGap;
             }
 
             String route = journey.getRoute().getName();
-            for (int j = route.length(); j < 18; j++) {
-                route += "   ";
+            for (int j = route.length(); j < maxNickName; j++) {
+                route += smallGap;
             }
 
             String distance = "" + journey.getRoute().getTotalDistanceKM();
-            for (int j = distance.length(); j < 4; j++) {
-                distance += "   ";
+            for (int j = distance.length(); j < maxDistance; j++) {
+                distance += smallGap;
             }
 
             String emission = "" + journey.getEmissionsKM();
-            for (int j = emission.length(); j < 8; j++) {
-                emission += "  ";
+            for (int j = emission.length(); j < maxEmission; j++) {
+                emission += XsmallGap;
             }
 
-            if (emission.length() > 10) emission = emission.substring(0, 10);
+            if (emission.length() > maxEmission) emission = emission.substring(0, maxEmission);
 
             String date = journey.getDateString();
 
-            descriptions[i] = date + "    " + route + "    " + distance + "                     " + car + "    " + emission;
+            descriptions[i] = date + regularGap + route + regularGap + distance + largeGap + car + regularGap + emission;
+
         }
         return descriptions;
     }
