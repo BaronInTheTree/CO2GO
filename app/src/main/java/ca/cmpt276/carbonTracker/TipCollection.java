@@ -10,7 +10,7 @@ import java.util.List;
  * in collections and they are randomly cycled through with a unique one being displayed at least
  * once every seven times.
  *
- * @author Team Teal
+ * Song Xiao - Team Teal
  */
 
 public class TipCollection {
