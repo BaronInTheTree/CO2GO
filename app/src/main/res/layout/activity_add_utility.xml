@@ -13,29 +13,19 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:text="@string/select_fuel_type"
+                android:id="@+id/utilityNickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewSelectMake" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <Spinner
-                android:id="@+id/spinnerSelectResource"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:text="@string/utilityNickname" />
         </TableRow>
 
         <TableRow
@@ -49,19 +39,39 @@
                 android:ems="10"
                 android:hint="@string/max_length_18_chars"
                 android:inputType="textCapWords"
-                android:maxLength="18"
-                />
+                android:maxLength="18" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:text="@string/utilityUsage"
+                android:id="@+id/textViewSelectMake"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/utilityUsageText" />
+                android:text="@string/select_fuel_type" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:id="@+id/spinnerSelectResource"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/utilityUsageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/utilityUsage" />
         </TableRow>
 
         <TableRow
@@ -74,35 +84,34 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number"
-                android:maxLength="6"
-                />
+                android:maxLength="6" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:text="@string/utility_starting_date"
+                android:id="@+id/textViewSelectModel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewSelectModel" />
+                android:text="@string/utility_starting_date" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Spinner
                     android:id="@+id/spinnerAddBillSelectStartYear"
@@ -129,29 +138,29 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:text="@string/utility_ending_date"
+                android:id="@+id/textViewSelectYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewSelectYear" />
+                android:text="@string/utility_ending_date" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Spinner
                     android:id="@+id/spinnerAddBillSelectEndYear"
@@ -178,13 +187,13 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
-                android:text="@string/utility_num_People_in_home"
+                android:id="@+id/utility_num_People_in_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/utility_num_People_in_home" />
+                android:text="@string/utility_num_People_in_home" />
         </TableRow>
 
         <TableRow
@@ -197,10 +206,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number"
-                android:maxLength="6"
-                />
+                android:maxLength="6" />
         </TableRow>
-
     </TableLayout>
 
     <Button
@@ -208,7 +215,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_bill"
-        android:layout_alignParentBottom="true"
+        android:layout_marginRight="47dp"
+        android:layout_marginEnd="47dp"
+        android:layout_alignBaseline="@+id/buttonAddBillCancel"
+        android:layout_alignBottom="@+id/buttonAddBillCancel"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -216,9 +226,12 @@
         android:id="@+id/buttonAddBillCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/cancel"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="@string/cancel" />
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="33dp" />
 
 </RelativeLayout>

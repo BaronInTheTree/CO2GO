@@ -13,6 +13,11 @@ import com.example.sasha.carbontracker.R;
 
 import java.util.List;
 
+/*
+ * UtilityListActivity class lists all created utilities to screen displaying the nickname of
+ * utility and its fuel type.
+ * Activity allows the user to add a new utility or return to main menu.
+ */
 public class UtilityListActivity extends AppCompatActivity {
 
     @Override
@@ -53,7 +58,6 @@ public class UtilityListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     private void addUtilityBtn() {

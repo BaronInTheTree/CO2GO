@@ -1,8 +1,9 @@
 package ca.cmpt276.carbonTracker;
 
 /*
- * UtilityCollection class contains a list of utilities and a list of resources used.
+ * UtilityCollection class contains a list of utilities and a list of possible fuels.
  */
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class UtilityCollection {
     public List<String> displayUtilityList() {
         List<String> utilities = new ArrayList<>();
 
-        for(Utility utility: utilityList) {
+        for (Utility utility : utilityList) {
             utilities.add(utility.displayToList());
         }
         return utilities;

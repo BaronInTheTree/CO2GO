@@ -81,7 +81,9 @@ public class CarbonModel {
         this.selectedRoute = selectedRoute;
     }
 
-    public TipCollection getTips(){return tips;}
+    public TipCollection getTips() {
+        return tips;
+    }
 
     public String getSelectedTransportType() {
         return selectedTransportType;
@@ -96,21 +98,18 @@ public class CarbonModel {
     }
 
     public Journey createJourney() {
-        if (getSelectedTransportType().equals("Car")){
+        if (getSelectedTransportType().equals("Car")) {
             Journey journey = new Journey(getSelectedCar(), getSelectedRoute());
             return journey;
-        }
-        else if (getSelectedTransportType().equals("WalkBike")){
+        } else if (getSelectedTransportType().equals("WalkBike")) {
             WalkBike walkBike = new WalkBike();
             Journey journey = new Journey(walkBike, getSelectedRoute());
             return journey;
-        }
-        else if (getSelectedTransportType().equals("Bus")){
+        } else if (getSelectedTransportType().equals("Bus")) {
             Bus bus = new Bus();
             Journey journey = new Journey(bus, getSelectedRoute());
             return journey;
-        }
-        else {
+        } else {
             Skytrain skytrain = new Skytrain();
             Journey journey = new Journey(skytrain, getSelectedRoute());
             return journey;

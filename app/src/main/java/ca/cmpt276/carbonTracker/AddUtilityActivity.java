@@ -13,6 +13,11 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+/*
+ * AddUtilityActivity allows the user to create a new utility by filling in all the data
+ * from spinners and editTexts.
+ * Stores data about the starting/ending dates and all necessary fields for an utility.
+ */
 public class AddUtilityActivity extends AppCompatActivity {
 
     private static final int INVALID_INPUT = 0;
@@ -99,7 +104,6 @@ public class AddUtilityActivity extends AppCompatActivity {
         }
     }
 
-    // Gets utility usage
     private void getUsage() {
         final EditText editText = (EditText) findViewById(R.id.editText_Utility_Usage);
         String value = editText.getText().toString();
@@ -112,6 +116,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         }
     }
 
+    // Following 3 methods get starting date
     private void setupStartYearSpinner() {
         final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartYear);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
@@ -177,6 +182,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         });
     }
 
+    // Following 3 methods get ending date
     private void setupEndYearSpinner() {
         final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndYear);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
@@ -277,7 +283,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                                     "Start date must be before end date.",
                             Toast.LENGTH_LONG).show();
 
-                }else {
+                } else {
                     // Create a Utility
                     Utility utility = new Utility(nickname, naturalGas, electricity,
                             startingDate, endingDate, usage, numPeople);
@@ -297,8 +303,8 @@ public class AddUtilityActivity extends AppCompatActivity {
         });
     }
 
-    // Until dates are not done this will crash the activity upon clicking save button
-    private boolean invalidInput()  {
+    // Checks if some fields are left blank
+    private boolean invalidInput() {
         startingDate = startYear + "-" + startMonth + "-" + startDay;
         endingDate = endYear + "-" + endMonth + "-" + endDay;
 
@@ -313,6 +319,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         }
     }
 
+    // Checks if starting date is the same as ending date
     private boolean identicalDate() {
         if (startYear == endYear &&
                 startMonth == endMonth &&
@@ -323,12 +330,13 @@ public class AddUtilityActivity extends AppCompatActivity {
         }
     }
 
+    // Checks if starting date is later than ending date
     private boolean negativeDates() {
         boolean negativeYear = (startYear > endYear);
         boolean negativeMonth = (startYear == endMonth && startMonth > endMonth);
         boolean negativeDay = (startYear == endYear &&
-                                startMonth == endMonth &&
-                                startDay > endDay);
+                startMonth == endMonth &&
+                startDay > endDay);
 
         if (negativeYear || negativeMonth || negativeDay) {
             return true;

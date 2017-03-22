@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /*
- * Utility class contains data about the about resources used, for how long and
+ * Utility class contains data like nickname, fuel used, timespan and
  * number of people in the house.
  * Household can only use electricity OR natural gas.
  */
@@ -141,7 +141,7 @@ public class Utility {
         String string = nickname + " - ";
 
         // Select which fuel used
-        if(naturalGas) {
+        if (naturalGas) {
             string = string + "Natural Gas";
         } else {
             string = string + "Electricity";
