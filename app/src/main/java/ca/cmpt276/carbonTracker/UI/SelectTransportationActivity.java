@@ -34,6 +34,7 @@ public class SelectTransportationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_transportation);
         modelInstance = CarbonModel.getInstance();
 
+        SaveData.loadAllCars(SelectTransportationActivity.this);
         addBackButton();
         populateListView();
         addCarButton();

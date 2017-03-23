@@ -30,6 +30,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         setUpButtons();
+        SaveData.loadTips(this);
     }
 
     private void setUpButtons() {
@@ -63,6 +64,7 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String message = modelInstance.getTips().getGeneralTip(summary);
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
+                SaveData.saveTips(MainMenuActivity.this);
             }
         });
 

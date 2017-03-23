@@ -27,7 +27,7 @@ public class FootprintTableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_footprint_table);
-
+        SaveData.loadJourneys(FootprintTableActivity.this);
         populateListView();
         setupButtons();
         setupNote();

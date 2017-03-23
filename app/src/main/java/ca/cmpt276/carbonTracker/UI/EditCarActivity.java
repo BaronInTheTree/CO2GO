@@ -187,7 +187,7 @@ public class EditCarActivity extends AppCompatActivity {
                     modelInstance.getSelectedCar().editCar(editedCar);
 
 
-
+                    SaveData.saveCars(EditCarActivity.this);
                     Intent intent = SelectTransportationActivity.makeIntent(EditCarActivity.this);
                     startActivity(intent);
                     finish();

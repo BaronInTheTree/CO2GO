@@ -38,6 +38,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_information);
 
+        SaveData.saveJourneys(JourneyInformationActivity.this);
         setupInfo();
         setupButtons();
         setupSelectYearSpinner();
@@ -75,11 +76,13 @@ public class JourneyInformationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 currentJourney.setDate(selectedYear, selectedMonth, selectedDay);
                 currentInstance.addNewJourney(currentJourney);
+                SaveData.saveJourneys(JourneyInformationActivity.this);
                 int type = currentJourney.getTransportType();
                 summary.updateJourneys(currentInstance.getJourneyCollection());
                 // create tip based on the type of transportation and the information within current Journey.
                 String message = currentInstance.getTips().getJourneyTip(type, currentJourney,summary);
                 Toast.makeText(JourneyInformationActivity.this, message, Toast.LENGTH_LONG).show();
+                SaveData.saveTips(JourneyInformationActivity.this);
                 finish();
             }
         });

@@ -23,6 +23,7 @@ public class JourneyListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journey_list);
+        SaveData.loadJourneys(JourneyListActivity.this);
         populateJourneyList();
         setupBackButton();
     }
@@ -55,6 +56,7 @@ public class JourneyListActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 final int index = position;
                 modelInstance.getJourneyCollection().deleteJourney(index);
+                SaveData.saveJourneys(JourneyListActivity.this);
                 populateJourneyList();
                 return false;
             }

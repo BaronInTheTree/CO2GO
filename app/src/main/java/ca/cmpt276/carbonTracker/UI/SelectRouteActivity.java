@@ -3,6 +3,7 @@ package ca.cmpt276.carbonTracker.UI;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,8 +17,7 @@ import android.widget.ListView;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.Route;
+import static ca.cmpt276.carbonTracker.SaveData.*;
 
 /**
  The SelectRouteActivity displays the current list of visible routes that the user has saved
@@ -39,6 +39,7 @@ public class SelectRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
+        loadAllRoutes(this);
         modelInstance = CarbonModel.getInstance();
 
         setupBackButton();
@@ -83,6 +84,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         list.setAdapter(adapter);
         registerClickCallback();
         registerForContextMenu(list);
+        saveRoutes(this);
     }
 
     private void registerClickCallback() {
@@ -136,6 +138,8 @@ public class SelectRouteActivity extends AppCompatActivity {
         } else if (item.toString().equals("Delete")) {
             cm.getRouteCollection().hideRoute(cm.getSelectedRoute());
             cm.getRouteCollection().removeRoute(selectedRoutePosition);
+            saveRoutes(SelectRouteActivity.this);
+            saveHiddenRoutes(SelectRouteActivity.this);
         }
         updateListView();
         return true;

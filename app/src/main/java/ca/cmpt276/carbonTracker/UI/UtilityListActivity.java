@@ -31,6 +31,7 @@ public class UtilityListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utility_list);
 
+        SaveData.loadUtilities(this);
         populateListOfUtilities();
         addUtilityBtn();
         backBtn();
@@ -117,6 +118,7 @@ public class UtilityListActivity extends AppCompatActivity {
             finish();
         } else if (item.toString().equals("Delete")) {
             cm.getUtilityCollection().deleteUtility(selectedUtilityPosition);
+            SaveData.saveUtilities(this);
         }
         updateListView();
         return true;
