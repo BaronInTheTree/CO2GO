@@ -1,6 +1,7 @@
 package ca.cmpt276.carbonTracker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public class TipCollection {
 
     public TipCollection() {
         generalTips = new ArrayList<>();
-        if (recentShownTips==null) recentShownTips = new ArrayList<>();
+        recentShownTips = new ArrayList<>();
 
         carTips = new ArrayList<>();
         busTips = new ArrayList<>();
@@ -73,6 +74,7 @@ public class TipCollection {
                     if (recentShownTips.size() == numTips) {
                         recentShownTips.remove(0);
                     }
+                    System.out.println(recentShownTips.get(0).getTipContent());
                     updateGeneralTipsContent(summary);
                     String currentTipContent = generalTipsContent.get(i);
                     Tip currentTip = new Tip(currentTipContent);
@@ -176,6 +178,7 @@ public class TipCollection {
             Tip currentTip = new Tip(generalTipsContent.get(i));
             generalTips.add(currentTip);
         }
+        Collections.shuffle(generalTips);
     }
 
     public void journeyInitialize(int journeyType){
@@ -184,24 +187,28 @@ public class TipCollection {
                 Tip currentTip = new Tip(carTipsContent.get(i));
                 carTips.add(currentTip);
             }
+            Collections.shuffle(carTips);
         }
         if (journeyType== BUS){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(busTipsContent.get(i));
                 busTips.add(currentTip);
             }
+            Collections.shuffle(busTips);
         }
         if (journeyType== SKYTRAIN){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(skyTrainTipsContent.get(i));
                 skyTrainTips.add(currentTip);
             }
+            Collections.shuffle(skyTrainTips);
         }
         if (journeyType== BIKEWALK){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(bikeWalkTipsContent.get(i));
                 bikeWalkTips.add(currentTip);
             }
+            Collections.shuffle(bikeWalkTips);
         }
     }
 
@@ -210,6 +217,7 @@ public class TipCollection {
             Tip currentTip = new Tip(utilityTipsContent.get(i));
             utilityTips.add(currentTip);
         }
+        Collections.shuffle(utilityTips);
     }
 
     // update tip contents for each category. Note: all contents need to be updated to reflect current user data.
@@ -223,6 +231,8 @@ public class TipCollection {
         generalTipsContent.add("Taking Skytrain within the last four weeks contributes to " + (int)summary.getMonthSkytrainEmission() + "g CO2 emission, consider to ride bikes or walk more often to lower your emission in the future.");
         generalTipsContent.add("You have biked and walked " + summary.getMonthWalkBikeDistance() +"km within last 4 weeks, keep it up!");
         generalTipsContent.add("You have biked and walked " + summary.getYearWalkBikeDistance() +"km over last year, keep it up!");
+        Collections.shuffle(generalTipsContent);
+        Collections.shuffle(generalTips);
     }
 
     public void updateCarTipsContent(Journey currentJourney, MonthYearSummary summary) {
@@ -234,6 +244,8 @@ public class TipCollection {
         carTipsContent.add("Distance of your trip by car is " + currentJourney.getDistance() + " km, consider to ride bikes or walk if possible.");
         carTipsContent.add("Your total driving distance within last 4 weeks are " + summary.getMonthCarDistance()+ "km, consider to take more bus or skytrain in the future.");
         carTipsContent.add("Your total driving distance within last year are " + summary.getYearCarDistance() + "km, consider to take more bus or skytrain in the future.");
+        Collections.shuffle(carTipsContent);
+        Collections.shuffle(carTips);
     }
 
     public void updateBusTipsContent(Journey currentJourney, MonthYearSummary summary){
@@ -245,8 +257,10 @@ public class TipCollection {
         busTipsContent.add("You have traveled " + summary.getMonthBusDistance()+ " km by Bus within last 4 weeks, consider to ride bikes or walk more often in the future.");
         busTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to take skytrain more often in the future.");
         busTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to ride bikes more often in the future.");
-
+        Collections.shuffle(busTipsContent);
+        Collections.shuffle(busTips);
     }
+
 
     public void updateSkyTrainTipsContent(Journey currentJourney, MonthYearSummary summary){
         if (skyTrainTipsContent.size()!= 0) skyTrainTipsContent.clear();
@@ -257,7 +271,8 @@ public class TipCollection {
         skyTrainTipsContent.add("Taking Skytrain within the last four weeks contributes to "+ (int)summary.getMonthSkytrainEmission() +"g CO2 emission, consider to ride bikes or walk more often in the future.");
         skyTrainTipsContent.add("You have traveled " + summary.getYearSkytrainDistance() + "km by Skytrain over the past year, consider to ride bikes or walk more often in the future.");
         skyTrainTipsContent.add("Taking Skytrain within the last year contributes to " + (int)summary.getYearSkytrainEmission() + "g CO2 emission, consider to ride bikes more often in the future.");
-
+        Collections.shuffle(skyTrainTipsContent);
+        Collections.shuffle(skyTrainTips);
     }
 
     public void updateBikeWalkTipsContent(Journey currentJourney, MonthYearSummary summary){
@@ -269,7 +284,8 @@ public class TipCollection {
         bikeWalkTipsContent.add("You have traveled " + summary.getYearBusDistance() + "km by Bus over the past year, consider to ride bikes or walk more often in the future.");
         bikeWalkTipsContent.add("You have traveled " + summary.getYearSkytrainDistance()+ " km by Skytrain over the past year, consider to ride bikes or walk more often in the future.");
         bikeWalkTipsContent.add("You have driven " + summary.getMonthCarDistance() + "km over the last 4 weeks, consider to ride bikes or walk more often in the future.");
-
+        Collections.shuffle(bikeWalkTipsContent);
+        Collections.shuffle(bikeWalkTips);
     }
 
     public void updateUtilityTipsContent(Utility currentBill){
@@ -281,6 +297,8 @@ public class TipCollection {
         utilityTipsContent.add("Your CO2 emission from the utility bill entered is ,"+ (int) currentBill.getC02PerPerson() + " g. Avoid over heating your laundry and try to hang dry your laundry." );
         utilityTipsContent.add("Your CO2 emission from the utility bill entered is ," + (int) currentBill.getC02PerPerson() + " g. If your fridge or stove is old, consider replace it with new ones with higher energy efficiency.");
         utilityTipsContent.add("Your CO2 emission from the utility bill entered is ,"+ (int) currentBill.getC02PerPerson() + " g, Consider to use energy saving light bulbs wherever possible.");
+        Collections.shuffle(utilityTipsContent);
+        Collections.shuffle(utilityTips);
     }
 
     public int getRecentTipSize() {
