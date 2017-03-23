@@ -72,6 +72,10 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 }
 
+dependencies {
+    compile 'com.google.code.gson:gson:2.7'
+}
+
 
 repositories {
     maven {

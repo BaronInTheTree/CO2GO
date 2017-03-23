@@ -54,8 +54,8 @@
     <string name="make2">Make</string>
     <string name="model">Model:</string>
     <string name="model2">Model</string>
-    <string name="year2">Year:</string>
-    <string name="year">Year</string>
+    <string name="year">Year:</string>
+    <string name="year2">Year</string>
     <string name="transmission">Transmission:</string>
     <string name="transmission2">Transmission</string>
     <string name="cylinders">Cylinders:</string>
@@ -96,4 +96,13 @@
     <string name="utilitySummaryOkay">Ok</string>
     <string name="utilityNickname">Utility Nickname</string>
     <string name="edit_bill">Edit Bill</string>
+    <string name="skytrain">Skytrain</string>
+    <string name="bus">Bus</string>
+    <string name="walk_bike">Walk / Bike</string>
+    <string name="view_journeys">View Journeys</string>
+    <string name="utilities">Utilities</string>
+    <string name="view_tips">View Tips</string>
+    <string name="click_to_edit_hold_to_delete">Click to Edit. Hold to Delete</string>
+    <string name="transportation">Transportation</string>
+    <string name="edit">Edit</string>
 </resources>

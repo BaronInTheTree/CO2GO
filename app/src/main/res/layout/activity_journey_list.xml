@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.cmpt276.carbonTracker.JourneyListActivity">
+    tools:context="ca.cmpt276.carbonTracker.UI.JourneyListActivity">
 
     <TextView
         android:id="@+id/textViewJourneyList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click to Edit. Hold to Delete"
+        android:text="@string/click_to_edit_hold_to_delete"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -27,7 +27,7 @@
         android:id="@+id/buttonBack_journeyList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="@string/back"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/textViewJourneyList"
         android:layout_toStartOf="@+id/textViewJourneyList"

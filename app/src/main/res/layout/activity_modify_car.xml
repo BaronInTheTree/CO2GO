@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ca.cmpt276.carbonTracker.ModifyCarActivity">
+    tools:context="ca.cmpt276.carbonTracker.UI.ModifyCarActivity">
 
     <Button
         android:id="@+id/deleteCarBtn"
@@ -81,7 +81,7 @@
                         android:id="@+id/textViewCarDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Car Details"
+                        android:text="@string/car_details"
                         android:textAlignment="center"
                         android:textSize="24sp" />
 
@@ -97,14 +97,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="150dp"
-                        android:text="Nickname:"
+                        android:text="@string/nickname"
                         android:textStyle="bold|italic" />
 
                     <TextView
                         android:id="@+id/textViewDisplayNickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nickname"
+                        android:text="@string/nickname2"
                         android:textSize="14sp"
                         android:textStyle="bold|italic" />
                 </TableRow>
@@ -119,13 +119,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="150dp"
-                        android:text="Make:" />
+                        android:text="@string/make" />
 
                     <TextView
                         android:id="@+id/textViewDisplayMake"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Make"
+                        android:text="@string/make2"
                         android:textSize="14sp" />
                 </TableRow>
 
@@ -139,13 +139,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="150dp"
-                        android:text="Model:" />
+                        android:text="@string/model" />
 
                     <TextView
                         android:id="@+id/textViewDisplayModel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Model"
+                        android:text="@string/model2"
                         android:textSize="14sp" />
                 </TableRow>
 
@@ -159,13 +159,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="150dp"
-                        android:text="Year:" />
+                        android:text="@string/year" />
 
                     <TextView
                         android:id="@+id/textViewDisplayYear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Year"
+                        android:text="@string/year2"
                         android:textSize="14sp" />
 
                 </TableRow>
@@ -180,13 +180,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="150dp"
-                        android:text="Transmission:" />
+                        android:text="@string/transmission" />
 
                     <TextView
                         android:id="@+id/textViewDisplayTransmission"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Transmission"
+                        android:text="@string/transmission2"
                         android:textSize="14sp" />
                 </TableRow>
 
@@ -200,13 +200,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="150dp"
-                        android:text="Cylinders:" />
+                        android:text="@string/cylinders" />
 
                     <TextView
                         android:id="@+id/textViewDisplayCylinders"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cylinders" />
+                        android:text="@string/cylinders2" />
                 </TableRow>
 
                 <TableRow
@@ -219,13 +219,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="150dp"
-                        android:text="Displacement:" />
+                        android:text="@string/displacement" />
 
                     <TextView
                         android:id="@+id/textViewDisplayDisplacement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Displacement" />
+                        android:text="@string/displacement2" />
                 </TableRow>
 
                 <TableRow
@@ -238,13 +238,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="150dp"
-                        android:text="Fuel Type:" />
+                        android:text="@string/fuel_type" />
 
                     <TextView
                         android:id="@+id/textViewDisplayFuelType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fuel Type" />
+                        android:text="@string/fuel_type2" />
                 </TableRow>
 
             </TableLayout>

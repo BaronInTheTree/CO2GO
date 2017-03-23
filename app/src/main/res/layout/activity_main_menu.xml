@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ca.cmpt276.carbonTracker.MainMenuActivity">
+    tools:context="ca.cmpt276.carbonTracker.UI.MainMenuActivity">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="View Journeys" />
+                android:text="@string/view_journeys" />
         </TableRow>
 
         <TableRow
@@ -60,7 +60,7 @@
                 android:layout_alignBottom="@+id/viewJourneys_btn"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="Utilities" />
+                android:text="@string/utilities" />
         </TableRow>
 
         <TableRow
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="View Tips" />
+                android:text="@string/view_tips" />
         </TableRow>
     </TableLayout>
 
