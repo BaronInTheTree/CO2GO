@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 import static ca.cmpt276.carbonTracker.Internal_Logic.JourneyCollection.maxEmission;
 

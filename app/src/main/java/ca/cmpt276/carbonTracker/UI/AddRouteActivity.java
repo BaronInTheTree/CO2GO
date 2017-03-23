@@ -15,8 +15,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.Route;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /**
     The AddRouteActivity is activated when the user click "Add" from SelectRouteActivity

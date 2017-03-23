@@ -15,8 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.Car;
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /**
  * The WelcomePageActivity displays an image for the user at startup and allows them to proceed

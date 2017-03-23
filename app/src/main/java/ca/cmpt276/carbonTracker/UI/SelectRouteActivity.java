@@ -3,7 +3,6 @@ package ca.cmpt276.carbonTracker.UI;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +16,10 @@ import android.widget.ListView;
 
 import com.example.sasha.carbontracker.R;
 
-import static ca.cmpt276.carbonTracker.SaveData.*;
+import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.Route;
+
+import static ca.cmpt276.carbonTracker.Internal_Logic.SaveData.*;
 
 /**
  The SelectRouteActivity displays the current list of visible routes that the user has saved

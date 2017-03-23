@@ -15,8 +15,7 @@ import com.example.sasha.carbontracker.R;
 
 import java.util.List;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.Utility;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /*
  * UtilityListActivity class lists all created utilities to screen displaying the nickname of

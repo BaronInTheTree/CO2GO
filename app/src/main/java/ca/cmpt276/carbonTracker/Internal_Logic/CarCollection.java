@@ -3,7 +3,6 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The CarCollection class is the basis for storing three car collections: a visible (main)
  * car collection, a hidden car collection which stores the cars the user deletes, and also a special
@@ -68,6 +67,7 @@ public class CarCollection {
     public void removeCar(int index) {
         carCollection.remove(index);
     }
+
     public void removeHiddenCar(int index) {
         hiddenCarCollection.remove(index);
     }
@@ -87,6 +87,7 @@ public class CarCollection {
     public int getListSize() {
         return carCollection.size();
     }
+
     public int getHiddenListSize() {
         return hiddenCarCollection.size();
     }
@@ -99,6 +100,7 @@ public class CarCollection {
     public Car getCarAtIndex(int index) {
         return carCollection.get(index);
     }
+
     public Car getHiddenCarAtIndex(int index) {
         return hiddenCarCollection.get(index);
     }

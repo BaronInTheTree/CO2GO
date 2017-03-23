@@ -14,8 +14,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.Utility;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /*
  * EditUtilityActivity creates spinners and input textboxes filled with utility's data.

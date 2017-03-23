@@ -3,10 +3,7 @@ package ca.cmpt276.carbonTracker.UI;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
-import ca.cmpt276.carbonTracker.Internal_Logic.JourneyCollection;
-import ca.cmpt276.carbonTracker.Internal_Logic.Utility;
-import ca.cmpt276.carbonTracker.Internal_Logic.UtilityCollection;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 import static ca.cmpt276.carbonTracker.Internal_Logic.DateHandler.getDateDiff;
 import static ca.cmpt276.carbonTracker.Internal_Logic.TipCollection.BIKEWALK;

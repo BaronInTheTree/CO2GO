@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.Utility;
-import ca.cmpt276.carbonTracker.Internal_Logic.UtilityCollection;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /*
  * AddUtilityActivity allows the user to create a new utility by filling in all the data

@@ -1,4 +1,4 @@
-package ca.cmpt276.carbonTracker;
+package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -15,8 +15,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.Route;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /**
  * Executed when clicking "Edit" from the context menu in SelectRouteActivity, the user is able to

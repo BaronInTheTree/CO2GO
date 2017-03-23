@@ -14,13 +14,7 @@ import com.example.sasha.carbontracker.R;
 
 import java.util.List;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.Bus;
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
-import ca.cmpt276.carbonTracker.Internal_Logic.Route;
-import ca.cmpt276.carbonTracker.Internal_Logic.Skytrain;
-import ca.cmpt276.carbonTracker.Internal_Logic.Transportation;
-import ca.cmpt276.carbonTracker.Internal_Logic.WalkBike;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /**
  * EditJourney enables the user to change the Transportation, Route, and Date of any selected

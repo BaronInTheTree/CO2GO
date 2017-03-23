@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.sasha.carbontracker.R;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 
 /**
  * FootprintTableActivity displays the journey collection in a side-by-side comparison so that the

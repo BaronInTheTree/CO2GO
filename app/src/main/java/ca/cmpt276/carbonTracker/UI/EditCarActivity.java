@@ -15,8 +15,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.Car;
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /**
  * The EditCarActivity is similar to the AddCarActivity, however (as the title of the activity states)

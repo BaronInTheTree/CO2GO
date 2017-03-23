@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.sasha.carbontracker.R;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 
 /**
  * From the MainMenuActivity, the user is able to view tips, start a new journey, or view a collection
