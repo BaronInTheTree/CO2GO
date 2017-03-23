@@ -83,4 +83,14 @@ public class CarCollection {
     public Car getCarAtIndex(int index) {
         return carCollection.get(index);
     }
+
+    public int getIndexOfCar(String nickname) {
+        int index = 0;
+        for (int i = 0; i < carCollection.size(); i++) {
+            if (nickname.equals(carCollection.get(i).getNickname())) {
+                index = i;
+            }
+        }
+        return index;
+    }
 }

@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class SelectTransportationActivity extends AppCompatActivity {
     }
 
     private void addBackButton() {
-        Button btn = (Button) findViewById(R.id.buttonBack);
+        Button btn = (Button) findViewById(R.id.buttonBack_journeyList);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

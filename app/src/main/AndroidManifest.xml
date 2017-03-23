@@ -44,6 +44,9 @@
         <activity android:name="ca.cmpt276.carbonTracker.UtilityListActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UtilitySummaryActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.EditUtilityActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.EditRouteActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.JourneyListActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.EditJourneyActivity"></activity>
     </application>
 
 </manifest>
