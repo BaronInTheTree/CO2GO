@@ -24,7 +24,6 @@ public class CarbonModel {
     private String selectedTransportType;
     private UtilityCollection utilityCollection;
     private DateHandler dateHandler;
-    private DateHandler dateHandler;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
