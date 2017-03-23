@@ -32,7 +32,7 @@ public class WelcomePageActivity extends AppCompatActivity {
         SaveData.loadAllRoutes(this);
         SaveData.loadAllCars(this);
         SaveData.loadJourneys(this);
-        //SaveData.loadUtilities(this);
+        SaveData.loadUtilities(this);
         SaveData.loadTips(this);
         new Thread(new Runnable() {
             @Override

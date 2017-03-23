@@ -334,6 +334,7 @@ public class EditUtilityActivity extends AppCompatActivity {
 
                     // Return to utility list and close activity
                     startActivity(new Intent(EditUtilityActivity.this, UtilityListActivity.class));
+                    SaveData.saveUtilities(EditUtilityActivity.this);
                     finish();
                 }
             }

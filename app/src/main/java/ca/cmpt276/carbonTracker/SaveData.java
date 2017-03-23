@@ -223,41 +223,41 @@ public class SaveData extends JSONObject  {
     // Saving Utility
     /////////////////
 
-//    public static void loadUtilities(Context context) {
-//        CarbonModel model = CarbonModel.getInstance();
-//        UtilityCollection uc = model.getUtilityCollection();
-//        int index = 0;
-//        while (index < uc.getNumberUtilities()) {
-//            uc.deleteUtility(index);
-//        }
-//
-//        SharedPreferences prefs = context.getSharedPreferences("UtilityCollection", MODE_PRIVATE);
-//
-//        while (!prefs.getString("Utility"+index, "").equals("")) {
-//            Gson utilityData = new Gson();
-//            String jsonUtilityData = prefs.getString("Utility" + index, null);
-//            Utility utility = utilityData.fromJson(jsonUtilityData, Utility.class);
-//            uc.addUtility(utility);
-//            Log.i("load",jsonUtilityData+"");
-//            index++;
-//        }
-//    }
+    public static void loadUtilities(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        UtilityCollection uc = model.getUtilityCollection();
+        int index = 0;
+        while (index < uc.getNumberUtilities()) {
+            uc.deleteUtility(index);
+        }
 
-//    public static void saveUtilities(Context context) {
-//        CarbonModel model = CarbonModel.getInstance();
-//        UtilityCollection uc = model.getUtilityCollection();
-//        SharedPreferences prefs = context.getSharedPreferences("UtilityCollection", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.clear();
-//        for (int i = 0; i < uc.getNumberUtilities(); i++) {
-//            Gson utilityData = new Gson();
-//            String jsonUtilityData = utilityData.toJson(uc.getUtility(i));
-//            editor.putString("Utility"+i, jsonUtilityData);
-//            Log.i("added", ""+jsonUtilityData);
-//        }
-//        editor.commit();
-//        editor.apply();
-//    }
+        SharedPreferences prefs = context.getSharedPreferences("UtilityCollection", MODE_PRIVATE);
+
+        while (!prefs.getString("Utility"+index, "").equals("")) {
+            Gson utilityData = new Gson();
+            String jsonUtilityData = prefs.getString("Utility" + index, null);
+            Utility utility = utilityData.fromJson(jsonUtilityData, Utility.class);
+            uc.addUtility(utility);
+            Log.i("load",jsonUtilityData+"");
+            index++;
+        }
+    }
+
+    public static void saveUtilities(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        UtilityCollection uc = model.getUtilityCollection();
+        SharedPreferences prefs = context.getSharedPreferences("UtilityCollection", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        for (int i = 0; i < uc.getNumberUtilities(); i++) {
+            Gson utilityData = new Gson();
+            String jsonUtilityData = utilityData.toJson(uc.getUtility(i));
+            editor.putString("Utility"+i, jsonUtilityData);
+            Log.i("added", ""+jsonUtilityData);
+        }
+        editor.commit();
+        editor.apply();
+    }
 
 
     //////////////////

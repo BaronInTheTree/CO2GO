@@ -29,6 +29,7 @@ private static final int REQUEST_CODE_EDIT_UTILITY = 1000;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utility_list);
 
+        SaveData.loadUtilities(this);
         populateListOfUtilities();
         addUtilityBtn();
         backBtn();
@@ -117,6 +118,7 @@ private static final int REQUEST_CODE_EDIT_UTILITY = 1000;
             finish();
         } else if (item.toString().equals("Delete")) {
             cm.getUtilityCollection().deleteUtility(selectedUtilityPosition);
+            SaveData.saveUtilities(this);
         }
         updateListView();
         return true;
