@@ -29,7 +29,6 @@ public class MainMenuActivity extends AppCompatActivity {
         modelInstance = CarbonModel.getInstance();
 
         setUpButtons();
-
     }
 
     private void setUpButtons() {
@@ -74,9 +73,6 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
     @Override
     public void onBackPressed() {
