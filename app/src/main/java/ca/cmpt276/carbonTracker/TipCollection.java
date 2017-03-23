@@ -143,6 +143,7 @@ public class TipCollection {
     // return a tip to the user after a new utility bill is entered.
     public String getUtilityTip(Utility currentBill){
         if (utilityTips.size()== 0) {
+            updateUtilityTipsContent(currentBill);
             utilityTipsInitialize();
         }
 

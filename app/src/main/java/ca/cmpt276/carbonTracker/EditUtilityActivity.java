@@ -332,12 +332,18 @@ public class EditUtilityActivity extends AppCompatActivity {
                     selectedUtility.setUsage(usage, naturalGas, electricity);
                     selectedUtility.setNumPeople(numPeople);
 
+                    // This is just a temporary testing toast message.
+                    Toast.makeText(EditUtilityActivity.this,"testing",Toast.LENGTH_LONG).show();
+
                     // Return to utility list and close activity
                     startActivity(new Intent(EditUtilityActivity.this, UtilityListActivity.class));
                     finish();
                 }
+
             }
+
         });
+
     }
 
     // Checks if some fields are left blank
