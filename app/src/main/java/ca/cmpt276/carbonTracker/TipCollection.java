@@ -40,7 +40,7 @@ public class TipCollection {
 
     public TipCollection() {
         generalTips = new ArrayList<>();
-        recentShownTips = new ArrayList<>();
+        if (recentShownTips==null) recentShownTips = new ArrayList<>();
 
         carTips = new ArrayList<>();
         busTips = new ArrayList<>();

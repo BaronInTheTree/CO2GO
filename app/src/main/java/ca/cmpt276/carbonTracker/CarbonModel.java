@@ -144,6 +144,6 @@ public class CarbonModel {
     }
 
     public List<String> getUtilityFuel() {
-        return utilityCollection.getUtilityFuel();
+        return utilityCollection.getUtilityFuelList();
     }
 }

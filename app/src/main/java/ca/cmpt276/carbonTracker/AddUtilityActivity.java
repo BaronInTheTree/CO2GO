@@ -134,6 +134,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                         (model.getDateHandler().getYearList().get(position));
                 setupStartDaySpinner();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -157,6 +158,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                         (model.getDateHandler().getMonthList().get(position));
                 setupStartDaySpinner();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -180,6 +182,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                 startDay = Integer.parseInt
                         (model.getDateHandler().getDayList().get(position));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -203,6 +206,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                         (model.getDateHandler().getYearList().get(position));
                 setupStartDaySpinner();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -226,6 +230,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                         (model.getDateHandler().getMonthList().get(position));
                 setupStartDaySpinner();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -249,6 +254,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                 endDay = Integer.parseInt
                         (model.getDateHandler().getDayList().get(position));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }

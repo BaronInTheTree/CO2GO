@@ -1,11 +1,8 @@
 package ca.cmpt276.carbonTracker;
 
-/*
- * UtilityCollection class contains a list of utilities and a list of possible fuels.
- */
-
 import java.util.ArrayList;
 import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,22 +12,25 @@ import android.widget.TextView;
 
 import com.example.sasha.carbontracker.R;
 
+/*
+ * UtilityCollection class contains a list of utilities and a list of possible fuels.
+ */
 public class UtilityCollection {
 
     private static final String NATURAL_GAS = "Natural Gas";
     private static final String ELECTRICITY = "Electricity";
     private List<Utility> utilityList;
-    private List<String> utilityFuel;
+    private List<String> utilityFuelList;
 
     public UtilityCollection() {
         utilityList = new ArrayList<>();
-        utilityFuel = new ArrayList<>();
+        utilityFuelList = new ArrayList<>();
         populateUtilityData();
     }
 
     private void populateUtilityData() {
-        utilityFuel.add(NATURAL_GAS);
-        utilityFuel.add(ELECTRICITY);
+        utilityFuelList.add(NATURAL_GAS);
+        utilityFuelList.add(ELECTRICITY);
     }
 
     public void addUtility(Utility utility) {
@@ -70,8 +70,8 @@ public class UtilityCollection {
         return utilities;
     }
 
-    public List<String> getUtilityFuel() {
-        return utilityFuel;
+    public List<String> getUtilityFuelList() {
+        return utilityFuelList;
     }
 
     public Utility getUtilityAtIndex(int index) {
