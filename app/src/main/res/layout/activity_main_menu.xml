@@ -10,40 +10,87 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.cmpt276.carbonTracker.MainMenuActivity">
 
-    <Button
-        android:text="@string/new_journey"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/newJourney_btn"
-        android:layout_marginTop="87dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:text="@string/view_footprint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/footprint_btn"
-        android:layout_marginBottom="63dp"
-        android:layout_above="@+id/tip_btn"
-        android:layout_centerHorizontal="true" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="75dp"
+            android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/tip_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:text="View Tips" />
+            <Button
+                android:id="@+id/newJourney_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/footprint_btn"
+                android:layout_centerHorizontal="true"
+                android:text="@string/new_journey" />
+        </TableRow>
 
-    <Button
-        android:id="@+id/viewJourneys_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
-        android:text="View Journeys"
-        android:layout_above="@+id/footprint_btn"
-        android:layout_centerHorizontal="true" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="25dp"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/viewJourneys_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="View Journeys" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="25dp"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/button_UtilityList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/viewJourneys_btn"
+                android:layout_alignBottom="@+id/viewJourneys_btn"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="Utilities" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="25dp"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/footprint_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tip_btn"
+                android:layout_centerHorizontal="true"
+                android:text="@string/view_footprint" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/tip_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="View Tips" />
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>

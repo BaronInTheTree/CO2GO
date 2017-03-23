@@ -22,6 +22,7 @@ public class CarbonModel {
     private Route selectedRoute;
     private TipCollection tips;
     private String selectedTransportType;
+    private UtilityCollection utilityCollection;
     private DateHandler dateHandler;
 
     public static CarbonModel getInstance() {
@@ -39,6 +40,7 @@ public class CarbonModel {
         carData = new CarData();
         tips = new TipCollection();
         dateHandler = new DateHandler();
+        utilityCollection = new UtilityCollection();
     }
 
     public void addNewJourney(Journey newJourney) {
@@ -59,30 +61,6 @@ public class CarbonModel {
 
     public CarCollection getCarCollection() {
         return carCollection;
-    }
-
-    // TODO: replace with a collection of cars that user owns
-    public List<String> outputCarCollectionToString() {
-        List<String> list = new ArrayList<>();
-/*
-        for (Car car: carCollection) {
-            String str = car.toString();
-            list.add(str);
-        }
-*/
-        return list;
-    }
-
-    // TODO: replace with a collection of routes that user uses
-    public List<String> outputRouteCollectionToString() {
-        List<String> list = new ArrayList<>();
-/*
-        for (Route route: routeCollection) {
-            String str = route.toString();
-            list.add(str);
-        }
-*/
-        return list;
     }
 
     public RouteCollection getRouteCollection() {
@@ -124,20 +102,17 @@ public class CarbonModel {
             Journey journey = new Journey(getSelectedCar(), getSelectedRoute(), new Date(),
                     Journey.Type.CAR);
             return journey;
-        }
-        else if (getSelectedTransportType().equals("WalkBike")){
+        } else if (getSelectedTransportType().equals("WalkBike")) {
             WalkBike walkBike = new WalkBike();
             Journey journey = new Journey(walkBike, getSelectedRoute(), new Date(),
                     Journey.Type.WALK_BIKE);
             return journey;
-        }
-        else if (getSelectedTransportType().equals("Bus")){
+        } else if (getSelectedTransportType().equals("Bus")) {
             Bus bus = new Bus();
             Journey journey = new Journey(bus, getSelectedRoute(), new Date(),
                     Journey.Type.BUS);
             return journey;
-        }
-        else {
+        } else {
             Skytrain skytrain = new Skytrain();
             Journey journey = new Journey(skytrain, getSelectedRoute(), new Date(),
                     Journey.Type.SKYTRAIN);
@@ -154,5 +129,17 @@ public class CarbonModel {
         options.add("Bus");
         options.add("Skytrain");
         return options;
+    }
+
+    public UtilityCollection getUtilityCollection() {
+        return utilityCollection;
+    }
+
+    public void setUtilityCollection(UtilityCollection utilityCollection) {
+        this.utilityCollection = utilityCollection;
+    }
+
+    public List<String> getUtilityFuel() {
+        return utilityCollection.getUtilityFuel();
     }
 }
