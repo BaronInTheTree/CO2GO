@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Stores a list of years and months for GUI
@@ -29,6 +30,12 @@ public class DateHandler {
         initializeYearList();
         initializeMonthList();
         initializeCurrentDate();
+    }
+
+    // static function to calculate the time difference between two dates.
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 
     private void initializeCurrentDate() {
