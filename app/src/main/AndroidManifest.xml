@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="ca.cmpt276.carbonTracker.WelcomePageActivity"
+            android:name="ca.cmpt276.carbonTracker.UI.WelcomePageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,34 +18,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ca.cmpt276.carbonTracker.MainMenuActivity"
+            android:name="ca.cmpt276.carbonTracker.UI.MainMenuActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.SelectTransportationActivity"
+            android:name="ca.cmpt276.carbonTracker.UI.SelectTransportationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.AddCarActivity"
+            android:name="ca.cmpt276.carbonTracker.UI.AddCarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.AddRouteActivity"
+            android:name="ca.cmpt276.carbonTracker.UI.AddRouteActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.JourneyInformationActivity"
+            android:name="ca.cmpt276.carbonTracker.UI.JourneyInformationActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="ca.cmpt276.carbonTracker.FootprintTableActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.FootprintGraphActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.FootprintTableActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.FootprintGraphActivity" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.SelectRouteActivity"
+            android:name="ca.cmpt276.carbonTracker.UI.SelectRouteActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="ca.cmpt276.carbonTracker.ModifyCarActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.EditCarActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.EditRouteActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.JourneyListActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.EditJourneyActivity"></activity>
-        <activity android:name="ca.cmpt276.carbonTracker.AddUtilityActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UtilityListActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UtilitySummaryActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.EditUtilityActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.UI.ModifyCarActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.EditCarActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.EditRouteActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.JourneyListActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.EditJourneyActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.UI.AddUtilityActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.UtilityListActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.EditUtilityActivity"></activity>
     </application>
 
 </manifest>
