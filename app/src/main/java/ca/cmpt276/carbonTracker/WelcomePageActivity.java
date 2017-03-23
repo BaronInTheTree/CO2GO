@@ -31,7 +31,9 @@ public class WelcomePageActivity extends AppCompatActivity {
         enterButton();
         SaveData.loadAllRoutes(this);
         SaveData.loadAllCars(this);
-        //SaveData.loadJourneys(this);
+        SaveData.loadJourneys(this);
+        //SaveData.loadUtilities(this);
+        SaveData.loadTips(this);
         new Thread(new Runnable() {
             @Override
             public void run() {

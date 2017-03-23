@@ -29,7 +29,7 @@ public class MainMenuActivity extends AppCompatActivity {
         modelInstance = CarbonModel.getInstance();
 
         setUpButtons();
-
+        SaveData.loadTips(this);
     }
 
     private void setUpButtons() {
@@ -55,6 +55,7 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String message = modelInstance.getTips().getGeneralTip();
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
+                SaveData.saveTips(MainMenuActivity.this);
             }
         });
 

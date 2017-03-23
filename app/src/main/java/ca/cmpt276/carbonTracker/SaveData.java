@@ -20,6 +20,7 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class SaveData extends JSONObject  {
+    private static final int MAX_TIP_SIZE = 7; // Maximum number of recent tips.
     ////////////////////
     // Saving Route
     ////////////////////
@@ -217,6 +218,7 @@ public class SaveData extends JSONObject  {
         editor.apply();
     }
 
+    //todo: test utility and tips
     //////////////////
     // Saving Utility
     /////////////////
@@ -258,5 +260,45 @@ public class SaveData extends JSONObject  {
 //    }
 
 
-    //todo: tips
+    //////////////////
+    // Saving Tip
+    /////////////////
+
+    public static void loadTips(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        TipCollection tc = model.getTips();
+        int index = 0;
+        while (index < tc.getRecentTipSize()) {
+            Log.i("load tip from in app","");
+            tc.removeRecentTip(index);
+        }
+
+        SharedPreferences prefs = context.getSharedPreferences("TipCollection", MODE_PRIVATE);
+
+        while (!prefs.getString("Tip"+index, "").equals("") && index < MAX_TIP_SIZE) {
+            Gson tipData = new Gson();
+            String jsonTipData = prefs.getString("Tip" + index, null);
+            Tip tip = tipData.fromJson(jsonTipData, Tip.class);
+            tc.addRecentTip(tip);
+            Log.i("load tip " + index,jsonTipData+"");
+            index++;
+        }
+    }
+
+    public static void saveTips(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        TipCollection tc = model.getTips();
+        SharedPreferences prefs = context.getSharedPreferences("TipCollection", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        for (int i = 0; i < tc.getRecentTipSize(); i++) {
+            Gson tipData = new Gson();
+            String jsonTipData = tipData.toJson(tc.getRecentTipAtIndex(i));
+            editor.putString("Tip"+i, jsonTipData);
+            Log.i("added", ""+jsonTipData);
+        }
+        editor.commit();
+        editor.apply();
+    }
+
 }
