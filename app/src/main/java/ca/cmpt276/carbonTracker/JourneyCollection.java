@@ -46,6 +46,11 @@ public class JourneyCollection {
         journeyCollection.get(index);
     }
 
+    public List<Journey> getJourneys() {return journeyCollection;}
+
+    public int getSize(){
+        return journeyCollection.size();
+    }
 
     public double getTotalEmissionsKM() {
         double totalEmissions = 0;

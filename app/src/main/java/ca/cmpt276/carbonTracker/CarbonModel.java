@@ -24,6 +24,7 @@ public class CarbonModel {
     private String selectedTransportType;
     private UtilityCollection utilityCollection;
     private DateHandler dateHandler;
+    private MonthYearSummary summary;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -41,6 +42,7 @@ public class CarbonModel {
         tips = new TipCollection();
         dateHandler = new DateHandler();
         utilityCollection = new UtilityCollection();
+        summary = new MonthYearSummary();
     }
 
     public void addNewJourney(Journey newJourney) {
@@ -66,6 +68,8 @@ public class CarbonModel {
     public RouteCollection getRouteCollection() {
         return routeCollection;
     }
+
+    public MonthYearSummary getSummary(){ return summary;}
 
     public Car getSelectedCar() {
         return selectedCar;

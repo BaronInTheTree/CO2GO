@@ -45,6 +45,14 @@ public class UtilityCollection {
         utilityList.remove(index);
     }
 
+    public int getSize(){
+        return utilityList.size();
+    }
+
+    public List<Utility> getUtilityList(){
+        return utilityList;
+    }
+
     public double getTotalEmissionsForPeriod(int days) {
         double totalEmissions = 0;
         for (Utility utility : utilityList) {

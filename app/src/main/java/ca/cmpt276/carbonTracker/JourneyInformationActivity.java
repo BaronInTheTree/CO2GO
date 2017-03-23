@@ -25,6 +25,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
 
     CarbonModel currentInstance = CarbonModel.getInstance();
     Journey currentJourney = currentInstance.createJourney();
+    MonthYearSummary summary = currentInstance.getSummary();
     int selectedYear = currentJourney.getYearInt();
     int selectedMonth = currentJourney.getMonthInt();
     int selectedDay = currentJourney.getDayInt();
@@ -72,8 +73,9 @@ public class JourneyInformationActivity extends AppCompatActivity {
                 currentJourney.setDate(selectedYear, selectedMonth, selectedDay);
                 currentInstance.addNewJourney(currentJourney);
                 int type = currentJourney.getTransportType();
+                summary.updateJourneys(currentInstance.getJourneyCollection());
                 // create tip based on the type of transportation and the information within current Journey.
-                String message = currentInstance.getTips().getJourneyTip(type, currentJourney);
+                String message = currentInstance.getTips().getJourneyTip(type, currentJourney,summary);
                 Toast.makeText(JourneyInformationActivity.this, message, Toast.LENGTH_LONG).show();
                 finish();
             }
