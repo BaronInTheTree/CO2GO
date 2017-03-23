@@ -46,8 +46,7 @@ public class Utility {
         try {
             startDate = (new SimpleDateFormat("yyyy-MM-dd").parse(startDateString));
             endDate = (new SimpleDateFormat("yyyy-MM-dd").parse(endDateString));
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
@@ -63,6 +62,7 @@ public class Utility {
             e.printStackTrace();
         }
 
+        // Break up into individual ints (months are indexed at 1 not 0)
         int startYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(startingDate));
         int startMonth = Integer.parseInt(new SimpleDateFormat("MM").format(startingDate)) - 1;
         int startDay = Integer.parseInt(new SimpleDateFormat("dd").format(startingDate));
@@ -77,8 +77,7 @@ public class Utility {
         if (endYear == startYear) {
             if (endMonth == startMonth) {
                 totalDays += (endDay - startDay + 1);
-            }
-            else {
+            } else {
 
                 totalDays += endDay; // endMonth/endDay to endMonth/01
 
@@ -91,15 +90,14 @@ public class Utility {
                     totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
                 }
             }
-        }
-        else {
-            // Sum from endMonth/Day to 01/01 of endYear
+        } else {
+            // Sum from endMonth/Day to first day of endYear
             totalDays += endDay;
             for (int m = endMonth - 1; m > 0; m--) {
                 Calendar calendar = new GregorianCalendar(endYear, m, 1);
                 totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             }
-            // Sum from startMonth/Day to 12/31 of startYear
+            // Sum from startMonth/Day to last day of startYear
             Calendar startMonthCal = new GregorianCalendar(startYear, startMonth, 1);
             totalDays += (startMonthCal.getActualMaximum(Calendar.DAY_OF_MONTH) - startDay + 1);
             for (int m = startMonth + 1; m < 12; m++) {
@@ -107,16 +105,15 @@ public class Utility {
                 totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             }
 
+            // Add for multiple years
             for (int y = endYear - 1; y >= startYear + 1; y--) {
                 if (y % 4 == 0) {
                     totalDays += 366;
-                }
-                else {
+                } else {
                     totalDays += 365;
                 }
             }
         }
-
         timespan = totalDays;
     }
 
@@ -165,6 +162,9 @@ public class Utility {
     }
 
     public int getUsageForPeriod(int days) {
+        // Makes sure difference in days is always positive
+        days = Math.abs(days);
+
         return usage / days;
     }
 
@@ -186,7 +186,6 @@ public class Utility {
         this.numPeople = numPeople;
     }
 
-    // TODO: C02 usage is not correctly computed
     public double getC02PerPerson() {
         if (naturalGas) {
             return usage * NATURAL_GAS_CO2_EMISSION / numPeople;
@@ -196,6 +195,9 @@ public class Utility {
     }
 
     public double getTotalC02(int days) {
+        // Makes sure difference in days is always positive
+        days = Math.abs(days);
+
         if (naturalGas) {
             return getUsageForPeriod(days) * NATURAL_GAS_CO2_EMISSION;
         } else {
