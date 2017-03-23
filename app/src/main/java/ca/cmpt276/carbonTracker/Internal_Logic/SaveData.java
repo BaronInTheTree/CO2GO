@@ -2,7 +2,6 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -40,7 +39,6 @@ public class SaveData extends JSONObject  {
         SharedPreferences prefs = context.getSharedPreferences("RouteCollection", MODE_PRIVATE);
 
         while (!prefs.getString("Route"+index, "").equals("")) {
-            Log.i("load",index+"");
             Gson routeData = new Gson();
             String jsonRouteData = prefs.getString("Route" + index, null);
             Route route = routeData.fromJson(jsonRouteData, Route.class);
@@ -60,7 +58,6 @@ public class SaveData extends JSONObject  {
         SharedPreferences prefs = context.getSharedPreferences("HiddenRouteCollection", MODE_PRIVATE);
 
         while (!prefs.getString("HiddenRoute"+index, "").equals("")) {
-            Log.i("loadHidden",index+"");
             Gson routeData = new Gson();
             String jsonRouteData = prefs.getString("HiddenRoute" + index, null);
             Route route = routeData.fromJson(jsonRouteData, Route.class);
@@ -79,7 +76,6 @@ public class SaveData extends JSONObject  {
             Gson routeData = new Gson();
             String jsonRouteData = routeData.toJson(rc.getRouteAtIndex(i));
             editor.putString("Route"+i, jsonRouteData);
-            Log.i("added", ""+jsonRouteData);
         }
         editor.commit();
         editor.apply();
@@ -115,7 +111,6 @@ public class SaveData extends JSONObject  {
             Gson carData = new Gson();
             String jsonCarData = carData.toJson(cc.getCarAtIndex(i));
             editor.putString("Car"+i, jsonCarData);
-            Log.i("added", ""+jsonCarData);
         }
         editor.commit();
         editor.apply();
@@ -238,7 +233,6 @@ public class SaveData extends JSONObject  {
             String jsonUtilityData = prefs.getString("Utility" + index, null);
             Utility utility = utilityData.fromJson(jsonUtilityData, Utility.class);
             uc.addUtility(utility);
-            Log.i("load",jsonUtilityData+"");
             index++;
         }
     }
@@ -253,7 +247,6 @@ public class SaveData extends JSONObject  {
             Gson utilityData = new Gson();
             String jsonUtilityData = utilityData.toJson(uc.getUtility(i));
             editor.putString("Utility"+i, jsonUtilityData);
-            Log.i("added", ""+jsonUtilityData);
         }
         editor.commit();
         editor.apply();
@@ -269,7 +262,6 @@ public class SaveData extends JSONObject  {
         TipCollection tc = model.getTips();
         int index = 0;
         while (index < tc.getRecentTipSize()) {
-            Log.i("load tip from in app","");
             tc.removeRecentTip(index);
         }
 
@@ -280,7 +272,6 @@ public class SaveData extends JSONObject  {
             String jsonTipData = prefs.getString("Tip" + index, null);
             Tip tip = tipData.fromJson(jsonTipData, Tip.class);
             tc.addRecentTip(tip);
-            Log.i("load tip " + index,jsonTipData+"");
             index++;
         }
     }
@@ -295,7 +286,6 @@ public class SaveData extends JSONObject  {
             Gson tipData = new Gson();
             String jsonTipData = tipData.toJson(tc.getRecentTipAtIndex(i));
             editor.putString("Tip"+i, jsonTipData);
-            Log.i("added", ""+jsonTipData);
         }
         editor.commit();
         editor.apply();

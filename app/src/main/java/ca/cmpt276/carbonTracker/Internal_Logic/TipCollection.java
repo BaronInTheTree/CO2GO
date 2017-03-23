@@ -76,7 +76,6 @@ public class TipCollection {
                     if (recentShownTips.size() == numTips) {
                         recentShownTips.remove(0);
                     }
-                    System.out.println(recentShownTips.get(0).getTipContent());
                     updateGeneralTipsContent(summary);
                     String currentTipContent = generalTipsContent.get(i);
                     Tip currentTip = new Tip(currentTipContent);
