@@ -19,14 +19,13 @@ import com.example.sasha.carbontracker.R;
  */
 public class MainMenuActivity extends AppCompatActivity {
 
-    private CarbonModel modelInstance;
+    CarbonModel modelInstance = CarbonModel.getInstance();
+    MonthYearSummary summary = modelInstance.getSummary();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
-        modelInstance = CarbonModel.getInstance();
 
         setUpButtons();
     }
@@ -60,7 +59,7 @@ public class MainMenuActivity extends AppCompatActivity {
         tip_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = modelInstance.getTips().getGeneralTip();
+                String message = modelInstance.getTips().getGeneralTip(summary);
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
             }
         });

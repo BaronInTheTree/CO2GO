@@ -16,10 +16,10 @@ import java.util.List;
 public class TipCollection {
 
     private static final int numTips = 7;
-    private static final int CAR = 0;
-    private static final int BUS = 1;
-    private static final int SKYTRAIN = 2;
-    private static final int BIKEWALK = 3;
+    public static final int CAR = 0;
+    public static final int BUS = 1;
+    public static final int SKYTRAIN = 2;
+    public static final int BIKEWALK = 3;
     private static final String ERROR = "Sorry. System running out of tips.";
 
     private List<Tip> recentShownTips;  // collection of seven tips recently shown to the users.
@@ -40,7 +40,7 @@ public class TipCollection {
 
     public TipCollection() {
         generalTips = new ArrayList<>();
-        recentShownTips = new ArrayList<>();
+        if (recentShownTips==null) recentShownTips = new ArrayList<>();
 
         carTips = new ArrayList<>();
         busTips = new ArrayList<>();
@@ -55,12 +55,12 @@ public class TipCollection {
         bikeWalkTipsContent = new ArrayList<>();
         utilityTipsContent  = new ArrayList<>();
 
-        updateGeneralTipsContent();
     }
 
     // return a tip after the user clicks the "View Tips" button on the main page.
-    public String getGeneralTip() {
+    public String getGeneralTip(MonthYearSummary summary) {
         if (generalTips.size()== 0) {
+            updateGeneralTipsContent(summary);
             generalTipsInitialize();
         }
 
@@ -73,7 +73,7 @@ public class TipCollection {
                     if (recentShownTips.size() == numTips) {
                         recentShownTips.remove(0);
                     }
-                    updateGeneralTipsContent();
+                    updateGeneralTipsContent(summary);
                     String currentTipContent = generalTipsContent.get(i);
                     Tip currentTip = new Tip(currentTipContent);
                     generalTips.set(i, currentTip);
@@ -87,7 +87,7 @@ public class TipCollection {
     }
 
     // return a tip to user after a new journey is created.
-    public String getJourneyTip(int journeyType, Journey currentJourney){
+    public String getJourneyTip(int journeyType, Journey currentJourney, MonthYearSummary summary){
         List<Tip> tips = new ArrayList<>();
         if (journeyType== CAR) tips = carTips;
         if (journeyType== BUS) tips = busTips;
@@ -95,10 +95,10 @@ public class TipCollection {
         if (journeyType== BIKEWALK) tips = bikeWalkTips;
 
         if (tips.size()== 0){
-            if (journeyType== CAR) updateCarTipsContent(currentJourney);
-            if (journeyType== BUS) updateBusTipsContent(currentJourney);
-            if (journeyType== SKYTRAIN) updateSkyTrainTipsContent(currentJourney);
-            if (journeyType== BIKEWALK) updateBikeWalkTipsContent(currentJourney);
+            if (journeyType== CAR) updateCarTipsContent(currentJourney, summary);
+            if (journeyType== BUS) updateBusTipsContent(currentJourney, summary);
+            if (journeyType== SKYTRAIN) updateSkyTrainTipsContent(currentJourney,summary);
+            if (journeyType== BIKEWALK) updateBikeWalkTipsContent(currentJourney,summary);
             journeyInitialize(journeyType);
         }
 
@@ -113,19 +113,19 @@ public class TipCollection {
                     }
                     String currentTipContent="";
                     if (journeyType== CAR) {
-                        updateCarTipsContent(currentJourney);
+                        updateCarTipsContent(currentJourney,summary);
                         currentTipContent = carTipsContent.get(i);
                     }
                     if (journeyType== BUS) {
-                        updateBusTipsContent(currentJourney);
+                        updateBusTipsContent(currentJourney,summary);
                         currentTipContent = busTipsContent.get(i);
                     }
                     if (journeyType== SKYTRAIN) {
-                        updateSkyTrainTipsContent(currentJourney);
+                        updateSkyTrainTipsContent(currentJourney,summary);
                         currentTipContent = skyTrainTipsContent.get(i);
                     }
                     if (journeyType== BIKEWALK) {
-                        updateBikeWalkTipsContent(currentJourney);
+                        updateBikeWalkTipsContent(currentJourney,summary);
                         currentTipContent = bikeWalkTipsContent.get(i);
                     }
 
@@ -214,65 +214,61 @@ public class TipCollection {
 
     // update tip contents for each category. Note: all contents need to be updated to reflect current user data.
 
-    public void updateGeneralTipsContent(){
+    public void updateGeneralTipsContent(MonthYearSummary summary){
         if (generalTipsContent.size()!= 0) generalTipsContent.clear();
-        // The following tips need getMonthDriveDistance(), getMonthDriveEmission() and other corresponding methods.
-        generalTipsContent.add("Your total driving distance within last 4 weeks are getMonthDriveDistance(), consider to take more bus or skytrain to lower your driving distance in the future.");
-        generalTipsContent.add("Driving within the last four weeks contributes to getMonthDriveEmission() CO2 emission, consider to take more bus or skytrain to lower your emission in the future.");
-        generalTipsContent.add("Driving last year contributes to getYearDriveEmission() CO2 emission, consider to take more bus or skytrain to lower your emission in the future.");
-        generalTipsContent.add("Taking buses within the last four weeks contributes to “getMonthBusEmission()” CO2 emission, consider to take skytrain more often to lower your emission in the future.");
-        generalTipsContent.add("Taking Skytrain within the last four weeks contributes to “getMonthBusEmission()” CO2 emission, consider to ride bikes or walk more often to lower your emission in the future.");
-        generalTipsContent.add("You have biked and walked “getMonthBikeWalkDistance()” within last 4 weeks, keep it up!");
-        generalTipsContent.add("Your electricity usage over the past year is “getYearElectricity()”, try to reduce your electricity usage to lower your total CO2 emission.");
+        generalTipsContent.add("Your total driving distance within last 4 weeks are " + summary.getMonthCarDistance() + "km, consider to take more bus or skytrain to lower your driving distance in the future.");
+        generalTipsContent.add("Driving within the last four weeks contributes to " +   (int)summary.getMonthCarEmission() + "g CO2 emission, consider to take more bus or skytrain to lower your emission in the future.");
+        generalTipsContent.add("Driving last year contributes to " + (int)summary.getYearCarEmission() + "g CO2 emission, consider to take more bus or skytrain to lower your emission in the future.");
+        generalTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to take skytrain more often to lower your emission in the future.");
+        generalTipsContent.add("Taking Skytrain within the last four weeks contributes to " + (int)summary.getMonthSkytrainEmission() + "g CO2 emission, consider to ride bikes or walk more often to lower your emission in the future.");
+        generalTipsContent.add("You have biked and walked " + summary.getMonthWalkBikeDistance() +"km within last 4 weeks, keep it up!");
+        generalTipsContent.add("You have biked and walked " + summary.getYearWalkBikeDistance() +"km over last year, keep it up!");
     }
 
-    public void updateCarTipsContent(Journey currentJourney) {
+    public void updateCarTipsContent(Journey currentJourney, MonthYearSummary summary) {
         if (carTipsContent.size() != 0) carTipsContent.clear();
         carTipsContent.add("Your CO2 emission per km drive is " + currentJourney.getEmissionPerKM() + " g/km, consider to drive a more economical car.");
         carTipsContent.add("Your CO2 emission for this trip by car is " + (int) currentJourney.getEmissionsKM() + " g, consider to take bus or skytrain to reduce your emission.");
         carTipsContent.add("Your CO2 emission for this trip by car is " + (int) currentJourney.getEmissionsKM() + " g, consider to ride bikes or walk to cut your emission to 0!");
         carTipsContent.add("Distance of your trip by car is " + currentJourney.getDistance() + " km, consider to take bus or skytrain to reduce your emission.");
         carTipsContent.add("Distance of your trip by car is " + currentJourney.getDistance() + " km, consider to ride bikes or walk if possible.");
-        // The following tips need getMonthDriveDistance() and getMonthDriveEmission() method.
-        carTipsContent.add("Your total driving distance within last 4 weeks are getMonthDriveDistance() km, consider to take more bus or skytrain in the future.");
-        carTipsContent.add("Your total driving distance within last year are getYearDriveDistance() km, consider to take more bus or skytrain in the future.");
+        carTipsContent.add("Your total driving distance within last 4 weeks are " + summary.getMonthCarDistance()+ "km, consider to take more bus or skytrain in the future.");
+        carTipsContent.add("Your total driving distance within last year are " + summary.getYearCarDistance() + "km, consider to take more bus or skytrain in the future.");
     }
 
-    public void updateBusTipsContent(Journey currentJourney){
+    public void updateBusTipsContent(Journey currentJourney, MonthYearSummary summary){
         if (busTipsContent.size()!= 0) busTipsContent.clear();
         busTipsContent.add("Your CO2 emission for this trip by bus is " + (int)currentJourney.getEmissionsKM()+ " g, consider to ride bikes or walk to cut your trip emission to 0!");
         busTipsContent.add("Distance of your trip by bus is " + currentJourney.getDistance() + " km, an equivalent trip by skytrain will generate ~40% less CO2.");
         busTipsContent.add("Distance of your trip by bus is " + currentJourney.getDistance() + " km, consider to ride bikes or walk if possible.");
-        // The following tips need supporting methods.
-        busTipsContent.add("You have traveled “getMonthBusDistance()” by Bus within last 4 weeks, consider to take skytrain more often in the future.");
-        busTipsContent.add("You have traveled “getMonthBusDistance()” by Bus within last 4 weeks, consider to ride bikes or walk more often in the future.");
-        busTipsContent.add("Taking buses within the last four weeks contributes to “getMonthBusEmission()” CO2 emission, consider to take skytrain more often in the future.");
-        busTipsContent.add("Taking buses within the last four weeks contributes to “getMonthBusEmission()” CO2 emission, consider to ride bikes more often in the future.");
+        busTipsContent.add("You have traveled " + summary.getMonthBusDistance()+ "km by Bus within last 4 weeks, consider to take skytrain more often in the future.");
+        busTipsContent.add("You have traveled " + summary.getMonthBusDistance()+ " km by Bus within last 4 weeks, consider to ride bikes or walk more often in the future.");
+        busTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to take skytrain more often in the future.");
+        busTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to ride bikes more often in the future.");
 
     }
 
-    public void updateSkyTrainTipsContent(Journey currentJourney){
+    public void updateSkyTrainTipsContent(Journey currentJourney, MonthYearSummary summary){
         if (skyTrainTipsContent.size()!= 0) skyTrainTipsContent.clear();
         skyTrainTipsContent.add("Your CO2 emission for this trip by SkyTrain is " + (int) currentJourney.getEmissionsKM() + " g, consider to ride bikes or walk to cut your trip emission to 0!");
         skyTrainTipsContent.add("Distance of your trip by SkyTrain is " + currentJourney.getDistance() + " km, consider to ride bikes or walk if possible.");
         skyTrainTipsContent.add("Your CO2 emission for this trip by Skytrain is " + + (int) currentJourney.getEmissionsKM() + " g, consider to bike part of your trip to reduce your emission.");
-        // The following tips need supporting methods.
-        skyTrainTipsContent.add("You have traveled “getMonthSkytrainDistance()” by Skytrain within last 4 weeks, consider to ride bikes or walk more often in the future.");
-        skyTrainTipsContent.add("Taking Skytrain within the last four weeks contributes to “getMonthBusEmission()” CO2 emission, consider to ride bikes or walk more often in the future.");
-        skyTrainTipsContent.add("You have traveled “getYearSkytrainDistance()” by Skytrain over the past year, consider to ride bikes or walk more often in the future.");
-        skyTrainTipsContent.add("Taking Skytrain within the last year contributes to “getYearSkyTrainEmission()” CO2 emission, consider to ride bikes more often in the future.");
+        skyTrainTipsContent.add("You have traveled " + summary.getMonthSkytrainDistance() + "km by Skytrain within last 4 weeks, consider to ride bikes or walk more often in the future.");
+        skyTrainTipsContent.add("Taking Skytrain within the last four weeks contributes to "+ (int)summary.getMonthSkytrainEmission() +"g CO2 emission, consider to ride bikes or walk more often in the future.");
+        skyTrainTipsContent.add("You have traveled " + summary.getYearSkytrainDistance() + "km by Skytrain over the past year, consider to ride bikes or walk more often in the future.");
+        skyTrainTipsContent.add("Taking Skytrain within the last year contributes to " + (int)summary.getYearSkytrainEmission() + "g CO2 emission, consider to ride bikes more often in the future.");
+
     }
 
-    public void updateBikeWalkTipsContent(Journey currentJourney){
+    public void updateBikeWalkTipsContent(Journey currentJourney, MonthYearSummary summary){
         if (bikeWalkTipsContent.size()!= 0) bikeWalkTipsContent.clear();
         bikeWalkTipsContent.add("Good job! Your trip does not generate any CO2. Keep it up!");
-        // The following tips need supporting methods.
-        bikeWalkTipsContent.add("You have biked and walked “getMonthBikeWalkDistance()” within last 4 weeks, keep it up!");
-        bikeWalkTipsContent.add("You have biked and walked “getYearBikeWalkDistance()” within last year, keep it up!");
-        bikeWalkTipsContent.add("Your estimated electricity usage per day is “getCurrentDailyElectricity()”, try to reduce your electricity usage.");
-        bikeWalkTipsContent.add("You estimated gas usage per day is “getCurrentDailyGas()”, try to reduce your gas usage.");
-        bikeWalkTipsContent.add("You have traveled “getYearBusDistance()” by Bus over the past year, consider to ride bikes or walk more often in the future.");
-        bikeWalkTipsContent.add("You have traveled “getYearSkytrainDistance()” by Skytrain over past year, consider to ride bikes or walk more often in the future.");
+        bikeWalkTipsContent.add("You have biked and walked " + summary.getMonthWalkBikeDistance()+ "km within last 4 weeks, keep it up!");
+        bikeWalkTipsContent.add("You have biked and walked " + summary.getYearWalkBikeDistance() + "km within last year, keep it up!");
+        bikeWalkTipsContent.add("You have driven " + summary.getYearCarDistance()+ "km over the past year, consider to ride bikes or walk more often in the future.");
+        bikeWalkTipsContent.add("You have traveled " + summary.getYearBusDistance() + "km by Bus over the past year, consider to ride bikes or walk more often in the future.");
+        bikeWalkTipsContent.add("You have traveled " + summary.getYearSkytrainDistance()+ " km by Skytrain over the past year, consider to ride bikes or walk more often in the future.");
+        bikeWalkTipsContent.add("You have driven " + summary.getMonthCarDistance() + "km over the last 4 weeks, consider to ride bikes or walk more often in the future.");
 
     }
 
