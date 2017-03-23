@@ -38,6 +38,11 @@ public class DateHandler {
         return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 
+    public int totalDaysInMonth(int year, int month) {
+        Calendar calendar = new GregorianCalendar(year, month, 1);
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+    }
+
     private void initializeCurrentDate() {
         currentYear = MAX_YEAR;
         currentMonth = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));

@@ -66,5 +66,19 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:+'
 }
 dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+}
+
+
+repositories {
+    maven {
+        url 'https://dl.bintray.com/sj/maven/'
+    }
+
+}
+dependencies {
+        compile 'com.numetriclabz.numandroidcharts:numandroidcharts:1.0.7'
 }
