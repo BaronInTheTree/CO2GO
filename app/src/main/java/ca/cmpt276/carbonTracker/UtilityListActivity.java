@@ -79,7 +79,6 @@ public class UtilityListActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UtilityListActivity.this, MainMenuActivity.class));
                 finish();
             }
         });
@@ -93,7 +92,6 @@ public class UtilityListActivity extends AppCompatActivity {
         list.setAdapter(adapter);
         registerForContextMenu(list);
     }
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
