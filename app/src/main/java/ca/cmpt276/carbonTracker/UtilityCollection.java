@@ -102,4 +102,8 @@ public class UtilityCollection {
         UtilityCollectionAdapter adapter = new UtilityCollectionAdapter(context);
         return adapter;
     }
+
+    public int getNumberUtilities() {
+        return utilityList.size();
+    }
 }

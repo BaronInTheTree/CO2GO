@@ -283,4 +283,17 @@ public class TipCollection {
         utilityTipsContent.add("Your CO2 emission from the utility bill entered is ,"+ (int) currentBill.getC02PerPerson() + " g, Consider to use energy saving light bulbs wherever possible.");
     }
 
+    public int getRecentTipSize() {
+        return recentShownTips.size();
+    }
+    public void removeRecentTip(int index) {
+        recentShownTips.remove(index);
+    }
+    public void addRecentTip(Tip tip) {
+        recentShownTips.add(tip);
+    }
+    public Tip getRecentTipAtIndex(int index) {
+        return recentShownTips.get(index);
+    }
+
 }

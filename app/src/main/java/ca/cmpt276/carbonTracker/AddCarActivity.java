@@ -172,7 +172,7 @@ public class AddCarActivity extends AppCompatActivity {
                     car.setNickname(selectedNickname);
 
                     modelInstance.getCarCollection().addCar(car);
-
+                    SaveData.saveCars(AddCarActivity.this);
                     Intent intent = SelectTransportationActivity.makeIntent(AddCarActivity.this);
                     startActivity(intent);
                     finish();
@@ -199,7 +199,7 @@ public class AddCarActivity extends AppCompatActivity {
 
                     modelInstance.getCarCollection().addCar(car);
                     modelInstance.setSelectedCar(modelInstance.getCarCollection().getLatestCar());
-
+                    SaveData.saveCars(AddCarActivity.this);
                     Intent intent = ModifyCarActivity.makeIntent(AddCarActivity.this);
                     startActivity(intent);
                     finish();

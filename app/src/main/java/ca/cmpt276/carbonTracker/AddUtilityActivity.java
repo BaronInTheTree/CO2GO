@@ -308,6 +308,7 @@ public class AddUtilityActivity extends AppCompatActivity {
 
                     // Return to utility list and close activity
                     Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
+                    SaveData.saveUtilities(AddUtilityActivity.this);
                     startActivity(intent);
                     finish();
                 }

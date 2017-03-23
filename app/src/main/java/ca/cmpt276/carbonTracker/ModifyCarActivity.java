@@ -83,6 +83,8 @@ public class ModifyCarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 modelInstance.getCarCollection().hideCar(modelInstance.getSelectedCar());
                 modelInstance.getCarCollection().removeCar(selectedCarIndex);
+                SaveData.saveCars(ModifyCarActivity.this);
+                SaveData.saveHiddenCars(ModifyCarActivity.this);
                 Intent intent = SelectTransportationActivity.makeIntent(ModifyCarActivity.this);
                 startActivity(intent);
                 finish();

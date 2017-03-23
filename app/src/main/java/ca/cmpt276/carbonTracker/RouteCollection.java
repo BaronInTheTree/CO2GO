@@ -35,6 +35,10 @@ public class RouteCollection {
         routeCollection.add(route);
     }
 
+    public void addHiddenRoute(Route route) {
+        hiddenRouteCollection.add(route);
+    }
+
     // See CarCollection class for details
     public void hideRoute(Route route) {
         for (Route r : routeCollection) {
@@ -56,6 +60,10 @@ public class RouteCollection {
 
     public void removeRoute(int index) {
         routeCollection.remove(index);
+    }
+
+    public void removeHiddenRoute(int index) {
+        hiddenRouteCollection.remove(index);
     }
 
     public void editRoute(Route route, int index) {
@@ -93,6 +101,10 @@ public class RouteCollection {
         return routeCollection.size();
     }
 
+    public int getHiddenListSize() {
+        return hiddenRouteCollection.size();
+    }
+
     public Route getLatestRoute() {
         if (getListSize() > 0) return routeCollection.get(routeCollection.size() - 1);
         else return null;
@@ -100,6 +112,10 @@ public class RouteCollection {
 
     public Route getRouteAtIndex(int i) {
         return routeCollection.get(i);
+    }
+
+    public Route getHiddenRouteAtIndex(int i) {
+        return hiddenRouteCollection.get(i);
     }
 
     public int getIndexOfRoute(Route route) {
