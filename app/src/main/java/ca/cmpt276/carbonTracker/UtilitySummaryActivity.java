@@ -52,11 +52,11 @@ public class UtilitySummaryActivity extends AppCompatActivity {
 
         // Set starting date
         TextView startingDate = (TextView) findViewById(R.id.utilitySummaryStartingDate);
-        startingDate.setText(utility.getStartDate());
+        startingDate.setText(utility.getStartDateString());
 
         // Set ending date
         TextView endingDate = (TextView) findViewById(R.id.utilitySummaryEndingDate);
-        endingDate.setText(utility.getEndDate());
+        endingDate.setText(utility.getEndDateString());
 
         // Set num of people
         TextView numPeople = (TextView) findViewById(R.id.utilitySummaryNumPeople);

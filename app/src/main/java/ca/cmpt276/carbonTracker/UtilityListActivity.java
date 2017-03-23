@@ -114,6 +114,7 @@ private static final int REQUEST_CODE_EDIT_UTILITY = 1000;
             Intent editUtilityIntent = EditUtilityActivity.makeIntent(UtilityListActivity.this);
             editUtilityIntent.putExtra("UtilityIndex", selectedUtilityPosition);
             startActivityForResult(editUtilityIntent, REQUEST_CODE_EDIT_UTILITY);
+            finish();
         } else if (item.toString().equals("Delete")) {
             cm.getUtilityCollection().deleteUtility(selectedUtilityPosition);
         }

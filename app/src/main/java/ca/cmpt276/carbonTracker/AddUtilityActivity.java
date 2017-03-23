@@ -289,14 +289,6 @@ public class AddUtilityActivity extends AppCompatActivity {
                             "Please check the dates. \n" +
                                     "Start date must be before end date.",
                             Toast.LENGTH_LONG).show();
-                    Toast.makeText(AddUtilityActivity.this,
-                            "Start Year: " + startYear
-                                    + "\nStart Month: " + startMonth
-                                    + "\nStart Day: " + startDay
-                                    + "\nEnd Year: " + endYear
-                                    + "\nEnd Month: " + endMonth
-                                    + "\nEnd Day: " + endDay, Toast.LENGTH_LONG).show();
-
                 } else {
                     // Create a Utility
                     Utility utility = new Utility(nickname, naturalGas, electricity,
@@ -305,9 +297,6 @@ public class AddUtilityActivity extends AppCompatActivity {
                     // Add to utility collection
                     UtilityCollection collection = model.getUtilityCollection();
                     collection.addUtility(utility);
-
-                    Toast.makeText(AddUtilityActivity.this, "Usage/Day: "
-                            + utility.getUsagePerDay(), Toast.LENGTH_LONG).show();
 
                     model.setUtilityCollection(collection);
 

@@ -66,6 +66,10 @@ public class UtilityCollection {
         return utilityFuel;
     }
 
+    public Utility getUtilityAtIndex(int index) {
+        return utilityList.get(index);
+    }
+
     private class UtilityCollectionAdapter extends ArrayAdapter<Utility> {
         UtilityCollectionAdapter(Context context) {
             super(context, R.layout.listview_format, utilityList);

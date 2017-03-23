@@ -23,7 +23,7 @@ public class EditUtilityActivity extends AppCompatActivity {
     private int endMonth;
     private int endDay;
 
-    private CarbonModel model;
+    private CarbonModel model = CarbonModel.getInstance();;
     private String nickname;
     private boolean naturalGas;
     private boolean electricity;
@@ -31,15 +31,23 @@ public class EditUtilityActivity extends AppCompatActivity {
     private String endingDate;
     private int usage;
     private int numPeople;
+    int selectedUtilityIndex;
+    private Utility selectedUtility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_utility);
-        model = CarbonModel.getInstance();
+        Intent callingIntent = getIntent();
+        selectedUtilityIndex = callingIntent.getIntExtra("UtilityIndex", 0);
+        selectedUtility = model.getUtilityCollection().getUtilityAtIndex(selectedUtilityIndex);
+
+        setupUtilityNicknameText();
 
         // Spinner requesting fuel
         selectFuelSpinner();
+
+        setupUsageText();
 
         // Spinners for getting starting date
         setupStartYearSpinner();
@@ -51,9 +59,16 @@ public class EditUtilityActivity extends AppCompatActivity {
         setupEndMonthSpinner();
         setupEndDaySpinner();
 
+        setupNumberPeopleText();
+
         // Save and cancel buttons
         setupEditBillButton();
         setupCancelButton();
+    }
+
+    private void setupUtilityNicknameText() {
+        EditText nickname = (EditText) findViewById(R.id.editUtilityNickname);
+        nickname.setText(selectedUtility.getNickname());
     }
 
     //todo: modify for editing/saving
@@ -68,6 +83,12 @@ public class EditUtilityActivity extends AppCompatActivity {
 
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         selectResource.setAdapter(spinnerArrayAdapter);
+        if (selectedUtility.isNaturalGas()) {
+            selectResource.setSelection(0);
+        }
+        else {
+            selectResource.setSelection(1);
+        }
 
         selectResource.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -88,8 +109,14 @@ public class EditUtilityActivity extends AppCompatActivity {
         });
     }
 
+    private void setupUsageText() {
+        EditText usage = (EditText) findViewById(R.id.editTextUtilityUsage_EditUtility);
+        String usageString = "" + selectedUtility.getUsage();
+        usage.setText(usageString);
+    }
+
     private void getNickName() {
-        final EditText editText = (EditText) findViewById(R.id.addUtilityNickname);
+        final EditText editText = (EditText) findViewById(R.id.editUtilityNickname);
         String text = editText.getText().toString();
 
         // Check if editText isn't empty
@@ -101,7 +128,7 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void getUsage() {
-        final EditText editText = (EditText) findViewById(R.id.editText_Utility_Usage);
+        final EditText editText = (EditText) findViewById(R.id.editTextUtilityUsage_EditUtility);
         String value = editText.getText().toString();
 
         // Check if editText is not empty
@@ -114,13 +141,14 @@ public class EditUtilityActivity extends AppCompatActivity {
 
     // Following 3 methods get starting date
     private void setupStartYearSpinner() {
-        final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartYear);
+        final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartYear);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         yearSpinner.setAdapter(spinnerArrayAdapter);
+        yearSpinner.setSelection(model.getDateHandler().MAX_YEAR - selectedUtility.getStartYear());
 
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,14 +164,14 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void setupStartMonthSpinner() {
-        final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartMonth);
+        final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartMonth);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getMonthList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         monthSpinner.setAdapter(spinnerArrayAdapter);
-        monthSpinner.setSelection(model.getDateHandler().getCurrentMonth() - 1);
+        monthSpinner.setSelection(selectedUtility.getStartMonth() - 1);
 
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -159,7 +187,7 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void setupStartDaySpinner() {
-        final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartDay);
+        final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerEditUtilityStartDay);
         model.getDateHandler().initializeDayList(startYear, startMonth);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
@@ -167,7 +195,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                 model.getDateHandler().getDayList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         daySpinner.setAdapter(spinnerArrayAdapter);
-        daySpinner.setSelection(model.getDateHandler().getCurrentDay() - 1);
+        daySpinner.setSelection(selectedUtility.getStartDay() - 1);
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -183,18 +211,19 @@ public class EditUtilityActivity extends AppCompatActivity {
 
     // Following 3 methods get ending date
     private void setupEndYearSpinner() {
-        final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndYear);
+        final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndYear);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         yearSpinner.setAdapter(spinnerArrayAdapter);
+        yearSpinner.setSelection(model.getDateHandler().MAX_YEAR - selectedUtility.getEndYear());
 
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                startYear = Integer.parseInt
+                endYear = Integer.parseInt
                         (model.getDateHandler().getYearList().get(position));
                 setupStartDaySpinner();
             }
@@ -205,19 +234,19 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void setupEndMonthSpinner() {
-        final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndMonth);
+        final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndMonth);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getMonthList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         monthSpinner.setAdapter(spinnerArrayAdapter);
-        monthSpinner.setSelection(model.getDateHandler().getCurrentMonth() - 1);
+        monthSpinner.setSelection(selectedUtility.getEndMonth() - 1);
 
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                startMonth = Integer.parseInt
+                endMonth = Integer.parseInt
                         (model.getDateHandler().getMonthList().get(position));
                 setupStartDaySpinner();
             }
@@ -228,7 +257,7 @@ public class EditUtilityActivity extends AppCompatActivity {
     }
 
     private void setupEndDaySpinner() {
-        final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndDay);
+        final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndDay);
         model.getDateHandler().initializeDayList(startYear, startMonth);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
@@ -236,18 +265,24 @@ public class EditUtilityActivity extends AppCompatActivity {
                 model.getDateHandler().getDayList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         daySpinner.setAdapter(spinnerArrayAdapter);
-        daySpinner.setSelection(model.getDateHandler().getCurrentDay() - 1);
+        daySpinner.setSelection(selectedUtility.getEndDay() - 1);
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                startDay = Integer.parseInt
+                endDay = Integer.parseInt
                         (model.getDateHandler().getDayList().get(position));
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    private void setupNumberPeopleText() {
+        EditText numPeople = (EditText) findViewById(R.id.editText_Utility_Num_People);
+        String numPeopleString = selectedUtility.getNumPeople() + "";
+        numPeople.setText(numPeopleString);
     }
 
     // Gets number of people in home
@@ -289,14 +324,16 @@ public class EditUtilityActivity extends AppCompatActivity {
                     // Create a Utility
                     Utility utility = new Utility(nickname, naturalGas, electricity,
                             startingDate, endingDate, usage, numPeople);
-
-                    // Add to utility collection
-                    UtilityCollection collection = model.getUtilityCollection();
-                    collection.addUtility(utility);
-
-                    model.setUtilityCollection(collection);
+                    selectedUtility.setNickname(nickname);
+                    selectedUtility.setNaturalGas(naturalGas);
+                    selectedUtility.setElectricity(electricity);
+                    selectedUtility.setStartDateString(startingDate);
+                    selectedUtility.setEndDateString(endingDate);
+                    selectedUtility.setUsage(usage, naturalGas, electricity);
+                    selectedUtility.setNumPeople(numPeople);
 
                     // Return to utility list and close activity
+                    startActivity(new Intent(EditUtilityActivity.this, UtilityListActivity.class));
                     finish();
                 }
             }
