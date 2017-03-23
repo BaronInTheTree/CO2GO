@@ -29,7 +29,6 @@ public class MainMenuActivity extends AppCompatActivity {
         modelInstance = CarbonModel.getInstance();
 
         setUpButtons();
-
     }
 
     private void setUpButtons() {
@@ -38,6 +37,14 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainMenuActivity.this, SelectTransportationActivity.class));
+            }
+        });
+
+        Button utilities_btn = (Button) findViewById(R.id.button_UtilityList);
+        utilities_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenuActivity.this, UtilityListActivity.class));
             }
         });
 
@@ -66,9 +73,6 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
     @Override
     public void onBackPressed() {

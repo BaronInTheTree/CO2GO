@@ -11,7 +11,6 @@ import java.util.List;
  * Stores a list of years and months for GUI
  * Updates number of selectable days in list depending on year and month selected
  */
-
 public class DateHandler {
 
     private List<String> yearList;
