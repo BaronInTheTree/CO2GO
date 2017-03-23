@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+/*
+ * EditUtilityActivity creates spinners and input textboxes filled with utility's data.
+ * Contains utility's data as well as date values for starting/ending dates.
+ */
 public class EditUtilityActivity extends AppCompatActivity {
     private static final int INVALID_INPUT = 0;
     private int startYear;
@@ -23,7 +27,8 @@ public class EditUtilityActivity extends AppCompatActivity {
     private int endMonth;
     private int endDay;
 
-    private CarbonModel model = CarbonModel.getInstance();;
+    private CarbonModel model = CarbonModel.getInstance();
+    ;
     private String nickname;
     private boolean naturalGas;
     private boolean electricity;
@@ -39,22 +44,24 @@ public class EditUtilityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_utility);
         Intent callingIntent = getIntent();
+
+        // Get utility from utility list
         selectedUtilityIndex = callingIntent.getIntExtra("UtilityIndex", 0);
         selectedUtility = model.getUtilityCollection().getUtilityAtIndex(selectedUtilityIndex);
 
+        // Set all spinners/editTexts to utility's values
         setupUtilityNicknameText();
 
-        // Spinner requesting fuel
         selectFuelSpinner();
 
         setupUsageText();
 
-        // Spinners for getting starting date
+        // Spinners for starting date
         setupStartYearSpinner();
         setupStartMonthSpinner();
         setupStartDaySpinner();
 
-        // Spinners for getting ending date
+        // Spinners for ending date
         setupEndYearSpinner();
         setupEndMonthSpinner();
         setupEndDaySpinner();
@@ -71,8 +78,6 @@ public class EditUtilityActivity extends AppCompatActivity {
         nickname.setText(selectedUtility.getNickname());
     }
 
-    //todo: modify for editing/saving
-
     private void selectFuelSpinner() {
         final Spinner selectResource = (Spinner) findViewById(R.id.spinnerSelectResource);
 
@@ -85,8 +90,7 @@ public class EditUtilityActivity extends AppCompatActivity {
         selectResource.setAdapter(spinnerArrayAdapter);
         if (selectedUtility.isNaturalGas()) {
             selectResource.setSelection(0);
-        }
-        else {
+        } else {
             selectResource.setSelection(1);
         }
 
@@ -157,6 +161,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                         (model.getDateHandler().getYearList().get(position));
                 setupStartDaySpinner();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -180,6 +185,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                         (model.getDateHandler().getMonthList().get(position));
                 setupStartDaySpinner();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -203,6 +209,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                 startDay = Integer.parseInt
                         (model.getDateHandler().getDayList().get(position));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -227,6 +234,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                         (model.getDateHandler().getYearList().get(position));
                 setupStartDaySpinner();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -250,6 +258,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                         (model.getDateHandler().getMonthList().get(position));
                 setupStartDaySpinner();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -273,6 +282,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                 endDay = Integer.parseInt
                         (model.getDateHandler().getDayList().get(position));
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -285,7 +295,6 @@ public class EditUtilityActivity extends AppCompatActivity {
         numPeople.setText(numPeopleString);
     }
 
-    // Gets number of people in home
     private void getNumPeople() {
         final EditText editText = (EditText) findViewById(R.id.editText_Utility_Num_People);
         String value = editText.getText().toString();
@@ -321,9 +330,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
 
                 } else {
-                    // Create a Utility
-                    Utility utility = new Utility(nickname, naturalGas, electricity,
-                            startingDate, endingDate, usage, numPeople);
+                    // Updates utility's values
                     selectedUtility.setNickname(nickname);
                     selectedUtility.setNaturalGas(naturalGas);
                     selectedUtility.setElectricity(electricity);
@@ -388,6 +395,7 @@ public class EditUtilityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Return to utility list and close activity
+                startActivity(new Intent(EditUtilityActivity.this, UtilityListActivity.class));
                 finish();
             }
         });
