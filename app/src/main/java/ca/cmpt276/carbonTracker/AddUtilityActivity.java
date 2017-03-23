@@ -199,7 +199,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                startYear = Integer.parseInt
+                endYear = Integer.parseInt
                         (model.getDateHandler().getYearList().get(position));
                 setupStartDaySpinner();
             }
@@ -222,7 +222,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                startMonth = Integer.parseInt
+                endMonth = Integer.parseInt
                         (model.getDateHandler().getMonthList().get(position));
                 setupStartDaySpinner();
             }
@@ -246,7 +246,7 @@ public class AddUtilityActivity extends AppCompatActivity {
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                startDay = Integer.parseInt
+                endDay = Integer.parseInt
                         (model.getDateHandler().getDayList().get(position));
             }
             @Override
@@ -289,6 +289,13 @@ public class AddUtilityActivity extends AppCompatActivity {
                             "Please check the dates. \n" +
                                     "Start date must be before end date.",
                             Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddUtilityActivity.this,
+                            "Start Year: " + startYear
+                                    + "\nStart Month: " + startMonth
+                                    + "\nStart Day: " + startDay
+                                    + "\nEnd Year: " + endYear
+                                    + "\nEnd Month: " + endMonth
+                                    + "\nEnd Day: " + endDay, Toast.LENGTH_LONG).show();
 
                 } else {
                     // Create a Utility

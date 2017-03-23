@@ -115,20 +115,20 @@ public class EditUtilityActivity extends AppCompatActivity {
     // Following 3 methods get starting date
     private void setupStartYearSpinner() {
         final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartYear);
+
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         yearSpinner.setAdapter(spinnerArrayAdapter);
+
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 startYear = Integer.parseInt
                         (model.getDateHandler().getYearList().get(position));
-                // Set day spinner
                 setupStartDaySpinner();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -137,20 +137,21 @@ public class EditUtilityActivity extends AppCompatActivity {
 
     private void setupStartMonthSpinner() {
         final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartMonth);
+
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getMonthList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         monthSpinner.setAdapter(spinnerArrayAdapter);
+        monthSpinner.setSelection(model.getDateHandler().getCurrentMonth() - 1);
+
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 startMonth = Integer.parseInt
                         (model.getDateHandler().getMonthList().get(position));
-                // Set day spinner
                 setupStartDaySpinner();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -160,18 +161,20 @@ public class EditUtilityActivity extends AppCompatActivity {
     private void setupStartDaySpinner() {
         final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectStartDay);
         model.getDateHandler().initializeDayList(startYear, startMonth);
+
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getDayList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         daySpinner.setAdapter(spinnerArrayAdapter);
+        daySpinner.setSelection(model.getDateHandler().getCurrentDay() - 1);
+
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 startDay = Integer.parseInt
                         (model.getDateHandler().getDayList().get(position));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -181,20 +184,20 @@ public class EditUtilityActivity extends AppCompatActivity {
     // Following 3 methods get ending date
     private void setupEndYearSpinner() {
         final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndYear);
+
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         yearSpinner.setAdapter(spinnerArrayAdapter);
+
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                endYear = Integer.parseInt
+                startYear = Integer.parseInt
                         (model.getDateHandler().getYearList().get(position));
-                // Set day spinner
                 setupStartDaySpinner();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -203,20 +206,21 @@ public class EditUtilityActivity extends AppCompatActivity {
 
     private void setupEndMonthSpinner() {
         final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndMonth);
+
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getMonthList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         monthSpinner.setAdapter(spinnerArrayAdapter);
+        monthSpinner.setSelection(model.getDateHandler().getCurrentMonth() - 1);
+
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                endMonth = Integer.parseInt
+                startMonth = Integer.parseInt
                         (model.getDateHandler().getMonthList().get(position));
-                // Set day spinner
                 setupStartDaySpinner();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -225,19 +229,21 @@ public class EditUtilityActivity extends AppCompatActivity {
 
     private void setupEndDaySpinner() {
         final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerAddBillSelectEndDay);
-        model.getDateHandler().initializeDayList(endYear, endMonth);
+        model.getDateHandler().initializeDayList(startYear, startMonth);
+
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 model.getDateHandler().getDayList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         daySpinner.setAdapter(spinnerArrayAdapter);
+        daySpinner.setSelection(model.getDateHandler().getCurrentDay() - 1);
+
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                endDay = Integer.parseInt
+                startDay = Integer.parseInt
                         (model.getDateHandler().getDayList().get(position));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
