@@ -1,4 +1,4 @@
-package ca.cmpt276.carbonTracker;
+package ca.cmpt276.carbonTracker.UI;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import com.github.mikephil.charting.data.Entry;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 
 public class MonthlyEmissionGraphActivity extends AppCompatActivity {
 
