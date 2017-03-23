@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.sasha.carbontracker.R;
 
-import org.w3c.dom.Text;
 /**
  * FootprintTableActivity displays the journey collection in a side-by-side comparison so that the
  * user and see and compare how much CO2 they have used when doing the journeys they have created.
@@ -20,6 +19,7 @@ import org.w3c.dom.Text;
  * @author Team Teal
  */
 public class FootprintTableActivity extends AppCompatActivity {
+    private static String userNotes = "In portrait view, scroll sideways to read full content.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class FootprintTableActivity extends AppCompatActivity {
 
     private void setupNote() {
         TextView note = (TextView) findViewById(R.id.note);
-        note.setText("In portrait view, scroll sideways to read full content.");
+        note.setText(userNotes);
     }
 
     private void setupButtons() {
@@ -58,7 +58,7 @@ public class FootprintTableActivity extends AppCompatActivity {
 
     private void populateListView() {
         CarbonModel currentInstance = CarbonModel.getInstance();
-        String[] allJourneys = currentInstance.getJourneys().getJourneyDescriptionsTableFormat();
+        String[] allJourneys = currentInstance.getJourneyCollection().getJourneyDescriptionsTableFormat();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.table_layout, allJourneys);

@@ -4,7 +4,7 @@ package ca.cmpt276.carbonTracker;
  * The Tip class generates one of several tips for the user so that they will be able to
  * learn new ways of reducing their CO2 output and other things.
  *
- * @author Team Teal
+ * Song Xiao - Team Teal
  */
 
 public class Tip {
