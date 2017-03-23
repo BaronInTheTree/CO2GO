@@ -1,8 +1,6 @@
 package ca.cmpt276.carbonTracker;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -23,7 +21,8 @@ import java.util.List;
  * Activity allows the user to add a new utility or return to main menu.
  */
 public class UtilityListActivity extends AppCompatActivity {
-private static final int REQUEST_CODE_EDIT_UTILITY = 1000;
+    private static final int REQUEST_CODE_EDIT_UTILITY = 1000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

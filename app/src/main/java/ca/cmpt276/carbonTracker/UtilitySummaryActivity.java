@@ -11,7 +11,7 @@ import com.example.sasha.carbontracker.R;
 
 /*
  * UtilitySummaryActivity class displays all information about a specific utility
- * to screen via text with an "ok" button allowing the user to return to previous page.
+ * to screen via text and allows the user to return to previous page.
  */
 public class UtilitySummaryActivity extends AppCompatActivity {
 
