@@ -101,9 +101,9 @@ public class EditUtilityActivity extends AppCompatActivity {
         startMonthSpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         startMonthSpinner.setAdapter(startMonthSpinnerArrayAdapter);
 
-        String[] strStartMonth = utility.getStartDate().split("-");
-        String startMonth = strStartMonth[1];
-        int startMonthSpinnerPosition = startMonthSpinnerArrayAdapter.getPosition(startMonth);
+        String startMonth = utility.getStartDate();
+        String[] strStartMonth = startMonth.split("-");
+        int startMonthSpinnerPosition = startYearSpinnerArrayAdapter.getPosition(strStartMonth[0]);
         startMonthSpinner.setSelection(startMonthSpinnerPosition);
 
         // doesn't work
@@ -118,7 +118,7 @@ public class EditUtilityActivity extends AppCompatActivity {
         String startDay = utility.getStartDate();
         String[] strStartDay = startDay.split("-");
         int startDaySpinnerPosition = startDaySpinnerArrayAdapter.getPosition(strStartDay[2]);
-        startDaySpinner.setSelection(startDaySpinnerPosition+2);
+        startDaySpinner.setSelection(startDaySpinnerPosition);
 
         // doesnt work
         // Set end year spinner
@@ -132,7 +132,7 @@ public class EditUtilityActivity extends AppCompatActivity {
         String endYear = utility.getEndDate();
         String[] strEndYear = endYear.split("-");
         int endYearSpinnerPosition = startYearSpinnerArrayAdapter.getPosition(strEndYear[0]);
-        startYearSpinner.setSelection(endYearSpinnerPosition+3);
+        startYearSpinner.setSelection(endYearSpinnerPosition);
 
         // Set end month spinner
         Spinner endMonthSpinner = (Spinner) findViewById(R.id.spinnerEditUtilityEndMonth);
@@ -158,7 +158,7 @@ public class EditUtilityActivity extends AppCompatActivity {
         String endDay = utility.getEndDate();
         String[] strEndDay = endDay.split("-");
         int endDaySpinnerPosition = endDaySpinnerArrayAdapter.getPosition(strEndDay[2]);
-        endDaySpinner.setSelection(endDaySpinnerPosition);  // day list starts from index 0
+        endDaySpinner.setSelection(endDaySpinnerPosition);
     }
 
     //todo: modify for editing/saving

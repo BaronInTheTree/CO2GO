@@ -9,15 +9,35 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ca.cmpt276.carbonTracker.MainMenuActivity">
-
     <Button
         android:text="@string/new_journey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newJourney_btn"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="119dp"
+        android:layout_marginBottom="51dp"
+        android:layout_above="@+id/footprint_btn"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/button_UtilityList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Utilities"
+        android:layout_marginRight="53dp"
+        android:layout_marginEnd="53dp"
+        android:layout_alignBaseline="@+id/viewJourneys_btn"
+        android:layout_alignBottom="@+id/viewJourneys_btn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/viewJourneys_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Journeys"
+        android:layout_marginTop="74dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -27,29 +47,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/footprint_btn"
-        android:layout_below="@+id/newJourney_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="102dp" />
+        android:layout_marginBottom="62dp"
+        android:layout_above="@+id/tip_btn"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/tip_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Tips"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="33dp" />
-
-    <Button
-        android:id="@+id/button_UtilityList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/newJourney_btn"
-        android:layout_alignBottom="@+id/newJourney_btn"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="51dp"
-        android:layout_marginRight="51dp"
-        android:text="Utilities" />
-
+        android:layout_marginBottom="20dp"
+        android:text="View Tips" />
 </RelativeLayout>

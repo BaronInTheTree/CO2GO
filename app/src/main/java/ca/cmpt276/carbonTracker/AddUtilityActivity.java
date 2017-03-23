@@ -339,8 +339,8 @@ public class AddUtilityActivity extends AppCompatActivity {
         boolean negativeYear = (startYear > endYear);
         boolean negativeMonth = (startYear == endYear && startMonth > endMonth);
         boolean negativeDay = (startYear == endYear &&
-                                startMonth == endMonth &&
-                                startDay > endDay);
+                startMonth == endMonth &&
+                startDay > endDay);
 
         if (negativeYear || negativeMonth || negativeDay) {
             return true;
