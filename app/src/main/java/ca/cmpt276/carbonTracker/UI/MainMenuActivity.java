@@ -60,7 +60,7 @@ public class MainMenuActivity extends AppCompatActivity {
         footprint_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuActivity.this, FootprintTableActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, GraphMenuActivity.class));
             }
         });
 
