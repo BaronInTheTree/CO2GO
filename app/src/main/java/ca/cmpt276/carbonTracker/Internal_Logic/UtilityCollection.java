@@ -56,7 +56,7 @@ public class UtilityCollection {
     public double getTotalEmissionsForPeriod(int days) {
         double totalEmissions = 0;
         for (Utility utility : utilityList) {
-            totalEmissions = totalEmissions + utility.getUsageForPeriod(days);
+            totalEmissions = totalEmissions + utility.getTotalCO2();
         }
         return totalEmissions;
     }

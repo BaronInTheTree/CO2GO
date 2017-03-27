@@ -20,7 +20,7 @@ public class Utility {
     private String nickname;
     private boolean naturalGas;
     private boolean electricity;
-    private double timespan;
+    private int timespan;
     private String startDateString;
     private String endDateString;
     private int usage;
@@ -149,7 +149,7 @@ public class Utility {
         return endDateString;
     }
 
-    public double getTimespan() {
+    public int getTimespan() {
         return timespan;
     }
 
@@ -159,13 +159,6 @@ public class Utility {
 
     public int getUsage() {
         return usage;
-    }
-
-    public int getUsageForPeriod(int days) {
-        // Makes sure difference in days is always positive
-        days = Math.abs(days);
-
-        return usage / days;
     }
 
     public double getUsagePerDay() {
@@ -194,14 +187,22 @@ public class Utility {
         }
     }
 
-    public double getTotalC02(int days) {
+    public double getTotalCO2() {
+        if (naturalGas) {
+            return usage * NATURAL_GAS_CO2_EMISSION;
+        }
+        else {
+            return usage * ELECTRICITY_CO2_EMISSION;
+        }
+    }
+
+    public double getCO2PerDay() {
         // Makes sure difference in days is always positive
-        days = Math.abs(days);
 
         if (naturalGas) {
-            return getUsageForPeriod(days) * NATURAL_GAS_CO2_EMISSION;
+            return getUsagePerDay() * NATURAL_GAS_CO2_EMISSION;
         } else {
-            return getUsageForPeriod(days) * ELECTRICITY_CO2_EMISSION;
+            return getUsagePerDay() * ELECTRICITY_CO2_EMISSION;
         }
     }
 

@@ -30,7 +30,6 @@ public class EditUtilityActivity extends AppCompatActivity {
     private int endDay;
 
     private CarbonModel model = CarbonModel.getInstance();
-    ;
     private String nickname;
     private boolean naturalGas;
     private boolean electricity;
@@ -340,6 +339,9 @@ public class EditUtilityActivity extends AppCompatActivity {
                     selectedUtility.setEndDateString(endingDate);
                     selectedUtility.setUsage(usage, naturalGas, electricity);
                     selectedUtility.setNumPeople(numPeople);
+
+                    model.getDayDataCollection().initializeUtilityDates();
+                    model.getDayDataCollection().updateUtilityDates();
 
                     // This is just a temporary testing toast message.
                     String message = model.getTips().getUtilityTip(selectedUtility);

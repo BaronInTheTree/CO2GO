@@ -76,6 +76,10 @@ public class JourneyInformationActivity extends AppCompatActivity {
                 currentJourney.setDate(selectedYear, selectedMonth, selectedDay);
                 currentInstance.addNewJourney(currentJourney);
                 SaveData.saveJourneys(JourneyInformationActivity.this);
+
+                currentInstance.getDayDataCollection().initializeJourneyDates();
+                currentInstance.getDayDataCollection().updateJourneyDates();
+
                 int type = currentJourney.getTransportType();
                 summary.updateJourneys(currentInstance.getJourneyCollection());
                 // create tip based on the type of transportation and the information within current Journey.

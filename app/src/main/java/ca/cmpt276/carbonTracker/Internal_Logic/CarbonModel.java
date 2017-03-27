@@ -1,5 +1,7 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ public class CarbonModel {
     private UtilityCollection utilityCollection;
     private DateHandler dateHandler;
     private MonthYearSummary summary;
+    private DayDataCollection dayDataCollection;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -45,6 +48,7 @@ public class CarbonModel {
         dateHandler = new DateHandler();
         utilityCollection = new UtilityCollection();
         summary = new MonthYearSummary();
+        dayDataCollection = new DayDataCollection();
     }
 
     public void addNewJourney(Journey newJourney) {
@@ -97,6 +101,10 @@ public class CarbonModel {
 
     public void setSelectedTransportType(String selectedTransportType) {
         this.selectedTransportType = selectedTransportType;
+    }
+
+    public DayDataCollection getDayDataCollection() {
+        return dayDataCollection;
     }
 
     public DateHandler getDateHandler() {

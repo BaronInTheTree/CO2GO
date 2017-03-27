@@ -35,14 +35,12 @@ public class JourneyCollection {
 
     public void deleteJourney(int index) {
         journeyCollection.remove(index);
+        //CarbonModel model = CarbonModel.getInstance();
+        //model.getDayDataCollection().updateJourneyDates();
     }
 
     private void sortJourneysByDate() {
         Collections.sort(journeyCollection);
-    }
-
-    public void editJourney(int index) {
-        journeyCollection.get(index);
     }
 
     public List<Journey> getJourneys() {return journeyCollection;}

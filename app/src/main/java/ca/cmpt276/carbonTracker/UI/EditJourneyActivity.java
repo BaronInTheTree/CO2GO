@@ -207,6 +207,10 @@ public class EditJourneyActivity extends AppCompatActivity {
                 selectedJourney.setTransport(selectedTransport);
                 selectedJourney.setRoute(selectedRoute);
                 selectedJourney.setDate(selectedYear, selectedMonth, selectedDay);
+
+                modelInstance.getDayDataCollection().initializeJourneyDates();
+                modelInstance.getDayDataCollection().updateJourneyDates();
+
                 startActivity(new Intent(EditJourneyActivity.this, JourneyListActivity.class));
                 finish();
             }
