@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ca.cmpt276.carbonTracker.UI.MonthYearSummary;
-
 /**
  * TipCollection, as the name implies, stores tips for the user to read. It is also able to maintain
  * specific types of tips, such as ones for cars or utilities, and are displayed accordingly once
