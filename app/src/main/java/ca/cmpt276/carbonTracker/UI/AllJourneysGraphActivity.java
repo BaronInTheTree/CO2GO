@@ -1,6 +1,5 @@
 package ca.cmpt276.carbonTracker.UI;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,14 +22,14 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 
 /**
- * The FootprintGraphActivity takes all journeys from the JourneyCollection in the Carbon Model
+ * The AllJourneysGraphActivity takes all journeys from the JourneyCollection in the Carbon Model
  * and creates a graph that the user is able to interact with and view the output in a more visual
  * representation.
  *
  * @author Team Teal
  */
 
-public class FootprintGraphActivity extends AppCompatActivity {
+public class AllJourneysGraphActivity extends AppCompatActivity {
 
     private final String tableLabel = "CO2 Emission of Journeys (in gram)";
 
@@ -74,7 +73,7 @@ public class FootprintGraphActivity extends AppCompatActivity {
                 if (e == null)
                     return;
 
-                Toast.makeText(FootprintGraphActivity.this,
+                Toast.makeText(AllJourneysGraphActivity.this,
                         journeys[(int) h.getX()], Toast.LENGTH_SHORT).show();
             }
 
@@ -86,13 +85,11 @@ public class FootprintGraphActivity extends AppCompatActivity {
     }
 
     private void setupButtons() {
-        Button toTable_btn = (Button) findViewById(R.id.toTable_btn);
-        toTable_btn.setOnClickListener(new View.OnClickListener() {
+        Button back_btn = (Button) findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(FootprintGraphActivity.this, FootprintTableActivity.class));
-
             }
         });
     }

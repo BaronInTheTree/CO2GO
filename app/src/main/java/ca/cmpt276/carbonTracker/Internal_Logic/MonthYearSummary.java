@@ -1,4 +1,4 @@
-package ca.cmpt276.carbonTracker.UI;
+package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

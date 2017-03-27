@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.sasha.carbontracker.R;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.MonthYearSummary;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 
 /**
@@ -55,7 +56,7 @@ public class MainMenuActivity extends AppCompatActivity {
         footprint_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuActivity.this, FootprintTableActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, GraphMenuActivity.class));
             }
         });
 
