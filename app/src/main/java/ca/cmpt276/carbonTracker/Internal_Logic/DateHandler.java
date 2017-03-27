@@ -22,6 +22,7 @@ public class DateHandler {
     private int currentYear;
     private int currentMonth; // 0-11
     private int currentDay;
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public DateHandler() {
         yearList = new ArrayList<>();
@@ -92,5 +93,9 @@ public class DateHandler {
 
     public int getCurrentDay() {
         return currentDay;
+    }
+
+    public static boolean compareDates(Date date1, Date date2) {
+        return dateFormat.format(date1).equals(dateFormat.format(date2));
     }
 }

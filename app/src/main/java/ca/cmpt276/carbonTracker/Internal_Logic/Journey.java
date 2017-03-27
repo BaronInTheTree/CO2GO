@@ -153,5 +153,4 @@ public class Journey implements Comparable<Journey> {
         return Integer.parseInt(new SimpleDateFormat("dd").format(dateTime));
     }
 
-
 }

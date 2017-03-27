@@ -58,6 +58,10 @@ public class JourneyListActivity extends AppCompatActivity {
                 final int index = position;
                 modelInstance.getJourneyCollection().deleteJourney(index);
                 SaveData.saveJourneys(JourneyListActivity.this);
+
+                modelInstance.getDayDataCollection().initializeJourneyDates();
+                modelInstance.getDayDataCollection().updateJourneyDates();
+
                 populateJourneyList();
                 return false;
             }

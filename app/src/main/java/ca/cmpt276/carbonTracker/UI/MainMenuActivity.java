@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.sasha.carbontracker.R;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 
 /**
@@ -29,6 +30,9 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        modelInstance.getDayDataCollection().initializeJourneyDates();
+        modelInstance.getDayDataCollection().initializeUtilityDates();
 
         setUpButtons();
         SaveData.loadTips(this);

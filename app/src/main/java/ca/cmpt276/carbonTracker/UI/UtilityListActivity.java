@@ -117,6 +117,8 @@ public class UtilityListActivity extends AppCompatActivity {
             finish();
         } else if (item.toString().equals("Delete")) {
             cm.getUtilityCollection().deleteUtility(selectedUtilityPosition);
+            cm.getDayDataCollection().initializeUtilityDates();
+            cm.getDayDataCollection().updateUtilityDates();
             SaveData.saveUtilities(this);
         }
         updateListView();
