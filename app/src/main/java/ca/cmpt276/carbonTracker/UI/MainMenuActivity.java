@@ -60,7 +60,7 @@ public class MainMenuActivity extends AppCompatActivity {
         footprint_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuActivity.this, FootprintTableActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, GraphMenuActivity.class));
             }
         });
 
@@ -71,6 +71,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 String message = modelInstance.getTips().getGeneralTip(summary);
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
                 SaveData.saveTips(MainMenuActivity.this);
+                startActivity(new Intent(MainMenuActivity.this, TestActivity.class));
             }
         });
 
