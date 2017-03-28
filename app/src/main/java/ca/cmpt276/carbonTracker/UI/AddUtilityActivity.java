@@ -307,8 +307,6 @@ public class AddUtilityActivity extends AppCompatActivity {
                     collection.addUtility(utility);
 
                     model.setUtilityCollection(collection);
-                    model.getDayDataCollection().initializeUtilityDates();
-                    model.getDayDataCollection().updateUtilityDates();
 
                     // Return to utility list and close activity
                     Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);

@@ -1,12 +1,16 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Stores all data pertaining to a particular date, including Journeys and Utilities entered.
  * Returns emissions for a particular date, to varying levels of detail.
+ *
+ * Use static methods getDayDataAtDate and getDayDataWithinInterval to gather information
+ * and populate graphs during runtime.
  */
 
 public class DayData {
@@ -38,7 +42,7 @@ public class DayData {
         journeyList.clear();
         CarbonModel model = CarbonModel.getInstance();
         for (Journey journey : model.getJourneyCollection().getJourneys()) {
-            if (DateHandler.compareDates(date, journey.getDateTime())) {
+            if (DateHandler.areDatesEqual(date, journey.getDateTime())) {
                 journeyList.add(journey);
             }
         }
@@ -94,5 +98,24 @@ public class DayData {
         String info = "Date: " + DateHandler.dateFormat.format(date)
                 + ", CO2: " + getTotalEmissions_KM() + "\n";
         return info;
+    }
+
+    public static List<DayData> getDayDataWithinInterval(Date startDate, Date endDate) {
+        List<DayData> dayDataList = new ArrayList<>();
+        Date currentDate = startDate;
+
+        while (!DateHandler.areDatesEqual(currentDate, endDate)) {
+            dayDataList.add(new DayData(currentDate));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(currentDate);
+            calendar.add(Calendar.DATE, 1);
+            currentDate = calendar.getTime();
+        }
+        dayDataList.add(new DayData(endDate));
+        return dayDataList;
+    }
+
+    public static DayData getDayDataAtDate(Date date) {
+        return new DayData(date);
     }
 }

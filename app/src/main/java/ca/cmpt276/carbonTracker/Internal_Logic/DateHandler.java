@@ -1,5 +1,6 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -71,6 +72,17 @@ public class DateHandler {
         }
     }
 
+    public static Date createDate(int year, int month, int day) {
+        try {
+            String dateString = year + "-" + month + "-" + day;
+            return DateHandler.dateFormat.parse(dateString);
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public List<String> getYearList() {
         return yearList;
     }
@@ -95,7 +107,7 @@ public class DateHandler {
         return currentDay;
     }
 
-    public static boolean compareDates(Date date1, Date date2) {
+    public static boolean areDatesEqual(Date date1, Date date2) {
         return dateFormat.format(date1).equals(dateFormat.format(date2));
     }
 }
