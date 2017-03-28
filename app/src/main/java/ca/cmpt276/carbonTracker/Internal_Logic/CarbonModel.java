@@ -27,6 +27,7 @@ public class CarbonModel {
     private UtilityCollection utilityCollection;
     private DateHandler dateHandler;
     private MonthYearSummary summary;
+    private boolean isTreeUnitEnabled;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -147,5 +148,13 @@ public class CarbonModel {
 
     public List<String> getUtilityFuel() {
         return utilityCollection.getUtilityFuelList();
+    }
+
+    public boolean getTreeUnitEnabled() {
+        return isTreeUnitEnabled;
+    }
+
+    public void setTreeUnitEnabled(boolean status) {
+        isTreeUnitEnabled = status;
     }
 }

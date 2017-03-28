@@ -291,4 +291,23 @@ public class SaveData extends JSONObject  {
         editor.apply();
     }
 
+    /////////////////////
+    // Saving Tree Unit
+    /////////////////////
+    public static void saveTreeUnit(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        SharedPreferences prefs = context.getSharedPreferences("TreeUnitSaveData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.putBoolean("TreeEnabled", model.getTreeUnitEnabled());
+        editor.commit();
+        editor.apply();
+    }
+
+
+    public static void loadTreeUnit(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        SharedPreferences prefs = context.getSharedPreferences("TreeUnitSaveData", MODE_PRIVATE);
+        model.setTreeUnitEnabled(prefs.getBoolean("TreeEnabled", false));
+    }
 }
