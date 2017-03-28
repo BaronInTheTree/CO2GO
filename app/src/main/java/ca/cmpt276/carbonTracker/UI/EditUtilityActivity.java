@@ -340,9 +340,6 @@ public class EditUtilityActivity extends AppCompatActivity {
                     selectedUtility.setUsage(usage, naturalGas, electricity);
                     selectedUtility.setNumPeople(numPeople);
 
-                    model.getDayDataCollection().initializeUtilityDates();
-                    model.getDayDataCollection().updateUtilityDates();
-
                     // This is just a temporary testing toast message.
                     String message = model.getTips().getUtilityTip(selectedUtility);
                     Toast.makeText(EditUtilityActivity.this,message,Toast.LENGTH_LONG).show();

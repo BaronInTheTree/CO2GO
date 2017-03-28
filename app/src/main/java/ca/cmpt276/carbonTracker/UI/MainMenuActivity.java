@@ -11,9 +11,13 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+import java.util.Date;
+import java.util.List;
+
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
-import ca.cmpt276.carbonTracker.Internal_Logic.MonthYearSummary;
+import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
+import ca.cmpt276.carbonTracker.Internal_Logic.MonthYearSummary;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 
 /**
@@ -31,9 +35,6 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
-        modelInstance.getDayDataCollection().initializeJourneyDates();
-        modelInstance.getDayDataCollection().initializeUtilityDates();
 
         setUpButtons();
         SaveData.loadTips(this);
@@ -103,4 +104,22 @@ public class MainMenuActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    // Test button code for easy testing of model on MainMenuActivity
+    /*
+    private void setupTestButton() {
+        Button test = (Button) findViewById(R.id.buttonTest);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<DayData> dayDataList = DayData.getDayDataWithinInterval(DateHandler.createDate(2016, 03, 20), new Date());
+                String info = "";
+                for (DayData dayData : dayDataList) {
+                    info = info + dayData.getInfo();
+                }
+                Toast.makeText(MainMenuActivity.this, info, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    */
 }
