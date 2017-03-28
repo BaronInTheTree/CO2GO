@@ -299,15 +299,17 @@ public class SaveData extends JSONObject  {
         SharedPreferences prefs = context.getSharedPreferences("TreeUnitSaveData", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
-        editor.putBoolean("TreeEnabled", model.getTreeUnitEnabled());
+        editor.putBoolean("TreeEnabled", model.getTreeUnit().getTreeUnitStatus());
         editor.commit();
         editor.apply();
+        System.out.println("save" + model.getTreeUnit().getTreeUnitStatus());
     }
 
 
     public static void loadTreeUnit(Context context) {
         CarbonModel model = CarbonModel.getInstance();
         SharedPreferences prefs = context.getSharedPreferences("TreeUnitSaveData", MODE_PRIVATE);
-        model.setTreeUnitEnabled(prefs.getBoolean("TreeEnabled", false));
+        model.getTreeUnit().setTreeUnitStatus(prefs.getBoolean("TreeEnabled", false));
+        System.out.println("load" + model.getTreeUnit().getTreeUnitStatus());
     }
 }
