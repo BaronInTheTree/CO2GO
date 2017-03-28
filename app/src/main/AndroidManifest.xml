@@ -49,6 +49,7 @@
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditUtilityActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.GraphMenuActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.MonthlyEmissionGraphActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.TestActivity"></activity>
     </application>
 

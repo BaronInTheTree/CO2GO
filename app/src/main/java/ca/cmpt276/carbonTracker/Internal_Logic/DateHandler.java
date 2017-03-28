@@ -83,6 +83,20 @@ public class DateHandler {
         }
     }
 
+    public static Date getDateLastMonth(Date currentDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DATE, -27);
+        return calendar.getTime();
+    }
+
+    public static Date getDateLastYear(Date currentDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DATE, -364);
+        return calendar.getTime();
+    }
+
     public List<String> getYearList() {
         return yearList;
     }

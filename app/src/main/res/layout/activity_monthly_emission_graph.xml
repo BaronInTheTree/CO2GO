@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.cmpt276.carbonTracker.MonthlyEmissionGraphActivity">
+    tools:context="ca.cmpt276.carbonTracker.UI.MonthlyEmissionGraphActivity">
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart"
+        android:id="@+id/lineChartMonthly"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
