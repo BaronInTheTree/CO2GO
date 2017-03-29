@@ -2,11 +2,15 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.Toast;
+
+import ca.cmpt276.carbonTracker.UI.AllJourneysGraphActivity;
+import ca.cmpt276.carbonTracker.UI.dayTransportPieGraphActivity;
 
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.dayMode;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.monthMode;
@@ -41,7 +45,8 @@ public class GraphModeDialog extends AppCompatDialogFragment {
                     }
                     if (which == 1) {
                         // Launch single day Pie graph - transportation mode
-                        Toast.makeText(getActivity(), "To launch single day pie graph transportation mode activity", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), dayTransportPieGraphActivity.class);
+                        getContext().startActivity(intent);
                     }
                     if (which == 2) {
                         // Launch single day Pie graph- route mode

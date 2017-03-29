@@ -40,8 +40,8 @@ public class DateHandler {
         return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 
-    public int totalDaysInMonth(int year, int month) {
-        Calendar calendar = new GregorianCalendar(year, month, 1);
+    public static int totalDaysInMonth(int year, int month) {
+        Calendar calendar = new GregorianCalendar(year, month - 1, 1);
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 

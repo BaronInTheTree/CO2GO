@@ -21,6 +21,7 @@ public class Journey implements Comparable<Journey> {
     private Date dateTime;
     private double emissionsMiles;
     private double emissionsKM;
+    private float emissions;
     public enum Type {WALK_BIKE, BUS, SKYTRAIN, CAR}
     private Type type;
 
@@ -97,6 +98,8 @@ public class Journey implements Comparable<Journey> {
     public double getEmissionsKM() {
         return emissionsKM;
     }
+
+    public float getEmissions() { return emissions; }
 
     public int getDistance() {
         return route.getTotalDistanceKM();

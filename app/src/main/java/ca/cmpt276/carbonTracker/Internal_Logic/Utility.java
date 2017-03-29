@@ -206,8 +206,8 @@ public class Utility {
         }
     }
 
-    public double getCO2PerDayPerPerson(){
-        return getCO2PerDay()/numPeople;
+    public float getCO2PerDayPerPerson(){
+        return (float)getCO2PerDay()/numPeople;
     }
 
     public String displayToList() {

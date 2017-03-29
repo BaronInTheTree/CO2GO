@@ -18,7 +18,7 @@ import java.util.List;
 public class DayData {
     private List<Journey> journeyList;
     private List<Utility> utilityList;
-    private HashMap<String, Double> emissionTransportationModes;
+    //private HashMap<String, Double> emissionTransportationModes;
     private double totalEmissions;
     private Date date;
 
@@ -26,11 +26,11 @@ public class DayData {
         this.date = date;
         journeyList = new ArrayList<>();
         utilityList = new ArrayList<>();
-        emissionTransportationModes = new HashMap <String, Double>();
+        //emissionTransportationModes = new HashMap <String, Double>();
         totalEmissions = 0;
         updateUtilities();
         updateJourneys();
-        setEmissionTransportationModes();
+        //setEmissionTransportationModes();
     }
 
     public void updateUtilities() {
@@ -38,6 +38,10 @@ public class DayData {
         CarbonModel model = CarbonModel.getInstance();
         for (Utility utility : model.getUtilityCollection().getUtilityList()) {
             if (!utility.getStartDate().after(date) && !utility.getEndDate().before(date)) {
+                utilityList.add(utility);
+            }
+            else if (DateHandler.areDatesEqual(date, utility.getStartDate())
+                    || DateHandler.areDatesEqual(date, utility.getEndDate())) {
                 utilityList.add(utility);
             }
         }
@@ -51,7 +55,7 @@ public class DayData {
                 journeyList.add(journey);
             }
         }
-        System.out.println("MSG 1: UPDATED");
+        //System.out.println("MSG 1: UPDATED");
     }
 
     public double getTotalEmissions_KM() {
@@ -65,6 +69,7 @@ public class DayData {
         return totalEmissions;
     }
 
+
     public double getRouteEmissions_KM(Route route) {
         double emissions = 0;
         for (Journey journey : journeyList) {
@@ -75,10 +80,11 @@ public class DayData {
         return emissions;
     }
 
-    public double getCarEmissions_KM(Car car) {
-        double emissions = 0;
+    public float getCarEmissions_KM(Car car) {
+        float emissions = 0;
         for (Journey journey : journeyList) {
-            if (journey.getTransportation().equals(car)) {
+            if (journey.getTransportation().getNickname().equals(car.getNickname())) {
+                System.out.println("TST 10");
                 emissions += journey.getEmissionsKM();
             }
         }
@@ -105,80 +111,12 @@ public class DayData {
         return info;
     }
 
-    public void setEmissionTransportationModes(){
-        emissionTransportationModes.clear();
-
-        for (Journey journey:journeyList){
-            if (journey.getType()== Journey.Type.CAR){
-                String carName = journey.getTransportation().getNickname();
-                if (!emissionTransportationModes.containsKey(carName)) {
-                    emissionTransportationModes.put(carName,journey.getEmissionsKM());
-                }
-                else {
-                    Double emission = emissionTransportationModes.get(carName);
-                    emission += journey.getEmissionsKM();
-                    emissionTransportationModes.put(carName,emission);
-                }
-            }
-            else if (journey.getType()== Journey.Type.BUS){
-                if (!emissionTransportationModes.containsKey("Bus")){
-                    emissionTransportationModes.put("Bus",journey.getEmissionsKM());
-                }
-                else{
-                    Double emission = emissionTransportationModes.get("Bus");
-                    emission += journey.getEmissionsKM();
-                    emissionTransportationModes.put("Bus",emission);
-                }
-            }
-            else if (journey.getType()== Journey.Type.SKYTRAIN) {
-                if (!emissionTransportationModes.containsKey("Skytrain")){
-                    emissionTransportationModes.put("Skytrain",journey.getEmissionsKM());
-                }
-                else{
-                    Double emission = emissionTransportationModes.get("Skytrain");
-                    emission += journey.getEmissionsKM();
-                    emissionTransportationModes.put("Skytrain",emission);
-                }
-            }
-            else {
-                if (!emissionTransportationModes.containsKey("WalkingBiking")){
-                    emissionTransportationModes.put("WalkingBiking",journey.getEmissionsKM());
-                }
-                else{
-                    Double emission = emissionTransportationModes.get("WalkingBiking");
-                    emission += journey.getEmissionsKM();
-                    emissionTransportationModes.put("WalkingBiking",emission);
-                }
-            }
-        }
-
-        for (Utility utility:utilityList){
-            if (utility.isElectricity()){
-                if (!emissionTransportationModes.containsKey("Electricity")){
-                    emissionTransportationModes.put("Electricity", utility.getC02PerPerson());
-                }
-                else {
-                    double emission = emissionTransportationModes.get("Electricity");
-                    emission+= utility.getCO2PerDayPerPerson();
-                    emissionTransportationModes.put("Electricity",emission);
-                }
-            }
-            else {
-                if (!emissionTransportationModes.containsKey("Gas")){
-                    emissionTransportationModes.put("Gas", utility.getC02PerPerson());
-                }
-                else {
-                    double emission = emissionTransportationModes.get("Gas");
-                    emission+= utility.getCO2PerDayPerPerson();
-                    emissionTransportationModes.put("Gas",emission);
-                }
-            }
-        }
-
+    public List<Journey> getJourneyList(){
+        return journeyList;
     }
 
-    public HashMap<String, Double> getEmissionTransportationModes(){
-        return emissionTransportationModes;
+    public List<Utility> getUtilityList(){
+        return utilityList;
     }
 
 
