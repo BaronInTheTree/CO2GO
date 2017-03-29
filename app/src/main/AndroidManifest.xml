@@ -49,7 +49,7 @@
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditUtilityActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.GraphMenuActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.dayTransportPieGraphActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphTransportActivity"></activity>
     </application>
 
 </manifest>

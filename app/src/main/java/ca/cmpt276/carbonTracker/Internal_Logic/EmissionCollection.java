@@ -1,5 +1,7 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
+import com.example.sasha.carbontracker.R;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,11 +14,10 @@ import java.util.Set;
  */
 
 public class EmissionCollection {
-    /*
+
     private HashMap<String, Float> emissionTransportationModes;
     private Float[] emissions;
     private String[] transportationModes;
-
 
     public EmissionCollection(List<DayData> dayDateList){
         emissionTransportationModes = new HashMap<String, Float>();
@@ -52,10 +53,9 @@ public class EmissionCollection {
     public String[] getTransportationModes(){
         return transportationModes;
     }
-    */
 
-    public static HashMap<String, Float> updateEmissionTransportMode(List<DayData> dayDateList) {
-        HashMap<String, Float> emissionTransportationModes = new HashMap<String, Float>();
+
+    public void updateEmissionTransportMode(List<DayData> dayDateList) {
         for (DayData data: dayDateList){
             float emission=0;
             for (Journey journey:data.getJourneyList()){
@@ -72,7 +72,7 @@ public class EmissionCollection {
                 }
                 else if (journey.getType()== Journey.Type.BUS){
                     if (!emissionTransportationModes.containsKey("Bus")){
-                        emissionTransportationModes.put("Bus",journey.getEmissions());
+                        emissionTransportationModes.put("Bus", journey.getEmissions())
                     }
                     else{
                         emission = emissionTransportationModes.get("Bus");
@@ -122,7 +122,6 @@ public class EmissionCollection {
                 }
             }
         }
-        return emissionTransportationModes;
     }
 
 

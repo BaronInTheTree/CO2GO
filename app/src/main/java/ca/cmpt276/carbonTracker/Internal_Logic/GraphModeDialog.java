@@ -4,17 +4,14 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.Toast;
 
-import ca.cmpt276.carbonTracker.UI.AllJourneysGraphActivity;
-import ca.cmpt276.carbonTracker.UI.dayTransportPieGraphActivity;
+import ca.cmpt276.carbonTracker.UI.PieGraphTransportActivity;
 
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.dayMode;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.monthMode;
-import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.yearMode;
 
 /**
  * Created by song on 2017-03-26.
@@ -35,7 +32,6 @@ public class GraphModeDialog extends AppCompatDialogFragment {
         };
 
         if (dayMode){
-            dayMode = false;   // reset it to original value.
             return new AlertDialog.Builder(getActivity()).setTitle("Graph Mode Selector").setSingleChoiceItems(singleDayOptions, -1, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -44,8 +40,7 @@ public class GraphModeDialog extends AppCompatDialogFragment {
                         Toast.makeText(getActivity(), "To launch single day pie graph journey mode activity", Toast.LENGTH_SHORT).show();
                     }
                     if (which == 1) {
-                        // Launch single day Pie graph - transportation mode
-                        Intent intent = new Intent(getContext(), dayTransportPieGraphActivity.class);
+                        Intent intent = new Intent(getContext(), PieGraphTransportActivity.class);
                         getContext().startActivity(intent);
                     }
                     if (which == 2) {
@@ -58,7 +53,6 @@ public class GraphModeDialog extends AppCompatDialogFragment {
 
         }
         else if (monthMode){
-            monthMode=false;   // reset it to original value.
             return new AlertDialog.Builder(getActivity()).setTitle("Select Graph Mode").setSingleChoiceItems(monthYearOptions, -1, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -67,8 +61,8 @@ public class GraphModeDialog extends AppCompatDialogFragment {
                         Toast.makeText(getActivity(), "To launch 4 week Bar graph activity", Toast.LENGTH_SHORT).show();
                     }
                     if (which == 1) {
-                        //Launch 4 week Pie graph- transportation mode
-                        Toast.makeText(getActivity(), "To launch 4 week pie graph transportation mode Activity", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), PieGraphTransportActivity.class);
+                        getContext().startActivity(intent);
                     }
                     if (which == 2) {
                         //Launch 4 week Pie graph- transportation mode
@@ -78,7 +72,7 @@ public class GraphModeDialog extends AppCompatDialogFragment {
             }).create();
         }
         else {
-            yearMode=false;   // reset it to original value.
+            // yearMode=false;   // reset it to original value.
             return new AlertDialog.Builder(getActivity()).setTitle("Select Graph Mode").setSingleChoiceItems(monthYearOptions, -1, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -87,8 +81,8 @@ public class GraphModeDialog extends AppCompatDialogFragment {
                         Toast.makeText(getActivity(), "To launch year Bar graph activity", Toast.LENGTH_SHORT).show();
                     }
                     if (which == 1) {
-                        //Launch year Pie graph- transportation mode
-                        Toast.makeText(getActivity(), "To launch year pie graph transportation mode Activity", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), PieGraphTransportActivity.class);
+                        getContext().startActivity(intent);
                     }
                     if (which == 2) {
                         //Launch year Pie graph- transportation mode

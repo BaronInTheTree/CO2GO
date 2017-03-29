@@ -2,17 +2,13 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.DatePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import ca.cmpt276.carbonTracker.UI.dayTransportPieGraphActivity;
 
 /**
  * Created by song on 2017-03-26.
