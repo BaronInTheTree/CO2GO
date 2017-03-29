@@ -67,8 +67,9 @@ public class MainMenuActivity extends AppCompatActivity {
                 String message = modelInstance.getTips().getGeneralTip(summary);
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
                 SaveData.saveTips(MainMenuActivity.this);
-                //startActivity(new Intent(MainMenuActivity.this, TestActivity.class));
-                startActivity(new Intent(MainMenuActivity.this, MonthlyEmissionGraphActivity.class));
+//                startActivity(new Intent(MainMenuActivity.this, TestActivity.class));
+//                startActivity(new Intent(MainMenuActivity.this, MonthlyEmissionGraphActivity.class));
+//                startActivity(new Intent(MainMenuActivity.this, YearlyEmissionLineGraphActivity.class));
             }
         });
 

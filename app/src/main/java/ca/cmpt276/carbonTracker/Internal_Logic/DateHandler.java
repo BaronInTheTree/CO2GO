@@ -40,8 +40,8 @@ public class DateHandler {
         return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 
-    public int totalDaysInMonth(int year, int month) {
-        Calendar calendar = new GregorianCalendar(year, month, 1);
+    public static int totalDaysInMonth(int year, int month) {
+        Calendar calendar = new GregorianCalendar(year, month - 1, 1);
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
@@ -119,6 +119,18 @@ public class DateHandler {
 
     public int getCurrentDay() {
         return currentDay;
+    }
+
+    public static int getYearOfDate(Date date) {
+        return Integer.parseInt(new SimpleDateFormat("yyyy").format(date));
+    }
+
+    public static int getMonthOfDate(Date date) {
+        return Integer.parseInt(new SimpleDateFormat("MM").format(date));
+    }
+
+    public static int getDayOfDate(Date date) {
+        return Integer.parseInt(new SimpleDateFormat("dd").format(date));
     }
 
     public static boolean areDatesEqual(Date date1, Date date2) {
