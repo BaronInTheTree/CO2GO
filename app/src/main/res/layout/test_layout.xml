@@ -32,7 +32,7 @@
                             android:id="@+id/button"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Notification"
+                            android:text="Notification Display"
                             android:textAlignment="center" />
                     </TableRow>
 
@@ -68,7 +68,9 @@
                                     android:id="@+id/button3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Day" />
+                                    android:layout_marginLeft="45dp"
+                                    android:text="Day"
+                                    android:textSize="12sp" />
                             </TableRow>
 
                             <TableRow
@@ -79,7 +81,9 @@
                                     android:id="@+id/button4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Month" />
+                                    android:layout_marginLeft="45dp"
+                                    android:text="Month"
+                                    android:textSize="12sp" />
                             </TableRow>
 
                             <TableRow
@@ -90,7 +94,10 @@
                                     android:id="@+id/button5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Year" />
+                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginLeft="45dp"
+                                    android:text="Year"
+                                    android:textSize="12sp" />
                             </TableRow>
 
                             <TableRow
@@ -101,6 +108,7 @@
                                     android:id="@+id/button15"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginLeft="45dp"
                                     android:text="Route" />
                             </TableRow>
 
@@ -112,6 +120,8 @@
                                     android:id="@+id/button16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="40dp"
+                                    android:layout_marginLeft="45dp"
                                     android:text="Vehicle" />
                             </TableRow>
 
@@ -125,9 +135,11 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
-                            android:layout_marginRight="30dp"
-                            android:minHeight="250dp"
-                            android:minWidth="250dp" />
+                            android:layout_marginBottom="40dp"
+                            android:layout_marginLeft="-5dp"
+                            android:layout_marginRight="60dp"
+                            android:minHeight="225dp"
+                            android:minWidth="225dp" />
                     </TableRow>
 
                 </TableLayout>
@@ -143,7 +155,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:text="Favorites (2 preset journeys)" />
+                    android:layout_marginRight="100dp"
+                    android:text="Favorites (2 preset journeys, expandable)" />
 
                 <ExpandableListView
                     android:layout_width="match_parent"
@@ -201,6 +214,28 @@
                             android:layout_height="wrap_content"
                             android:minWidth="280dp"
                             android:text="Utilities (List Activity)" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <Button
+                            android:id="@+id/button9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:width="40dp"
+                            android:maxWidth="40dp"
+                            android:minWidth="10dp"
+                            android:text="+" />
+
+                        <Button
+                            android:id="@+id/button2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vehicles (List Activity)" />
                     </TableRow>
 
                     <TableRow
@@ -214,15 +249,13 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:text="Hint" />
+
                     </TableRow>
 
                 </TableLayout>
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </TableLayout>
     </ScrollView>
 
