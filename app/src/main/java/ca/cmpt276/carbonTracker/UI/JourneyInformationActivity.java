@@ -1,7 +1,6 @@
 package ca.cmpt276.carbonTracker.UI;
 
 import android.content.Intent;
-import android.icu.text.DecimalFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
-
-import org.w3c.dom.Text;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
@@ -66,7 +63,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
         distance.setText(distanceInfo);
 
         TextView emissionText= (TextView) findViewById(R.id.emission);
-        emissionText.setText(currentInstance.getTreeUnit().getUnitType());
+        emissionText.setText(currentInstance.getTreeUnit().getUnitTypeSummary());
         TextView emission = (TextView) findViewById(R.id.emission_entry);
         String emissionInfo = String.format("%.2f", currentInstance.getTreeUnit().getUnitValue(currentJourney.getEmissionsKM()));
         if (emissionInfo.length() > maxEmission) emissionInfo = emissionInfo.substring(0, maxEmission);

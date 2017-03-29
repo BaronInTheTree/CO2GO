@@ -11,9 +11,10 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 public class TreeUnit {
     private boolean isTreeUnitEnabled;
     private static final double TREE_TO_CO2 = 44.12;
-    private static final String CO2 = "CO2";
+    private static final String CO2 = "g CO2";
     private static final String EMISSION= "Emission (g):";
-    private static final String TREES = "Trees:";
+    private static final String TREES_COLON = "Trees:";
+    private static final String TREES = "Trees";
 
     public TreeUnit () {
         this.isTreeUnitEnabled = false;
@@ -27,11 +28,20 @@ public class TreeUnit {
         isTreeUnitEnabled = status;
     }
 
-    public String getUnitType() {
+    // Related to activities, such as JourneyInformationActivity.
+    public String getUnitTypeSummary() {
+        if (isTreeUnitEnabled) {
+            return TREES_COLON;
+        }
+        return EMISSION;
+    }
+
+    // More related to the model, such as for JourneyCollection.
+    public String getUnitTypeList() {
         if (isTreeUnitEnabled) {
             return TREES;
         }
-        return EMISSION;
+        return CO2;
     }
 
     public double getUnitValue(double emission) {
@@ -39,5 +49,9 @@ public class TreeUnit {
             return emission/TREE_TO_CO2;
         }
         return emission;
+    }
+
+    public static double convertToTrees(double emission) {
+        return emission/TREE_TO_CO2;
     }
 }
