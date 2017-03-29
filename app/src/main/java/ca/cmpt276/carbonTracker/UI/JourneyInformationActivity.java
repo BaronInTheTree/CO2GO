@@ -1,6 +1,7 @@
 package ca.cmpt276.carbonTracker.UI;
 
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
+
+import org.w3c.dom.Text;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
@@ -62,8 +65,10 @@ public class JourneyInformationActivity extends AppCompatActivity {
         String distanceInfo = "" + currentJourney.getRoute().getTotalDistanceKM();
         distance.setText(distanceInfo);
 
+        TextView emissionText= (TextView) findViewById(R.id.emission);
+        emissionText.setText(currentInstance.getTreeUnit().getUnitType());
         TextView emission = (TextView) findViewById(R.id.emission_entry);
-        String emissionInfo = "" + currentJourney.getEmissionsKM();
+        String emissionInfo = String.format("%.2f", currentInstance.getTreeUnit().getUnitValue(currentJourney.getEmissionsKM()));
         if (emissionInfo.length() > maxEmission) emissionInfo = emissionInfo.substring(0, maxEmission);
         emission.setText(emissionInfo);
     }
@@ -100,7 +105,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
     private void setupSelectYearSpinner() {
         final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerYear);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 currentInstance.getDateHandler().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -124,7 +129,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
     private void setupSelectMonthSpinner() {
         final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerMonth);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 currentInstance.getDateHandler().getMonthList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -148,7 +153,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
         final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerDay);
         currentInstance.getDateHandler().initializeDayList(selectedYear, selectedMonth);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 currentInstance.getDateHandler().getDayList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);

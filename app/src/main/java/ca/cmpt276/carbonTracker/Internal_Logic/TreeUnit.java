@@ -11,6 +11,9 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 public class TreeUnit {
     private boolean isTreeUnitEnabled;
     private static final double TREE_TO_CO2 = 44.12;
+    private static final String CO2 = "CO2";
+    private static final String EMISSION= "Emission (g):";
+    private static final String TREES = "Trees:";
 
     public TreeUnit () {
         this.isTreeUnitEnabled = false;
@@ -22,5 +25,19 @@ public class TreeUnit {
 
     public void setTreeUnitStatus(boolean status) {
         isTreeUnitEnabled = status;
+    }
+
+    public String getUnitType() {
+        if (isTreeUnitEnabled) {
+            return TREES;
+        }
+        return EMISSION;
+    }
+
+    public double getUnitValue(double emission) {
+        if (isTreeUnitEnabled) {
+            return emission/TREE_TO_CO2;
+        }
+        return emission;
     }
 }
