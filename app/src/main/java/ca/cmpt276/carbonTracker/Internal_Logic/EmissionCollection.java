@@ -72,7 +72,7 @@ public class EmissionCollection {
                 }
                 else if (journey.getType()== Journey.Type.BUS){
                     if (!emissionTransportationModes.containsKey("Bus")){
-                        emissionTransportationModes.put("Bus", journey.getEmissions())
+                        emissionTransportationModes.put("Bus", journey.getEmissions());
                     }
                     else{
                         emission = emissionTransportationModes.get("Bus");
