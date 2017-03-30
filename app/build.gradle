@@ -87,5 +87,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:+'
 }
 dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
     compile 'com.numetriclabz.numandroidcharts:numandroidcharts:1.0.7'
 }

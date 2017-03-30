@@ -16,7 +16,7 @@ import java.util.List;
 public class DayData {
     private List<Journey> journeyList;
     private List<Utility> utilityList;
-    private double totalEmissions;
+    private float totalEmissions;
     private Date date;
 
     public DayData(Date date) {
@@ -35,6 +35,10 @@ public class DayData {
             if (!utility.getStartDate().after(date) && !utility.getEndDate().before(date)) {
                 utilityList.add(utility);
             }
+            else if (DateHandler.areDatesEqual(date, utility.getStartDate())
+                    || DateHandler.areDatesEqual(date, utility.getEndDate())) {
+                utilityList.add(utility);
+            }
         }
     }
 
@@ -49,7 +53,7 @@ public class DayData {
         System.out.println("MSG 1: UPDATED");
     }
 
-    public double getTotalEmissions_KM() {
+    public float getTotalEmissions_KM() {
         totalEmissions = 0;
         for (Journey journey : journeyList) {
             totalEmissions += journey.getEmissionsKM();
@@ -60,8 +64,8 @@ public class DayData {
         return totalEmissions;
     }
 
-    public double getRouteEmissions_KM(Route route) {
-        double emissions = 0;
+    public float getRouteEmissions_KM(Route route) {
+        float emissions = 0;
         for (Journey journey : journeyList) {
             if (journey.getRoute().equals(route)) {
                 emissions += journey.getEmissionsKM();
@@ -70,21 +74,42 @@ public class DayData {
         return emissions;
     }
 
-    public double getCarEmissions_KM(Car car) {
-        double emissions = 0;
+    public float getCarEmissions_KM(Car car) {
+        float emissions = 0;
         for (Journey journey : journeyList) {
-            if (journey.getTransportation().equals(car)) {
+            if (journey.getTransportation().getNickname().equals(car.getNickname())) {
+                System.out.println("TST 10");
                 emissions += journey.getEmissionsKM();
             }
         }
         return emissions;
     }
 
-    public double getTransportTypeEmissions_KM(Journey.Type type) {
-        double emissions = 0;
+    public float getTransportTypeEmissions_KM(Journey.Type type) {
+        float emissions = 0;
         for (Journey journey : journeyList) {
             if (journey.getType().equals(type)) {
                 emissions += journey.getEmissionsKM();
+            }
+        }
+        return emissions;
+    }
+
+    public float getNaturalGasEmissions() {
+        float emissions = 0;
+        for (Utility utility : utilityList) {
+            if (utility.isNaturalGas()) {
+                emissions += utility.getTotalCO2();
+            }
+        }
+        return emissions;
+    }
+
+    public float getElectricityEmissions() {
+        float emissions = 0;
+        for (Utility utility : utilityList) {
+            if (utility.isElectricity()) {
+                emissions += utility.getTotalCO2();
             }
         }
         return emissions;
@@ -100,8 +125,8 @@ public class DayData {
         return info;
     }
 
-    public static List<DayData> getDayDataWithinInterval(Date startDate, Date endDate) {
-        List<DayData> dayDataList = new ArrayList<>();
+    public static ArrayList<DayData> getDayDataWithinInterval(Date startDate, Date endDate) {
+        ArrayList<DayData> dayDataList = new ArrayList<>();
         Date currentDate = startDate;
 
         while (!DateHandler.areDatesEqual(currentDate, endDate)) {
@@ -113,6 +138,65 @@ public class DayData {
         }
         dayDataList.add(new DayData(endDate));
         return dayDataList;
+    }
+
+    public static ArrayList<ArrayList> getDayDataPerWeekInYear(ArrayList<DayData> dayDataList) {
+        ArrayList<ArrayList> yearData = new ArrayList<>();
+        for (int i = dayDataList.size() - 1; i >= 0; i-=7) {
+            ArrayList<DayData> weekData = new ArrayList<>();
+            if (i >= 7) {
+                for (int j = i; j > (i - 7); j--) {
+                    weekData.add(dayDataList.get(j));
+                }
+            }
+            else {
+                for (int j = i; j >= 0; j--) {
+                    weekData.add(dayDataList.get(j));
+                }
+            }
+            yearData.add(0, weekData);
+        }
+        return yearData;
+    }
+
+    public static float getWeeklyElectricityEmissions(ArrayList<DayData> weekData) {
+        float emissions = 0;
+        for (DayData dayData : weekData) {
+            emissions += dayData.getElectricityEmissions();
+        }
+        return emissions;
+    }
+
+    public static float getWeeklyGasEmissions(ArrayList<DayData> weekData) {
+        float emissions = 0;
+        for (DayData dayData : weekData) {
+            emissions += dayData.getNaturalGasEmissions();
+        }
+        return emissions;
+    }
+
+    public static float getWeeklyBusEmissions(ArrayList<DayData> weekData) {
+        float emissions = 0;
+        for (DayData dayData : weekData) {
+            emissions += dayData.getTransportTypeEmissions_KM(Journey.Type.BUS);
+        }
+        return emissions;
+    }
+
+    public static float getWeeklySkytrainEmissions(ArrayList<DayData> weekData) {
+        float emissions = 0;
+        for (DayData dayData : weekData) {
+            emissions += dayData.getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN);
+        }
+        return emissions;
+    }
+
+    public static float getWeeklyCarEmissions(ArrayList<DayData> weekData, Car car) {
+        float emissions = 0;
+        for (DayData dayData : weekData) {
+            emissions += dayData.getCarEmissions_KM(car);
+        }
+        return emissions;
     }
 
     public static DayData getDayDataAtDate(Date date) {

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 /*
  * Utility class contains data like nickname, fuel used, timespan and
@@ -61,60 +62,7 @@ public class Utility {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        // Break up into individual ints (months are indexed at 1 not 0)
-        int startYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(startingDate));
-        int startMonth = Integer.parseInt(new SimpleDateFormat("MM").format(startingDate)) - 1;
-        int startDay = Integer.parseInt(new SimpleDateFormat("dd").format(startingDate));
-
-        int endYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(endingDate));
-        int endMonth = Integer.parseInt(new SimpleDateFormat("MM").format(endingDate)) - 1;
-        int endDay = Integer.parseInt(new SimpleDateFormat("dd").format(endingDate));
-
-        int monthDiff = endMonth - startMonth;
-        int totalDays = 0;
-
-        if (endYear == startYear) {
-            if (endMonth == startMonth) {
-                totalDays += (endDay - startDay + 1);
-            } else {
-
-                totalDays += endDay; // endMonth/endDay to endMonth/01
-
-                // startMonth/startDay to startMonth/end of startMonth
-                Calendar startMonthCal = new GregorianCalendar(startYear, startMonth, 1);
-                totalDays += (startMonthCal.getActualMaximum(Calendar.DAY_OF_MONTH) - startDay + 1);
-
-                for (int m = monthDiff; m > 1; m--) {
-                    Calendar calendar = new GregorianCalendar(startYear, endMonth - m + 1, 1);
-                    totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                }
-            }
-        } else {
-            // Sum from endMonth/Day to first day of endYear
-            totalDays += endDay;
-            for (int m = endMonth - 1; m > 0; m--) {
-                Calendar calendar = new GregorianCalendar(endYear, m, 1);
-                totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-            }
-            // Sum from startMonth/Day to last day of startYear
-            Calendar startMonthCal = new GregorianCalendar(startYear, startMonth, 1);
-            totalDays += (startMonthCal.getActualMaximum(Calendar.DAY_OF_MONTH) - startDay + 1);
-            for (int m = startMonth + 1; m < 12; m++) {
-                Calendar calendar = new GregorianCalendar(startYear, m, 1);
-                totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-            }
-
-            // Add for multiple years
-            for (int y = endYear - 1; y >= startYear + 1; y--) {
-                if (y % 4 == 0) {
-                    totalDays += 366;
-                } else {
-                    totalDays += 365;
-                }
-            }
-        }
-        timespan = totalDays;
+        timespan = (int) DateHandler.getDateDiff(startingDate, endingDate, TimeUnit.DAYS);
     }
 
     public String getNickname() {

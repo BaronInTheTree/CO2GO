@@ -22,12 +22,12 @@ import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
 
-public class MonthlyEmissionGraphActivity extends AppCompatActivity {
+public class YearlyEmissionLineGraphActivity extends AppCompatActivity {
 
     private LineChart lineChart;
     CarbonModel model = CarbonModel.getInstance();
     final int GRAMS_PER_KG = 1000;
-    final int DATA_POINTS = 28;
+    final int DATA_POINTS = 53;
 
     ArrayList<Integer> colorList = new ArrayList<>();
     int currentColor = 0;
@@ -35,9 +35,9 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_monthly_emission_graph);
+        setContentView(R.layout.activity_yearly_emission_line_graph);
 
-        lineChart = (LineChart) findViewById(R.id.lineChartMonthly);
+        lineChart = (LineChart) findViewById(R.id.lineChartYearly);
 
         XAxis xAxis = lineChart.getXAxis();
 
@@ -53,7 +53,8 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
         ArrayList<ArrayList> yAXES = new ArrayList<>();
 
         ArrayList<DayData> dayDataList = DayData.getDayDataWithinInterval
-                (DateHandler.getDateLastMonth(new Date()), new Date());
+                (DateHandler.getDateLastYear(new Date()), new Date());
+        ArrayList<ArrayList> yearDataList = DayData.getDayDataPerWeekInYear(dayDataList);
 
         ArrayList<Entry> electricity = new ArrayList<>();
         ArrayList<Entry> naturalGas = new ArrayList<>();
@@ -65,19 +66,21 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < DATA_POINTS; i++) {
-            electricity.add(new Entry(i, dayDataList.get(i).getElectricityEmissions() / GRAMS_PER_KG));
-            naturalGas.add(new Entry(i, dayDataList.get(i).getNaturalGasEmissions() / GRAMS_PER_KG));
-            bus.add(new Entry(i, dayDataList.get(i).
-                    getTransportTypeEmissions_KM(Journey.Type.BUS) / GRAMS_PER_KG));
-            skytrain.add(new Entry(i, dayDataList.get(i).
-                    getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN) / GRAMS_PER_KG));
+            System.out.println("TST 3.1: Week = " + i + ", Elec CO2 = " + DayData.getWeeklyElectricityEmissions(yearDataList.get(i)));
+            System.out.println("TST 3.2: Week = " + i + ", Gas CO2 = " + DayData.getWeeklyGasEmissions(yearDataList.get(i)));
+            System.out.println("TST 3.3: Week = " + i + ", Bus CO2 = " + DayData.getWeeklyBusEmissions(yearDataList.get(i)));
+            System.out.println("TST 3.4: Week = " + i + ", Skytrain CO2 = " + DayData.getWeeklySkytrainEmissions(yearDataList.get(i)));
+            electricity.add(new Entry(i, DayData.getWeeklyElectricityEmissions(yearDataList.get(i)) / GRAMS_PER_KG));
+            naturalGas.add(new Entry(i, DayData.getWeeklyGasEmissions(yearDataList.get(i)) / GRAMS_PER_KG));
+            bus.add(new Entry(i, DayData.getWeeklyBusEmissions(yearDataList.get(i)) / GRAMS_PER_KG));
+            skytrain.add(new Entry(i, DayData.getWeeklySkytrainEmissions(yearDataList.get(i)) / GRAMS_PER_KG));
         }
 
         for (Car car : model.getCarCollection().getCarCollection()) {
             ArrayList<Entry> vehicle = new ArrayList<>();
 
             for (int i = 0; i < DATA_POINTS; i++) {
-                vehicle.add(new Entry(i, dayDataList.get(i).getCarEmissions_KM(car) / GRAMS_PER_KG));
+                vehicle.add(new Entry(i, DayData.getWeeklyCarEmissions(yearDataList.get(i), car) / GRAMS_PER_KG));
             }
             if (vehicle.size() > 0) {
                 vehicleEntryList.add(vehicle);
@@ -114,10 +117,8 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
             lineDataSet.setColor(getRandomColor());
             lineDataSetList.add(lineDataSet);
         }
-
         lineChart.setData(new LineData(lineDataSetList));
         lineChart.setVisibleXRange(DATA_POINTS, DATA_POINTS);
-
     }
 
     private int getRandomColor() {
@@ -128,13 +129,4 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
         }
         return colorCode;
     }
-
-    // get current Day.
-    // Get list of dates from current day to beginning of month.
-    // Get list of dates from end of last month - remainingDays
-    // Set xAXES Strings to MM/dd strings for each date
-    // For each Date in list, get emissions
-    // For all Journeys, compare dates. If on date, add to day's TypeTotal
-    // For all Utilities, if date falls between start and end date, add dailyUsage to day's Utilities
-    // Add line point for each lineType for that day (x-value)
 }
