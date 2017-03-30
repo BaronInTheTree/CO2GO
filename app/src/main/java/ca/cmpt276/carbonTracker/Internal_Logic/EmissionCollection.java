@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class EmissionCollection {
 
-    private final String[] allModes = {"Bus","Skytrain","WalkBike","Electricity","Gas"};
+    private final String[] allModes = {"Bus","Skytrain","WalkBike","Electricity","Gas","OtherRoutes"};
 
     private HashMap<String, Float> emissionTransportationModes;
     private Float[] emissionsTransport;
@@ -156,12 +156,21 @@ public class EmissionCollection {
         }
     }
 
-
     public void updateEmissionRouteMode(List<DayData> dayDateList) {
         for (DayData data: dayDateList){
             float emission=0;
             for (Journey journey:data.getJourneyList()){
-                if (!emissionRouteModes.containsKey(journey.getRoute().getName())){
+                if (journey.getRoute().isHidden()) {
+                    if (!emissionRouteModes.containsKey(allModes[5])){
+                        emissionRouteModes.put(allModes[5],journey.getEmissions());
+                    }
+                    else {
+                        emission = emissionRouteModes.get(allModes[5]);
+                        emission += journey.getEmissions();
+                        emissionRouteModes.put(allModes[5],emission);
+                    }
+                }
+                else if (!emissionRouteModes.containsKey(journey.getRoute().getName())){
                     emissionRouteModes.put(journey.getRoute().getName(),journey.getEmissions());
                 }
                 else {

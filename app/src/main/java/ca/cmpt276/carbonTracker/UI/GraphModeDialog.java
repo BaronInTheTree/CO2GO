@@ -52,11 +52,10 @@ public class GraphModeDialog extends AppCompatDialogFragment {
                         getActivity().finish();
                     }
                     if (which == 2) {
-                        // Launch single day Pie graph- route mode
-                        Toast.makeText(getActivity(), "To launch single day pie graph route mode activity", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), PieGraphRouteActivity.class);
+                        getContext().startActivity(intent);
                         getActivity().finish();
                     }
-
                 }
             }).create();
 
@@ -78,8 +77,8 @@ public class GraphModeDialog extends AppCompatDialogFragment {
                         getActivity().finish();
                     }
                     if (which == 2) {
-                        //Launch 4 week Pie graph- transportation mode
-                        Toast.makeText(getActivity(), "To launch 4 week pie graph route mode Activity", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), PieGraphRouteActivity.class);
+                        getContext().startActivity(intent);
                         getActivity().finish();
                     }
                 }
@@ -102,13 +101,12 @@ public class GraphModeDialog extends AppCompatDialogFragment {
                         getActivity().finish();
                     }
                     if (which == 2) {
-                        //Launch year Pie graph- transportation mode
-                        Toast.makeText(getActivity(), "To launch year pie graph route mode Activity", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), PieGraphRouteActivity.class);
+                        getContext().startActivity(intent);
                         getActivity().finish();
                     }
                 }
             }).create();
         }
     }
-
 }
