@@ -136,8 +136,6 @@ public class DayData {
     }
 
 
-    public static List<DayData> getDayDataWithinInterval(Date startDate, Date endDate) {
-        List<DayData> dayDataList = new ArrayList<>();
     public static ArrayList<DayData> getDayDataWithinInterval(Date startDate, Date endDate) {
         ArrayList<DayData> dayDataList = new ArrayList<>();
         Date currentDate = startDate;

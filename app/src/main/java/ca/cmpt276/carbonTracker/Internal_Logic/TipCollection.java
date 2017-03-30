@@ -17,10 +17,6 @@ import java.util.List;
 public class TipCollection {
 
     private static final int numTips = 7;
-    public static final int CAR = 0;
-    public static final int BUS = 1;
-    public static final int SKYTRAIN = 2;
-    public static final int BIKEWALK = 3;
     private static final String ERROR = "Sorry. System running out of tips.";
 
     private List<Tip> recentShownTips;  // collection of seven tips recently shown to the users.
@@ -55,7 +51,6 @@ public class TipCollection {
         skyTrainTipsContent = new ArrayList<>();
         bikeWalkTipsContent = new ArrayList<>();
         utilityTipsContent  = new ArrayList<>();
-
     }
 
     // return a tip after the user clicks the "View Tips" button on the main page.
@@ -88,18 +83,19 @@ public class TipCollection {
     }
 
     // return a tip to user after a new journey is created.
-    public String getJourneyTip(int journeyType, Journey currentJourney, MonthYearSummary summary){
+    public String getJourneyTip(Journey currentJourney, MonthYearSummary summary){
         List<Tip> tips = new ArrayList<>();
-        if (journeyType== CAR) tips = carTips;
-        if (journeyType== BUS) tips = busTips;
-        if (journeyType== SKYTRAIN) tips = skyTrainTips;
-        if (journeyType== BIKEWALK) tips = bikeWalkTips;
+        Journey.Type journeyType = currentJourney.getType();
+        if (journeyType== Journey.Type.CAR) tips = carTips;
+        if (journeyType== Journey.Type.BUS) tips = busTips;
+        if (journeyType== Journey.Type.SKYTRAIN) tips = skyTrainTips;
+        if (journeyType== Journey.Type.WALK_BIKE) tips = bikeWalkTips;
 
         if (tips.size()== 0){
-            if (journeyType== CAR) updateCarTipsContent(currentJourney, summary);
-            if (journeyType== BUS) updateBusTipsContent(currentJourney, summary);
-            if (journeyType== SKYTRAIN) updateSkyTrainTipsContent(currentJourney,summary);
-            if (journeyType== BIKEWALK) updateBikeWalkTipsContent(currentJourney,summary);
+            if (journeyType== Journey.Type.CAR) updateCarTipsContent(currentJourney, summary);
+            if (journeyType== Journey.Type.BUS) updateBusTipsContent(currentJourney, summary);
+            if (journeyType== Journey.Type.SKYTRAIN) updateSkyTrainTipsContent(currentJourney,summary);
+            if (journeyType== Journey.Type.WALK_BIKE) updateBikeWalkTipsContent(currentJourney,summary);
             journeyInitialize(journeyType);
         }
 
@@ -113,19 +109,19 @@ public class TipCollection {
                         recentShownTips.remove(0);
                     }
                     String currentTipContent="";
-                    if (journeyType== CAR) {
+                    if (journeyType== Journey.Type.CAR) {
                         updateCarTipsContent(currentJourney,summary);
                         currentTipContent = carTipsContent.get(i);
                     }
-                    if (journeyType== BUS) {
+                    if (journeyType== Journey.Type.BUS) {
                         updateBusTipsContent(currentJourney,summary);
                         currentTipContent = busTipsContent.get(i);
                     }
-                    if (journeyType== SKYTRAIN) {
+                    if (journeyType== Journey.Type.SKYTRAIN) {
                         updateSkyTrainTipsContent(currentJourney,summary);
                         currentTipContent = skyTrainTipsContent.get(i);
                     }
-                    if (journeyType== BIKEWALK) {
+                    if (journeyType== Journey.Type.WALK_BIKE) {
                         updateBikeWalkTipsContent(currentJourney,summary);
                         currentTipContent = bikeWalkTipsContent.get(i);
                     }
@@ -170,9 +166,7 @@ public class TipCollection {
         return ERROR;
     }
 
-
     // Initialize collections of tips for each category.
-
     public void generalTipsInitialize(){
         for (int i = 0; i< numTips; i++){
             Tip currentTip = new Tip(generalTipsContent.get(i));
@@ -181,29 +175,29 @@ public class TipCollection {
         Collections.shuffle(generalTips);
     }
 
-    public void journeyInitialize(int journeyType){
-        if (journeyType== CAR) {
+    public void journeyInitialize(Journey.Type journeyType){
+        if (journeyType== Journey.Type.CAR) {
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(carTipsContent.get(i));
                 carTips.add(currentTip);
             }
             Collections.shuffle(carTips);
         }
-        if (journeyType== BUS){
+        if (journeyType== Journey.Type.BUS){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(busTipsContent.get(i));
                 busTips.add(currentTip);
             }
             Collections.shuffle(busTips);
         }
-        if (journeyType== SKYTRAIN){
+        if (journeyType== Journey.Type.SKYTRAIN){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(skyTrainTipsContent.get(i));
                 skyTrainTips.add(currentTip);
             }
             Collections.shuffle(skyTrainTips);
         }
-        if (journeyType== BIKEWALK){
+        if (journeyType== Journey.Type.WALK_BIKE){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(bikeWalkTipsContent.get(i));
                 bikeWalkTips.add(currentTip);
@@ -221,7 +215,6 @@ public class TipCollection {
     }
 
     // update tip contents for each category. Note: all contents need to be updated to reflect current user data.
-
     public void updateGeneralTipsContent(MonthYearSummary summary){
         if (generalTipsContent.size()!= 0) generalTipsContent.clear();
         generalTipsContent.add("Your total driving distance within last 4 weeks are " + summary.getMonthCarDistance() + "km, consider to take more bus or skytrain to lower your driving distance in the future.");
@@ -301,9 +294,7 @@ public class TipCollection {
         Collections.shuffle(utilityTips);
     }
 
-    public int getRecentTipSize() {
-        return recentShownTips.size();
-    }
+    public int getRecentTipSize() { return recentShownTips.size(); }
     public void removeRecentTip(int index) {
         recentShownTips.remove(index);
     }

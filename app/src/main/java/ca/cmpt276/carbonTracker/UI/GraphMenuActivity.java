@@ -9,13 +9,10 @@ import android.widget.Button;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CalendarDialog;
-import ca.cmpt276.carbonTracker.Internal_Logic.GraphModeDialog;
-
 
 public class GraphMenuActivity extends AppCompatActivity {
 
-    // NOTE: May need to re-set them back to false after graph shown to user.
+    // Need to re-set them back to false after graph shown to user.
     public static boolean yearMode = false;
     public static boolean monthMode = false;
     public static boolean dayMode = false;
@@ -38,7 +35,7 @@ public class GraphMenuActivity extends AppCompatActivity {
                 dayMode = true;
                 FragmentManager manager = getSupportFragmentManager();
                 CalendarDialog caldialog = new CalendarDialog();
-                caldialog.show(manager,"calendarDialog");
+                caldialog.show(manager,getResources().getString(R.string.calendarModeDialog));
             }
         });
 
@@ -49,7 +46,7 @@ public class GraphMenuActivity extends AppCompatActivity {
                 monthMode = true;
                 FragmentManager manager = getSupportFragmentManager();
                 GraphModeDialog dialog = new GraphModeDialog();
-                dialog.show(manager,"graphModeDialog");
+                dialog.show(manager,getResources().getString(R.string.graphModeDialog));
             }
         });
 
@@ -60,7 +57,7 @@ public class GraphMenuActivity extends AppCompatActivity {
                 yearMode = true;
                 FragmentManager manager = getSupportFragmentManager();
                 GraphModeDialog dialog = new GraphModeDialog();
-                dialog.show(manager,"graphModeDialog");
+                dialog.show(manager,getResources().getString(R.string.graphModeDialog));
             }
         });
 

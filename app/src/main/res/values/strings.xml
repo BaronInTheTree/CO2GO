@@ -105,4 +105,7 @@
     <string name="click_to_edit_hold_to_delete">Click to Edit. Hold to Delete</string>
     <string name="transportation">Transportation</string>
     <string name="edit">Edit</string>
+    <string name="graphModeDialog">graphModeDialog</string>
+    <string name="calendarModeDialog">calendarModeDialog</string>
+    <string name="graphModeDialogTitle">Graph Mode Selector</string>
 </resources>

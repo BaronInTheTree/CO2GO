@@ -24,7 +24,7 @@ import java.util.List;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.EmissionCollection;
 
-import static ca.cmpt276.carbonTracker.Internal_Logic.CalendarDialog.selectedDate;
+import static ca.cmpt276.carbonTracker.UI.CalendarDialog.selectedDate;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.dayMode;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.monthMode;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.yearMode;
@@ -56,19 +56,19 @@ public class PieGraphTransportActivity extends AppCompatActivity {
         }
         if (monthMode){
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DATE, -28);
+            cal.add(Calendar.DATE, -28);   // get date 28 days before today
             dataList = DayData.getDayDataWithinInterval(cal.getTime(),today);
-            monthMode=false;
+            monthMode=false;   // reset it to original value.
         }
         if (yearMode){
             Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DATE, -365);
+            cal.add(Calendar.DATE, -365);  // get date 365 days before today
             dataList = DayData.getDayDataWithinInterval(cal.getTime(),today);
-            yearMode=false;
+            yearMode=false;   // reset it to original value.
         }
         emissionColl = new EmissionCollection(dataList);
         transportModes = emissionColl.getTransportationModes();
-        emissions = emissionColl.getEmissions();
+        emissions = emissionColl.getEmissionsTransport();
     }
 
     private void setupPieChart() {
@@ -98,11 +98,9 @@ public class PieGraphTransportActivity extends AppCompatActivity {
             public void onValueSelected(Entry e, Highlight h) {
                 if (e == null)
                     return;
-
                 Toast.makeText(PieGraphTransportActivity.this,
                         transportModes[(int) h.getX()], Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onNothingSelected() {
             }
