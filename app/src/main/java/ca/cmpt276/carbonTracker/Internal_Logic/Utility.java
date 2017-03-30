@@ -154,6 +154,10 @@ public class Utility {
         }
     }
 
+    public float getCO2PerDayPerPerson(){
+        return (float)getCO2PerDay()/numPeople;
+    }
+
     public String displayToList() {
         String string = nickname + " - ";
 

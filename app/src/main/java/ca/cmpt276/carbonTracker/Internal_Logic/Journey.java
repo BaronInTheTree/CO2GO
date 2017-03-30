@@ -98,6 +98,8 @@ public class Journey implements Comparable<Journey> {
         return emissionsKM;
     }
 
+    public float getEmissions() { return (float)emissionsKM; }
+
     public int getDistance() {
         return route.getTotalDistanceKM();
     }

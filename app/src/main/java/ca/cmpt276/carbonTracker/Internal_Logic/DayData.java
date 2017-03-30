@@ -1,8 +1,10 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -125,6 +127,17 @@ public class DayData {
         return info;
     }
 
+    public List<Journey> getJourneyList(){
+        return journeyList;
+    }
+
+    public List<Utility> getUtilityList(){
+        return utilityList;
+    }
+
+
+    public static List<DayData> getDayDataWithinInterval(Date startDate, Date endDate) {
+        List<DayData> dayDataList = new ArrayList<>();
     public static ArrayList<DayData> getDayDataWithinInterval(Date startDate, Date endDate) {
         ArrayList<DayData> dayDataList = new ArrayList<>();
         Date currentDate = startDate;

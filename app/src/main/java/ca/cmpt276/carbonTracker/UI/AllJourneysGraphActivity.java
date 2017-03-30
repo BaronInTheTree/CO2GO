@@ -41,7 +41,7 @@ public class AllJourneysGraphActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_footprint_graph);
+        setContentView(R.layout.activity_all_journeys_graph);
 
         setupPieChart();
         setupButtons();
