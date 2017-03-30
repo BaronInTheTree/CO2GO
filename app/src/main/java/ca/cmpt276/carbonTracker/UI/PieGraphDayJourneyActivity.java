@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.example.sasha.carbontracker.R;
-
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -19,38 +16,64 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-/**
- * The AllJourneysGraphActivity takes all journeys from the JourneyCollection in the Carbon Model
- * and creates a graph that the user is able to interact with and view the output in a more visual
- * representation.
- *
- * @author Team Teal
- */
+import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
+import ca.cmpt276.carbonTracker.Internal_Logic.EmissionCollection;
+import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
+import ca.cmpt276.carbonTracker.Internal_Logic.Utility;
 
-public class AllJourneysGraphActivity extends AppCompatActivity {
+import static ca.cmpt276.carbonTracker.UI.CalendarDialog.selectedDate;
+import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.dayMode;
 
-    private final String tableLabel = "CO2 Emission of Journeys (in gram)";
+public class PieGraphDayJourneyActivity extends AppCompatActivity {
 
-    CarbonModel currentInstance = CarbonModel.getInstance();
-    String journeys[] = currentInstance.getJourneyCollection().getJourneyDescription();
+    private final String tableLabel = "CO2 Emission of Each Journey and Utility (in gram)";
 
-    int emissions[] = currentInstance.getJourneyCollection().getJourneyEmission();
+    DayData dayData;
+    String[] journeyModes;
+    Float[] emissions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_journeys_graph);
+        setContentView(R.layout.activity_pie_graph_day_journey);
 
+        initializeData();
         setupPieChart();
         setupButtons();
     }
 
+    private void initializeData() {
+        dayData= DayData.getDayDataAtDate(selectedDate);
+        dayMode = false;   // reset it to original value.
+
+        List<Journey> journeyList = dayData.getJourneyList();
+        List<Utility> utilityList = dayData.getUtilityList();
+        int listSize = journeyList.size()+utilityList.size();
+
+        journeyModes = new String[listSize];
+        emissions = new Float[listSize];
+
+        for (int i=0;i<journeyList.size();i++){
+            journeyModes[i] = journeyList.get(i).getDescription();
+            emissions[i] = journeyList.get(i).getEmissions();
+        }
+
+        for (int i =0, j= journeyList.size();i<utilityList.size();i++,j++){
+            journeyModes[j] = utilityList.get(i).displayToList();
+            emissions[j]=utilityList.get(i).getCO2PerDayPerPerson();
+        }
+    }
+
     private void setupPieChart() {
         List<PieEntry> pieEntries = new ArrayList<>();
-        for (int i = 0; i < emissions.length; i++) {
-            pieEntries.add(new PieEntry((float) emissions[i]));
+        if (emissions.length!=0) {
+            for (int i = 0; i < emissions.length; i++) {
+                pieEntries.add(new PieEntry((float)emissions[i]));
+            }
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
@@ -59,7 +82,7 @@ public class AllJourneysGraphActivity extends AppCompatActivity {
         dataSet.setValueTextSize(12);
         PieData data = new PieData(dataSet);
 
-        PieChart chart = (PieChart) findViewById(R.id.chart);
+        PieChart chart = (PieChart) findViewById(R.id.dayJourneyPieGraph);
         chart.setData(data);
         chart.setDescription(null);
         chart.setHoleRadius(25f);
@@ -72,11 +95,9 @@ public class AllJourneysGraphActivity extends AppCompatActivity {
             public void onValueSelected(Entry e, Highlight h) {
                 if (e == null)
                     return;
-
-                Toast.makeText(AllJourneysGraphActivity.this,
-                        journeys[(int) h.getX()], Toast.LENGTH_SHORT).show();
+                Toast.makeText(PieGraphDayJourneyActivity.this,
+                        journeyModes[(int) h.getX()], Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onNothingSelected() {
             }

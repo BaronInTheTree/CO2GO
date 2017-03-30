@@ -147,4 +147,8 @@ public class Journey implements Comparable<Journey> {
         return Integer.parseInt(new SimpleDateFormat("dd").format(dateTime));
     }
 
+    public String getDescription(){
+        return this.dateString + " " + this.transport.getNickname() + " " + this.route.getName();
+    }
+
 }

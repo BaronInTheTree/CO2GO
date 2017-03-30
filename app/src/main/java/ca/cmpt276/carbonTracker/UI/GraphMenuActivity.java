@@ -65,7 +65,7 @@ public class GraphMenuActivity extends AppCompatActivity {
         allJourneysBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GraphMenuActivity.this, AllJourneysGraphActivity.class));
+                startActivity(new Intent(GraphMenuActivity.this, PieGraphAllJourneysActivity.class));
             }
         });
 

@@ -42,8 +42,8 @@ public class GraphModeDialog extends AppCompatDialogFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (which == 0) {
-                        // launch single day Pie graph - journey mode
-                        Toast.makeText(getActivity(), "To launch single day pie graph journey mode activity", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(), PieGraphDayJourneyActivity.class);
+                        getContext().startActivity(intent);
                         getActivity().finish();
                     }
                     if (which == 1) {
