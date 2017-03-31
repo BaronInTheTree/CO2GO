@@ -29,20 +29,20 @@ import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.dayMode;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.monthMode;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.yearMode;
 
-public class PieGraphTransportActivity extends AppCompatActivity {
+public class PieGraphRouteActivity extends AppCompatActivity {
 
-    private final String tableLabel = "CO2 Emission of Each Transport Mode (in gram)";
+    private final String tableLabel = "CO2 Emission of Each Route Mode (in gram)";
 
     Date today = new Date();
     List<DayData> dataList;
     EmissionCollection emissionColl;
-    String[] transportModes;
+    String[] routeModes;
     Float[] emissions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transport_pie_graph);
+        setContentView(R.layout.activity_pie_graph_route_modes);
 
         initializeData();
         setupPieChart();
@@ -67,8 +67,9 @@ public class PieGraphTransportActivity extends AppCompatActivity {
             yearMode=false;   // reset it to original value.
         }
         emissionColl = new EmissionCollection(dataList);
-        transportModes = emissionColl.getTransportationModes();
-        emissions = emissionColl.getEmissionsTransport();
+        routeModes = emissionColl.getRouteModes();
+        emissions = emissionColl.getEmissionsRoute();
+
     }
 
     private void setupPieChart() {
@@ -85,7 +86,7 @@ public class PieGraphTransportActivity extends AppCompatActivity {
         dataSet.setValueTextSize(12);
         PieData data = new PieData(dataSet);
 
-        PieChart chart = (PieChart) findViewById(R.id.transportPieGraph);
+        PieChart chart = (PieChart) findViewById(R.id.routePieGraph);
         chart.setData(data);
         chart.setDescription(null);
         chart.setHoleRadius(25f);
@@ -98,8 +99,8 @@ public class PieGraphTransportActivity extends AppCompatActivity {
             public void onValueSelected(Entry e, Highlight h) {
                 if (e == null)
                     return;
-                Toast.makeText(PieGraphTransportActivity.this,
-                        transportModes[(int) h.getX()], Toast.LENGTH_SHORT).show();
+                Toast.makeText(PieGraphRouteActivity.this,
+                        routeModes[(int) h.getX()], Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected() {

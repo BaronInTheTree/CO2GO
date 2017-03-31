@@ -1,4 +1,4 @@
-package ca.cmpt276.carbonTracker.Internal_Logic;
+package ca.cmpt276.carbonTracker.UI;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -7,8 +7,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.DatePicker;
 
+import com.example.sasha.carbontracker.R;
+
 import java.util.Calendar;
 import java.util.Date;
+
+import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 
 /**
  * Created by song on 2017-03-26.
@@ -43,7 +47,7 @@ public class CalendarDialog extends AppCompatDialogFragment {
             // call the next dialog
             FragmentManager manager = getActivity().getSupportFragmentManager();
             GraphModeDialog dialog = new GraphModeDialog();
-            dialog.show(manager,"graphModeDialog");
+            dialog.show(manager, getResources().getString(R.string.graphModeDialog));
 
         }
     };
