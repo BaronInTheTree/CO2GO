@@ -10,10 +10,12 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
+import ca.cmpt276.carbonTracker.Internal_Logic.CalendarObserver;
 import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 
 /**
@@ -23,6 +25,17 @@ import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 public class CalendarDialog extends AppCompatDialogFragment {
     private static int year_x, month_x, day_x;
     public static Date selectedDate;
+    public static ArrayList<CalendarObserver> observers = new ArrayList<>();
+
+    public static void addObserver(CalendarObserver observer) {
+        observers.add(observer);
+    }
+
+    private void updateObservers() {
+        for (CalendarObserver observer : observers) {
+            observer.updateGraphs();
+        }
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -45,6 +58,7 @@ public class CalendarDialog extends AppCompatDialogFragment {
             month_x = month+1;
 
             selectedDate = DateHandler.createDate(year_x,month_x,day_x);
+            updateObservers();
 
             // call the next dialog
             /*FragmentManager manager = getActivity().getSupportFragmentManager();

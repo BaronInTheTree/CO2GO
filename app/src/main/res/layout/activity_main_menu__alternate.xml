@@ -26,9 +26,16 @@
                 android:layout_height="60dp"
                 android:layout_marginBottom="20dp" />
 
+            <TextView
+                android:id="@+id/textViewChartTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAlignment="center" />
+
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="325dp">
+                android:layout_height="300dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -45,12 +52,19 @@
             </android.support.v4.widget.NestedScrollView>
 
             <TextView
+                android:id="@+id/textViewDateTextHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Click to Change Ending Date"
+                android:textSize="10sp" />
+
+            <TextView
                 android:id="@+id/textViewSelectedDateRange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="Date: 99/99/9999"
+                android:text="Date: 99/99/99 - 99/99/99"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -84,21 +98,21 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button38"
+                    android:id="@+id/buttonSingleDay"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="1" />
 
                 <Button
-                    android:id="@+id/button37"
+                    android:id="@+id/button28Days"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="28" />
 
                 <Button
-                    android:id="@+id/button36"
+                    android:id="@+id/button365Days"
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
@@ -106,7 +120,7 @@
                     android:text="365" />
 
                 <Button
-                    android:id="@+id/button35"
+                    android:id="@+id/buttonFilterByRoute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -115,7 +129,7 @@
                     android:textSize="10sp" />
 
                 <Button
-                    android:id="@+id/button34"
+                    android:id="@+id/buttonFilterByVehicle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
