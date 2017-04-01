@@ -6,12 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sasha.carbontracker.R;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -24,7 +22,6 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -163,12 +160,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(currentDate)
-                            + ", By Route");
+                            + ", By Route (kg)");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(currentDate)
-                            + ", By Vehicle");
+                            + ", By Vehicle (kg)");
                 }
                 break;
             }
@@ -178,12 +175,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ", By Route");
+                            + chartDateFormat.format(currentDate) + ", By Route (kg)");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ", By Vehicle");
+                            + chartDateFormat.format(currentDate) + ", By Vehicle (kg)");
                 }
                 break;
             }
@@ -194,12 +191,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ", By Route");
+                            + chartDateFormat.format(currentDate) + ", By Route (kg)");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ", By Vehicle");
+                            + chartDateFormat.format(currentDate) + ", By Vehicle (kg)");
                 }
                 break;
             }
@@ -207,10 +204,11 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     }
 
     private float addEntryToList(List<PieEntry> pieEntries, ArrayList<String> labelList, String label, float emissions, float totalEmissions) {
-        pieEntries.add(new PieEntry(emissions / gPerKG));
-        labelList.add(label +  ": " + String.format("%.2f", emissions / gPerKG));
-        totalEmissions += emissions;
-        System.out.println("TST 6.2");
+        if (emissions > 0) {
+            pieEntries.add(new PieEntry(emissions / gPerKG));
+            labelList.add(label +  ": " + String.format("%.2f", emissions / gPerKG));
+            totalEmissions += emissions;
+        }
         return totalEmissions;
     }
 
@@ -219,79 +217,18 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         PieChart chart = (PieChart) findViewById(R.id.mainMenu_pieChart);
         float totalEmissions = 0;
 
-        System.out.println("TST 6.0");
-
         List<PieEntry> pieEntries = new ArrayList<>();
 
         ArrayList<DayData> dayDataList = DayData.getDayDataWithinInterval(originDate, currentDate);
         ArrayList<String> labelList = new ArrayList<>();
 
-        System.out.println("TST 6.1: RouteCollection size = " + model.getRouteCollection().getRouteCollection().size());
-
         for (Route route : model.getRouteCollection().getRouteCollection()) {
             totalEmissions = addEntryToList(pieEntries, labelList, route.getName(), DayData.getTotalRouteEmissions(dayDataList, route), totalEmissions);
         }
 
-        System.out.println("TST 6.3");
+        setupChartUI(chart, totalEmissions, pieEntries, labelList);
 
-        LegendEntry[] legendEntryList = new LegendEntry[labelList.size()];
-        String[] labels = new String[labelList.size()];
-        float[] intervals = new float[]{2, 2};
 
-        System.out.println("TST 6.4");
-
-        ArrayList<Integer> colorList = new ArrayList<>();
-        for (int i = 0; i < ColorTemplate.VORDIPLOM_COLORS.length; i++) {
-            colorList.add(ColorTemplate.VORDIPLOM_COLORS[i]);
-            System.out.println("TST 6.5");
-        }
-
-        int colorIndex = 0;
-        for (int i = 0; i < legendEntryList.length; i++) {
-            legendEntryList[i] = new LegendEntry(labelList.get(i), Legend.LegendForm.CIRCLE, 10, 10, new DashPathEffect(intervals, 1), colorList.get(colorIndex));
-            colorIndex++;
-            if (colorIndex >= colorList.size()) {
-                colorIndex = 0;
-            }
-            System.out.println("TST 6.6");
-        }
-
-        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
-        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-        dataSet.setSliceSpace(2);
-        dataSet.setValueTextSize(10);
-        PieData data = new PieData(dataSet);
-
-        System.out.println("TST 6.7");
-
-        chart.setData(data);
-        chart.setHoleRadius(25f);
-        chart.setDescription(null);
-        chart.setTransparentCircleAlpha(0);
-        chart.setRotationEnabled(false);
-        chart.setDrawEntryLabels(false);
-        chart.setCenterText("" + String.format("%.0f", (totalEmissions / gPerKG)));
-
-        chart.setDrawSliceText(false);
-//        chart.animateY(1500);
-
-        System.out.println("TST 6.8");
-
-        Legend legend = chart.getLegend();
-        legend.setWordWrapEnabled(true);
-        legend.setTextSize(10);
-        legend.setXEntrySpace(30);
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        legend.setFormSize(14);
-
-        System.out.println("TST 6.9");
-
-        legend.setCustom(legendEntryList);
-
-        /*LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                (chart.getLayoutParams().width, chart.getLayoutParams().height + (30 * (labelList.size() - 3)));
-        chart.setLayoutParams(params);*/
 
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -304,23 +241,16 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
             public void onNothingSelected() {
             }
         });
-        chart.notifyDataSetChanged();
-        chart.invalidate();
-        System.out.println("TST 6.10");
     }
 
     private void setupVehiclePieChart() {
         PieChart chart = (PieChart) findViewById(R.id.mainMenu_pieChart);
         float totalEmissions = 0;
 
-        System.out.println("TST 6.0");
-
         List<PieEntry> pieEntries = new ArrayList<>();
 
         ArrayList<DayData> dayDataList = DayData.getDayDataWithinInterval(originDate, currentDate);
         ArrayList<String> labelList = new ArrayList<>();
-
-        System.out.println("TST 6.1");
 
         totalEmissions = addEntryToList(pieEntries, labelList, "Electricity", DayData.getTotalElectricityEmissions(dayDataList), totalEmissions);
         totalEmissions = addEntryToList(pieEntries, labelList, "Natural Gas", DayData.getTotalGasEmissions(dayDataList), totalEmissions);
@@ -331,67 +261,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
             totalEmissions = addEntryToList(pieEntries, labelList, car.getNickname(), DayData.getTotalCarEmissions(dayDataList, car), totalEmissions);
         }
 
-        System.out.println("TST 6.3");
-
-        ArrayList<LegendEntry> legendList = new ArrayList<>();
-        LegendEntry[] legendEntryList = new LegendEntry[labelList.size()];
-        float[] intervals = new float[]{2, 2};
-
-        System.out.println("TST 6.4: labelList Size = " + labelList.size());
-
-        ArrayList<Integer> colorList = new ArrayList<>();
-        for (int i = 0; i < ColorTemplate.VORDIPLOM_COLORS.length; i++) {
-            colorList.add(ColorTemplate.VORDIPLOM_COLORS[i]);
-            System.out.println("TST 6.5");
-        }
-
-        int colorIndex = 0;
-        for (int i = 0; i < legendEntryList.length; i++) {
-            legendEntryList[i] = new LegendEntry(labelList.get(i), Legend.LegendForm.CIRCLE, 10, 10, new DashPathEffect(intervals, 1), colorList.get(colorIndex));
-            legendList.add(new LegendEntry(labelList.get(i), Legend.LegendForm.CIRCLE, 10, 10, new DashPathEffect(intervals, 1), colorList.get(colorIndex)));
-            colorIndex++;
-            if (colorIndex >= colorList.size()) {
-                colorIndex = 0;
-            }
-            System.out.println("TST 6.6: legendEntryList size = " + legendEntryList.length);
-        }
-
-        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
-        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-        dataSet.setSliceSpace(2);
-        dataSet.setValueTextSize(10);
-        PieData data = new PieData(dataSet);
-
-        System.out.println("TST 6.7");
-
-        chart.setData(data);
-        chart.setHoleRadius(25f);
-        chart.setDescription(null);
-        chart.setTransparentCircleAlpha(0);
-        chart.setRotationEnabled(false);
-        chart.setDrawEntryLabels(false);
-        chart.setCenterText("" + String.format("%.0f", (totalEmissions / gPerKG)));
-
-        chart.setDrawSliceText(false);
-//        chart.animateY(1500);
-
-        System.out.println("TST 6.8");
-
-        Legend legend = chart.getLegend();
-        legend.setWordWrapEnabled(true);
-        legend.setTextSize(10);
-        legend.setXEntrySpace(30);
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        legend.setFormSize(14);
-
-        System.out.println("TST 6.9");
-
-        legend.setCustom(legendList);
-
-        /*LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                (chart.getLayoutParams().width, chart.getLayoutParams().height + (30 * (labelList.size() - 3)));
-        chart.setLayoutParams(params);*/
+        setupChartUI(chart, totalEmissions, pieEntries, labelList);
 
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -404,9 +274,61 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
             public void onNothingSelected() {
             }
         });
+    }
+
+    private void setupChartUI(PieChart chart, float totalEmissions, List<PieEntry> pieEntries, ArrayList<String> labelList) {
+        ArrayList<LegendEntry> legendList = new ArrayList<>();
+        LegendEntry[] legendEntryList = new LegendEntry[labelList.size()];
+        float[] intervals = new float[]{2, 2};
+
+        ArrayList<Integer> colorList = new ArrayList<>();
+        for (int i = 0; i < ColorTemplate.VORDIPLOM_COLORS.length; i++) {
+            colorList.add(ColorTemplate.VORDIPLOM_COLORS[i]);
+        }
+
+        int colorIndex = 0;
+        for (int i = 0; i < legendEntryList.length; i++) {
+            legendEntryList[i] = new LegendEntry(labelList.get(i), Legend.LegendForm.CIRCLE, 10, 10, new DashPathEffect(intervals, 1), colorList.get(colorIndex));
+            legendList.add(new LegendEntry(labelList.get(i), Legend.LegendForm.CIRCLE, 10, 10, new DashPathEffect(intervals, 1), colorList.get(colorIndex)));
+            colorIndex++;
+            if (colorIndex >= colorList.size()) {
+                colorIndex = 0;
+            }
+        }
+
+        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
+        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        dataSet.setSliceSpace(2);
+        dataSet.setValueTextSize(10);
+        PieData data = new PieData(dataSet);
+
+        chart.setData(data);
+        chart.setHoleRadius(25f);
+        chart.setDescription(null);
+        chart.setTransparentCircleAlpha(0);
+        chart.setRotationEnabled(false);
+        chart.setDrawEntryLabels(false);
+        chart.setCenterText("" + String.format("%.0f", (totalEmissions / gPerKG)) + "kg");
+
+        chart.setDrawSliceText(false);
+//        chart.animateY(1500);
+
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
+        legend.setTextSize(10);
+        legend.setXEntrySpace(30);
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        legend.setFormSize(14);
+
+        legend.setCustom(legendList);
+
+        /*LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+                (chart.getLayoutParams().width, chart.getLayoutParams().height + (30 * (labelList.size() - 3)));
+        chart.setLayoutParams(params);*/
+
         chart.notifyDataSetChanged();
         chart.invalidate();
-        System.out.println("TST 6.10");
     }
 
     private void registerAsObserver() {
