@@ -1,11 +1,13 @@
 package ca.cmpt276.carbonTracker.AlternateUI;
 
+import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sasha.carbontracker.R;
@@ -16,9 +18,11 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,7 +48,9 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     private enum DateType {SINGLE, MONTH, YEAR}
     private GraphType graphType;
     private DateType dateType;
-    private SimpleDateFormat chartDateFormat = new SimpleDateFormat("MM/dd/yy");
+    private SimpleDateFormat chartDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    PieChart chart;
+    int chartHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,8 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu__alternate);
         graphType = GraphType.VEHICLE;
         dateType = DateType.SINGLE;
+        chart = (PieChart) findViewById(R.id.mainMenu_pieChart);
+        chartHeight = chart.getLayoutParams().height;
         registerAsObserver();
         setupChart();
         setupSingleDateText();
@@ -63,56 +71,85 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     }
 
     private void setupSingleDayButton() {
-        Button singleDay = (Button) findViewById(R.id.buttonSingleDay);
+        final Button singleDay = (Button) findViewById(R.id.buttonSingleDay);
+        singleDay.setBackgroundResource(R.drawable.button_selected_red);
         singleDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dateType = DateType.SINGLE;
                 setupChart();
+                singleDay.setBackgroundResource(R.drawable.button_selected_red);
+
+                Button monthRange = (Button) findViewById(R.id.button28Days);
+                monthRange.setBackgroundResource(R.drawable.button_default_brown);
+                Button yearRange = (Button) findViewById(R.id.button365Days);
+                yearRange.setBackgroundResource(R.drawable.button_default_brown);
             }
         });
     }
 
     private void setupMonthRangeButton() {
-        Button monthRange = (Button) findViewById(R.id.button28Days);
+        final Button monthRange = (Button) findViewById(R.id.button28Days);
         monthRange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dateType = DateType.MONTH;
                 setupChart();
+                monthRange.setBackgroundResource(R.drawable.button_selected_red);
+
+                Button singleDay = (Button) findViewById(R.id.buttonSingleDay);
+                singleDay.setBackgroundResource(R.drawable.button_default_brown);
+                Button yearRange = (Button) findViewById(R.id.button365Days);
+                yearRange.setBackgroundResource(R.drawable.button_default_brown);
             }
         });
     }
 
     private void setupYearRangeButton() {
-        Button yearRange = (Button) findViewById(R.id.button365Days);
+        final Button yearRange = (Button) findViewById(R.id.button365Days);
         yearRange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dateType = DateType.YEAR;
                 setupChart();
+                yearRange.setBackgroundResource(R.drawable.button_selected_red);
+
+                Button singleDay = (Button) findViewById(R.id.buttonSingleDay);
+                singleDay.setBackgroundResource(R.drawable.button_default_brown);
+                Button monthRange = (Button) findViewById(R.id.button28Days);
+                monthRange.setBackgroundResource(R.drawable.button_default_brown);
             }
         });
     }
 
     private void setupRouteFilterButton() {
-        Button routeFilter = (Button) findViewById(R.id.buttonFilterByRoute);
+        final Button routeFilter = (Button) findViewById(R.id.buttonFilterByRoute);
+        routeFilter.setBackgroundResource(R.drawable.button_default_brown);
         routeFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 graphType = GraphType.ROUTE;
                 setupChart();
+                routeFilter.setBackgroundResource(R.drawable.button_selected_red);
+
+                Button vehicleFilter = (Button) findViewById(R.id.buttonFilterByVehicle);
+                vehicleFilter.setBackgroundResource(R.drawable.button_default_brown);
             }
         });
     }
 
     private void setupVehicleFilterButton() {
-        Button vehicleFilter = (Button) findViewById(R.id.buttonFilterByVehicle);
+        final Button vehicleFilter = (Button) findViewById(R.id.buttonFilterByVehicle);
+        vehicleFilter.setBackgroundResource(R.drawable.button_selected_red);
         vehicleFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 graphType = GraphType.VEHICLE;
                 setupChart();
+                vehicleFilter.setBackgroundResource(R.drawable.button_selected_red);
+
+                Button routeFilter = (Button) findViewById(R.id.buttonFilterByRoute);
+                routeFilter.setBackgroundResource(R.drawable.button_default_brown);
             }
         });
     }
@@ -214,7 +251,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
 
 
     private void setupRoutePieChart() {
-        PieChart chart = (PieChart) findViewById(R.id.mainMenu_pieChart);
+        chart = (PieChart) findViewById(R.id.mainMenu_pieChart);
         float totalEmissions = 0;
 
         List<PieEntry> pieEntries = new ArrayList<>();
@@ -225,10 +262,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         for (Route route : model.getRouteCollection().getRouteCollection()) {
             totalEmissions = addEntryToList(pieEntries, labelList, route.getName(), DayData.getTotalRouteEmissions(dayDataList, route), totalEmissions);
         }
-
         setupChartUI(chart, totalEmissions, pieEntries, labelList);
-
-
 
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -244,7 +278,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     }
 
     private void setupVehiclePieChart() {
-        PieChart chart = (PieChart) findViewById(R.id.mainMenu_pieChart);
+        chart = (PieChart) findViewById(R.id.mainMenu_pieChart);
         float totalEmissions = 0;
 
         List<PieEntry> pieEntries = new ArrayList<>();
@@ -276,12 +310,13 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         });
     }
 
-    private void setupChartUI(PieChart chart, float totalEmissions, List<PieEntry> pieEntries, ArrayList<String> labelList) {
+    private void setupChartUI(PieChart chart, final float totalEmissions, List<PieEntry> pieEntries, ArrayList<String> labelList) {
         ArrayList<LegendEntry> legendList = new ArrayList<>();
         LegendEntry[] legendEntryList = new LegendEntry[labelList.size()];
         float[] intervals = new float[]{2, 2};
 
         ArrayList<Integer> colorList = new ArrayList<>();
+        List<Integer> colorTemplate = ColorTemplate.createColors(setupColorList());
         for (int i = 0; i < ColorTemplate.VORDIPLOM_COLORS.length; i++) {
             colorList.add(ColorTemplate.VORDIPLOM_COLORS[i]);
         }
@@ -298,34 +333,53 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
 
         PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
         dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-        dataSet.setSliceSpace(2);
-        dataSet.setValueTextSize(10);
+        dataSet.setSliceSpace(0);
+        dataSet.setValueTextSize(12);
+        dataSet.setValueFormatter(new IValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                if (value / (totalEmissions / gPerKG) < 0.05) {
+                    return "";
+                }
+                else return "" + String.format("%.0f",value);
+            }
+        });
+
         PieData data = new PieData(dataSet);
 
         chart.setData(data);
-        chart.setHoleRadius(25f);
+
+        String str = new Float(totalEmissions / gPerKG).toString();
+        int numDigits = str.indexOf(".");
+        int counter = 0;
+        for (int i = numDigits; i > 4; i--) {
+            counter++;
+        }
+        chart.setHoleRadius(25f + (2 * counter));
         chart.setDescription(null);
         chart.setTransparentCircleAlpha(0);
         chart.setRotationEnabled(false);
         chart.setDrawEntryLabels(false);
         chart.setCenterText("" + String.format("%.0f", (totalEmissions / gPerKG)) + "kg");
+        chart.setCenterTextSize(10);
 
         chart.setDrawSliceText(false);
 //        chart.animateY(1500);
 
         Legend legend = chart.getLegend();
         legend.setWordWrapEnabled(true);
-        legend.setTextSize(10);
-        legend.setXEntrySpace(30);
+        legend.setTextSize(12);
+        legend.setXEntrySpace(40);
+        legend.setMaxSizePercent(0.99f);
         legend.setForm(Legend.LegendForm.CIRCLE);
         legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
         legend.setFormSize(14);
 
         legend.setCustom(legendList);
 
-        /*LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                (chart.getLayoutParams().width, chart.getLayoutParams().height + (30 * (labelList.size() - 3)));
-        chart.setLayoutParams(params);*/
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+                (chart.getLayoutParams().width, chartHeight + (10 * (labelList.size() - 2)));
+        chart.setLayoutParams(params);
 
         chart.notifyDataSetChanged();
         chart.invalidate();
@@ -343,6 +397,24 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 setupChart();
             }
         });
+    }
+
+    private int[] setupColorList() {
+        int[] colorList = new int[]{
+                R.color.earthDarkGreen,
+                R.color.earthDarkRed,
+                R.color.earthGold,
+                R.color.earthTeal,
+                R.color.earthOrange,
+                R.color.earthLime,
+                R.color.earthBrown,
+                R.color.earthDarkTeal,
+                R.color.earthDarkOrange
+        };
+        for (int color : colorList) {
+            System.out.println("TST 6.1: Color: " + color);
+        }
+        return colorList;
     }
 }
 
