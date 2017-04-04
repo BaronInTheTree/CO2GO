@@ -123,6 +123,8 @@ public class Car extends Transportation implements Cloneable {
         return fuelType;
     }
 
+
+
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();

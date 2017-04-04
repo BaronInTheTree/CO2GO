@@ -2,14 +2,9 @@ package ca.cmpt276.carbonTracker.UI;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.example.sasha.carbontracker.R;
-
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -19,38 +14,45 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import ca.cmpt276.carbonTracker.Internal_Logic.Car;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
+import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
+import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
 
-/**
- * The AllJourneysGraphActivity takes all journeys from the JourneyCollection in the Carbon Model
- * and creates a graph that the user is able to interact with and view the output in a more visual
- * representation.
- *
- * @author Team Teal
- */
+public class TestActivity extends AppCompatActivity {
 
-public class AllJourneysGraphActivity extends AppCompatActivity {
-
-    private final String tableLabel = "CO2 Emission of Journeys (in gram)";
-
-    CarbonModel currentInstance = CarbonModel.getInstance();
-    String journeys[] = currentInstance.getJourneyCollection().getJourneyDescription();
-
-    int emissions[] = currentInstance.getJourneyCollection().getJourneyEmission();
+    private Date currentDate = new Date();
+    CarbonModel model = CarbonModel.getInstance();
+    private final String tableLabel = "CO2 Emissions for " + DateHandler.getMonthOfDate(currentDate)
+            + "/" + DateHandler.getDayOfDate(currentDate)
+            + "/" + DateHandler.getYearOfDate(currentDate);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_footprint_graph);
-
+        setContentView(R.layout.test_layout);
         setupPieChart();
-        setupButtons();
     }
 
     private void setupPieChart() {
+        PieChart chart = (PieChart) findViewById(R.id.mainMenu_pieChart);
+
         List<PieEntry> pieEntries = new ArrayList<>();
-        for (int i = 0; i < emissions.length; i++) {
-            pieEntries.add(new PieEntry((float) emissions[i]));
+
+        DayData dayData = DayData.getDayDataAtDate(currentDate);
+
+        pieEntries.add(new PieEntry(dayData.getElectricityEmissions()));
+        pieEntries.add(new PieEntry(dayData.getNaturalGasEmissions()));
+        pieEntries.add(new PieEntry(dayData.getTransportTypeEmissions_KM(Journey.Type.BUS)));
+        pieEntries.add(new PieEntry(dayData.getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN)));
+
+        for (Car car : model.getCarCollection().getCarCollection()) {
+            pieEntries.add(new PieEntry(dayData.getCarEmissions_KM(car)));
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
@@ -59,7 +61,6 @@ public class AllJourneysGraphActivity extends AppCompatActivity {
         dataSet.setValueTextSize(12);
         PieData data = new PieData(dataSet);
 
-        PieChart chart = (PieChart) findViewById(R.id.chart);
         chart.setData(data);
         chart.setDescription(null);
         chart.setHoleRadius(25f);
@@ -72,9 +73,6 @@ public class AllJourneysGraphActivity extends AppCompatActivity {
             public void onValueSelected(Entry e, Highlight h) {
                 if (e == null)
                     return;
-
-                Toast.makeText(AllJourneysGraphActivity.this,
-                        journeys[(int) h.getX()], Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -84,13 +82,4 @@ public class AllJourneysGraphActivity extends AppCompatActivity {
         chart.invalidate();
     }
 
-    private void setupButtons() {
-        Button back_btn = (Button) findViewById(R.id.back_btn);
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
 }

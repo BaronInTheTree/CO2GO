@@ -1,23 +1,26 @@
-package ca.cmpt276.carbonTracker.Internal_Logic;
+package ca.cmpt276.carbonTracker.UI;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.DatePicker;
-import android.widget.Toast;
+
+import com.example.sasha.carbontracker.R;
 
 import java.util.Calendar;
+import java.util.Date;
+
+import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 
 /**
  * Created by song on 2017-03-26.
  */
 
 public class CalendarDialog extends AppCompatDialogFragment {
-    private int year_x, month_x, day_x;
+    private static int year_x, month_x, day_x;
+    public static Date selectedDate;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -34,21 +37,19 @@ public class CalendarDialog extends AppCompatDialogFragment {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             year_x = year;
-            month_x = month;
+            /* Note: creatDate() uses month index from 1-12, while the calendar indexes from 0-11. That's why
+               month_x needs to be incremented by 1.*/
             day_x = dayOfMonth;
+            month_x = month+1;
 
-            // pass the above info into the graph activity.
-
+            selectedDate = DateHandler.createDate(year_x,month_x,day_x);
 
             // call the next dialog
             FragmentManager manager = getActivity().getSupportFragmentManager();
             GraphModeDialog dialog = new GraphModeDialog();
-            dialog.show(manager,"graphModeDialog");
+            dialog.show(manager, getResources().getString(R.string.graphModeDialog));
 
         }
     };
-
-
-
 
 }

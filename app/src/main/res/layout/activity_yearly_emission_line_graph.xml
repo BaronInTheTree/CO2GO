@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.cmpt276.carbonTracker.UI.MonthlyEmissionGraphActivity">
+    tools:context="ca.cmpt276.carbonTracker.UI.YearlyEmissionLineGraphActivity">
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lineChartMonthly"
+        android:id="@+id/lineChartYearly"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

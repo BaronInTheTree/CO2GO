@@ -37,14 +37,6 @@ public class Journey implements Comparable<Journey> {
         return transport;
     }
 
-    public int getTransportType(){
-        String transportContent = transport.getNickname();
-        if (transportContent.equals("Bus")) return 1;
-        else if (transportContent.equals("Skytrain")) return 2;
-        else if (transportContent.equals("Walking / Biking")) return 3;
-        else return 0;
-    }
-
     private void setType() {
         if (transport instanceof Car) {
             type = Type.CAR;
@@ -97,6 +89,8 @@ public class Journey implements Comparable<Journey> {
     public double getEmissionsKM() {
         return emissionsKM;
     }
+
+    public float getEmissions() { return (float)emissionsKM; }
 
     public int getDistance() {
         return route.getTotalDistanceKM();
@@ -151,6 +145,10 @@ public class Journey implements Comparable<Journey> {
 
     public int getDayInt() {
         return Integer.parseInt(new SimpleDateFormat("dd").format(dateTime));
+    }
+
+    public String getDescription(){
+        return this.dateString + " " + this.transport.getNickname() + " " + this.route.getName();
     }
 
 }

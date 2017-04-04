@@ -115,4 +115,8 @@ public class CarCollection {
         }
         return index;
     }
+
+    public List<Car> getCarCollection() {
+        return carCollection;
+    }
 }

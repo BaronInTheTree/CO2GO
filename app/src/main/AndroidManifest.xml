@@ -35,7 +35,7 @@
         <activity
             android:name="ca.cmpt276.carbonTracker.UI.JourneyInformationActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.AllJourneysGraphActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphAllJourneysActivity" />
         <activity
             android:name="ca.cmpt276.carbonTracker.UI.SelectRouteActivity"
             android:screenOrientation="portrait" />
@@ -48,7 +48,14 @@
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilityListActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditUtilityActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.GraphMenuActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.UI.GraphMenuActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphTransportActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.GraphMenuActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.MonthlyEmissionGraphActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.TestActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.YearlyEmissionLineGraphActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphRouteActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphDayJourneyActivity"></activity>
     </application>
 
 </manifest>
