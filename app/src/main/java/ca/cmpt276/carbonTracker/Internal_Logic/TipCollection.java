@@ -1,7 +1,6 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,15 +18,16 @@ public class TipCollection {
     private static final int numTips = 7;
     private static final String ERROR = "Sorry. System running out of tips.";
 
-    private List<Tip> recentShownTips;  // collection of seven tips recently shown to the users.
-    private List<Tip> generalTips;   // tips shown on the main page. They are not relevant to any specific action.
+    // List of Tip objects for each category
+    private List<Tip> recentShownTips;    // collection of seven tips recently shown to the users.
+    private List<Tip> generalTips;       // tips shown on the main page. They are not relevant to any specific action.
     private List<Tip> carTips;
     private List<Tip> busTips;
     private List<Tip> skyTrainTips;
     private List<Tip> bikeWalkTips;
     private List<Tip> utilityTips;
 
-    // Collections of actual tip content of each category.
+    // List of actual tip contents for each category.
     private List<String> generalTipsContent;
     private List<String> carTipsContent;
     private List<String> busTipsContent;
@@ -36,9 +36,9 @@ public class TipCollection {
     private List<String> utilityTipsContent;
 
     public TipCollection() {
-        generalTips = new ArrayList<>();
-        recentShownTips = new ArrayList<>();
 
+        recentShownTips = new ArrayList<>();
+        generalTips = new ArrayList<>();
         carTips = new ArrayList<>();
         busTips = new ArrayList<>();
         skyTrainTips = new ArrayList<>();
@@ -57,9 +57,8 @@ public class TipCollection {
     public String getGeneralTip(MonthYearSummary summary) {
         if (generalTips.size()== 0) {
             updateGeneralTipsContent(summary);
-            generalTipsInitialize();
+            initializeGeneralTips();
         }
-
         boolean findTip =false;
 
         while (!findTip) {
@@ -71,8 +70,7 @@ public class TipCollection {
                     }
                     updateGeneralTipsContent(summary);
                     String currentTipContent = generalTipsContent.get(i);
-                    Tip currentTip = new Tip(currentTipContent);
-                    generalTips.set(i, currentTip);
+                    generalTips.get(i).setTipContent(currentTipContent);
                     recentShownTips.add(generalTips.get(i));
                     return generalTips.get(i).getTipContent();
                 }
@@ -84,21 +82,20 @@ public class TipCollection {
 
     // return a tip to user after a new journey is created.
     public String getJourneyTip(Journey currentJourney, MonthYearSummary summary){
-        List<Tip> tips = new ArrayList<>();
+        List<Tip> tips;
         Journey.Type journeyType = currentJourney.getType();
         if (journeyType== Journey.Type.CAR) tips = carTips;
-        if (journeyType== Journey.Type.BUS) tips = busTips;
-        if (journeyType== Journey.Type.SKYTRAIN) tips = skyTrainTips;
-        if (journeyType== Journey.Type.WALK_BIKE) tips = bikeWalkTips;
+        else if (journeyType== Journey.Type.BUS) tips = busTips;
+        else if (journeyType== Journey.Type.SKYTRAIN) tips = skyTrainTips;
+        else tips = bikeWalkTips;
 
         if (tips.size()== 0){
             if (journeyType== Journey.Type.CAR) updateCarTipsContent(currentJourney, summary);
             if (journeyType== Journey.Type.BUS) updateBusTipsContent(currentJourney, summary);
             if (journeyType== Journey.Type.SKYTRAIN) updateSkyTrainTipsContent(currentJourney,summary);
             if (journeyType== Journey.Type.WALK_BIKE) updateBikeWalkTipsContent(currentJourney,summary);
-            journeyInitialize(journeyType);
+            initializeJourneyTips(journeyType);
         }
-
         boolean findTip= false;
 
         while (!findTip) {
@@ -125,9 +122,7 @@ public class TipCollection {
                         updateBikeWalkTipsContent(currentJourney,summary);
                         currentTipContent = bikeWalkTipsContent.get(i);
                     }
-
-                    Tip currentTip = new Tip(currentTipContent);
-                    tips.set(i, currentTip);
+                    tips.get(i).setTipContent(currentTipContent);
                     recentShownTips.add(tips.get(i));
                     return tips.get(i).getTipContent();
                 }
@@ -141,9 +136,8 @@ public class TipCollection {
     public String getUtilityTip(Utility currentBill){
         if (utilityTips.size()== 0) {
             updateUtilityTipsContent(currentBill);
-            utilityTipsInitialize();
+            initializeUtilityTips();
         }
-
         boolean findTip =false;
 
         while (!findTip) {
@@ -155,8 +149,7 @@ public class TipCollection {
                     }
                     updateUtilityTipsContent(currentBill);
                     String currentTipContent = utilityTipsContent.get(i);
-                    Tip currentTip = new Tip(currentTipContent);
-                    utilityTips.set(i, currentTip);
+                    utilityTips.get(i).setTipContent(currentTipContent);
                     recentShownTips.add(utilityTips.get(i));
                     return utilityTips.get(i).getTipContent();
                 }
@@ -166,55 +159,50 @@ public class TipCollection {
         return ERROR;
     }
 
-    // Initialize collections of tips for each category.
-    public void generalTipsInitialize(){
+    // The following three functions: Initialize list of Tip objects for each category.
+    public void initializeGeneralTips(){
         for (int i = 0; i< numTips; i++){
             Tip currentTip = new Tip(generalTipsContent.get(i));
             generalTips.add(currentTip);
         }
-        Collections.shuffle(generalTips);
     }
 
-    public void journeyInitialize(Journey.Type journeyType){
+    public void initializeJourneyTips(Journey.Type journeyType){
         if (journeyType== Journey.Type.CAR) {
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(carTipsContent.get(i));
                 carTips.add(currentTip);
             }
-            Collections.shuffle(carTips);
         }
         if (journeyType== Journey.Type.BUS){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(busTipsContent.get(i));
                 busTips.add(currentTip);
             }
-            Collections.shuffle(busTips);
         }
         if (journeyType== Journey.Type.SKYTRAIN){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(skyTrainTipsContent.get(i));
                 skyTrainTips.add(currentTip);
             }
-            Collections.shuffle(skyTrainTips);
         }
         if (journeyType== Journey.Type.WALK_BIKE){
             for (int i = 0; i< numTips; i++){
                 Tip currentTip = new Tip(bikeWalkTipsContent.get(i));
                 bikeWalkTips.add(currentTip);
             }
-            Collections.shuffle(bikeWalkTips);
         }
     }
 
-    public void utilityTipsInitialize(){
+    public void initializeUtilityTips(){
         for (int i = 0; i< numTips; i++){
             Tip currentTip = new Tip(utilityTipsContent.get(i));
             utilityTips.add(currentTip);
         }
-        Collections.shuffle(utilityTips);
     }
 
-    // update tip contents for each category. Note: all contents need to be updated to reflect current user data.
+    // The following six functions: Update tip contents for each category.
+    // Note: all contents need to be updated to reflect current user data.
     public void updateGeneralTipsContent(MonthYearSummary summary){
         if (generalTipsContent.size()!= 0) generalTipsContent.clear();
         generalTipsContent.add("Your total driving distance within last 4 weeks are " + summary.getMonthCarDistance() + "km, consider to take more bus or skytrain to lower your driving distance in the future.");
@@ -222,10 +210,14 @@ public class TipCollection {
         generalTipsContent.add("Driving last year contributes to " + (int)summary.getYearCarEmission() + "g CO2 emission, consider to take more bus or skytrain to lower your emission in the future.");
         generalTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to take skytrain more often to lower your emission in the future.");
         generalTipsContent.add("Taking Skytrain within the last four weeks contributes to " + (int)summary.getMonthSkytrainEmission() + "g CO2 emission, consider to ride bikes or walk more often to lower your emission in the future.");
-        generalTipsContent.add("You have biked and walked " + summary.getMonthWalkBikeDistance() +"km within last 4 weeks, keep it up!");
-        generalTipsContent.add("You have biked and walked " + summary.getYearWalkBikeDistance() +"km over last year, keep it up!");
-        Collections.shuffle(generalTipsContent);
-        Collections.shuffle(generalTips);
+        if (summary.getMonthWalkBikeDistance()==0){
+            generalTipsContent.add("You have not entered any journey by bike or walk during last month, do not forget to record your journeys by bike/walk.");
+        }
+        else generalTipsContent.add("You have biked and walked " + summary.getMonthWalkBikeDistance() +"km within last 4 weeks, keep it up!");
+        if (summary.getYearWalkBikeDistance()==0){
+            generalTipsContent.add("You have not entered any journey by bike or walk during last year, do not forget to record your journeys by bike/walk.");
+        }
+        else generalTipsContent.add("You have biked and walked " + summary.getYearWalkBikeDistance() +"km over last year, keep it up!");
     }
 
     public void updateCarTipsContent(Journey currentJourney, MonthYearSummary summary) {
@@ -237,8 +229,6 @@ public class TipCollection {
         carTipsContent.add("Distance of your trip by car is " + currentJourney.getDistance() + " km, consider to ride bikes or walk if possible.");
         carTipsContent.add("Your total driving distance within last 4 weeks are " + summary.getMonthCarDistance()+ "km, consider to take more bus or skytrain in the future.");
         carTipsContent.add("Your total driving distance within last year are " + summary.getYearCarDistance() + "km, consider to take more bus or skytrain in the future.");
-        Collections.shuffle(carTipsContent);
-        Collections.shuffle(carTips);
     }
 
     public void updateBusTipsContent(Journey currentJourney, MonthYearSummary summary){
@@ -248,12 +238,9 @@ public class TipCollection {
         busTipsContent.add("Distance of your trip by bus is " + currentJourney.getDistance() + " km, consider to ride bikes or walk if possible.");
         busTipsContent.add("You have traveled " + summary.getMonthBusDistance()+ "km by Bus within last 4 weeks, consider to take skytrain more often in the future.");
         busTipsContent.add("You have traveled " + summary.getMonthBusDistance()+ " km by Bus within last 4 weeks, consider to ride bikes or walk more often in the future.");
-        busTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to take skytrain more often in the future.");
-        busTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to ride bikes more often in the future.");
-        Collections.shuffle(busTipsContent);
-        Collections.shuffle(busTips);
+        busTipsContent.add("Taking buses within the last four weeks contributes to " + (int)summary.getMonthBusEmission() + "g CO2 emission, consider to take skytrain or bike more often in the future.");
+        busTipsContent.add("Taking buses within the last year contributes to " + (int)summary.getYearBusEmission() + "g CO2 emission, consider to take skytrain or bike more often in the future.");
     }
-
 
     public void updateSkyTrainTipsContent(Journey currentJourney, MonthYearSummary summary){
         if (skyTrainTipsContent.size()!= 0) skyTrainTipsContent.clear();
@@ -264,8 +251,6 @@ public class TipCollection {
         skyTrainTipsContent.add("Taking Skytrain within the last four weeks contributes to "+ (int)summary.getMonthSkytrainEmission() +"g CO2 emission, consider to ride bikes or walk more often in the future.");
         skyTrainTipsContent.add("You have traveled " + summary.getYearSkytrainDistance() + "km by Skytrain over the past year, consider to ride bikes or walk more often in the future.");
         skyTrainTipsContent.add("Taking Skytrain within the last year contributes to " + (int)summary.getYearSkytrainEmission() + "g CO2 emission, consider to ride bikes more often in the future.");
-        Collections.shuffle(skyTrainTipsContent);
-        Collections.shuffle(skyTrainTips);
     }
 
     public void updateBikeWalkTipsContent(Journey currentJourney, MonthYearSummary summary){
@@ -273,12 +258,10 @@ public class TipCollection {
         bikeWalkTipsContent.add("Good job! Your trip does not generate any CO2. Keep it up!");
         bikeWalkTipsContent.add("You have biked and walked " + summary.getMonthWalkBikeDistance()+ "km within last 4 weeks, keep it up!");
         bikeWalkTipsContent.add("You have biked and walked " + summary.getYearWalkBikeDistance() + "km within last year, keep it up!");
-        bikeWalkTipsContent.add("You have driven " + summary.getYearCarDistance()+ "km over the past year, consider to ride bikes or walk more often in the future.");
-        bikeWalkTipsContent.add("You have traveled " + summary.getYearBusDistance() + "km by Bus over the past year, consider to ride bikes or walk more often in the future.");
-        bikeWalkTipsContent.add("You have traveled " + summary.getYearSkytrainDistance()+ " km by Skytrain over the past year, consider to ride bikes or walk more often in the future.");
-        bikeWalkTipsContent.add("You have driven " + summary.getMonthCarDistance() + "km over the last 4 weeks, consider to ride bikes or walk more often in the future.");
-        Collections.shuffle(bikeWalkTipsContent);
-        Collections.shuffle(bikeWalkTips);
+        bikeWalkTipsContent.add("You have driven " + summary.getYearCarDistance()+ "km over the past year, consider to bike or walk more often in the future.");
+        bikeWalkTipsContent.add("You have traveled " + summary.getYearBusDistance() + "km by Bus over the past year, consider to bike or walk more often in the future.");
+        bikeWalkTipsContent.add("You have traveled " + summary.getYearSkytrainDistance()+ " km by Skytrain over the past year, consider to bike or walk more often in the future.");
+        bikeWalkTipsContent.add("You have driven " + summary.getMonthCarDistance() + "km over the last 4 weeks, consider to bikes or walk more often in the future.");
     }
 
     public void updateUtilityTipsContent(Utility currentBill){
@@ -290,10 +273,9 @@ public class TipCollection {
         utilityTipsContent.add("Your CO2 emission from the utility bill entered is ,"+ (int) currentBill.getC02PerPerson() + " g. Avoid over heating your laundry and try to hang dry your laundry." );
         utilityTipsContent.add("Your CO2 emission from the utility bill entered is ," + (int) currentBill.getC02PerPerson() + " g. If your fridge or stove is old, consider replace it with new ones with higher energy efficiency.");
         utilityTipsContent.add("Your CO2 emission from the utility bill entered is ,"+ (int) currentBill.getC02PerPerson() + " g, Consider to use energy saving light bulbs wherever possible.");
-        Collections.shuffle(utilityTipsContent);
-        Collections.shuffle(utilityTips);
     }
 
+    // Other utility method
     public int getRecentTipSize() { return recentShownTips.size(); }
     public void removeRecentTip(int index) {
         recentShownTips.remove(index);
@@ -304,5 +286,4 @@ public class TipCollection {
     public Tip getRecentTipAtIndex(int index) {
         return recentShownTips.get(index);
     }
-
 }
