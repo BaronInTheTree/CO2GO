@@ -32,10 +32,12 @@ import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 public class PieGraphAllJourneysActivity extends AppCompatActivity {
 
     private final String tableLabel = "CO2 Emission of Journeys (in gram)";
+    private final String tableLabelTree = "CO2 Emission of Journeys (in Tree Units)";
 
     CarbonModel currentInstance = CarbonModel.getInstance();
     String journeys[] = currentInstance.getJourneyCollection().getJourneyDescription();
     int emissions[] = currentInstance.getJourneyCollection().getJourneyEmission();
+    CarbonModel cm = CarbonModel.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,16 @@ public class PieGraphAllJourneysActivity extends AppCompatActivity {
 
     private void setupPieChart() {
         List<PieEntry> pieEntries = new ArrayList<>();
+        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
+
         for (int i = 0; i < emissions.length; i++) {
-            pieEntries.add(new PieEntry((float) emissions[i]));
+            pieEntries.add(new PieEntry((cm.getTreeUnit().getUnitValueGraphs(emissions[i]))));
         }
 
-        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
+        if (cm.getTreeUnit().getTreeUnitStatus()) {
+            dataSet = new PieDataSet(pieEntries, tableLabelTree);
+        }
+
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setSliceSpace(2);
         dataSet.setValueTextSize(12);
