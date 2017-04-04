@@ -11,6 +11,7 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 public class TreeUnit {
     private boolean isTreeUnitEnabled;
     private static final double TREE_TO_CO2 = 44.12;
+    private static final float TREE_TO_CO2_GRAPH = (float)44.12;
     private static final String CO2 = "g CO2";
     private static final String EMISSION= "Emission (g):";
     private static final String TREES_COLON = "Trees:";
@@ -27,6 +28,9 @@ public class TreeUnit {
     public void setTreeUnitStatus(boolean status) {
         isTreeUnitEnabled = status;
     }
+
+
+    // The next two functions return a String with whatever there was to replace (g to Trees or vice versa).
 
     // Related to activities, such as JourneyInformationActivity.
     public String getUnitTypeSummary() {
@@ -47,6 +51,13 @@ public class TreeUnit {
     public double getUnitValue(double emission) {
         if (isTreeUnitEnabled) {
             return emission/TREE_TO_CO2;
+        }
+        return emission;
+    }
+
+    public float getUnitValueGraphs(float emission) {
+        if (isTreeUnitEnabled) {
+            return emission/TREE_TO_CO2_GRAPH;
         }
         return emission;
     }
