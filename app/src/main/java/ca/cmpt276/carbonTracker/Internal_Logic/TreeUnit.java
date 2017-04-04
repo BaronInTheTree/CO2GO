@@ -10,8 +10,8 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 
 public class TreeUnit {
     private boolean isTreeUnitEnabled;
-    private static final double TREE_TO_CO2 = 44.12;
-    private static final float TREE_TO_CO2_GRAPH = (float)44.12;
+    private static final double CO2_TO_TREE = 44.12; // grams of CO2 to Trees
+    private static final float CO2_TO_TREE_GRAPH = (float)44.12;
     private static final String CO2 = "g CO2";
     private static final String EMISSION= "Emission (g):";
     private static final String TREES_COLON = "Trees:";
@@ -50,19 +50,19 @@ public class TreeUnit {
 
     public double getUnitValue(double emission) {
         if (isTreeUnitEnabled) {
-            return emission/TREE_TO_CO2;
+            return emission/ CO2_TO_TREE;
         }
         return emission;
     }
 
     public float getUnitValueGraphs(float emission) {
         if (isTreeUnitEnabled) {
-            return emission/TREE_TO_CO2_GRAPH;
+            return emission/ CO2_TO_TREE_GRAPH;
         }
         return emission;
     }
 
     public static double convertToTrees(double emission) {
-        return emission/TREE_TO_CO2;
+        return emission/ CO2_TO_TREE;
     }
 }
