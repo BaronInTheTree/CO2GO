@@ -1,14 +1,20 @@
 package ca.cmpt276.carbonTracker.AlternateUI;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.graphics.DashPathEffect;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 import com.github.mikephil.charting.charts.PieChart;
@@ -35,6 +41,9 @@ import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.Route;
+import ca.cmpt276.carbonTracker.UI.AddCarActivity;
+import ca.cmpt276.carbonTracker.UI.AddRouteActivity;
+import ca.cmpt276.carbonTracker.UI.AddUtilityActivity;
 import ca.cmpt276.carbonTracker.UI.CalendarDialog;
 
 public class MainMenuActivity_Alternate extends AppCompatActivity {
@@ -51,6 +60,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     private SimpleDateFormat chartDateFormat = new SimpleDateFormat("MM/dd/yyyy");
     PieChart chart;
     int chartHeight;
+    private ActionMenuView amvMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +78,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setupYearRangeButton();
         setupRouteFilterButton();
         setupVehicleFilterButton();
+        setupActionBar();
     }
 
     private void setupSingleDayButton() {
@@ -212,12 +223,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ", By Route (kg)");
+                            + chartDateFormat.format(currentDate) + ",\nBy Route (kg)");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ", By Vehicle (kg)");
+                            + chartDateFormat.format(currentDate) + ",\nBy Vehicle (kg)");
                 }
                 break;
             }
@@ -228,12 +239,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ", By Route (kg)");
+                            + chartDateFormat.format(currentDate) + ",\nBy Route (kg)");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ", By Vehicle (kg)");
+                            + chartDateFormat.format(currentDate) + ",\nBy Vehicle (kg)");
                 }
                 break;
             }
@@ -398,6 +409,62 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
             }
         });
     }
+
+    private void setupActionBar() {
+        // Inflate your custom layout
+        Toolbar toolBar = (Toolbar) findViewById(R.id.mainMenu_toolBar);
+        amvMenu = (ActionMenuView) toolBar.findViewById(R.id.amvMenu);
+        amvMenu.setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return onOptionsItemSelected(menuItem);
+            }
+        });
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_actions, amvMenu.getMenu());
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch(id) {
+            case R.id.action_settings: {
+                return true;
+            }
+            case R.id.action_addVehicle: {
+                startActivity(new Intent(MainMenuActivity_Alternate.this, AddCarActivity.class));
+                finish();
+            }
+            case R.id.action_addRoute: {
+                startActivity(new Intent(MainMenuActivity_Alternate.this, AddRouteActivity.class));
+                finish();
+            }
+            case R.id.action_addUtility: {
+                startActivity(new Intent(MainMenuActivity_Alternate.this, AddUtilityActivity.class));
+                finish();
+            }
+            case R.id.action_addJourney: {
+                startActivity(new Intent(MainMenuActivity_Alternate.this, AddJourneyActivity_Alternate.class));
+                finish();
+            }
+            case android.R.id.home: {
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private int[] setupColorList() {
         int[] colorList = new int[]{

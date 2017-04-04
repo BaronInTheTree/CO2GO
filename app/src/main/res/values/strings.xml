@@ -108,4 +108,5 @@
     <string name="graphModeDialog">graphModeDialog</string>
     <string name="calendarModeDialog">calendarModeDialog</string>
     <string name="graphModeDialogTitle">Graph Mode Selector</string>
+    <string name="toolbar_add_route">Add Route</string>
 </resources>

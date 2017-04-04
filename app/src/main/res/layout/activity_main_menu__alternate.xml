@@ -6,7 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate"
-    android:background="@mipmap/rainforest">
+    android:background="@mipmap/rainforest"
+    android:theme="@style/AppTheme.NoActionBar">
+
+    <include
+        android:id="@+id/mainMenu_toolBar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/toolbar_layout" />
 
     <ScrollView
         android:layout_width="match_parent"
