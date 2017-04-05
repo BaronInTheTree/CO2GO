@@ -187,7 +187,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         String endDate = chartDateFormat.format(currentDate);
         TextView dateTextHint = (TextView) findViewById(R.id.textViewDateTextHint);
         dateTextHint.setText("Click to Select Ending Date in Range");
-        dateText.setText(originDate + " - " + endDate);
+        dateText.setText(endDate);
         dateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

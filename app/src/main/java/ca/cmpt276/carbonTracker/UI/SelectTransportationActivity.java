@@ -94,7 +94,7 @@ public class SelectTransportationActivity extends AppCompatActivity {
     }
 
     private void addWalkBikeButton() {
-        Button walkBike = (Button) findViewById(R.id.buttonWalkBike);
+        Button walkBike = (Button) findViewById(R.id.buttonWalkBikeMode);
         walkBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

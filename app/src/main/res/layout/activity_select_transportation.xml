@@ -26,7 +26,7 @@
         android:paddingTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/buttonWalkBike" />
+        android:layout_above="@+id/buttonWalkBikeMode" />
 
     <Button
         android:id="@+id/addCar_btn"
@@ -67,7 +67,7 @@
         android:text="@string/bus" />
 
     <Button
-        android:id="@+id/buttonWalkBike"
+        android:id="@+id/buttonWalkBikeMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonBus"
