@@ -36,6 +36,7 @@ public class WelcomePageActivity extends AppCompatActivity {
         SaveData.loadJourneys(this);
         SaveData.loadUtilities(this);
         SaveData.loadTips(this);
+        SaveData.loadTreeUnit(this);
         new Thread(new Runnable() {
             @Override
             public void run() {

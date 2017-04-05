@@ -70,17 +70,22 @@ public class YearlyEmissionLineGraphActivity extends AppCompatActivity {
             System.out.println("TST 3.2: Week = " + i + ", Gas CO2 = " + DayData.getWeeklyGasEmissions(yearDataList.get(i)));
             System.out.println("TST 3.3: Week = " + i + ", Bus CO2 = " + DayData.getWeeklyBusEmissions(yearDataList.get(i)));
             System.out.println("TST 3.4: Week = " + i + ", Skytrain CO2 = " + DayData.getWeeklySkytrainEmissions(yearDataList.get(i)));
-            electricity.add(new Entry(i, DayData.getWeeklyElectricityEmissions(yearDataList.get(i)) / GRAMS_PER_KG));
-            naturalGas.add(new Entry(i, DayData.getWeeklyGasEmissions(yearDataList.get(i)) / GRAMS_PER_KG));
-            bus.add(new Entry(i, DayData.getWeeklyBusEmissions(yearDataList.get(i)) / GRAMS_PER_KG));
-            skytrain.add(new Entry(i, DayData.getWeeklySkytrainEmissions(yearDataList.get(i)) / GRAMS_PER_KG));
+            electricity.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                    DayData.getWeeklyElectricityEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
+            naturalGas.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                    DayData.getWeeklyGasEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
+            bus.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                    DayData.getWeeklyBusEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
+            skytrain.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                    DayData.getWeeklySkytrainEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
         }
 
         for (Car car : model.getCarCollection().getCarCollection()) {
             ArrayList<Entry> vehicle = new ArrayList<>();
 
             for (int i = 0; i < DATA_POINTS; i++) {
-                vehicle.add(new Entry(i, DayData.getWeeklyCarEmissions(yearDataList.get(i), car) / GRAMS_PER_KG));
+                vehicle.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                        DayData.getWeeklyCarEmissions(yearDataList.get(i), car) / GRAMS_PER_KG)));
             }
             if (vehicle.size() > 0) {
                 vehicleEntryList.add(vehicle);
