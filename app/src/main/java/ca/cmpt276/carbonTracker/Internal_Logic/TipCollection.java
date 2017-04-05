@@ -280,7 +280,7 @@ public class TipCollection {
         utilityTipsContent.add(appContext.getString(R.string.utilityTip1_1)+ (int) currentBill.getC02PerPerson() + appContext.getString(R.string.utilityTip7_2));
     }
 
-    // Other utility method
+    // Other utility method - Recent
     public int getRecentTipSize() { return recentShownTips.size(); }
     public void removeRecentTip(int index) {
         recentShownTips.remove(index);
@@ -290,5 +290,78 @@ public class TipCollection {
     }
     public Tip getRecentTipAtIndex(int index) {
         return recentShownTips.get(index);
+    }
+
+    // Other utility method - General
+    public int getGeneralTipSize() { return generalTips.size(); }
+    public void removeGeneralTip(int index) {
+        generalTips.remove(index);
+    }
+    public void addGeneralTip(Tip tip) {
+        generalTips.add(tip);
+    }
+    public Tip getGeneralTipAtIndex(int index) {
+        return generalTips.get(index);
+    }
+
+    // Other utility method - Car
+    public int getCarTipSize() { return carTips.size(); }
+    public void removeCarTip(int index) {
+        carTips.remove(index);
+    }
+    public void addCarTip(Tip tip) {
+        carTips.add(tip);
+    }
+    public Tip getCarTipAtIndex(int index) {
+        return carTips.get(index);
+    }
+
+    // Other utility method - Bus
+    public int getBusTipSize() { return busTips.size(); }
+    public void removeBusTip(int index) {
+        busTips.remove(index);
+    }
+    public void addBusTip(Tip tip) {
+        busTips.add(tip);
+    }
+    public Tip getBusTipAtIndex(int index) {
+        return busTips.get(index);
+    }
+
+    // Other utility method - Skytrain
+    public int getSkytrainTipSize() { return skyTrainTips.size(); }
+    public void removeSkytrainTip(int index) {
+        skyTrainTips.remove(index);
+    }
+    public void addSkytrainTip(Tip tip) {
+        skyTrainTips.add(tip);
+    }
+    public Tip getSkytrainTipAtIndex(int index) {
+        return skyTrainTips.get(index);
+    }
+
+    // Other utility method - Bike/Walk
+    public int getBikeWalkTipSize() { return bikeWalkTips.size(); }
+    public void removeBikeWalkTip(int index) {
+        bikeWalkTips.remove(index);
+    }
+    public void addBikeWalkTip(Tip tip) {
+        bikeWalkTips.add(tip);
+    }
+    public Tip getBikeWalkTipAtIndex(int index) {
+        return bikeWalkTips.get(index);
+    }
+
+
+    // Other utility method - Utility
+    public int getUtilityTipSize() { return utilityTips.size(); }
+    public void removeUtilityTip(int index) {
+        utilityTips.remove(index);
+    }
+    public void addUtilityTip(Tip tip) {
+        utilityTips.add(tip);
+    }
+    public Tip getUtilityTipAtIndex(int index) {
+        return utilityTips.get(index);
     }
 }
