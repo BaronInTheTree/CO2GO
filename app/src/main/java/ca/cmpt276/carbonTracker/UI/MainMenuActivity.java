@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
@@ -32,7 +34,29 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         setUpButtons();
+        setUpToggle();
         SaveData.loadTips(this);
+    }
+
+    private void setUpToggle() {
+        Switch unitToggle = (Switch) findViewById(R.id.treeUnitToggle);
+        if (CarbonModel.getInstance().getTreeUnit().getTreeUnitStatus() == true) {
+            unitToggle.setChecked(true);
+        }
+        unitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(true);
+                    Toast.makeText(MainMenuActivity.this, "on", Toast.LENGTH_SHORT).show();
+                    SaveData.saveTreeUnit(MainMenuActivity.this);
+                } else {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
+                    Toast.makeText(MainMenuActivity.this, "off", Toast.LENGTH_SHORT).show();
+                    SaveData.saveTreeUnit(MainMenuActivity.this);
+                }
+            }
+        });
     }
 
     private void setUpButtons() {

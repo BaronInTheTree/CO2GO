@@ -108,4 +108,7 @@
     <string name="graphModeDialog">graphModeDialog</string>
     <string name="calendarModeDialog">calendarModeDialog</string>
     <string name="graphModeDialogTitle">Graph Mode Selector</string>
+    <string name="trees">Trees</string>
+    <string name="units">Units</string>
+    <string name="co2">CO2</string>
 </resources>
