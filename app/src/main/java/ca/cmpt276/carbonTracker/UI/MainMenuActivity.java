@@ -88,7 +88,7 @@ public class MainMenuActivity extends AppCompatActivity {
         tip_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = modelInstance.getTips().getGeneralTip(summary);
+                String message = modelInstance.getTips().getGeneralTip(getApplicationContext(),summary);
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
                 SaveData.saveTips(MainMenuActivity.this);
 //                startActivity(new Intent(MainMenuActivity.this, TestActivity.class));

@@ -81,7 +81,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
 
                 summary.updateJourneys(currentInstance.getJourneyCollection());
                 // create tip based on the type of transportation and the information within current Journey.
-                String message = currentInstance.getTips().getJourneyTip(currentJourney,summary);
+                String message = currentInstance.getTips().getJourneyTip(getApplicationContext(),currentJourney,summary);
                 Toast.makeText(JourneyInformationActivity.this, message, Toast.LENGTH_LONG).show();
                 SaveData.saveTips(JourneyInformationActivity.this);
                 finish();

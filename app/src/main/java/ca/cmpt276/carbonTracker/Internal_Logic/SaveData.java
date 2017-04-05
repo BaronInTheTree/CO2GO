@@ -2,6 +2,7 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -261,34 +262,189 @@ public class SaveData extends JSONObject  {
         CarbonModel model = CarbonModel.getInstance();
         TipCollection tc = model.getTips();
         int index = 0;
+
         while (index < tc.getRecentTipSize()) {
             tc.removeRecentTip(index);
         }
+        while (index < tc.getGeneralTipSize()) {
+            tc.removeGeneralTip(index);
+        }
+        while (index < tc.getCarTipSize()) {
+            tc.removeCarTip(index);
+        }
+        while (index < tc.getBusTipSize()) {
+            tc.removeBusTip(index);
+        }
+        while (index < tc.getBikeWalkTipSize()) {
+            tc.removeBikeWalkTip(index);
+        }
+        while (index < tc.getSkytrainTipSize()) {
+            tc.removeSkytrainTip(index);
+        }
+        while (index < tc.getUtilityTipSize()) {
+            tc.removeUtilityTip(index);
+        }
 
-        SharedPreferences prefs = context.getSharedPreferences("TipCollection", MODE_PRIVATE);
 
-        while (!prefs.getString("Tip"+index, "").equals("") && index < MAX_TIP_SIZE) {
+        SharedPreferences prefsRecent = context.getSharedPreferences("RecentTips", MODE_PRIVATE);
+        SharedPreferences prefsGeneral = context.getSharedPreferences("GeneralTips", MODE_PRIVATE);
+        SharedPreferences prefsCar = context.getSharedPreferences("CarTips", MODE_PRIVATE);
+        SharedPreferences prefsBus = context.getSharedPreferences("BusTips", MODE_PRIVATE);
+        SharedPreferences prefsSkytrain = context.getSharedPreferences("SkytrainTips", MODE_PRIVATE);
+        SharedPreferences prefsBikeWalk = context.getSharedPreferences("BikeWalkTips", MODE_PRIVATE);
+        SharedPreferences prefsUtility = context.getSharedPreferences("UtilityTips", MODE_PRIVATE);
+
+        while (!prefsRecent.getString("Tip"+index, "").equals("") && index < MAX_TIP_SIZE) {
             Gson tipData = new Gson();
-            String jsonTipData = prefs.getString("Tip" + index, null);
+            String jsonTipData = prefsRecent.getString("Tip" + index, null);
             Tip tip = tipData.fromJson(jsonTipData, Tip.class);
             tc.addRecentTip(tip);
             index++;
+        }
+
+        index = 0;
+        while (!prefsGeneral.getString("Tip"+index, "").equals("")) {
+            Gson tipData = new Gson();
+            String jsonTipData = prefsGeneral.getString("Tip" + index, null);
+            Tip tip = tipData.fromJson(jsonTipData, Tip.class);
+            tc.addGeneralTip(tip);
+            index++;
+        }
+
+        index = 0;
+        while (!prefsCar.getString("Tip"+index, "").equals("")) {
+            Gson tipData = new Gson();
+            String jsonTipData = prefsCar.getString("Tip" + index, null);
+            Tip tip = tipData.fromJson(jsonTipData, Tip.class);
+            tc.addCarTip(tip);
+            index++;
+        }
+
+        index = 0;
+        while (!prefsBus.getString("Tip"+index, "").equals("")) {
+            Gson tipData = new Gson();
+            String jsonTipData = prefsBus.getString("Tip" + index, null);
+            Tip tip = tipData.fromJson(jsonTipData, Tip.class);
+            tc.addBusTip(tip);
+            index++;
+        }
+
+        index = 0;
+        while (!prefsSkytrain.getString("Tip"+index, "").equals("")) {
+            Gson tipData = new Gson();
+            String jsonTipData = prefsSkytrain.getString("Tip" + index, null);
+            Tip tip = tipData.fromJson(jsonTipData, Tip.class);
+            tc.addSkytrainTip(tip);
+            index++;
+        }
+
+        index = 0;
+        while (!prefsBikeWalk.getString("Tip"+index, "").equals("")) {
+            Gson tipData = new Gson();
+            String jsonTipData = prefsBikeWalk.getString("Tip" + index, null);
+            Tip tip = tipData.fromJson(jsonTipData, Tip.class);
+            tc.addBikeWalkTip(tip);
+            index++;
+        }
+
+        index = 0;
+        while (!prefsUtility.getString("Tip"+index, "").equals("")) {
+            Gson tipData = new Gson();
+            String jsonTipData = prefsUtility.getString("Tip" + index, null);
+            Tip tip = tipData.fromJson(jsonTipData, Tip.class);
+            tc.addUtilityTip(tip);
+            index++;
+            System.out.println("load");
         }
     }
 
     public static void saveTips(Context context) {
         CarbonModel model = CarbonModel.getInstance();
         TipCollection tc = model.getTips();
-        SharedPreferences prefs = context.getSharedPreferences("TipCollection", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.clear();
+
+        SharedPreferences prefsRecent = context.getSharedPreferences("RecentTips", MODE_PRIVATE);
+        SharedPreferences.Editor editorRecent = prefsRecent.edit();
+        editorRecent.clear();
+
+        SharedPreferences prefsGeneral = context.getSharedPreferences("GeneralTips", MODE_PRIVATE);
+        SharedPreferences.Editor editorGeneral = prefsGeneral.edit();
+        editorGeneral.clear();
+
+        SharedPreferences prefsCar = context.getSharedPreferences("CarTips", MODE_PRIVATE);
+        SharedPreferences.Editor editorCar = prefsCar.edit();
+        editorCar.clear();
+
+        SharedPreferences prefsBus = context.getSharedPreferences("BusTips", MODE_PRIVATE);
+        SharedPreferences.Editor editorBus = prefsBus.edit();
+        editorBus.clear();
+
+        SharedPreferences prefsSkytrain = context.getSharedPreferences("SkytrainTips", MODE_PRIVATE);
+        SharedPreferences.Editor editorSkytrain = prefsSkytrain.edit();
+        editorSkytrain.clear();
+
+        SharedPreferences prefsBikeWalk = context.getSharedPreferences("BikeWalkTips", MODE_PRIVATE);
+        SharedPreferences.Editor editorBikeWalk = prefsBikeWalk.edit();
+        editorBikeWalk.clear();
+
+        SharedPreferences prefsUtility = context.getSharedPreferences("UtilityTips", MODE_PRIVATE);
+        SharedPreferences.Editor editorUtility = prefsUtility.edit();
+        editorUtility.clear();
+
         for (int i = 0; i < tc.getRecentTipSize(); i++) {
             Gson tipData = new Gson();
             String jsonTipData = tipData.toJson(tc.getRecentTipAtIndex(i));
-            editor.putString("Tip"+i, jsonTipData);
+            editorRecent.putString("Tip"+i, jsonTipData);
         }
-        editor.commit();
-        editor.apply();
+        editorRecent.commit();
+        editorRecent.apply();
+
+        for (int i = 0; i < tc.getGeneralTipSize(); i++) {
+            Gson tipData = new Gson();
+            String jsonTipData = tipData.toJson(tc.getGeneralTipAtIndex(i));
+            editorGeneral.putString("Tip"+i, jsonTipData);
+        }
+        editorGeneral.commit();
+        editorGeneral.apply();
+
+        for (int i = 0; i < tc.getCarTipSize(); i++) {
+            Gson tipData = new Gson();
+            String jsonTipData = tipData.toJson(tc.getCarTipAtIndex(i));
+            editorCar.putString("Tip"+i, jsonTipData);
+        }
+        editorCar.commit();
+        editorCar.apply();
+
+        for (int i = 0; i < tc.getBusTipSize(); i++) {
+            Gson tipData = new Gson();
+            String jsonTipData = tipData.toJson(tc.getBusTipAtIndex(i));
+            editorBus.putString("Tip"+i, jsonTipData);
+        }
+        editorBus.commit();
+        editorBus.apply();
+
+        for (int i = 0; i < tc.getSkytrainTipSize(); i++) {
+            Gson tipData = new Gson();
+            String jsonTipData = tipData.toJson(tc.getSkytrainTipAtIndex(i));
+            editorSkytrain.putString("Tip"+i, jsonTipData);
+        }
+        editorSkytrain.commit();
+        editorSkytrain.apply();
+
+        for (int i = 0; i < tc.getBikeWalkTipSize(); i++) {
+            Gson tipData = new Gson();
+            String jsonTipData = tipData.toJson(tc.getBikeWalkTipAtIndex(i));
+            editorBikeWalk.putString("Tip"+i, jsonTipData);
+        }
+        editorBikeWalk.commit();
+        editorBikeWalk.apply();
+
+        for (int i = 0; i < tc.getUtilityTipSize(); i++) {
+            Gson tipData = new Gson();
+            String jsonTipData = tipData.toJson(tc.getUtilityTipAtIndex(i));
+            editorUtility.putString("Tip"+i, jsonTipData);
+        }
+        editorUtility.commit();
+        editorUtility.apply();
     }
 
     /////////////////////
