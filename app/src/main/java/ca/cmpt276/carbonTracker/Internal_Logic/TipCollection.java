@@ -336,7 +336,7 @@ public class TipCollection {
     }
 
     // Other utility method - Bike/Walk
-    public int getBikeWalkSize() { return bikeWalkTips.size(); }
+    public int getBikeWalkTipSize() { return bikeWalkTips.size(); }
     public void removeBikeWalkTip(int index) {
         bikeWalkTips.remove(index);
     }
