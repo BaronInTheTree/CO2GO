@@ -15,6 +15,7 @@ public class SkytrainDB {
     private List<String> expoLineStations;
     private List<String> milleniumLineStations;
     private List<String> canadaLineStations;
+    private List<String> lineList;
     private final double KM_PER_MINUTE = 0.75; // Skytrain average velocity
 
     public SkytrainDB() {
@@ -24,9 +25,11 @@ public class SkytrainDB {
         expoLineStations = new ArrayList<>();
         milleniumLineStations = new ArrayList<>();
         canadaLineStations = new ArrayList<>();
+        lineList = new ArrayList<>();
         setupExpoLine();
         setupMilleniumLine();
         setupCanadaLine();
+        setupLineList();
     }
 
     private void setupExpoLine() {
@@ -130,6 +133,12 @@ public class SkytrainDB {
         canadaLineStations.add("YVR - Airport");
     }
 
+    private void setupLineList() {
+        lineList.add("Expo Line");
+        lineList.add("Millenium Line");
+        lineList.add("Canada Line");
+    }
+
     public List<Double> getExpoLineDistances() {
         return expoLineDistances;
     }
@@ -154,7 +163,11 @@ public class SkytrainDB {
         return canadaLineStations;
     }
 
-    public int getDistanceStations_KM(int startIndex, int endIndex, ArrayList<Double> lineDistances) {
+    public List<String> getLineList() {
+        return lineList;
+    }
+
+    public int getDistanceStations_KM(int startIndex, int endIndex, List<Double> lineDistances) {
         int distanceKM = 0;
         if (endIndex - startIndex > 0) {
             for (int i = startIndex; i < endIndex; i++) {
