@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sasha.carbontracker">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -43,11 +45,11 @@
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditCarActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditRouteActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.JourneyListActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.EditJourneyActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.UI.EditJourneyActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.AddUtilityActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilityListActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.EditUtilityActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.UI.EditUtilityActivity" />
     </application>
 
 </manifest>
