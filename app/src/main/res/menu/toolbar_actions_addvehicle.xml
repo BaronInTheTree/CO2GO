@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item android:id="@+id/action_settings"
+        android:title="Settings"
+        android:orderInCategory="100"
+        android:icon="@mipmap/icon_settings_24dp"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/toolbar_switch"
+        android:title=""
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        app:actionLayout="@layout/switch_layout" />
+
+    <item android:id="@+id/action_addRoute"
+        android:title="@string/toolbar_add_route"
+        android:icon="@mipmap/icon_directions_white"
+        android:orderInCategory="400"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_addUtility"
+        android:title="Add Utility"
+        android:icon="@mipmap/icon_utilities_white"
+        android:orderInCategory="500"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_addJourney"
+        android:title="Add Journey"
+        android:icon="@mipmap/icon_journey_white"
+        android:orderInCategory="600"
+        app:showAsAction="always" />
+</menu>

@@ -1,9 +1,13 @@
-package ca.cmpt276.carbonTracker.UI;
+package ca.cmpt276.carbonTracker.AlternateUI;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
@@ -16,6 +20,8 @@ import android.widget.Toast;
 import com.example.sasha.carbontracker.R;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
+import ca.cmpt276.carbonTracker.UI.AddRouteActivity;
+import ca.cmpt276.carbonTracker.UI.AddUtilityActivity;
 
 /**
  The AddCarActivity is accessed when the user picks their mode of transportation and they can
@@ -26,24 +32,29 @@ import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 public class AddCarActivity extends AppCompatActivity {
 
-    CarbonModel modelInstance;
+    CarbonModel model;
     String selectedMake;
     String selectedModel;
     String selectedYear;
     int selectedVariation;
     String selectedNickname;
+    private ActionMenuView amvMenu;
+    private String callingActivity = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car);
-        modelInstance = CarbonModel.getInstance();
+        model = CarbonModel.getInstance();
+
+        Intent callingIntent = getIntent();
+        callingActivity = callingIntent.getStringExtra("Caller");
 
         setupSelectMakeSpinner();
         setupAddCarButton();
         setupEnterNicknameEditText();
         setupCancelButton();
-        setupSaveUseButton();
+        setupActionBar();
     }
 
     private void setupSelectMakeSpinner() {
@@ -51,7 +62,7 @@ public class AddCarActivity extends AppCompatActivity {
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
-                modelInstance.getCarData().getMakeList());
+                model.getCarData().getMakeList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         selectMake.setAdapter(spinnerArrayAdapter);
         selectMake.setSelection(0);
@@ -74,11 +85,11 @@ public class AddCarActivity extends AppCompatActivity {
 
         selectedMake = selectMake.getSelectedItem().toString();
 
-        modelInstance.getCarData().updateModelList(selectedMake);
+        model.getCarData().updateModelList(selectedMake);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
-                modelInstance.getCarData().getModelList());
+                model.getCarData().getModelList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         selectModel.setAdapter(spinnerArrayAdapter);
 
@@ -100,11 +111,11 @@ public class AddCarActivity extends AppCompatActivity {
 
         selectedModel = selectModel.getSelectedItem().toString();
 
-        modelInstance.getCarData().updateYearList(selectedMake, selectedModel);
+        model.getCarData().updateYearList(selectedMake, selectedModel);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
-                modelInstance.getCarData().getYearList());
+                model.getCarData().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         selectYear.setAdapter(spinnerArrayAdapter);
 
@@ -126,11 +137,11 @@ public class AddCarActivity extends AppCompatActivity {
 
         selectedYear = selectYear.getSelectedItem().toString();
 
-        modelInstance.getCarData().updateSpecsList(selectedMake, selectedModel, selectedYear);
+        model.getCarData().updateSpecsList(selectedMake, selectedModel, selectedYear);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
-                modelInstance.getCarData().getSpecsList());
+                model.getCarData().getSpecsList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         selectSpecs.setAdapter(spinnerArrayAdapter);
 
@@ -168,41 +179,19 @@ public class AddCarActivity extends AppCompatActivity {
                             "Please enter a nickname for your car.",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
+                    Car car = model.getCarData().findCar(selectedMake, selectedModel,
                             Integer.parseInt(selectedYear), selectedVariation);
                     car.setNickname(selectedNickname);
 
-                    modelInstance.getCarCollection().addCar(car);
+                    model.getCarCollection().addCar(car);
                     SaveData.saveCars(AddCarActivity.this);
-                    Intent intent = SelectTransportationActivity.makeIntent(AddCarActivity.this);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-    }
 
-    private void setupSaveUseButton() {
-        Button saveUseCar = (Button) findViewById(R.id.buttonSaveAndUseCar);
-        final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
-        saveUseCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedNickname = enterNickname.getText().toString();
-                if (selectedNickname.equals("")) {
-                    Toast.makeText(AddCarActivity.this,
-                            "Please enter a nickname for your car.",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    Car car = modelInstance.getCarData().findCar(selectedMake, selectedModel,
-                            Integer.parseInt(selectedYear), selectedVariation);
-                    car.setNickname(selectedNickname);
-
-                    modelInstance.getCarCollection().addCar(car);
-                    modelInstance.setSelectedCar(modelInstance.getCarCollection().getLatestCar());
-                    SaveData.saveCars(AddCarActivity.this);
-                    Intent intent = ModifyCarActivity.makeIntent(AddCarActivity.this);
-                    startActivity(intent);
+                    if (callingActivity.equals("AddJourney")) {
+                        startActivity(new Intent(AddCarActivity.this, AddJourneyActivity_Alternate.class));
+                    }
+                    else {
+                        startActivity(new Intent(AddCarActivity.this, MainMenuActivity_Alternate.class));
+                    }
                     finish();
                 }
             }
@@ -210,12 +199,16 @@ public class AddCarActivity extends AppCompatActivity {
     }
 
     private void setupCancelButton() {
-        Button cancel = (Button) findViewById(R.id.buttonCancel);
+        Button cancel = (Button) findViewById(R.id.buttonCancel_AddCar);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = SelectTransportationActivity.makeIntent(AddCarActivity.this);
-                startActivity(intent);
+                if (callingActivity.equals("AddJourney")) {
+                    startActivity(new Intent(AddCarActivity.this, AddJourneyActivity_Alternate.class));
+                }
+                else {
+                    startActivity(new Intent(AddCarActivity.this, MainMenuActivity_Alternate.class));
+                }
                 finish();
             }
         });
@@ -223,5 +216,68 @@ public class AddCarActivity extends AppCompatActivity {
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, AddCarActivity.class);
+    }
+
+    private void setupActionBar() {
+        // Inflate your custom layout
+        Toolbar toolBar = (Toolbar) findViewById(R.id.addCar_toolBar);
+        amvMenu = (ActionMenuView) toolBar.findViewById(R.id.amvMenu);
+        amvMenu.setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return onOptionsItemSelected(menuItem);
+            }
+        });
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_actions_addvehicle, amvMenu.getMenu());
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch(id) {
+            case R.id.action_settings: {
+                return true;
+            }
+            case R.id.action_addRoute: {
+                Intent intent = new Intent(AddCarActivity.this, AddRouteActivity.class);
+                intent.putExtra("Caller", "AddCar");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case R.id.action_addUtility: {
+                Intent intent = new Intent(AddCarActivity.this, AddUtilityActivity.class);
+                intent.putExtra("Caller", "AddCar");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case R.id.action_addJourney: {
+                Intent intent = new Intent(AddCarActivity.this, AddJourneyActivity_Alternate.class);
+                intent.putExtra("Caller", "AddCar");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case android.R.id.home: {
+                Intent intent = new Intent(AddCarActivity.this, MainMenuActivity_Alternate.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

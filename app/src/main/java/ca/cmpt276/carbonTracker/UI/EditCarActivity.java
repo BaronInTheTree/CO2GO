@@ -181,8 +181,8 @@ public class EditCarActivity extends AppCompatActivity {
 
                     editedCar.setNickname(selectedNickname);
 
-                    //modelInstance.getCarCollection().editCar(car, selectedIndex);
-                    //modelInstance.setSelectedCar(car);
+                    //model.getCarCollection().editCar(car, selectedIndex);
+                    //model.setSelectedCar(car);
                     modelInstance.getSelectedCar().editCar(editedCar);
 
 

@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +19,9 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+import ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity;
+import ca.cmpt276.carbonTracker.AlternateUI.AddJourneyActivity_Alternate;
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /**
@@ -27,6 +34,8 @@ import ca.cmpt276.carbonTracker.Internal_Logic.*;
 public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     private Route route;
     private CarbonModel carbonModel = CarbonModel.getInstance();
+    private ActionMenuView amvMenu;
+    private String callingActivity = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +43,9 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         setContentView(R.layout.activity_add_route);
 
         setupSaveRouteButton();
-        setupUseRouteButton();
         setupTextListeners();
-        setupSaveUseButton();
         setupBackButton();
+        setupActionBar();
     }
 
     private void setupSaveRouteButton() {
@@ -50,7 +58,12 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                         carbonModel.getRouteCollection().addRoute(route);
                         setResult(Activity.RESULT_OK);
                         SaveData.saveRoutes(AddRouteActivity.this);
-                        startActivity(new Intent(AddRouteActivity.this, SelectRouteActivity.class));
+                        if (callingActivity.equals("AddJourney")) {
+                            startActivity(new Intent(AddRouteActivity.this, AddJourneyActivity_Alternate.class));
+                        }
+                        else {
+                            startActivity(new Intent(AddRouteActivity.this, MainMenuActivity_Alternate.class));
+                        }
                         finish();
                     } else {
                         Toast.makeText(AddRouteActivity.this, "To save, enter a nickname.",
@@ -58,52 +71,6 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                     }
                 } else {
                     Toast.makeText(AddRouteActivity.this, "Please fill out the form completely.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void setupSaveUseButton() {
-        Button saveUseRoute = (Button) findViewById(R.id.buttonSaveUseRoute);
-        saveUseRoute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (setupTotalText()) {
-                    if (!route.getName().equals("")) {
-                        carbonModel.getRouteCollection().addRoute(route);
-                        carbonModel.setSelectedRoute(route);
-                        setResult(Activity.RESULT_OK);
-                        startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
-                        SaveData.saveRoutes(AddRouteActivity.this);
-                        finish();
-                    } else {
-                        Toast.makeText(AddRouteActivity.this, "To save, enter a nickname.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(AddRouteActivity.this, "Please fill out the form completely.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void setupUseRouteButton() {
-        Button useRoute_btn = (Button) findViewById(R.id.useRoute_btn);
-        useRoute_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText cityInput = (EditText) findViewById(R.id.cityDistance);
-                EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
-                if (setupTotalText()) {
-                    route.setHidden(true);
-                    carbonModel.setSelectedRoute(route);
-                    startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
-                    finish();
-                } else if ((isEmptyEditText(cityInput) || isEmptyEditText(highwayInput)) ||
-                        (!isEmptyEditText(cityInput) && !isEmptyEditText(highwayInput))) {
-                    Toast.makeText(AddRouteActivity.this, "Please enter both highway and city distance",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -115,8 +82,12 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selectRouteIntent = SelectRouteActivity.makeIntent(AddRouteActivity.this);
-                startActivity(selectRouteIntent);
+                if (callingActivity.equals("AddJourney")) {
+                    startActivity(new Intent(AddRouteActivity.this, AddJourneyActivity_Alternate.class));
+                }
+                else {
+                    startActivity(new Intent(AddRouteActivity.this, MainMenuActivity_Alternate.class));
+                }
                 finish();
             }
         });
@@ -222,4 +193,67 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     public void afterTextChanged(Editable s) {
         refreshTotalDistance();
     }
+
+    private void setupActionBar() {
+        // Inflate your custom layout
+        Toolbar toolBar = (Toolbar) findViewById(R.id.addRoute_toolBar);
+        amvMenu = (ActionMenuView) toolBar.findViewById(R.id.amvMenu);
+        amvMenu.setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return onOptionsItemSelected(menuItem);
+            }
+        });
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_actions_addroute, amvMenu.getMenu());
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch(id) {
+            case R.id.action_settings: {
+                return true;
+            }
+            case R.id.action_addVehicle: {
+                Intent intent = new Intent(AddRouteActivity.this, AddCarActivity.class);
+                intent.putExtra("Caller", "AddRoute");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case R.id.action_addUtility: {
+                Intent intent = new Intent(AddRouteActivity.this, AddUtilityActivity.class);
+                intent.putExtra("Caller", "AddRoute");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case R.id.action_addJourney: {
+                Intent intent = new Intent(AddRouteActivity.this, AddJourneyActivity_Alternate.class);
+                intent.putExtra("Caller", "AddRoute");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case android.R.id.home: {
+                startActivity(new Intent(AddRouteActivity.this, MainMenuActivity_Alternate.class));
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

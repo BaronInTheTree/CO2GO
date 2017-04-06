@@ -3,6 +3,10 @@ package ca.cmpt276.carbonTracker.UI;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +17,9 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+import ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity;
+import ca.cmpt276.carbonTracker.AlternateUI.AddJourneyActivity_Alternate;
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /*
@@ -39,6 +46,8 @@ public class AddUtilityActivity extends AppCompatActivity {
     private int usage;
     private int numPeople;
 
+    private ActionMenuView amvMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +71,8 @@ public class AddUtilityActivity extends AppCompatActivity {
         // Save and cancel buttons
         saveBillButton();
         cancelButton();
+
+        setupActionBar();
     }
 
 
@@ -309,7 +320,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                     model.setUtilityCollection(collection);
 
                     // Return to utility list and close activity
-                    Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
+                    Intent intent = new Intent(AddUtilityActivity.this, MainMenuActivity_Alternate.class);
                     SaveData.saveUtilities(AddUtilityActivity.this);
                     startActivity(intent);
                     finish();
@@ -366,10 +377,74 @@ public class AddUtilityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Return to utility list and close activity
-                Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
+                Intent intent = new Intent(AddUtilityActivity.this, MainMenuActivity_Alternate.class);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    private void setupActionBar() {
+        // Inflate your custom layout
+        Toolbar toolBar = (Toolbar) findViewById(R.id.addUtility_toolBar);
+        amvMenu = (ActionMenuView) toolBar.findViewById(R.id.amvMenu);
+        amvMenu.setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return onOptionsItemSelected(menuItem);
+            }
+        });
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_actions_addutility, amvMenu.getMenu());
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch(id) {
+            case R.id.action_settings: {
+                return true;
+            }
+            case R.id.action_addVehicle: {
+                Intent intent = new Intent(AddUtilityActivity.this, AddCarActivity.class);
+                intent.putExtra("Caller", "AddUtility");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case R.id.action_addRoute: {
+                Intent intent = new Intent(AddUtilityActivity.this, AddRouteActivity.class);
+                intent.putExtra("Caller", "AddUtility");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case R.id.action_addJourney: {
+                Intent intent = new Intent(AddUtilityActivity.this, AddJourneyActivity_Alternate.class);
+                intent.putExtra("Caller", "AddUtility");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case android.R.id.home: {
+                Intent intent = new Intent(AddUtilityActivity.this, MainMenuActivity_Alternate.class);
+                intent.putExtra("Caller", "AddUtility");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

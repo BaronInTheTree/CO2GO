@@ -27,17 +27,27 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/background_rectangle"
+            android:background="@drawable/background_rectangle_40"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Add Journey"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewSelectTransportMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:text="Select Transportation Mode"
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -53,7 +63,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_default_brown_round"
-                    android:foreground="@drawable/icon_walk_white" />
+                    android:foreground="@mipmap/icon_walk_white" />
 
                 <Button
                     android:id="@+id/buttonBikeMode"
@@ -62,7 +72,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_default_brown_round"
-                    android:foreground="@drawable/icon_bike_white" />
+                    android:foreground="@mipmap/icon_bike_white" />
 
                 <Button
                     android:id="@+id/buttonCarMode"
@@ -71,7 +81,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_default_brown_round"
-                    android:foreground="@drawable/icon_car_white" />
+                    android:foreground="@mipmap/icon_car_white" />
 
                 <Button
                     android:id="@+id/buttonBusMode"
@@ -80,7 +90,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_default_brown_round"
-                    android:foreground="@drawable/icon_bus_white" />
+                    android:foreground="@mipmap/icon_bus_white" />
 
                 <Button
                     android:id="@+id/buttonSkytrainMode"
@@ -90,7 +100,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_default_brown_round"
-                    android:foreground="@drawable/icon_skytrain_white" />
+                    android:foreground="@mipmap/icon_skytrain_white" />
 
             </LinearLayout>
 
@@ -102,16 +112,16 @@
                 android:layout_weight="1"
                 android:text="Walking"
                 android:textAlignment="center"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="22sp"
+                android:textStyle="bold|italic" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -120,7 +130,9 @@
                     android:layout_height="wrap_content"
                     android:text="Select Vehicle/Route/Skytrain Line"
                     android:textAlignment="textStart"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
 
                 <Spinner
                     android:id="@+id/spinnerOne"
@@ -134,7 +146,8 @@
                     android:id="@+id/textViewTwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Select Route/Departure Station" />
+                    android:text="Select Route/Departure Station"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinnerTwo"
@@ -148,15 +161,15 @@
                     android:id="@+id/textViewThree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Select Arrival Station" />
+                    android:text="Select Arrival Station"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/spinnerThree"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/toolbar_background"
-                    />
+                    android:background="@drawable/toolbar_background" />
 
             </LinearLayout>
 
@@ -178,11 +191,12 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="10"
+                android:background="@drawable/button_default_brown"
                 android:text="Date: 99/99/9999"
                 android:textAlignment="center"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:background="@drawable/button_default_brown"/>
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -210,19 +224,55 @@
                     android:layout_weight="1"
                     android:text="Distance:"
                     android:textAlignment="textStart"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
 
                 <TextView
                     android:id="@+id/textViewSummaryEmissions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_weight="1"
                     android:text="Emissions: "
                     android:textAlignment="textStart"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonCancel_AddJourney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selected_red"
+                    android:text="@string/cancel" />
+
+                <Button
+                    android:id="@+id/buttonConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_default_green"
+                    android:elevation="0dp"
+                    android:text="Add Journey"
+                    android:textAlignment="center"
+                    android:textColor="#2e2e2e"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -230,30 +280,16 @@
                 android:id="@+id/buttonConfirmAddFavorites"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/button_default_green"
                 android:elevation="0dp"
-                android:text="CONFIRM"
+                android:text="Add + Favourite"
                 android:textAlignment="center"
                 android:textColor="#2e2e2e"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/buttonConfirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/button_default_green"
-                android:elevation="0dp"
-                android:text="CONFIRM + Favorite"
-                android:textAlignment="center"
-                android:textColor="#2e2e2e"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="14sp" />
 
 
         </LinearLayout>

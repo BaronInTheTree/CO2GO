@@ -1,20 +1,22 @@
 package ca.cmpt276.carbonTracker.AlternateUI;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 import com.github.mikephil.charting.charts.PieChart;
@@ -41,10 +43,13 @@ import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.Route;
-import ca.cmpt276.carbonTracker.UI.AddCarActivity;
 import ca.cmpt276.carbonTracker.UI.AddRouteActivity;
 import ca.cmpt276.carbonTracker.UI.AddUtilityActivity;
 import ca.cmpt276.carbonTracker.UI.CalendarDialog;
+import ca.cmpt276.carbonTracker.UI.JourneyListActivity;
+import ca.cmpt276.carbonTracker.UI.ModifyCarActivity;
+import ca.cmpt276.carbonTracker.UI.SelectRouteActivity;
+import ca.cmpt276.carbonTracker.UI.UtilityListActivity;
 
 public class MainMenuActivity_Alternate extends AppCompatActivity {
 
@@ -79,6 +84,8 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setupRouteFilterButton();
         setupVehicleFilterButton();
         setupActionBar();
+        setupTipsText();
+        setupAddViewButtons();
     }
 
     private void setupSingleDayButton() {
@@ -223,12 +230,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ",\nBy Route (kg)");
+                            + chartDateFormat.format(currentDate) + "\nLast 28 Days, By Route (kg)");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ",\nBy Vehicle (kg)");
+                            + chartDateFormat.format(currentDate) + "\nLast 28 Days, By Vehicle (kg)");
                 }
                 break;
             }
@@ -239,12 +246,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ",\nBy Route (kg)");
+                            + chartDateFormat.format(currentDate) + "\nLast 365 Days, By Route (kg)");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + ",\nBy Vehicle (kg)");
+                            + chartDateFormat.format(currentDate) + "\nLast 365 Days, By Vehicle (kg)");
                 }
                 break;
             }
@@ -427,7 +434,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_actions, amvMenu.getMenu());
+        getMenuInflater().inflate(R.menu.toolbar_actions_mainmenu, amvMenu.getMenu());
         return true;
     }
 
@@ -443,23 +450,36 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 return true;
             }
             case R.id.action_addVehicle: {
-                startActivity(new Intent(MainMenuActivity_Alternate.this, AddCarActivity.class));
+                Intent intent = new Intent(MainMenuActivity_Alternate.this, AddCarActivity.class);
+                intent.putExtra("Caller", "MainMenu");
+                startActivity(intent);
                 finish();
+                return true;
             }
             case R.id.action_addRoute: {
-                startActivity(new Intent(MainMenuActivity_Alternate.this, AddRouteActivity.class));
+                Intent intent = new Intent(MainMenuActivity_Alternate.this, AddRouteActivity.class);
+                intent.putExtra("Caller", "MainMenu");
+                startActivity(intent);
                 finish();
+                return true;
             }
             case R.id.action_addUtility: {
-                startActivity(new Intent(MainMenuActivity_Alternate.this, AddUtilityActivity.class));
+                Intent intent = new Intent(MainMenuActivity_Alternate.this, AddUtilityActivity.class);
+                intent.putExtra("Caller", "MainMenu");
+                startActivity(intent);
                 finish();
+                return true;
             }
             case R.id.action_addJourney: {
-                startActivity(new Intent(MainMenuActivity_Alternate.this, AddJourneyActivity_Alternate.class));
+                Intent intent = new Intent(MainMenuActivity_Alternate.this, AddJourneyActivity_Alternate.class);
+                intent.putExtra("Caller", "MainMenu");
+                startActivity(intent);
                 finish();
+                return true;
             }
             case android.R.id.home: {
                 finish();
+                return true;
             }
         }
         return super.onOptionsItemSelected(item);
@@ -482,6 +502,54 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
             System.out.println("TST 6.1: Color: " + color);
         }
         return colorList;
+    }
+
+    private void setupAddViewButtons() {
+        Button addJourney = (Button) findViewById(R.id.buttonAddJourney_MainMenu);
+        Button viewJourney = (Button) findViewById(R.id.buttonViewJourneys_MainMenu);
+        Button addUtility = (Button) findViewById(R.id.buttonAddUtility_MainMenu);
+        Button viewUtility = (Button) findViewById(R.id.buttonViewUtilities_MainMenu);
+        Button addVehicle = (Button) findViewById(R.id.buttonAddVehicle_MainMenu);
+        Button viewVehicle = (Button) findViewById(R.id.buttonViewVehicles_MainMenu);
+        Button addRoute = (Button) findViewById(R.id.buttonAddRoute_MainMenu);
+        Button viewRoute = (Button) findViewById(R.id.buttonViewRoutes_MainMenu);
+
+        setupButtonListener(addJourney, new Intent
+                (MainMenuActivity_Alternate.this, AddJourneyActivity_Alternate.class));
+        setupButtonListener(viewJourney, new Intent
+                (MainMenuActivity_Alternate.this, JourneyListActivity.class));
+        setupButtonListener(addUtility, new Intent
+                (MainMenuActivity_Alternate.this, AddUtilityActivity.class));
+        setupButtonListener(viewUtility, new Intent
+                (MainMenuActivity_Alternate.this, UtilityListActivity.class));
+        setupButtonListener(addVehicle, new Intent
+                (MainMenuActivity_Alternate.this, AddCarActivity.class));
+        setupButtonListener(viewVehicle, new Intent
+                (MainMenuActivity_Alternate.this, ModifyCarActivity.class));
+        setupButtonListener(addRoute, new Intent
+                (MainMenuActivity_Alternate.this, AddRouteActivity.class));
+        setupButtonListener(viewRoute, new Intent
+                (MainMenuActivity_Alternate.this, SelectRouteActivity.class));
+    }
+
+    private void setupButtonListener(Button button, final Intent intent) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void setupTipsText() {
+        String tip = "Tip:\n" + model.getTips().getGeneralTip(model.getSummary());
+        SpannableString spannableString = new SpannableString(tip);
+        spannableString.setSpan(new RelativeSizeSpan(1.5f), 0,5, 0); // set size
+        spannableString.setSpan(new ForegroundColorSpan(Color.WHITE), 0, 5, 0);// set color
+
+        Button tips = (Button) findViewById(R.id.buttonTipsMainMenu);
+        tips.setText(spannableString);
     }
 }
 

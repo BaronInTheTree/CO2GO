@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
@@ -31,7 +32,6 @@ import ca.cmpt276.carbonTracker.Internal_Logic.Skytrain;
 import ca.cmpt276.carbonTracker.Internal_Logic.SkytrainDB;
 import ca.cmpt276.carbonTracker.Internal_Logic.Transportation;
 import ca.cmpt276.carbonTracker.Internal_Logic.WalkBike;
-import ca.cmpt276.carbonTracker.UI.AddCarActivity;
 import ca.cmpt276.carbonTracker.UI.AddRouteActivity;
 import ca.cmpt276.carbonTracker.UI.AddUtilityActivity;
 import ca.cmpt276.carbonTracker.UI.CalendarDialog;
@@ -43,8 +43,8 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
     private CarbonModel model = CarbonModel.getInstance();
     private Date currentDate = new Date();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-    private Route selectedRoute = model.getRouteCollection().getRouteAtIndex(0);
-    private Transportation selectedTransportation = model.getCarCollection().getCarAtIndex(0);
+    private Route selectedRoute;
+    private Transportation selectedTransportation;
     private Journey selectedJourney;
     private enum TransportType{WALKBIKE, CAR, BUS, SKYTRAIN};
     private TransportType transportType = TransportType.CAR;
@@ -60,6 +60,10 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_journey_alternate);
+
+        isCarCollectionEmpty();
+        isRouteCollectionEmpty();
+
         setupWalkButton();
         setupBikeButton();
         setupCarButton();
@@ -77,6 +81,8 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         setupSpinnerThree(getEmptyList(), "", false, 0);
         setupActionBar();
         setupSummaryText();
+        setupConfirmButtons();
+        setupCancelButton();
     }
 
     private void registerAsObserver() {
@@ -87,6 +93,29 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
                 setupDateText();
             }
         });
+    }
+
+    private boolean isCarCollectionEmpty() {
+        if (model.getCarCollection().getListSize() <= 0) {
+            selectedTransportation = new WalkBike();
+            selectedTransportation.setNickname("No Vehicles Available");
+            return true;
+        }
+        else {
+            selectedTransportation = model.getCarCollection().getCarAtIndex(0);
+            return false;
+        }
+    }
+
+    private boolean isRouteCollectionEmpty() {
+        if (model.getRouteCollection().getListSize() <= 0) {
+            selectedRoute = new Route("No Routes Available", 0, 0);
+            return true;
+        }
+        else {
+            selectedRoute = model.getRouteCollection().getRouteAtIndex(0);
+            return false;
+        }
     }
 
     private void setupTransportModeText(String mode) {
@@ -113,7 +142,7 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         walk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                walk.setBackgroundResource(R.drawable.button_selected_red);
+                walk.setBackgroundResource(R.drawable.button_selected_red_round);
 
                 transportType = TransportType.WALKBIKE;
                 setupTransportModeText("Walking");
@@ -142,7 +171,7 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         selected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selected.setBackgroundResource(R.drawable.button_selected_red);
+                selected.setBackgroundResource(R.drawable.button_selected_red_round);
 
                 transportType = TransportType.WALKBIKE;
                 setupTransportModeText("Biking");
@@ -168,11 +197,11 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
 
     private void setupCarButton() {
         final Button selected = (Button) findViewById(R.id.buttonCarMode);
-        selected.setBackgroundResource(R.drawable.button_selected_red);
+        selected.setBackgroundResource(R.drawable.button_selected_red_round);
         selected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selected.setBackgroundResource(R.drawable.button_selected_red);
+                selected.setBackgroundResource(R.drawable.button_selected_red_round);
 
                 transportType = TransportType.CAR;
                 setupTransportModeText("Vehicle");
@@ -229,19 +258,19 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         selected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selected.setBackgroundResource(R.drawable.button_selected_red);
+                selected.setBackgroundResource(R.drawable.button_selected_red_round);
 
                 transportType = TransportType.SKYTRAIN;
                 setupTransportModeText("Skytrain");
 
                 Button btn1 = (Button) findViewById(R.id.buttonWalkMode);
-                btn1.setBackgroundResource(R.drawable.button_default_brown);
+                btn1.setBackgroundResource(R.drawable.button_default_brown_round);
                 Button btn2 = (Button) findViewById(R.id.buttonBikeMode);
-                btn2.setBackgroundResource(R.drawable.button_default_brown);
+                btn2.setBackgroundResource(R.drawable.button_default_brown_round);
                 Button btn3 = (Button) findViewById(R.id.buttonBusMode);
-                btn3.setBackgroundResource(R.drawable.button_default_brown);
+                btn3.setBackgroundResource(R.drawable.button_default_brown_round);
                 Button btn4 = (Button) findViewById(R.id.buttonCarMode);
-                btn4.setBackgroundResource(R.drawable.button_default_brown);
+                btn4.setBackgroundResource(R.drawable.button_default_brown_round);
 
                 setupSpinnerOne(skytrainDB.getLineList(), "Select Skytrain Line");
                 setupSpinnerTwo(skytrainDB.getExpoLineStations(), "Select Departure Station", true);
@@ -254,6 +283,43 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
 
     private void setupSpinnerOne(final List<String> list, String title) {
         final Spinner spinner = (Spinner) findViewById(R.id.spinnerOne);
+        TextView textView = (TextView) findViewById(R.id.textViewOne);
+        spinner.setVisibility(View.INVISIBLE);
+        spinner.setClickable(false);
+
+        if (isCarCollectionEmpty() && transportType.equals(TransportType.CAR)) {
+            textView.setText("Add Vehicle");
+            textView.setTextSize(18);
+            textView.setBackgroundResource(R.drawable.button_default_green);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(AddJourneyActivity_Alternate.this, AddCarActivity.class));
+                    finish();
+                }
+            });
+        }
+        else if (isRouteCollectionEmpty() && !transportType.equals(TransportType.CAR)
+                && !transportType.equals(TransportType.SKYTRAIN)) {
+            textView.setText("Add Route");
+            textView.setTextSize(18);
+            textView.setBackgroundResource(R.drawable.button_default_green);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(AddJourneyActivity_Alternate.this, AddRouteActivity.class));
+                    finish();
+                }
+            });
+        }
+        else {
+            spinner.setVisibility(View.VISIBLE);
+            spinner.setClickable(true);
+            textView.setText(title);
+            textView.setTextSize(14);
+            textView.setBackgroundResource(R.drawable.button_transparent);
+            textView.setOnClickListener(null);
+        }
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
@@ -284,11 +350,15 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
                     selectedTransportation = new Skytrain();
                 }
                 else if (transportType.equals(TransportType.CAR)) {
-                    selectedTransportation = model.getCarCollection().getCarAtIndex(position);
+                    if (!isCarCollectionEmpty()){
+                        selectedTransportation = model.getCarCollection().getCarAtIndex(position);
+                    }
                     setupSummaryText();
                 }
                 else {
-                    selectedRoute = model.getRouteCollection().getRouteAtIndex(position);
+                    if (!isRouteCollectionEmpty()) {
+                        selectedRoute = model.getRouteCollection().getRouteAtIndex(position);
+                    }
                     setupSummaryText();
                 }
             }
@@ -297,9 +367,6 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-        TextView textView = (TextView) findViewById(R.id.textViewOne);
-        textView.setText(title);
     }
 
     private void setupSpinnerTwo(final List<String> list, String title, boolean visible) {
@@ -321,6 +388,29 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
 
             textView.setText(title);
             departureStationIndex = 0;
+
+            if (isRouteCollectionEmpty() && transportType.equals(TransportType.CAR)) {
+                spinner.setVisibility(View.INVISIBLE);
+                spinner.setClickable(false);
+                textView.setText("Add Route");
+                textView.setTextSize(18);
+                textView.setBackgroundResource(R.drawable.button_default_green);
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(AddJourneyActivity_Alternate.this, AddRouteActivity.class));
+                        finish();
+                    }
+                });
+            }
+            else {
+                spinner.setVisibility(View.VISIBLE);
+                spinner.setClickable(true);
+                textView.setText(title);
+                textView.setTextSize(14);
+                textView.setBackgroundResource(R.drawable.button_transparent);
+                textView.setOnClickListener(null);
+            }
         }
 
         else {
@@ -342,7 +432,9 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
                     setupSummaryText();
                 }
                 else if (transportType.equals(TransportType.CAR)) {
-                    selectedRoute = model.getRouteCollection().getRouteAtIndex(position);
+                    if (!isRouteCollectionEmpty()) {
+                        selectedRoute = model.getRouteCollection().getRouteAtIndex(position);
+                    }
                     setupSummaryText();
                 }
             }
@@ -417,7 +509,7 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_actions, amvMenu.getMenu());
+        getMenuInflater().inflate(R.menu.toolbar_actions_addjourney, amvMenu.getMenu());
         return true;
     }
 
@@ -433,23 +525,31 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
                 return true;
             }
             case R.id.action_addVehicle: {
-                startActivity(new Intent(AddJourneyActivity_Alternate.this, AddCarActivity.class));
+                Intent intent = new Intent(AddJourneyActivity_Alternate.this, AddCarActivity.class);
+                intent.putExtra("Caller", "AddJourney");
+                startActivity(intent);
                 finish();
+                return true;
             }
             case R.id.action_addRoute: {
-                startActivity(new Intent(AddJourneyActivity_Alternate.this, AddRouteActivity.class));
+                Intent intent = new Intent(AddJourneyActivity_Alternate.this, AddRouteActivity.class);
+                intent.putExtra("Caller", "AddJourney");
+                startActivity(intent);
                 finish();
+                return true;
             }
             case R.id.action_addUtility: {
-                startActivity(new Intent(AddJourneyActivity_Alternate.this, AddUtilityActivity.class));
+                Intent intent = new Intent(AddJourneyActivity_Alternate.this, AddUtilityActivity.class);
+                intent.putExtra("Caller", "AddJourney");
+                startActivity(intent);
                 finish();
-            }
-            case R.id.action_addJourney: {
-                startActivity(new Intent(AddJourneyActivity_Alternate.this, AddJourneyActivity_Alternate.class));
-                finish();
+                return true;
             }
             case android.R.id.home: {
+                Intent intent = new Intent(AddJourneyActivity_Alternate.this, MainMenuActivity_Alternate.class);
+                startActivity(intent);
                 finish();
+                return true;
             }
         }
         return super.onOptionsItemSelected(item);
@@ -459,10 +559,78 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         selectedJourney = createJourney();
 
         TextView distance = (TextView) findViewById(R.id.textViewSummaryDistance);
-        distance.setText("Distance:  " + selectedRoute.getTotalDistanceKM() + " km");
+        distance.setText("Distance:   " + selectedRoute.getTotalDistanceKM() + " km");
 
         TextView emissions = (TextView) findViewById(R.id.textViewSummaryEmissions);
         emissions.setText(("Emissions: " + String.format("%.3f", (selectedJourney.getEmissionsKM() / gPerKG)) + " " + unit));
+    }
+
+    private void setupConfirmButtons() {
+        Button confirm = (Button) findViewById(R.id.buttonConfirm);
+        setupConfirmListeners(confirm, false);
+        Button confirmFav = (Button) findViewById(R.id.buttonConfirmAddFavorites);
+        setupConfirmListeners(confirmFav, true);
+    }
+
+    private void setupConfirmListeners(Button button, final boolean favorite) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean validInput = false;
+                switch(transportType) {
+                    case WALKBIKE: {
+                        if (!isRouteCollectionEmpty()) {
+                            validInput = true;
+                        }
+                        break;
+                    }
+                    case CAR: {
+                        if (!isCarCollectionEmpty() && !isRouteCollectionEmpty()) {
+                            validInput = true;
+                        }
+                        break;
+                    }
+                    case BUS: {
+                        if (!isRouteCollectionEmpty()) {
+                            validInput = true;
+                        }
+                        break;
+                    }
+                    case SKYTRAIN: {
+                        validInput = true;
+                        break;
+                    }
+                }
+                if (validInput) {
+                    model.addNewJourney(selectedJourney);
+                    if (favorite) {
+                        // ADD TO FAVORITES
+                    }
+                    startActivity(new Intent(AddJourneyActivity_Alternate.this, MainMenuActivity_Alternate.class));
+                }
+                else {
+                    if (isCarCollectionEmpty()) {
+                        Toast.makeText(AddJourneyActivity_Alternate.this,
+                                "Please add and select a Vehicle", Toast.LENGTH_LONG).show();
+                    }
+                    else if (isRouteCollectionEmpty()) {
+                        Toast.makeText(AddJourneyActivity_Alternate.this,
+                                "Please add and select a Route", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+    }
+
+    private void setupCancelButton() {
+        Button cancel = (Button) findViewById(R.id.buttonCancel_AddJourney);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddJourneyActivity_Alternate.this, MainMenuActivity_Alternate.class));
+                finish();
+            }
+        });
     }
 
     public Journey createJourney() {

@@ -103,10 +103,6 @@ public class Car extends Transportation implements Cloneable {
         this.isHidden = hidden;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
     public String getTrany() {
         return trany;
     }

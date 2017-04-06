@@ -27,7 +27,7 @@
             android:name="ca.cmpt276.carbonTracker.UI.SelectTransportationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.UI.AddCarActivity"
+            android:name="ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="ca.cmpt276.carbonTracker.UI.AddRouteActivity"

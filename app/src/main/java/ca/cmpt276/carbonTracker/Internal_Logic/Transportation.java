@@ -32,4 +32,8 @@ public class Transportation {
     public double getCo2GramsPerKM_City() {
         return co2GramsPerKM_City;
     }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }
