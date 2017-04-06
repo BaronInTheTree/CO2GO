@@ -15,6 +15,7 @@ import com.example.sasha.carbontracker.R;
 
 import java.util.List;
 
+import ca.cmpt276.carbonTracker.AlternateUI.AddUtilityActivity;
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /*

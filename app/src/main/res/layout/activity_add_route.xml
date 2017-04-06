@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context="ca.cmpt276.carbonTracker.UI.AddRouteActivity"
+    tools:context="ca.cmpt276.carbonTracker.AlternateUI.AddRouteActivity"
     android:background="@mipmap/forest_road">
 
     <include

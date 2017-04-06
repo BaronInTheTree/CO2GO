@@ -30,7 +30,7 @@
             android:name="ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.UI.AddRouteActivity"
+            android:name="ca.cmpt276.carbonTracker.AlternateUI.AddRouteActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="ca.cmpt276.carbonTracker.UI.JourneyInformationActivity"
@@ -44,7 +44,7 @@
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditRouteActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.JourneyListActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditJourneyActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.AddUtilityActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.AddUtilityActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilityListActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditUtilityActivity" />

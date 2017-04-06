@@ -1,4 +1,4 @@
-package ca.cmpt276.carbonTracker.UI;
+package ca.cmpt276.carbonTracker.AlternateUI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +17,6 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
-import ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity;
-import ca.cmpt276.carbonTracker.AlternateUI.AddJourneyActivity_Alternate;
-import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /*

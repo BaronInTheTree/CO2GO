@@ -43,8 +43,6 @@ import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.Route;
-import ca.cmpt276.carbonTracker.UI.AddRouteActivity;
-import ca.cmpt276.carbonTracker.UI.AddUtilityActivity;
 import ca.cmpt276.carbonTracker.UI.CalendarDialog;
 import ca.cmpt276.carbonTracker.UI.JourneyListActivity;
 import ca.cmpt276.carbonTracker.UI.ModifyCarActivity;

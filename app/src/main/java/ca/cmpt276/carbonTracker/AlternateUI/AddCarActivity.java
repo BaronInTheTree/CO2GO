@@ -20,8 +20,6 @@ import android.widget.Toast;
 import com.example.sasha.carbontracker.R;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
-import ca.cmpt276.carbonTracker.UI.AddRouteActivity;
-import ca.cmpt276.carbonTracker.UI.AddUtilityActivity;
 
 /**
  The AddCarActivity is accessed when the user picks their mode of transportation and they can

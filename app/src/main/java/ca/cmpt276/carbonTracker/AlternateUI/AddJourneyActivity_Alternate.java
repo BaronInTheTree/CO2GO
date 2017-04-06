@@ -32,8 +32,6 @@ import ca.cmpt276.carbonTracker.Internal_Logic.Skytrain;
 import ca.cmpt276.carbonTracker.Internal_Logic.SkytrainDB;
 import ca.cmpt276.carbonTracker.Internal_Logic.Transportation;
 import ca.cmpt276.carbonTracker.Internal_Logic.WalkBike;
-import ca.cmpt276.carbonTracker.UI.AddRouteActivity;
-import ca.cmpt276.carbonTracker.UI.AddUtilityActivity;
 import ca.cmpt276.carbonTracker.UI.CalendarDialog;
 
 import static ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate.gPerKG;
