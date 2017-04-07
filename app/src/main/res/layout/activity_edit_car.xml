@@ -9,7 +9,7 @@
     android:background="@mipmap/bugatti">
 
     <include
-        android:id="@+id/addCar_toolBar"
+        android:id="@+id/mainMenu_toolBar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         layout="@layout/toolbar_layout" />
@@ -41,7 +41,7 @@
             android:layout_gravity="left"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="0.25"
             android:text="@string/select_make"
             android:textStyle="bold" />
@@ -116,6 +116,28 @@
             android:id="@+id/spinnerSelectSpecsEdit"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight=".5"
+            android:background="@drawable/toolbar_background" />
+
+        <TextView
+            android:id="@+id/textViewSelectIcon_Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="0.25"
+            android:text="Select Icon"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerSelectIcon_Edit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="left"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"

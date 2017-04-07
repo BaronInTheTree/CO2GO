@@ -1,5 +1,6 @@
 package ca.cmpt276.carbonTracker.AlternateUI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +31,7 @@ import java.util.List;
 import ca.cmpt276.carbonTracker.Internal_Logic.Bus;
 import ca.cmpt276.carbonTracker.Internal_Logic.CalendarObserver;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.IconCollection;
 import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
 import ca.cmpt276.carbonTracker.Internal_Logic.Route;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
@@ -36,6 +40,7 @@ import ca.cmpt276.carbonTracker.Internal_Logic.SkytrainDB;
 import ca.cmpt276.carbonTracker.Internal_Logic.Transportation;
 import ca.cmpt276.carbonTracker.Internal_Logic.WalkBike;
 import ca.cmpt276.carbonTracker.UI.CalendarDialog;
+import ca.cmpt276.carbonTracker.UI.EditCarActivity;
 
 import static ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate.gPerKG;
 
@@ -282,6 +287,23 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         });
     }
 
+    private class MyArrayAdapter<T> extends ArrayAdapter<T>
+    {
+        List<Integer> iconIDs = IconCollection.iconIDs;
+        public MyArrayAdapter(Context context, int resource, int textViewResourceId, List<T> objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View itemView = super.getView(position, convertView, parent);
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.vehicleIconEntryAddJourney);
+//            imageView.setBackgroundResource(vehicleIcons.get(position));
+            imageView.setImageResource(model.getCarCollection().getCarCollection().get(position).getIconID());
+            System.out.println("TST 10.1: ID = " + iconIDs.get(position));
+            return itemView;
+        }
+    }
+
     private void setupSpinnerOne(final List<String> list, String title) {
         final Spinner spinner = (Spinner) findViewById(R.id.spinnerOne);
         TextView textView = (TextView) findViewById(R.id.textViewOne);
@@ -322,11 +344,21 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
             textView.setOnClickListener(null);
         }
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
-                R.layout.support_simple_spinner_dropdown_item,
-                list);
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerArrayAdapter);
+        if (transportType.equals(TransportType.CAR)) {
+            ArrayAdapter<String> spinnerArrayAdapter = new AddJourneyActivity_Alternate.MyArrayAdapter<String>(this,
+                    R.layout.icon_spinner_row_addjourney_layout,
+                    R.id.vehicleIconNameAddJourney,
+                    list);
+            spinnerArrayAdapter.setDropDownViewResource(R.layout.icon_spinner_row_addjourney_layout);
+            spinner.setAdapter(spinnerArrayAdapter);
+        }
+        else {
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    list);
+            spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            spinner.setAdapter(spinnerArrayAdapter);
+        }
         spinner.setSelection(0);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -413,7 +445,6 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
                 textView.setOnClickListener(null);
             }
         }
-
         else {
             spinner.setVisibility(View.INVISIBLE);
             spinner.setClickable(false);

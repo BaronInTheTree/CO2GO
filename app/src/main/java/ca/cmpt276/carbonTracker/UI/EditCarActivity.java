@@ -10,16 +10,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity;
 import ca.cmpt276.carbonTracker.AlternateUI.AddJourneyActivity_Alternate;
@@ -45,6 +50,7 @@ public class EditCarActivity extends AppCompatActivity {
     String selectedNickname;
     int selectedIndex;
     private ActionMenuView amvMenu;
+    int selectedIconID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,7 @@ public class EditCarActivity extends AppCompatActivity {
         setupEditCarButton();
         setupCancelButton();
         setupActionBar();
+        setupSelectIconSpinner();
     }
 
     private void setupSelectMakeSpinner() {
@@ -164,6 +171,53 @@ public class EditCarActivity extends AppCompatActivity {
         });
     }
 
+    private class MyArrayAdapter<T> extends ArrayAdapter<T>
+    {
+        List<Integer> iconIDs = IconCollection.iconIDs;
+        public MyArrayAdapter(Context context, int resource, int textViewResourceId, List<T> objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View itemView = super.getView(position, convertView, parent);
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.vehicleIconEntry);
+//            imageView.setBackgroundResource(vehicleIcons.get(position));
+            imageView.setImageResource(iconIDs.get(position));
+            System.out.println("TST 10.1: ID = " + iconIDs.get(position));
+            return itemView;
+        }
+    }
+
+    private void setupSelectIconSpinner() {
+        Spinner selectIcon = (Spinner) findViewById(R.id.spinnerSelectIcon_Edit);
+
+        ArrayAdapter<String> spinnerArrayAdapter = new EditCarActivity.MyArrayAdapter<String>(this,
+                R.layout.icon_spinner_row_layout,
+                R.id.vehicleIconName,
+                IconCollection.iconNames);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.icon_spinner_row_layout);
+        selectIcon.setAdapter(spinnerArrayAdapter);
+
+        for (int i = 0; i < IconCollection.iconIDs.size(); i++) {
+            if (IconCollection.iconIDs.get(i).equals(modelInstance.getCarCollection().
+                    getCarAtIndex(selectedIndex).getIconID())) {
+                selectIcon.setSelection(i);
+                break;
+            }
+        }
+
+        selectIcon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedIconID = IconCollection.iconIDs.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
     private void setupEnterNicknameEditText() {
         EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNicknameEdit);
         enterNickname.setText(modelInstance.getSelectedCar().getNickname());
@@ -196,6 +250,7 @@ public class EditCarActivity extends AppCompatActivity {
                     //model.getCarCollection().editCar(car, selectedIndex);
                     //model.setSelectedCar(car);
                     modelInstance.getSelectedCar().editCar(editedCar);
+                    modelInstance.getSelectedCar().setIconID(selectedIconID);
 
                     SaveData.saveCars(EditCarActivity.this);
                     startActivity(new Intent(EditCarActivity.this, SelectTransportationActivity.class));
