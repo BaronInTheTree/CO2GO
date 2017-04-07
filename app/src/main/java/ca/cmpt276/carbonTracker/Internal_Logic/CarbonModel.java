@@ -17,6 +17,7 @@ import java.util.List;
 public class CarbonModel {
     private static CarbonModel instance = new CarbonModel();
     private JourneyCollection journeyCollection;
+    private JourneyCollection favouriteJourneyCollection;
     private CarCollection carCollection;
     private RouteCollection routeCollection;
     private CarData carData;
@@ -39,6 +40,7 @@ public class CarbonModel {
 
     private CarbonModel() {
         journeyCollection = new JourneyCollection();
+        favouriteJourneyCollection = new JourneyCollection();
         carCollection = new CarCollection();
         routeCollection = new RouteCollection();
         carData = new CarData();
@@ -63,6 +65,10 @@ public class CarbonModel {
 
     public JourneyCollection getJourneyCollection() {
         return journeyCollection;
+    }
+
+    public JourneyCollection getFavouriteJourneyCollection() {
+        return favouriteJourneyCollection;
     }
 
     public CarCollection getCarCollection() {
