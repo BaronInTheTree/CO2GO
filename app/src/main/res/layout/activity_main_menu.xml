@@ -12,7 +12,10 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TableRow
             android:layout_width="match_parent"
@@ -92,5 +95,45 @@
                 android:text="@string/view_tips" />
         </TableRow>
     </TableLayout>
+
+    <Switch
+        android:id="@+id/treeUnitToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/unitsText"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/treesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trees"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/treeUnitToggle"
+        android:layout_alignBottom="@+id/treeUnitToggle"
+        android:layout_toRightOf="@+id/treeUnitToggle"
+        android:layout_toEndOf="@+id/treeUnitToggle" />
+
+    <TextView
+        android:id="@+id/unitsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/units"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/CO2Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/co2"
+        android:textSize="18sp"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_alignBaseline="@+id/treeUnitToggle"
+        android:layout_alignBottom="@+id/treeUnitToggle"
+        android:layout_toLeftOf="@+id/unitsText"
+        android:layout_toStartOf="@+id/unitsText" />
 
 </RelativeLayout>

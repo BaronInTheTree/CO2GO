@@ -62,8 +62,10 @@ public class JourneyInformationActivity extends AppCompatActivity {
         String distanceInfo = "" + currentJourney.getRoute().getTotalDistanceKM();
         distance.setText(distanceInfo);
 
+        TextView emissionText= (TextView) findViewById(R.id.emission);
+        emissionText.setText(currentInstance.getTreeUnit().getUnitTypeSummary());
         TextView emission = (TextView) findViewById(R.id.emission_entry);
-        String emissionInfo = "" + currentJourney.getEmissionsKM();
+        String emissionInfo = String.format("%.2f", currentInstance.getTreeUnit().getUnitValue(currentJourney.getEmissionsKM()));
         if (emissionInfo.length() > maxEmission) emissionInfo = emissionInfo.substring(0, maxEmission);
         emission.setText(emissionInfo);
     }
@@ -79,7 +81,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
 
                 summary.updateJourneys(currentInstance.getJourneyCollection());
                 // create tip based on the type of transportation and the information within current Journey.
-                String message = currentInstance.getTips().getJourneyTip(currentJourney,summary);
+                String message = currentInstance.getTips().getJourneyTip(getApplicationContext(),currentJourney,summary);
                 Toast.makeText(JourneyInformationActivity.this, message, Toast.LENGTH_LONG).show();
                 SaveData.saveTips(JourneyInformationActivity.this);
                 finish();
@@ -99,7 +101,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
     private void setupSelectYearSpinner() {
         final Spinner yearSpinner = (Spinner) findViewById(R.id.spinnerYear);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 currentInstance.getDateHandler().getYearList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -123,7 +125,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
     private void setupSelectMonthSpinner() {
         final Spinner monthSpinner = (Spinner) findViewById(R.id.spinnerMonth);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 currentInstance.getDateHandler().getMonthList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -147,7 +149,7 @@ public class JourneyInformationActivity extends AppCompatActivity {
         final Spinner daySpinner = (Spinner) findViewById(R.id.spinnerDay);
         currentInstance.getDateHandler().initializeDayList(selectedYear, selectedMonth);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 currentInstance.getDateHandler().getDayList());
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);

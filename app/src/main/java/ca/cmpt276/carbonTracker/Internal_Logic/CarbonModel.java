@@ -27,6 +27,7 @@ public class CarbonModel {
     private UtilityCollection utilityCollection;
     private DateHandler dateHandler;
     private MonthYearSummary summary;
+    private TreeUnit treeUnit;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -45,6 +46,7 @@ public class CarbonModel {
         dateHandler = new DateHandler();
         utilityCollection = new UtilityCollection();
         summary = new MonthYearSummary();
+        treeUnit = new TreeUnit();
     }
 
     public void addNewJourney(Journey newJourney) {
@@ -147,5 +149,9 @@ public class CarbonModel {
 
     public List<String> getUtilityFuel() {
         return utilityCollection.getUtilityFuelList();
+    }
+
+    public TreeUnit getTreeUnit() {
+        return treeUnit;
     }
 }

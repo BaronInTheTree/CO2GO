@@ -63,21 +63,43 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
         ArrayList<ArrayList> vehicleEntryList = new ArrayList<>();
         ArrayList<String> vehicleNameList = new ArrayList<>();
 
-
-        for (int i = 0; i < DATA_POINTS; i++) {
-            electricity.add(new Entry(i, dayDataList.get(i).getElectricityEmissions() / GRAMS_PER_KG));
-            naturalGas.add(new Entry(i, dayDataList.get(i).getNaturalGasEmissions() / GRAMS_PER_KG));
-            bus.add(new Entry(i, dayDataList.get(i).
-                    getTransportTypeEmissions_KM(Journey.Type.BUS) / GRAMS_PER_KG));
-            skytrain.add(new Entry(i, dayDataList.get(i).
-                    getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN) / GRAMS_PER_KG));
+        if (model.getTreeUnit().getTreeUnitStatus()) {
+            for (int i = 0; i < DATA_POINTS; i++) {
+                electricity.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                        dayDataList.get(i).getElectricityEmissions() / GRAMS_PER_KG)));
+                naturalGas.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                        dayDataList.get(i).getNaturalGasEmissions() / GRAMS_PER_KG)));
+                bus.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(dayDataList.get(i).
+                        getTransportTypeEmissions_KM(Journey.Type.BUS) / GRAMS_PER_KG)));
+                skytrain.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(dayDataList.get(i).
+                        getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN) / GRAMS_PER_KG)));
+            }
+        } else {
+            for (int i = 0; i < DATA_POINTS; i++) {
+                electricity.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                        dayDataList.get(i).getElectricityEmissions() / GRAMS_PER_KG)));
+                naturalGas.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                        dayDataList.get(i).getNaturalGasEmissions() / GRAMS_PER_KG)));
+                bus.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                        dayDataList.get(i).getTransportTypeEmissions_KM(Journey.Type.BUS) / GRAMS_PER_KG)));
+                skytrain.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                        dayDataList.get(i).getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN) / GRAMS_PER_KG)));
+            }
         }
 
         for (Car car : model.getCarCollection().getCarCollection()) {
             ArrayList<Entry> vehicle = new ArrayList<>();
 
-            for (int i = 0; i < DATA_POINTS; i++) {
-                vehicle.add(new Entry(i, dayDataList.get(i).getCarEmissions_KM(car) / GRAMS_PER_KG));
+            if (model.getTreeUnit().getTreeUnitStatus()) {
+                for (int i = 0; i < DATA_POINTS; i++) {
+                    vehicle.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                            dayDataList.get(i).getCarEmissions_KM(car) / GRAMS_PER_KG)));
+                }
+            } else {
+                for (int i = 0; i < DATA_POINTS; i++) {
+                    vehicle.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                            dayDataList.get(i).getCarEmissions_KM(car) / GRAMS_PER_KG)));
+                }
             }
             if (vehicle.size() > 0) {
                 vehicleEntryList.add(vehicle);
