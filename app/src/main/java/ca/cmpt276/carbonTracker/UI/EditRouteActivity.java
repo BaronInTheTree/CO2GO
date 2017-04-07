@@ -69,6 +69,7 @@ public class EditRouteActivity extends AppCompatActivity implements TextWatcher 
                     carbonModel.getRouteCollection().editRoute(route, routeIndex);
                     SaveData.saveRoutes(EditRouteActivity.this);
                     setResult(Activity.RESULT_OK);
+                    startActivity(new Intent(EditRouteActivity.this, SelectRouteActivity.class));
                     finish();
                 } else {
                     Toast.makeText(EditRouteActivity.this, "Please fill out the form completely.",
@@ -83,6 +84,7 @@ public class EditRouteActivity extends AppCompatActivity implements TextWatcher 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(EditRouteActivity.this, SelectRouteActivity.class));
                 finish();
             }
         });

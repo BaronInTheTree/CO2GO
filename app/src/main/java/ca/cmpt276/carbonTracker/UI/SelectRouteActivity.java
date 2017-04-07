@@ -67,14 +67,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent;
-                if (modelInstance.getSelectedTransportType().equals("Car")) {
-                    intent = ModifyCarActivity.makeIntent(SelectRouteActivity.this);
-                }
-                else {
-                    intent = SelectTransportationActivity.makeIntent(SelectRouteActivity.this);
-                }
-                startActivity(intent);
+                startActivity(new Intent(SelectRouteActivity.this, MainMenuActivity_Alternate.class));
                 finish();
             }
         });
