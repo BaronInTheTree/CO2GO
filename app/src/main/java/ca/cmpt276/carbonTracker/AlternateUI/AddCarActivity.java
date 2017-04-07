@@ -10,18 +10,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
+import ca.cmpt276.carbonTracker.UI.SelectTransportationActivity;
 
 /**
  The AddCarActivity is accessed when the user picks their mode of transportation and they can
@@ -40,6 +46,8 @@ public class AddCarActivity extends AppCompatActivity {
     String selectedNickname;
     private ActionMenuView amvMenu;
     private String callingActivity = "";
+    int selectedIconID;
+    private ArrayList<String> emptyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,7 @@ public class AddCarActivity extends AppCompatActivity {
         setupAddCarButton();
         setupEnterNicknameEditText();
         setupCancelButton();
+        setupSelectIconSpinner();
         setupActionBar();
     }
 
@@ -157,6 +166,51 @@ public class AddCarActivity extends AppCompatActivity {
         });
     }
 
+    private class MyArrayAdapter<T> extends ArrayAdapter<T>
+    {
+        List<Integer> iconIDs = IconCollection.iconIDs;
+        public MyArrayAdapter(Context context, int resource, int textViewResourceId, List<T> objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View itemView = super.getView(position, convertView, parent);
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.vehicleIconEntry);
+//            imageView.setBackgroundResource(vehicleIcons.get(position));
+            imageView.setImageResource(iconIDs.get(position));
+            System.out.println("TST 10.1: ID = " + iconIDs.get(position));
+            return itemView;
+        }
+    }
+
+    private void setupSelectIconSpinner() {
+        Spinner selectIcon = (Spinner) findViewById(R.id.spinnerSelectIcon_Add);
+        List<Integer> iconIDs = IconCollection.iconIDs;
+        emptyList = new ArrayList<>();
+        emptyList.clear();
+        for (Integer id : IconCollection.iconIDs) {
+            emptyList.add("");
+        }
+
+        ArrayAdapter<String> spinnerArrayAdapter = new MyArrayAdapter<String>(this,
+                R.layout.icon_spinner_row_layout,
+                R.id.vehicleIconName,
+                IconCollection.iconNames);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.icon_spinner_row_layout);
+        selectIcon.setAdapter(spinnerArrayAdapter);
+
+        selectIcon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedIconID = IconCollection.iconIDs.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
     private void setupEnterNicknameEditText() {
         final EditText enterNickname = (EditText) findViewById(R.id.editTextEnterNickname);
         enterNickname.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -182,12 +236,16 @@ public class AddCarActivity extends AppCompatActivity {
                     Car car = model.getCarData().findCar(selectedMake, selectedModel,
                             Integer.parseInt(selectedYear), selectedVariation);
                     car.setNickname(selectedNickname);
+                    car.setIconID(selectedIconID);
 
                     model.getCarCollection().addCar(car);
                     SaveData.saveCars(AddCarActivity.this);
 
                     if (callingActivity.equals("AddJourney")) {
                         startActivity(new Intent(AddCarActivity.this, AddJourneyActivity_Alternate.class));
+                    }
+                    else if (callingActivity.equals("VehicleList")) {
+                        startActivity(new Intent(AddCarActivity.this, SelectTransportationActivity.class));
                     }
                     else {
                         startActivity(new Intent(AddCarActivity.this, MainMenuActivity_Alternate.class));
@@ -205,6 +263,9 @@ public class AddCarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (callingActivity.equals("AddJourney")) {
                     startActivity(new Intent(AddCarActivity.this, AddJourneyActivity_Alternate.class));
+                }
+                else if (callingActivity.equals("VehicleList")) {
+                    startActivity(new Intent(AddCarActivity.this, SelectTransportationActivity.class));
                 }
                 else {
                     startActivity(new Intent(AddCarActivity.this, MainMenuActivity_Alternate.class));

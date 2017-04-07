@@ -53,6 +53,7 @@ import ca.cmpt276.carbonTracker.UI.JourneyListActivity;
 import ca.cmpt276.carbonTracker.UI.MainMenuActivity;
 import ca.cmpt276.carbonTracker.UI.ModifyCarActivity;
 import ca.cmpt276.carbonTracker.UI.SelectRouteActivity;
+import ca.cmpt276.carbonTracker.UI.SelectTransportationActivity;
 import ca.cmpt276.carbonTracker.UI.UtilityListActivity;
 
 public class MainMenuActivity_Alternate extends AppCompatActivity {
@@ -608,7 +609,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setupButtonListener(addVehicle, new Intent
                 (MainMenuActivity_Alternate.this, AddCarActivity.class));
         setupButtonListener(viewVehicle, new Intent
-                (MainMenuActivity_Alternate.this, ModifyCarActivity.class));
+                (MainMenuActivity_Alternate.this, SelectTransportationActivity.class));
         setupButtonListener(addRoute, new Intent
                 (MainMenuActivity_Alternate.this, AddRouteActivity.class));
         setupButtonListener(viewRoute, new Intent

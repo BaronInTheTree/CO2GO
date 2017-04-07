@@ -12,6 +12,7 @@ public class Transportation {
     protected double co2GramsPerMile_City;
     protected double co2GramsPerKM_City;
     protected String nickname;
+    protected int iconID;
 
     public String getNickname() {
         return nickname;
@@ -35,5 +36,13 @@ public class Transportation {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public int getIconID() {
+        return iconID;
+    }
+
+    public void setIconID(int iconID) {
+        this.iconID = iconID;
     }
 }
