@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+import com.example.sasha.carbontracker.BuildConfig;
 import com.example.sasha.carbontracker.R;
 
 import java.io.ByteArrayOutputStream;
@@ -26,6 +27,12 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         setupWebsiteText();
         setupCreditsText();
+        setupVersion();
+    }
+
+    private void setupVersion() {
+        TextView version = (TextView) findViewById(R.id.versionText);
+        version.setText(BuildConfig.VERSION_NAME);
     }
 
     private void setupCreditsText() {
