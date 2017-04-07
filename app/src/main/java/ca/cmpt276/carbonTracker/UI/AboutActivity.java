@@ -13,6 +13,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/** The AboutActivity displays some credits and information on all resources
+ * used in the app.
+ *
+ * @author Team Teal
+ */
 public class AboutActivity extends AppCompatActivity {
 
     @Override
