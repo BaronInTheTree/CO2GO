@@ -84,7 +84,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:text="@string/utilityUsage"
+            android:text="Utility Usage (GWh or GJ)"
             android:textStyle="bold" />
 
         <EditText
