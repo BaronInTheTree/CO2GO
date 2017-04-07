@@ -56,7 +56,8 @@
         <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphRouteActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphDayJourneyActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate" />
-        <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.AddJourneyActivity_Alternate"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.AddJourneyActivity_Alternate" />
+        <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.LineGraphActivity"></activity>
     </application>
 
 </manifest>

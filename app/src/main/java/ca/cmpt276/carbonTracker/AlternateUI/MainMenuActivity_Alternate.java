@@ -70,7 +70,6 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     PieChart chart;
     int chartHeight;
     private ActionMenuView amvMenu;
-    private boolean treeModeEnabled = model.getTreeUnit().getTreeUnitStatus();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +90,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setupActionBar();
         setupTipsText();
         setupAddViewButtons();
-
+        setupLineGraphButton();
     }
 
     private void setupSingleDayButton() {
@@ -108,6 +107,8 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 monthRange.setBackgroundResource(R.drawable.button_default_brown);
                 Button yearRange = (Button) findViewById(R.id.button365Days);
                 yearRange.setBackgroundResource(R.drawable.button_default_brown);
+
+                setupLineGraphButton();
             }
         });
     }
@@ -125,6 +126,8 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 singleDay.setBackgroundResource(R.drawable.button_default_brown);
                 Button yearRange = (Button) findViewById(R.id.button365Days);
                 yearRange.setBackgroundResource(R.drawable.button_default_brown);
+
+                setupLineGraphButton();
             }
         });
     }
@@ -142,6 +145,8 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 singleDay.setBackgroundResource(R.drawable.button_default_brown);
                 Button monthRange = (Button) findViewById(R.id.button28Days);
                 monthRange.setBackgroundResource(R.drawable.button_default_brown);
+
+                setupLineGraphButton();
             }
         });
     }
@@ -221,12 +226,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(currentDate)
-                            + ", By Route (kg)");
+                            + ", By Route (" + model.getTreeUnit().getUnitTypeList() + ")");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(currentDate)
-                            + ", By Vehicle (kg)");
+                            + ", By Vehicle (" + model.getTreeUnit().getUnitTypeList() + ")");
                 }
                 break;
             }
@@ -236,12 +241,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + "\nLast 28 Days, By Route (kg)");
+                            + chartDateFormat.format(currentDate) + "\nLast 28 Days, By Route (" + model.getTreeUnit().getUnitTypeList() + ")");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + "\nLast 28 Days, By Vehicle (kg)");
+                            + chartDateFormat.format(currentDate) + "\nLast 28 Days, By Vehicle (" + model.getTreeUnit().getUnitTypeList() + ")");
                 }
                 break;
             }
@@ -252,12 +257,12 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 if (graphType.equals(GraphType.ROUTE)) {
                     setupRoutePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + "\nLast 365 Days, By Route (kg)");
+                            + chartDateFormat.format(currentDate) + "\nLast 365 Days, By Route (" + model.getTreeUnit().getUnitTypeList() + ")");
                 }
                 else {
                     setupVehiclePieChart();
                     chartTitle.setText("CO2 Emissions for:\n" + chartDateFormat.format(originDate) + " - "
-                            + chartDateFormat.format(currentDate) + "\nLast 365 Days, By Vehicle (kg)");
+                            + chartDateFormat.format(currentDate) + "\nLast 365 Days, By Vehicle (" + model.getTreeUnit().getUnitTypeList() + ")");
                 }
                 break;
             }
@@ -266,8 +271,8 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
 
     private float addEntryToList(List<PieEntry> pieEntries, ArrayList<String> labelList, String label, float emissions, float totalEmissions) {
         if (emissions > 0) {
-            pieEntries.add(new PieEntry(emissions / gPerKG));
-            labelList.add(label +  ": " + String.format("%.2f", emissions / gPerKG));
+            pieEntries.add(new PieEntry(emissions));
+            labelList.add(label +  ": " + String.format("%.2f", emissions));
             totalEmissions += emissions;
         }
         return totalEmissions;
@@ -284,7 +289,9 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         ArrayList<String> labelList = new ArrayList<>();
 
         for (Route route : model.getRouteCollection().getRouteCollection()) {
-            totalEmissions = addEntryToList(pieEntries, labelList, route.getName(), DayData.getTotalRouteEmissions(dayDataList, route), totalEmissions);
+            totalEmissions = addEntryToList(pieEntries, labelList, route.getName(),
+                    model.getTreeUnit().getUnitValueGraphs(DayData.getTotalRouteEmissions(dayDataList, route)),
+                    totalEmissions);
         }
         setupChartUI(chart, totalEmissions, pieEntries, labelList);
 
@@ -310,13 +317,23 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         ArrayList<DayData> dayDataList = DayData.getDayDataWithinInterval(originDate, currentDate);
         ArrayList<String> labelList = new ArrayList<>();
 
-        totalEmissions = addEntryToList(pieEntries, labelList, "Electricity", DayData.getTotalElectricityEmissions(dayDataList), totalEmissions);
-        totalEmissions = addEntryToList(pieEntries, labelList, "Natural Gas", DayData.getTotalGasEmissions(dayDataList), totalEmissions);
-        totalEmissions = addEntryToList(pieEntries, labelList, "Bus", DayData.getTotalBusEmissions(dayDataList), totalEmissions);
-        totalEmissions = addEntryToList(pieEntries, labelList, "Skytrain", DayData.getTotalSkytrainEmissions(dayDataList), totalEmissions);
+        totalEmissions = addEntryToList(pieEntries, labelList, "Electricity",
+                model.getTreeUnit().getUnitValueGraphs(DayData.getTotalElectricityEmissions(dayDataList)),
+                totalEmissions);
+        totalEmissions = addEntryToList(pieEntries, labelList, "Natural Gas",
+                model.getTreeUnit().getUnitValueGraphs(DayData.getTotalGasEmissions(dayDataList)),
+                totalEmissions);
+        totalEmissions = addEntryToList(pieEntries, labelList, "Bus",
+                model.getTreeUnit().getUnitValueGraphs(DayData.getTotalBusEmissions(dayDataList)),
+                totalEmissions);
+        totalEmissions = addEntryToList(pieEntries, labelList, "Skytrain",
+                model.getTreeUnit().getUnitValueGraphs(DayData.getTotalSkytrainEmissions(dayDataList)),
+                totalEmissions);
 
         for (Car car : model.getCarCollection().getCarCollection()) {
-            totalEmissions = addEntryToList(pieEntries, labelList, car.getNickname(), DayData.getTotalCarEmissions(dayDataList, car), totalEmissions);
+            totalEmissions = addEntryToList(pieEntries, labelList, car.getNickname(),
+                    model.getTreeUnit().getUnitValueGraphs(DayData.getTotalCarEmissions(dayDataList, car)),
+                    totalEmissions);
         }
 
         setupChartUI(chart, totalEmissions, pieEntries, labelList);
@@ -362,7 +379,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         dataSet.setValueFormatter(new IValueFormatter() {
             @Override
             public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                if (value / (totalEmissions / gPerKG) < 0.05) {
+                if ((value / totalEmissions) < 0.05) {
                     return "";
                 }
                 else return "" + String.format("%.0f",value);
@@ -373,7 +390,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
 
         chart.setData(data);
 
-        String str = new Float(totalEmissions / gPerKG).toString();
+        String str = new Float(totalEmissions).toString();
         int numDigits = str.indexOf(".");
         int counter = 0;
         for (int i = numDigits; i > 4; i--) {
@@ -384,7 +401,8 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         chart.setTransparentCircleAlpha(0);
         chart.setRotationEnabled(false);
         chart.setDrawEntryLabels(false);
-        chart.setCenterText("" + String.format("%.0f", (totalEmissions / gPerKG)) + "kg");
+        chart.setCenterText("" + String.format("%.0f", totalEmissions)
+                + model.getTreeUnit().getUnitTypeList());
         chart.setCenterTextSize(10);
 
         chart.setDrawSliceText(false);
@@ -407,6 +425,44 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
 
         chart.notifyDataSetChanged();
         chart.invalidate();
+    }
+
+    private void setupLineGraphButton() {
+        Button lineGraph = (Button) findViewById(R.id.buttonLineGraph);
+        lineGraph.setVisibility(View.INVISIBLE);
+        lineGraph.setClickable(false);
+
+        if (!dateType.equals(DateType.SINGLE)) {
+            lineGraph.setVisibility(View.VISIBLE);
+            lineGraph.setClickable(true);
+        }
+
+        lineGraph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMenuActivity_Alternate.this, LineGraphActivity.class);
+                intent.putExtra("OriginDate", DateHandler.convertDateToString(originDate));
+                intent.putExtra("CurrentDate", DateHandler.convertDateToString(currentDate));
+                if (graphType.equals(GraphType.ROUTE)) {
+                    intent.putExtra("Type", "Route");
+                }
+                else if (graphType.equals(GraphType.VEHICLE)) {
+                    intent.putExtra("Type", "Vehicle");
+                }
+                switch(dateType) {
+                    case MONTH: {
+                        intent.putExtra("DateRange", 28);
+                        break;
+                    }
+                    case YEAR: {
+                        intent.putExtra("DateRange", 365);
+                        break;
+                    }
+                }
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void registerAsObserver() {
@@ -459,6 +515,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                     CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
                     SaveData.saveTreeUnit(MainMenuActivity_Alternate.this);
                 }
+                setupChart();
             }
         });
         return true;
@@ -576,27 +633,6 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
 
         Button tips = (Button) findViewById(R.id.buttonTipsMainMenu);
         tips.setText(spannableString);
-    }
-
-    private void setUpToggle() {
-        Switch unitToggle = (Switch) findViewById(R.id.toolbar_switch);
-        if (CarbonModel.getInstance().getTreeUnit().getTreeUnitStatus() == true) {
-            unitToggle.setChecked(true);
-        }
-        unitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(true);
-                    Toast.makeText(MainMenuActivity_Alternate.this, "on", Toast.LENGTH_SHORT).show();
-                    SaveData.saveTreeUnit(MainMenuActivity_Alternate.this);
-                } else {
-                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
-                    Toast.makeText(MainMenuActivity_Alternate.this, "off", Toast.LENGTH_SHORT).show();
-                    SaveData.saveTreeUnit(MainMenuActivity_Alternate.this);
-                }
-            }
-        });
     }
 }
 

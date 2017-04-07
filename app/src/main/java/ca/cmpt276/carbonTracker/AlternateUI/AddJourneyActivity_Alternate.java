@@ -525,9 +525,11 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
                 if (isChecked) {
                     CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(true);
                     SaveData.saveTreeUnit(AddJourneyActivity_Alternate.this);
+                    setupSummaryText();
                 } else {
                     CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
                     SaveData.saveTreeUnit(AddJourneyActivity_Alternate.this);
+                    setupSummaryText();
                 }
             }
         });
@@ -583,7 +585,9 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         distance.setText("Distance:   " + selectedRoute.getTotalDistanceKM() + " km");
 
         TextView emissions = (TextView) findViewById(R.id.textViewSummaryEmissions);
-        emissions.setText(("Emissions: " + String.format("%.3f", (selectedJourney.getEmissionsKM() / gPerKG)) + " " + unit));
+        emissions.setText(("Emissions: " + String.format("%.2f",
+                (model.getTreeUnit().getUnitValue(selectedJourney.getEmissionsKM())))
+                + " " + model.getTreeUnit().getUnitTypeList()));
     }
 
     private void setupConfirmButtons() {

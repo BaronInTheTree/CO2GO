@@ -1,4 +1,4 @@
-package ca.cmpt276.carbonTracker.UI;
+package ca.cmpt276.carbonTracker.AlternateUI;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,12 +23,10 @@ import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
 
-public class MonthlyEmissionGraphActivity extends AppCompatActivity {
+public class LineGraphActivity extends AppCompatActivity {
 
     private LineChart lineChart;
     CarbonModel model = CarbonModel.getInstance();
-    final int GRAMS_PER_KG = 1000;
-    final int DATA_POINTS = 28;
 
     ArrayList<Integer> colorList = new ArrayList<>();
     int currentColor = 0;
@@ -36,12 +34,17 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_monthly_emission_graph);
+        setContentView(R.layout.activity_line_graph);
+        Intent callingIntent = getIntent();
 
-        lineChart = (LineChart) findViewById(R.id.lineChartMonthly);
+        Date currentDate = DateHandler.convertStringToDate(callingIntent.getStringExtra("CurrentDate"));
+        Date originDate = DateHandler.convertStringToDate(callingIntent.getStringExtra("OriginDate"));
+        String graphType = callingIntent.getStringExtra("Type");
+        int dateRange = callingIntent.getIntExtra("DateRange", 28);
+
+        lineChart = (LineChart) findViewById(R.id.lineChart);
 
         XAxis xAxis = lineChart.getXAxis();
-
         YAxis yAxis = lineChart.getAxisLeft();
 
         colorList.add(Color.RED);
@@ -54,7 +57,7 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
         ArrayList<ArrayList> yAXES = new ArrayList<>();
 
         ArrayList<DayData> dayDataList = DayData.getDayDataWithinInterval
-                (DateHandler.getDateLastMonth(new Date()), new Date());
+                (originDate, currentDate);
 
         ArrayList<Entry> electricity = new ArrayList<>();
         ArrayList<Entry> naturalGas = new ArrayList<>();
@@ -64,43 +67,23 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
         ArrayList<ArrayList> vehicleEntryList = new ArrayList<>();
         ArrayList<String> vehicleNameList = new ArrayList<>();
 
-        if (model.getTreeUnit().getTreeUnitStatus()) {
-            for (int i = 0; i < DATA_POINTS; i++) {
-                electricity.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                        dayDataList.get(i).getElectricityEmissions() / GRAMS_PER_KG)));
-                naturalGas.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                        dayDataList.get(i).getNaturalGasEmissions() / GRAMS_PER_KG)));
-                bus.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(dayDataList.get(i).
-                        getTransportTypeEmissions_KM(Journey.Type.BUS) / GRAMS_PER_KG)));
-                skytrain.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(dayDataList.get(i).
-                        getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN) / GRAMS_PER_KG)));
-            }
-        } else {
-            for (int i = 0; i < DATA_POINTS; i++) {
-                electricity.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                        dayDataList.get(i).getElectricityEmissions() / GRAMS_PER_KG)));
-                naturalGas.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                        dayDataList.get(i).getNaturalGasEmissions() / GRAMS_PER_KG)));
-                bus.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                        dayDataList.get(i).getTransportTypeEmissions_KM(Journey.Type.BUS) / GRAMS_PER_KG)));
-                skytrain.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                        dayDataList.get(i).getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN) / GRAMS_PER_KG)));
-            }
+        for (int i = 0; i < dateRange; i++) {
+            electricity.add(new Entry(i, model.getTreeUnit().
+                    getUnitValueGraphs(dayDataList.get(i).getElectricityEmissions())));
+            naturalGas.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                    dayDataList.get(i).getNaturalGasEmissions())));
+            bus.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(dayDataList.get(i).
+                    getTransportTypeEmissions_KM(Journey.Type.BUS))));
+            skytrain.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(dayDataList.get(i).
+                    getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN))));
         }
 
         for (Car car : model.getCarCollection().getCarCollection()) {
             ArrayList<Entry> vehicle = new ArrayList<>();
 
-            if (model.getTreeUnit().getTreeUnitStatus()) {
-                for (int i = 0; i < DATA_POINTS; i++) {
-                    vehicle.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                            dayDataList.get(i).getCarEmissions_KM(car) / GRAMS_PER_KG)));
-                }
-            } else {
-                for (int i = 0; i < DATA_POINTS; i++) {
-                    vehicle.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                            dayDataList.get(i).getCarEmissions_KM(car) / GRAMS_PER_KG)));
-                }
+            for (int i = 0; i < dateRange; i++) {
+                vehicle.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
+                        dayDataList.get(i).getCarEmissions_KM(car))));
             }
             if (vehicle.size() > 0) {
                 vehicleEntryList.add(vehicle);
@@ -139,7 +122,7 @@ public class MonthlyEmissionGraphActivity extends AppCompatActivity {
         }
 
         lineChart.setData(new LineData(lineDataSetList));
-        lineChart.setVisibleXRange(DATA_POINTS, DATA_POINTS);
+        lineChart.setVisibleXRange(dateRange, dateRange);
 
     }
 
