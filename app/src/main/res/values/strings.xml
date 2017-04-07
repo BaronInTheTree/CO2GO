@@ -108,6 +108,68 @@
     <string name="graphModeDialog">graphModeDialog</string>
     <string name="calendarModeDialog">calendarModeDialog</string>
     <string name="graphModeDialogTitle">Graph Mode Selector</string>
+
+    <string name="generalTip1_1">Your total driving distance within last 4 weeks are\u0020</string>
+    <string name="generalTip1_2">km, consider to take more bus or skytrain in the future.</string>
+    <string name="generalTip2_1">Driving within the last four weeks contributes to\u0020</string>
+    <string name="generalTip2_2">g CO2 emission, consider to take more bus or skytrain to lower your emission in the future.</string>
+    <string name="generalTip3_1">Driving last year contributes to\u0020</string>
+    <string name="generalTip4_1">Taking buses within the last four weeks contributes to\u0020</string>
+    <string name="generalTip4_2">g CO2 emission, consider to take skytrain more often to lower your emission in the future.</string>
+    <string name="generalTip5_1">Taking Skytrain within the last four weeks contributes to\u0020</string>
+    <string name="generalTip5_2">g CO2 emission, consider to ride or walk more often to lower your emission in the future.</string>
+    <string name="generalTip6_1">You have not entered any journey by bike or walk during last month, do not forget to record your journeys by bike/walk.</string>
+    <string name="generalTip6_2">You have biked and walked\u0020</string>
+    <string name="generalTip6_3">km within last 4 weeks, keep it up!</string>
+    <string name="generalTip7_1">You have not entered any journey by bike or walk during last year, do not forget to record your journeys by bike/walk.</string>
+    <string name="generalTip7_2">km over last year, keep it up!</string>
+
+    <string name="carTip1_1">Your CO2 emission per km drive is\u0020</string>
+    <string name="carTip1_2">g/km, consider to drive a more economical car.</string>
+    <string name="carTip2_1">Your CO2 emission for this trip is\u0020</string>
+    <string name="carTip2_2">g, consider to take bus or skytrain to reduce your emission.</string>
+    <string name="carTip3_2">g, consider to ride bikes or walk to cut your emission to 0!</string>
+    <string name="carTip4_1">Distance of your trip is\u0020</string>
+    <string name="carTip4_2">km, consider to take bus or skytrain if possible.</string>
+    <string name="carTip5_1">Your CO2 emission per km drive is\u0020</string>
+    <string name="carTip5_2">km, consider to ride or walk if possible.</string>
+    <string name="carTip6_1">Your total driving distance within last 4 weeks are\u0020</string>
+    <string name="carTip6_2">km, consider to take more bus or skytrain in the future.</string>
+    <string name="carTip7_1">Your total driving distance within last year are\u0020</string>
+
+    <string name="busTip2_2"> km, an equivalent trip by skytrain will generate ~40% less CO2.</string>
+    <string name="busTip4_1">You have traveled\u0020</string>
+    <string name="busTip4_2">km by Bus within last 4 weeks, consider to take skytrain more often in the future.</string>
+    <string name="busTip5_2">km by Bus within last 4 weeks, consider to ride or walk more often in the future.</string>
+    <string name="busTip6_1">Taking buses within the last four weeks contributes to\u0020</string>
+    <string name="busTip6_2">g CO2 emission, consider to take skytrain or bike more often in the future.</string>
+    <string name="busTip7_1">Taking buses within last year contributes to\u0020</string>
+
+    <string name="skyTrainTip3_2">g, consider to bike part of your trip to reduce your emission.</string>
+    <string name="skyTrainTip4_2">km by Skytrain within last 4 weeks, consider to ride bikes or walk more often in the future.</string>
+    <string name="skyTrainTip5_1">Taking Skytrain within the last four weeks contributes to\u0020</string>
+    <string name="skyTrainTip6_2">km by Skytrain over the past year, consider to ride bikes or walk more often in the future.</string>
+    <string name="skyTrainTip7_1">Taking Skytrain within the last year contributes to\u0020</string>
+
+    <string name="bikeWalkTip1_1">Good job! Your trip does not generate any CO2. Keep it up!</string>
+    <string name="bikeWalkTip2_1">You have biked and walked\u0020</string>
+    <string name="bikeWalkTip2_2">km within last 4 weeks, keep it up!</string>
+    <string name="bikeWalkTip3_2">km within last year, keep it up!</string>
+    <string name="bikeWalkTip4_2">km, consider to bikes or walk more often in the future.</string>
+    <string name="bikeWalkTip5_2">km by Bus over the past year, consider to bike or walk more often in the future.</string>
+
+    <string name="utilityTip1_1">Your CO2 emission from the utility bill entered is\u0020</string>
+    <string name="utilityTip1_2">g. If your heating equipment is old, consider to upgrade it to more efficient models.</string>
+    <string name="utilityTip2_2">g. If you use air conditioner, consider to reduce its usage by creating better airflow in your home.</string>
+    <string name="utilityTip3_2">g. Consider to turn off computers and other electronic devices when not being used.</string>
+    <string name="utilityTip4_2">g. Consider to install a programmable thermostat to automatically reduce unnecessary heating.</string>
+    <string name="utilityTip5_2">g. Avoid over heating your laundry and try to hang dry your laundry.</string>
+    <string name="utilityTip6_2">g. If your fridge or stove is old, consider replace it with new ones with higher energy efficiency.</string>
+    <string name="utilityTip7_2">g, Consider to use energy saving light bulbs wherever possible.</string>
+
+    <string name="trees">Trees</string>
+    <string name="units">Units</string>
+    <string name="co2">CO2</string>
     <string name="website"><a href='http://www.cs.sfu.ca/CourseCentral/276/bfraser/'>Website</a></string>
     <string name="_2017_by_team_teal">© 2017 by Team Teal</string>
     <string name="v_1_2">v 1.2</string>

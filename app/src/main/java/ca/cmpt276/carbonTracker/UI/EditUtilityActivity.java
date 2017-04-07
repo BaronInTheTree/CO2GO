@@ -341,7 +341,7 @@ public class EditUtilityActivity extends AppCompatActivity {
                     selectedUtility.setNumPeople(numPeople);
 
                     // This is just a temporary testing toast message.
-                    String message = model.getTips().getUtilityTip(selectedUtility);
+                    String message = model.getTips().getUtilityTip(getApplicationContext(),selectedUtility);
                     Toast.makeText(EditUtilityActivity.this,message,Toast.LENGTH_LONG).show();
 
                     // Return to utility list and close activity

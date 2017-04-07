@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.EmissionCollection;
 
@@ -32,12 +33,14 @@ import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.yearMode;
 public class PieGraphTransportActivity extends AppCompatActivity {
 
     private final String tableLabel = "CO2 Emission of Each Transport Mode (in gram)";
+    private final String tableLabelTree = "CO2 Emission of Each Transport Mode (in Tree Units)";
 
     Date today = new Date();
     List<DayData> dataList;
     EmissionCollection emissionColl;
     String[] transportModes;
     Float[] emissions;
+    CarbonModel cm = CarbonModel.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +76,16 @@ public class PieGraphTransportActivity extends AppCompatActivity {
 
     private void setupPieChart() {
         List<PieEntry> pieEntries = new ArrayList<>();
-        if (emissions.length!=0) {
-            for (int i = 0; i < emissions.length; i++) {
-                pieEntries.add(new PieEntry((float)emissions[i]));
-            }
+        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
+
+        for (int i = 0; i < emissions.length; i++) {
+            pieEntries.add(new PieEntry((cm.getTreeUnit().getUnitValueGraphs(emissions[i]))));
         }
 
-        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
+        if (cm.getTreeUnit().getTreeUnitStatus()) {
+            dataSet = new PieDataSet(pieEntries, tableLabelTree);
+        }
+
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setSliceSpace(2);
         dataSet.setValueTextSize(12);

@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.example.sasha.carbontracker.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
@@ -31,7 +32,12 @@ public class JourneyListActivity extends AppCompatActivity {
 
     private void populateJourneyList() {
         // Create list of items
-        final List<String> journeyList = modelInstance.getJourneyCollection().getJourneyList();
+        List<String> journeyList = new ArrayList<>();
+        if (modelInstance.getTreeUnit().getTreeUnitStatus()) {
+            journeyList = modelInstance.getJourneyCollection().getJourneyListTrees();
+        } else {
+            journeyList = modelInstance.getJourneyCollection().getJourneyList();
+        }
         // Build adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,           // Context for activity
