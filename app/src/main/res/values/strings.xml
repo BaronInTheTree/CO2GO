@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CarbonTracker</string>
+    <string name="app_name">CO2Go</string>
     <string name="see_table_view">See Table View</string>
     <string name="see_graph_view">See Graph View</string>
     <string name="back_to_main_page">Back to Main Page</string>
