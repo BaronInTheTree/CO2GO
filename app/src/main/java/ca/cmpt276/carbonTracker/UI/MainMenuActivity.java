@@ -1,5 +1,6 @@
 package ca.cmpt276.carbonTracker.UI;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -65,11 +66,9 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String message = modelInstance.getTips().getGeneralTip(summary);
-                Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
-                SaveData.saveTips(MainMenuActivity.this);
-//                startActivity(new Intent(MainMenuActivity.this, TestActivity.class));
-//                startActivity(new Intent(MainMenuActivity.this, MonthlyEmissionGraphActivity.class));
-//                startActivity(new Intent(MainMenuActivity.this, YearlyEmissionLineGraphActivity.class));
+                //Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
+                //SaveData.saveTips(MainMenuActivity.this);
+                startActivity(AboutActivity.makeIntent(MainMenuActivity.this));
             }
         });
 

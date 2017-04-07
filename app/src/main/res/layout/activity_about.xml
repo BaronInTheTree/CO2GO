@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ca.cmpt276.carbonTracker.UI.AboutActivity"
+    android:background="@mipmap/aboutbg">
+
+    <TextView
+        android:id="@+id/aboutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about"
+        android:textColor="@android:color/background_light"
+        android:textSize="40sp"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/creditsText"
+        android:layout_alignEnd="@+id/creditsText" />
+
+    <TextView
+        android:id="@+id/creditsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="219dp"
+        android:text="@string/credits"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp" />
+
+    <ScrollView
+        android:id="@+id/creditsScrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/creditsText"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/scrollText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/logo"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/aboutText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/versionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/v_1_2"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:layout_above="@+id/byText"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/byText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/websiteText"
+        android:layout_alignBottom="@+id/websiteText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/_2017_by_team_teal"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/websiteText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/website"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp"
+        android:layout_below="@+id/imageView"
+        android:layout_toRightOf="@+id/byText"
+        android:layout_toEndOf="@+id/byText" />
+</RelativeLayout>

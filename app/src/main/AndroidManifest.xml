@@ -55,7 +55,8 @@
         <activity android:name="ca.cmpt276.carbonTracker.UI.TestActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.YearlyEmissionLineGraphActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphRouteActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphDayJourneyActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphDayJourneyActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.UI.AboutActivity"></activity>
     </application>
 
 </manifest>
