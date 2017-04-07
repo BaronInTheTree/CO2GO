@@ -1,8 +1,5 @@
 package ca.cmpt276.carbonTracker.UI;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.Date;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
@@ -34,19 +30,12 @@ public class WelcomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_page);
 
-/*
-        Intent intent = new Intent(this, AddCarActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(MainMenuActivity.class);
-        stackBuilder.addNextIntent(intent);
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification notification = new Notification(this, "test test", pendingIntent);
-*/
-
-
-
-        // Creates alarm for notification
-        AlarmReceiver.setAlarm(this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                createNotificationService();
+            }
+        }).start();
 
         enterButton();
         SaveData.loadAllRoutes(this);
@@ -60,6 +49,11 @@ public class WelcomePageActivity extends AppCompatActivity {
                 readVehicleDate();
             }
         }).start();
+    }
+
+    // Creates a notification and will display it at specified time
+    private void createNotificationService() {
+        NotificationCaller.getInstance().run(this);
     }
 
     private void enterButton() {
