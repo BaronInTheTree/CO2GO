@@ -66,18 +66,18 @@ public class YearlyEmissionLineGraphActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < DATA_POINTS; i++) {
-            System.out.println("TST 3.1: Week = " + i + ", Elec CO2 = " + DayData.getWeeklyElectricityEmissions(yearDataList.get(i)));
-            System.out.println("TST 3.2: Week = " + i + ", Gas CO2 = " + DayData.getWeeklyGasEmissions(yearDataList.get(i)));
-            System.out.println("TST 3.3: Week = " + i + ", Bus CO2 = " + DayData.getWeeklyBusEmissions(yearDataList.get(i)));
-            System.out.println("TST 3.4: Week = " + i + ", Skytrain CO2 = " + DayData.getWeeklySkytrainEmissions(yearDataList.get(i)));
+            System.out.println("TST 3.1: Week = " + i + ", Elec CO2 = " + DayData.getTotalElectricityEmissions(yearDataList.get(i)));
+            System.out.println("TST 3.2: Week = " + i + ", Gas CO2 = " + DayData.getTotalGasEmissions(yearDataList.get(i)));
+            System.out.println("TST 3.3: Week = " + i + ", Bus CO2 = " + DayData.getTotalBusEmissions(yearDataList.get(i)));
+            System.out.println("TST 3.4: Week = " + i + ", Skytrain CO2 = " + DayData.getTotalSkytrainEmissions(yearDataList.get(i)));
             electricity.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                    DayData.getWeeklyElectricityEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
+                    DayData.getTotalElectricityEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
             naturalGas.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                    DayData.getWeeklyGasEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
+                    DayData.getTotalGasEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
             bus.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                    DayData.getWeeklyBusEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
+                    DayData.getTotalBusEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
             skytrain.add(new Entry(i, model.getTreeUnit().getUnitValueGraphs(
-                    DayData.getWeeklySkytrainEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
+                    DayData.getTotalSkytrainEmissions(yearDataList.get(i)) / GRAMS_PER_KG)));
         }
 
         for (Car car : model.getCarCollection().getCarCollection()) {

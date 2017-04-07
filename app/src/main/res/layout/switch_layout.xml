@@ -7,17 +7,18 @@
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="CO2 / TREES"
-        android:textStyle="bold"
-        android:textSize="8sp"
-        android:layout_marginTop="10dp" />
+        android:textSize="9sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/switchForActionBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginTop="20dp"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:text="" />
 
 
 </RelativeLayout>

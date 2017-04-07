@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -15,8 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 import com.github.mikephil.charting.charts.PieChart;
@@ -43,8 +47,10 @@ import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.Route;
+import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 import ca.cmpt276.carbonTracker.UI.CalendarDialog;
 import ca.cmpt276.carbonTracker.UI.JourneyListActivity;
+import ca.cmpt276.carbonTracker.UI.MainMenuActivity;
 import ca.cmpt276.carbonTracker.UI.ModifyCarActivity;
 import ca.cmpt276.carbonTracker.UI.SelectRouteActivity;
 import ca.cmpt276.carbonTracker.UI.UtilityListActivity;
@@ -64,6 +70,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     PieChart chart;
     int chartHeight;
     private ActionMenuView amvMenu;
+    private boolean treeModeEnabled = model.getTreeUnit().getTreeUnitStatus();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +91,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setupActionBar();
         setupTipsText();
         setupAddViewButtons();
+
     }
 
     private void setupSingleDayButton() {
@@ -433,6 +441,26 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_actions_mainmenu, amvMenu.getMenu());
+        MenuItem itemSwitch = amvMenu.getMenu().findItem(R.id.toolbar_switch);
+        itemSwitch.setActionView(R.layout.switch_layout);
+
+        final SwitchCompat unitToggle = (SwitchCompat) amvMenu.getMenu().findItem(R.id.toolbar_switch).
+                getActionView().findViewById(R.id.switchForActionBar);
+        if (CarbonModel.getInstance().getTreeUnit().getTreeUnitStatus()) {
+            unitToggle.setChecked(true);
+        }
+        unitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(true);
+                    SaveData.saveTreeUnit(MainMenuActivity_Alternate.this);
+                } else {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
+                    SaveData.saveTreeUnit(MainMenuActivity_Alternate.this);
+                }
+            }
+        });
         return true;
     }
 
@@ -541,13 +569,34 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     }
 
     private void setupTipsText() {
-        String tip = "Tip:\n" + model.getTips().getGeneralTip(model.getSummary());
+        String tip = "Tip:\n" + model.getTips().getGeneralTip(MainMenuActivity_Alternate.this, model.getSummary());
         SpannableString spannableString = new SpannableString(tip);
         spannableString.setSpan(new RelativeSizeSpan(1.5f), 0,5, 0); // set size
         spannableString.setSpan(new ForegroundColorSpan(Color.WHITE), 0, 5, 0);// set color
 
         Button tips = (Button) findViewById(R.id.buttonTipsMainMenu);
         tips.setText(spannableString);
+    }
+
+    private void setUpToggle() {
+        Switch unitToggle = (Switch) findViewById(R.id.toolbar_switch);
+        if (CarbonModel.getInstance().getTreeUnit().getTreeUnitStatus() == true) {
+            unitToggle.setChecked(true);
+        }
+        unitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(true);
+                    Toast.makeText(MainMenuActivity_Alternate.this, "on", Toast.LENGTH_SHORT).show();
+                    SaveData.saveTreeUnit(MainMenuActivity_Alternate.this);
+                } else {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
+                    Toast.makeText(MainMenuActivity_Alternate.this, "off", Toast.LENGTH_SHORT).show();
+                    SaveData.saveTreeUnit(MainMenuActivity_Alternate.this);
+                }
+            }
+        });
     }
 }
 

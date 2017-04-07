@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -209,6 +211,26 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_actions_addroute, amvMenu.getMenu());
+        MenuItem itemSwitch = amvMenu.getMenu().findItem(R.id.toolbar_switch);
+        itemSwitch.setActionView(R.layout.switch_layout);
+
+        final SwitchCompat unitToggle = (SwitchCompat) amvMenu.getMenu().findItem(R.id.toolbar_switch).
+                getActionView().findViewById(R.id.switchForActionBar);
+        if (CarbonModel.getInstance().getTreeUnit().getTreeUnitStatus()) {
+            unitToggle.setChecked(true);
+        }
+        unitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(true);
+                    SaveData.saveTreeUnit(AddRouteActivity.this);
+                } else {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
+                    SaveData.saveTreeUnit(AddRouteActivity.this);
+                }
+            }
+        });
         return true;
     }
 
