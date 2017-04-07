@@ -24,6 +24,7 @@ public class Car extends Transportation implements Cloneable {
     private double displacement;
     private String fuelType;
     private double kgC02perGallon;
+    private final double MPG_TO_LP100KM = 235.21;
 
     public Car(String make, String model, int year, double highwayMPG, double cityMPG, String trany,
                int cylinders, double displacement, String fuelType) {
@@ -87,6 +88,11 @@ public class Car extends Transportation implements Cloneable {
         } else return 0;
     }
 
+    public double getAvgLitersPer100KM() {
+        double avg = (cityMPG + highwayMPG) / 2;
+        return MPG_TO_LP100KM / avg;
+    }
+
     public String getMake() {
         return make;
     }
@@ -119,7 +125,12 @@ public class Car extends Transportation implements Cloneable {
         return fuelType;
     }
 
-
+    public String getSpecs() {
+        return getTrany() + ", "
+                + getCylinders() + "C, "
+                + getDisplacement() + "L, "
+                + getFuelType();
+    }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {

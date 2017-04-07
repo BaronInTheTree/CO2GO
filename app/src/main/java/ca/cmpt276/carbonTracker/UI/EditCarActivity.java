@@ -81,6 +81,12 @@ public class EditCarActivity extends AppCompatActivity {
         spinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         selectMake.setAdapter(spinnerArrayAdapter);
 
+        for (int i = 0; i < modelInstance.getCarData().getMakeList().size(); i++) {
+            if (modelInstance.getCarData().getMakeList().get(i).equals(modelInstance.getSelectedCar().getMake())) {
+                selectMake.setSelection(i);
+                break;
+            }
+        }
         selectMake.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -101,6 +107,16 @@ public class EditCarActivity extends AppCompatActivity {
 
         modelInstance.getCarData().updateModelList(selectedMake);
 
+        for (int i = 0; i < modelInstance.getCarData().getModelList().size(); i++) {
+            if (modelInstance.getCarData().getModelList().get(i).equals(modelInstance.getSelectedCar().getModel())) {
+                selectModel.setSelection(i);
+                System.out.println("TST 11.1: TRUE at i = " + i);
+                break;
+            }
+            else {
+                System.out.println("TST 11.1: FALSE");
+            }
+        }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 modelInstance.getCarData().getModelList());
@@ -110,6 +126,7 @@ public class EditCarActivity extends AppCompatActivity {
         selectModel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("TST 11.2: Setting up Year Spinner...");
                 setupSelectYearSpinner();
             }
 
@@ -127,6 +144,12 @@ public class EditCarActivity extends AppCompatActivity {
 
         modelInstance.getCarData().updateYearList(selectedMake, selectedModel);
 
+        for (int i = 0; i < modelInstance.getCarData().getYearList().size(); i++) {
+            if (modelInstance.getCarData().getYearList().get(i).equals(modelInstance.getSelectedCar().getYear())) {
+                selectYear.setSelection(i);
+                break;
+            }
+        }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 modelInstance.getCarData().getYearList());
@@ -153,6 +176,12 @@ public class EditCarActivity extends AppCompatActivity {
 
         modelInstance.getCarData().updateSpecsList(selectedMake, selectedModel, selectedYear);
 
+        for (int i = 0; i < modelInstance.getCarData().getSpecsList().size(); i++) {
+            if (modelInstance.getCarData().getSpecsList().get(i).equals(modelInstance.getSelectedCar().getSpecs())) {
+                selectSpecs.setSelection(i);
+                break;
+            }
+        }
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 modelInstance.getCarData().getSpecsList());

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.sasha.carbontracker.R;
 
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
+import ca.cmpt276.carbonTracker.UI.SelectRouteActivity;
 
 /**
     The AddRouteActivity is activated when the user click "Add" from SelectRouteActivity
@@ -83,6 +84,9 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
             public void onClick(View v) {
                 if (callingActivity.equals("AddJourney")) {
                     startActivity(new Intent(AddRouteActivity.this, AddJourneyActivity_Alternate.class));
+                }
+                else if (callingActivity.equals("RouteList")) {
+                    startActivity(new Intent(AddRouteActivity.this, SelectRouteActivity.class));
                 }
                 else {
                     startActivity(new Intent(AddRouteActivity.this, MainMenuActivity_Alternate.class));
