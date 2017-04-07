@@ -65,6 +65,11 @@ public class EditRouteActivity extends AppCompatActivity implements TextWatcher 
             @Override
             public void onClick(View v) {
                 if (setupTotalText()) {
+                    if (route.getCityDistanceKM() + route.getHighwayDistanceKM() == 0) {
+                        Toast.makeText(EditRouteActivity.this, "Total distance cannot be 0.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     carbonModel.setSelectedRoute(route);
                     carbonModel.getRouteCollection().editRoute(route, routeIndex);
                     SaveData.saveRoutes(EditRouteActivity.this);

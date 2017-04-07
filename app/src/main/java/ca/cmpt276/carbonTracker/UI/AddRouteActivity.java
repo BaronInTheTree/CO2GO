@@ -46,6 +46,11 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
             @Override
             public void onClick(View v) {
                 if (setupTotalText()) {
+                    if (route.getCityDistanceKM() + route.getHighwayDistanceKM() == 0) {
+                        Toast.makeText(AddRouteActivity.this, "Total distance cannot be 0.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     if (!route.getName().equals("")) {
                         carbonModel.getRouteCollection().addRoute(route);
                         setResult(Activity.RESULT_OK);
@@ -70,6 +75,11 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
             @Override
             public void onClick(View v) {
                 if (setupTotalText()) {
+                    if (route.getCityDistanceKM() + route.getHighwayDistanceKM() == 0) {
+                        Toast.makeText(AddRouteActivity.this, "Total distance cannot be 0.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     if (!route.getName().equals("")) {
                         carbonModel.getRouteCollection().addRoute(route);
                         carbonModel.setSelectedRoute(route);
@@ -97,6 +107,11 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                 EditText cityInput = (EditText) findViewById(R.id.cityDistance);
                 EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
                 if (setupTotalText()) {
+                    if (route.getCityDistanceKM() + route.getHighwayDistanceKM() == 0) {
+                        Toast.makeText(AddRouteActivity.this, "Total distance cannot be 0.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     route.setHidden(true);
                     carbonModel.setSelectedRoute(route);
                     startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
@@ -126,6 +141,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         EditText nameInput = (EditText) findViewById(R.id.routeName);
         EditText cityInput = (EditText) findViewById(R.id.cityDistance);
         EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
+
 
         int highway;
         try {
