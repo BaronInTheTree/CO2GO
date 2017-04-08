@@ -264,7 +264,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_default_green"
                     android:elevation="0dp"
-                    android:text="Edit Journey"
+                    android:text="@string/edit_journey"
                     android:textAlignment="center"
                     android:textColor="#2e2e2e"
                     android:textSize="14sp" />
@@ -281,7 +281,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_default_green"
                 android:elevation="0dp"
-                android:text="Edit + Favorite"
+                android:text="@string/edit_favorite"
                 android:textAlignment="center"
                 android:textColor="#2e2e2e"
                 android:textSize="14sp" />

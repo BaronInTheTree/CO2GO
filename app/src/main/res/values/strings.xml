@@ -212,4 +212,5 @@
     <string name="click_and_hold_a_journey_for_options">Click and hold a Journey for Options</string>
     <string name="_99_99_9999">99/99/9999</string>
     <string name="edit_journey">Edit Journey</string>
+    <string name="edit_favorite">Edit + Favorite</string>
 </resources>
