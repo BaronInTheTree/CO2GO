@@ -5,9 +5,10 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
-import ca.cmpt276.carbonTracker.UI.AddUtilityActivity;
 import ca.cmpt276.carbonTracker.UI.MainMenuActivity;
 import ca.cmpt276.carbonTracker.UI.Notification;
 
@@ -21,6 +22,7 @@ public class NotificationCaller {
     private static final int DESIRED_HOUR = 21;
     private static final int DESIRED_MINUTE = 0;
     private static final int BUFFER_ONE_MINUTE = 60 * 1000;
+    public static final int SIX_WEEKS = 42;
 
     private static NotificationCaller instance;
 
@@ -58,7 +60,6 @@ public class NotificationCaller {
                         currentTimeMinute == DESIRED_MINUTE) {
 
                     createNotification(context);
-                    Notification notification = new Notification(context, "Testing", null);
 
                     System.out.println("HOORAY!! IT WORKS!!!");
                     System.out.println(currentTimeHour + ":" + currentTimeMinute + ":" + currentTmeSecond);
@@ -75,47 +76,79 @@ public class NotificationCaller {
     }
 
     private void createNotification(Context context) {
+        Date today = DateHandler.createDate(
+                Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+        DayData dayData = DayData.getDayDataAtDate(today);
 
-        // No Journeys added today
-        noJourneyAdded(context);
+        // No journeys added today
+        if (dayData.getJourneyList().size() == 0) {     // this if statement is never triggering
+            noJourneyAdded(context);
+        }
 
+/*
         // No Bills added in 1.5 months (42 days)
-        noBillAdded(context);
+        if (noBillAddedIn6Weeks())
+            noBillAdded(context);
+*/
 
         // No favourite Journey selected
-        noFavouriteJourney(context);
+//        noFavouriteJourney(context);
 
         // If none of others are chosen display default notification
         defaultNotification(context);
     }
 
+    private boolean noBillAddedIn6Weeks() {
+
+        Calendar calendar = Calendar.getInstance();
+        Date current = DateHandler.createDate(calendar.YEAR, calendar.MONTH, calendar.DAY_OF_MONTH);
+        DayData dayData;
+
+        // Loop through 6 weeks checking if for each day the list is not empty (added utility that day)
+        for (int i = 0; i < SIX_WEEKS; i++) {
+            // Get current day
+            dayData = DayData.getDayDataAtDate(current);
+
+            if (!(dayData.getUtilityList().size() == 0)) {
+                return true;
+            }
+
+            // Get to previous day
+            calendar.add(Calendar.DATE, -1);
+            // Update current date to previous day
+            current = calendar.getTime();
+        }
+        return false;
+    }
+
     private void noJourneyAdded(Context context) {
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            stackBuilder.addParentStack(MainMenuActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(MainMenuActivity.class);
 
-            // replace with add journey activity if that exists
-            Intent intent = new Intent(context, MainMenuActivity.class);
-            stackBuilder.addNextIntent(intent);
-            PendingIntent pendingIntent =
-                    stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        // replace with add journey activity if that exists
+        Intent intent = new Intent(context, MainMenuActivity.class);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent pendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            String message = "No journeys entered today, would you like to add one?";
+        String message = "No journeys entered today, would you like to add one?";
 
-            Notification journeyNotification = new Notification(context, message, pendingIntent);
+        Notification journeyNotification = new Notification(context, message, pendingIntent);
     }
 
     private void noBillAdded(Context context) {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainMenuActivity.class);
 
-        Intent intent = new Intent(context, AddUtilityActivity.class);
+        // change to adding bill activity
+        Intent intent = new Intent(context, MainMenuActivity.class);
         stackBuilder.addNextIntent(intent);
         PendingIntent pendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         String message = "No utility bill added in 1.5 months, please add one.";
 
-        Notification utilityNotification = new Notification(context,message, pendingIntent);
+        Notification utilityNotification = new Notification(context, message, pendingIntent);
 
     }
 
@@ -134,15 +167,6 @@ public class NotificationCaller {
 
         String string1 = "Would you like to add another journey?";
 
-/*  This is a possible string to display
-
-        int numJourneysAddedToday = get number of journeys entered
-        String string2 = "You have entered " +
-                numJourneysAddedToday +
-                " today, would you like to add another one?";
-*/
-
         Notification notification = new Notification(context, string1, pendingIntent);
-
     }
 }
