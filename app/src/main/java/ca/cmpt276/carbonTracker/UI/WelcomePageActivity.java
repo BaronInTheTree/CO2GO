@@ -31,6 +31,13 @@ public class WelcomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_page);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                createNotificationService();
+            }
+        }).start();
+
         enterButton();
         SaveData.loadAllRoutes(this);
         SaveData.loadAllCars(this);
@@ -44,6 +51,11 @@ public class WelcomePageActivity extends AppCompatActivity {
                 readVehicleDate();
             }
         }).start();
+    }
+
+    // Creates a notification and will display it at specified time
+    private void createNotificationService() {
+        NotificationCaller.getInstance().run(this);
     }
 
     private void enterButton() {
