@@ -26,7 +26,7 @@ public class Notification {
 
         // A notification plays sounds and vibrates when it is displayed
         builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-        builder.setVibrate(new long[] { 1000, 1000});
+        builder.setVibrate(new long[]{1000, 1000});
 
         // Set given pendingIntent to load onto stackBuilder
         builder.setContentIntent(pendingIntent);

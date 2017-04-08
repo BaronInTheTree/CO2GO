@@ -7,7 +7,6 @@ import android.content.Intent;
 
 import com.example.sasha.carbontracker.R;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -63,9 +62,6 @@ public class NotificationCaller {
                         currentTimeMinute == DESIRED_MINUTE) {
 
                     createNotification(context);
-
-                    System.out.println("HOORAY!! IT WORKS!!!");
-                    System.out.println(currentTimeHour + ":" + currentTimeMinute + ":" + currentTmeSecond);
                 }
 
                 // Wait time for a minute
@@ -83,22 +79,15 @@ public class NotificationCaller {
                 Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
         DayData dayData = DayData.getDayDataAtDate(today);
 
-        // No journeys added today
+
         if (dayData.getJourneyList().size() == 0) {     // this if statement is never triggering
             noJourneyAdded(context);
-        }
-
-/*
-        // No Bills added in 1.5 months (42 days)
-        if (noBillAddedIn6Weeks())
+        } else if (noBillAddedIn6Weeks()) {
             noBillAdded(context);
-*/
-
-        // No favourite Journey selected
-//        noFavouriteJourney(context);
-
-        // If none of others are chosen display default notification
-        defaultNotification(context);
+        } else {
+            // If none of others are chosen display default notification
+            defaultNotification(context);
+        }
     }
 
     private boolean noBillAddedIn6Weeks() {
@@ -124,6 +113,7 @@ public class NotificationCaller {
         return false;
     }
 
+    // No journeys added today
     private void noJourneyAdded(Context context) {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainMenuActivity.class);
@@ -139,6 +129,7 @@ public class NotificationCaller {
         Notification journeyNotification = new Notification(context, message, pendingIntent);
     }
 
+    // No Bills added in 1.5 months (42 days)
     private void noBillAdded(Context context) {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainMenuActivity.class);
@@ -155,10 +146,11 @@ public class NotificationCaller {
 
     }
 
+    // For future development
     private void noFavouriteJourney(Context context) {
-
     }
 
+    // Display default notification
     private void defaultNotification(Context context) {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainMenuActivity.class);
