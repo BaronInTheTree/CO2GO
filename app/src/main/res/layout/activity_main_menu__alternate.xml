@@ -74,7 +74,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:backgroundTintMode="src_atop"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -112,7 +112,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:text="Click to Change Ending Date"
+                android:text="@string/click_to_change_ending_date"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textSize="14sp"
@@ -129,7 +129,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="1dp"
-                android:text="99/99/99"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
@@ -148,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Day Range:"
+                    android:text="@string/day_range"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -157,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2.6"
-                    android:text="Filter:"
+                    android:text="@string/filter"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -179,7 +179,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_default_brown"
                     android:paddingBottom="2dp"
-                    android:text="1"
+                    android:text="@string/_1"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -192,7 +192,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_default_brown"
                     android:paddingBottom="2dp"
-                    android:text="28"
+                    android:text="@string/_28"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold" />/>
@@ -205,7 +205,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_default_brown"
                     android:paddingBottom="2dp"
-                    android:text="365"
+                    android:text="@string/_365"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold" />/>
@@ -218,7 +218,7 @@
                     android:layout_weight="3"
                     android:background="@drawable/button_default_brown"
                     android:paddingBottom="2dp"
-                    android:text="By Route"
+                    android:text="@string/by_route"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -230,7 +230,7 @@
                     android:layout_weight="3"
                     android:background="@drawable/button_default_brown"
                     android:paddingBottom="2dp"
-                    android:text="By Vehicle"
+                    android:text="@string/by_vehicle"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -247,7 +247,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="1dp"
-                android:text="View Detailed Line Graph"
+                android:text="@string/view_detailed_line_graph"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
@@ -271,7 +271,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_round_green"
-                    android:text="+"
+                    android:text="@string/plus"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -282,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:background="@drawable/button_default_brown"
-                    android:text="Journeys"
+                    android:text="@string/journeys"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -303,7 +303,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_round_green"
-                    android:text="+"
+                    android:text="@string/plus"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -314,7 +314,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:background="@drawable/button_default_brown"
-                    android:text="Utilities"
+                    android:text="@string/utilities"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -335,7 +335,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_round_green"
-                    android:text="+"
+                    android:text="@string/plus"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -346,7 +346,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:background="@drawable/button_default_brown"
-                    android:text="Vehicles"
+                    android:text="@string/vehicles"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -368,7 +368,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_round_green"
-                    android:text="+"
+                    android:text="@string/plus"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -379,7 +379,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
                     android:background="@drawable/button_default_brown"
-                    android:text="Routes"
+                    android:text="@string/routes"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold" />

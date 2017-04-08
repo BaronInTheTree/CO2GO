@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_weight="0.25"
-            android:text="Edit Car"
+            android:text="@string/edit_car"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -131,7 +131,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="0.25"
-            android:text="Select Icon"
+            android:text="@string/select_icon"
             android:textStyle="bold" />
 
         <Spinner
@@ -186,9 +186,6 @@
                 android:id="@+id/buttonCancelEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_selected_red"
@@ -198,9 +195,6 @@
                 android:id="@+id/buttonEditCar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/buttonCancel_AddCar"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_default_green"

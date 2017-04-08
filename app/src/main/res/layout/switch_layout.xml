@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="CO2 / TREES"
+        android:text="@string/co2_trees"
         android:textSize="9sp"
         android:textStyle="bold" />
 

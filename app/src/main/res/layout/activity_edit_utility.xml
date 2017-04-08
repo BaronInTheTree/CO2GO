@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Edit Utility"
+            android:text="@string/edit_utility"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -83,7 +83,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:text="Utility Usage (GWh or GJ)"
+            android:text="@string/utility_usage_gwh_or_gj"
             android:textStyle="bold" />
 
         <EditText
@@ -246,7 +246,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_default_green"
-                android:text="Edit Utility" />
+                android:text="@string/edit_utility" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

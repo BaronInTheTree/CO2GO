@@ -26,7 +26,7 @@
         android:layout_below="@+id/last4week_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp"
-        android:text="Last Year"
+        android:text="@string/last_year"
         tools:layout_editor_absoluteX="144dp"
         tools:layout_editor_absoluteY="309dp" />
 
@@ -38,7 +38,7 @@
         android:layout_alignRight="@+id/allJourney_btn"
         android:layout_below="@+id/singleDay_btn"
         android:layout_marginTop="42dp"
-        android:text="Last 4 Weeks"
+        android:text="@string/last_4_weeks"
         tools:layout_editor_absoluteX="133dp"
         tools:layout_editor_absoluteY="198dp" />
 
@@ -49,7 +49,7 @@
         android:layout_below="@+id/graphMenuTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp"
-        android:text="Single Day"
+        android:text="@string/single_day"
         tools:layout_editor_absoluteX="141dp"
         tools:layout_editor_absoluteY="95dp" />
 
@@ -60,7 +60,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
-        android:text="Graph View of Your CO2 Emission"
+        android:text="@string/graph_view_of_your_co2_emission"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="58dp"

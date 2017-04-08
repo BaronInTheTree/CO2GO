@@ -254,7 +254,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="150dp"
-                    android:text="Average L/100km:"
+                    android:text="@string/average_l_100km"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -263,7 +263,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="150dp"
-                    android:text="TextView"
+                    android:text=""
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </TableRow>
