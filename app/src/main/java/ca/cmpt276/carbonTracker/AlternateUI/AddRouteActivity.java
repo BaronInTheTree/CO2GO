@@ -54,6 +54,11 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
             @Override
             public void onClick(View v) {
                 if (setupTotalText()) {
+                    if (route.getCityDistanceKM() + route.getHighwayDistanceKM() == 0) {
+                        Toast.makeText(AddRouteActivity.this, "Total distance cannot be 0.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     if (!route.getName().equals("")) {
                         carbonModel.getRouteCollection().addRoute(route);
                         setResult(Activity.RESULT_OK);
@@ -71,6 +76,62 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
                     }
                 } else {
                     Toast.makeText(AddRouteActivity.this, "Please fill out the form completely.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void setupSaveUseButton() {
+        Button saveUseRoute = (Button) findViewById(R.id.buttonSaveUseRoute);
+        saveUseRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (setupTotalText()) {
+                    if (route.getCityDistanceKM() + route.getHighwayDistanceKM() == 0) {
+                        Toast.makeText(AddRouteActivity.this, "Total distance cannot be 0.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!route.getName().equals("")) {
+                        carbonModel.getRouteCollection().addRoute(route);
+                        carbonModel.setSelectedRoute(route);
+                        setResult(Activity.RESULT_OK);
+                        startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
+                        SaveData.saveRoutes(AddRouteActivity.this);
+                        finish();
+                    } else {
+                        Toast.makeText(AddRouteActivity.this, "To save, enter a nickname.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(AddRouteActivity.this, "Please fill out the form completely.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void setupUseRouteButton() {
+        Button useRoute_btn = (Button) findViewById(R.id.useRoute_btn);
+        useRoute_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText cityInput = (EditText) findViewById(R.id.cityDistance);
+                EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
+                if (setupTotalText()) {
+                    if (route.getCityDistanceKM() + route.getHighwayDistanceKM() == 0) {
+                        Toast.makeText(AddRouteActivity.this, "Total distance cannot be 0.",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    route.setHidden(true);
+                    carbonModel.setSelectedRoute(route);
+                    startActivity(new Intent(AddRouteActivity.this, JourneyInformationActivity.class));
+                    finish();
+                } else if ((isEmptyEditText(cityInput) || isEmptyEditText(highwayInput)) ||
+                        (!isEmptyEditText(cityInput) && !isEmptyEditText(highwayInput))) {
+                    Toast.makeText(AddRouteActivity.this, "Please enter both highway and city distance",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -100,6 +161,7 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         EditText nameInput = (EditText) findViewById(R.id.routeName);
         EditText cityInput = (EditText) findViewById(R.id.cityDistance);
         EditText highwayInput = (EditText) findViewById(R.id.highwayDistance);
+
 
         int highway;
         try {

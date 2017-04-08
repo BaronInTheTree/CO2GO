@@ -124,6 +124,35 @@
             android:textColorHint="#D6D6D6"
             android:textSize="18sp"
             android:textStyle="bold" />
+    <EditText
+        android:id="@+id/highwayDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/routeName"
+        android:layout_marginTop="13dp"
+        android:ems="6"
+        android:hint="@string/max_9999km"
+        android:inputType="number"
+        android:maxLength="4"
+        android:text="0"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/cityDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/cityDistanceText"
+        android:layout_alignBottom="@+id/cityDistanceText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:ems="6"
+        android:hint="@string/max_9999km"
+        android:inputType="number"
+        android:maxLength="4"
+        android:text="0"
+        android:textSize="16sp" />
 
         <TextView
             android:id="@+id/totalDistanceText"
