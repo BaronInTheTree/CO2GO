@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.MonthYearSummary;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
@@ -91,9 +92,9 @@ public class MainMenuActivity extends AppCompatActivity {
                 String message = modelInstance.getTips().getGeneralTip(getApplicationContext(),summary);
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
                 SaveData.saveTips(MainMenuActivity.this);
-//                startActivity(new Intent(MainMenuActivity.this, TestActivity.class));
 //                startActivity(new Intent(MainMenuActivity.this, MonthlyEmissionGraphActivity.class));
 //                startActivity(new Intent(MainMenuActivity.this, YearlyEmissionLineGraphActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, MainMenuActivity_Alternate.class));
             }
         });
 

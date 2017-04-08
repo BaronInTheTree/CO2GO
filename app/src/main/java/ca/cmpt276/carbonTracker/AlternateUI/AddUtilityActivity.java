@@ -1,12 +1,18 @@
-package ca.cmpt276.carbonTracker.UI;
+package ca.cmpt276.carbonTracker.AlternateUI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -39,6 +45,8 @@ public class AddUtilityActivity extends AppCompatActivity {
     private int usage;
     private int numPeople;
 
+    private ActionMenuView amvMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,8 @@ public class AddUtilityActivity extends AppCompatActivity {
         // Save and cancel buttons
         saveBillButton();
         cancelButton();
+
+        setupActionBar();
     }
 
 
@@ -309,7 +319,7 @@ public class AddUtilityActivity extends AppCompatActivity {
                     model.setUtilityCollection(collection);
 
                     // Return to utility list and close activity
-                    Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
+                    Intent intent = new Intent(AddUtilityActivity.this, MainMenuActivity_Alternate.class);
                     SaveData.saveUtilities(AddUtilityActivity.this);
                     startActivity(intent);
                     finish();
@@ -366,10 +376,100 @@ public class AddUtilityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Return to utility list and close activity
-                Intent intent = new Intent(AddUtilityActivity.this, UtilityListActivity.class);
+                Intent intent = new Intent(AddUtilityActivity.this, MainMenuActivity_Alternate.class);
                 startActivity(intent);
                 finish();
             }
         });
+    }
+
+    private void setupActionBar() {
+        // Inflate your custom layout
+        Toolbar toolBar = (Toolbar) findViewById(R.id.addUtility_toolBar);
+        amvMenu = (ActionMenuView) toolBar.findViewById(R.id.amvMenu);
+        amvMenu.setOnMenuItemClickListener(new ActionMenuView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return onOptionsItemSelected(menuItem);
+            }
+        });
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_actions_addutility, amvMenu.getMenu());
+        MenuItem itemSwitch = amvMenu.getMenu().findItem(R.id.toolbar_switch);
+        itemSwitch.setActionView(R.layout.switch_layout);
+
+        final SwitchCompat unitToggle = (SwitchCompat) amvMenu.getMenu().findItem(R.id.toolbar_switch).
+                getActionView().findViewById(R.id.switchForActionBar);
+        if (CarbonModel.getInstance().getTreeUnit().getTreeUnitStatus()) {
+            unitToggle.setChecked(true);
+        }
+        unitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(true);
+                    SaveData.saveTreeUnit(AddUtilityActivity.this);
+                } else {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
+                    SaveData.saveTreeUnit(AddUtilityActivity.this);
+                }
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch(id) {
+            case R.id.action_settings: {
+                return true;
+            }
+            case R.id.action_addVehicle: {
+                Intent intent = new Intent(AddUtilityActivity.this, AddCarActivity.class);
+                intent.putExtra("Caller", "AddUtility");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case R.id.action_addRoute: {
+                Intent intent = new Intent(AddUtilityActivity.this, AddRouteActivity.class);
+                intent.putExtra("Caller", "AddUtility");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case R.id.action_addJourney: {
+                Intent intent = new Intent(AddUtilityActivity.this, AddJourneyActivity_Alternate.class);
+                intent.putExtra("Caller", "AddUtility");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            case android.R.id.home: {
+                Intent intent = new Intent(AddUtilityActivity.this, MainMenuActivity_Alternate.class);
+                intent.putExtra("Caller", "AddUtility");
+                startActivity(intent);
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddUtilityActivity.this, MainMenuActivity_Alternate.class));
+        finish();
     }
 }

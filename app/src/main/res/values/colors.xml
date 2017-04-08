@@ -3,4 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="earthDarkGreen">#2C9200</color>
+    <color name="earthDarkRed">#A10000</color>
+    <color name="earthGold">#F6E300</color>
+    <color name="earthTeal">#0092C5</color>
+    <color name="earthOrange">#E88200</color>
+    <color name="earthLime">#86FF46</color>
+    <color name="earthBrown">#826500</color>
+    <color name="earthDarkTeal">#005982</color>
+    <color name="earthDarkOrange">#FF3A00</color>
+
 </resources>

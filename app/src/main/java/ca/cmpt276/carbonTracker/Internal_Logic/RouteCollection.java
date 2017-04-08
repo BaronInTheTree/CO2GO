@@ -118,6 +118,10 @@ public class RouteCollection {
         return hiddenRouteCollection.get(i);
     }
 
+    public List<Route> getRouteCollection() {
+        return routeCollection;
+    }
+
     public int getIndexOfRoute(Route route) {
         int index = 0;
         for (int i = 0; i < routeCollection.size(); i++) {

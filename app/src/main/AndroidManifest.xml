@@ -7,10 +7,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo2"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name="ca.cmpt276.carbonTracker.UI.WelcomePageActivity"
             android:screenOrientation="portrait">
@@ -27,10 +27,10 @@
             android:name="ca.cmpt276.carbonTracker.UI.SelectTransportationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.UI.AddCarActivity"
+            android:name="ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ca.cmpt276.carbonTracker.UI.AddRouteActivity"
+            android:name="ca.cmpt276.carbonTracker.AlternateUI.AddRouteActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="ca.cmpt276.carbonTracker.UI.JourneyInformationActivity"
@@ -44,18 +44,19 @@
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditRouteActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.JourneyListActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditJourneyActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.AddUtilityActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.AddUtilityActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilityListActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.EditUtilityActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.GraphMenuActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphTransportActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.GraphMenuActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.MonthlyEmissionGraphActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.TestActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.YearlyEmissionLineGraphActivity" />
         <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphRouteActivity" />
-        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphDayJourneyActivity"></activity>
+        <activity android:name="ca.cmpt276.carbonTracker.UI.PieGraphDayJourneyActivity" />
+        <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate" />
+        <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.AddJourneyActivity_Alternate" />
+        <activity android:name="ca.cmpt276.carbonTracker.AlternateUI.LineGraphActivity"></activity>
     </application>
 
 </manifest>

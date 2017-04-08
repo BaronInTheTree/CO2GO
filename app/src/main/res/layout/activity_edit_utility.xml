@@ -1,236 +1,252 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_edit_utility"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ca.cmpt276.carbonTracker.UI.EditUtilityActivity">
+    tools:context="ca.cmpt276.carbonTracker.UI.EditUtilityActivity"
+    android:orientation="vertical"
+    android:background="@mipmap/dam2">
 
-    <TableLayout
+    <include
+        android:id="@+id/mainMenu_toolBar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/toolbar_layout" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/background_rectangle_55"
+        android:orientation="vertical"
+        android:weightSum="10">
 
-        <TableRow
+        <TextView
+            android:id="@+id/textView13"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/edit_utility"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/utilityNickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/utilityNickname" />
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/utilityNickname"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/utilityNickname"
+            android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/editUtilityNickname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/max_length_18_chars"
-                android:inputType="textCapWords"
-                android:maxLength="18" />
-        </TableRow>
-
-        <TableRow
+        <EditText
+            android:id="@+id/editUtilityNickname"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_default_brown"
+            android:ems="10"
+            android:hint="@string/max_length_18_chars"
+            android:inputType="textCapWords"
+            android:maxLength="18"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#D6D6D6"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textViewSelectMake"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/select_fuel_type" />
-        </TableRow>
-
-        <TableRow
+        <TextView
+            android:id="@+id/textViewSelectMake"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/select_fuel_type"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinnerSelectResource"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/toolbar_background" />
+
+        <TextView
+            android:id="@+id/utilityUsageText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/utility_usage_gwh_or_gj"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextUtilityUsage_EditUtility"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_default_brown"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewSelectModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/utility_starting_date"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/spinnerSelectResource"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </TableRow>
+                android:id="@+id/spinnerEditUtilityStartYear"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.27"
+                android:background="@drawable/toolbar_background"
+                android:prompt="@string/billStartYear" />
 
-        <TableRow
+            <Spinner
+                android:id="@+id/spinnerEditUtilityStartMonth"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/toolbar_background"
+                android:prompt="@string/billStartMonth" />
+
+            <Spinner
+                android:id="@+id/spinnerEditUtilityStartDay"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/toolbar_background"
+                android:prompt="@string/billStartDay" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewSelectYear"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/utility_ending_date"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/utilityUsageText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/utilityUsage" />
-        </TableRow>
-
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="0.27"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editTextUtilityUsage_EditUtility"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:maxLength="6" />
-        </TableRow>
+            <Spinner
+                android:id="@+id/spinnerEditUtilityEndYear"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.27"
+                android:background="@drawable/toolbar_background"
+                android:prompt="@string/billEndYear" />
 
-        <TableRow
+            <Spinner
+                android:id="@+id/spinnerEditUtilityEndMonth"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/toolbar_background"
+                android:prompt="@string/billEndMonth" />
+
+            <Spinner
+                android:id="@+id/spinnerEditUtilityEndDay"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/toolbar_background"
+                android:prompt="@string/billEndDay" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/utility_num_People_in_home"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/utility_num_People_in_home"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textViewSelectModel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/utility_starting_date" />
-        </TableRow>
-
-        <TableRow
+        <EditText
+            android:id="@+id/editText_Utility_Num_People"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_default_brown"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/spinnerEditUtilityStartYear"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.27"
-                    android:prompt="@string/billStartYear" />
-
-                <Spinner
-                    android:id="@+id/spinnerEditUtilityStartMonth"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:prompt="@string/billStartMonth" />
-
-                <Spinner
-                    android:id="@+id/spinnerEditUtilityStartDay"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:prompt="@string/billStartDay" />
-            </LinearLayout>
-        </TableRow>
-
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewSelectYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/utility_ending_date" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/spinnerEditUtilityEndYear"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.27"
-                    android:prompt="@string/billEndYear" />
-
-                <Spinner
-                    android:id="@+id/spinnerEditUtilityEndMonth"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:prompt="@string/billEndMonth" />
-
-                <Spinner
-                    android:id="@+id/spinnerEditUtilityEndDay"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:prompt="@string/billEndDay" />
-            </LinearLayout>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/utility_num_People_in_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/utility_num_People_in_home" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/editText_Utility_Num_People"
+            <Button
+                android:id="@+id/buttonCancelEditBill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:maxLength="6" />
-        </TableRow>
-    </TableLayout>
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_selected_red"
+                android:text="@string/cancel" />
 
-    <Button
-        android:id="@+id/buttonEditBillSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonCancelEditBill"
-        android:layout_alignBottom="@+id/buttonCancelEditBill"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:text="@string/edit_bill" />
-
-    <Button
-        android:id="@+id/buttonCancelEditBill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="47dp"
-        android:layout_marginLeft="49dp"
-        android:layout_marginStart="49dp"
-        android:text="@string/cancel" />
-
-</RelativeLayout>
+            <Button
+                android:id="@+id/buttonEditBillSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_default_green"
+                android:text="@string/edit_utility" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -45,6 +45,20 @@ public class DateHandler {
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
+    public static String convertDateToString(Date date) {
+        return dateFormat.format(date);
+    }
+
+    public static Date convertStringToDate(String dateString) {
+        try {
+            return DateHandler.dateFormat.parse(dateString);
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private void initializeCurrentDate() {
         currentYear = MAX_YEAR;
         currentMonth = Integer.parseInt(new SimpleDateFormat("MM").format(new Date()));
