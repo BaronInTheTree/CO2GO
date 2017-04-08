@@ -214,7 +214,44 @@ public class SaveData extends JSONObject  {
         editor.apply();
     }
 
-    //todo: test utility and tips
+    //////////////////
+    // Saving Favourite Journey
+    /////////////////
+
+    public static void loadFavouriteJourneys(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        JourneyCollection favourites = model.getFavouriteJourneyCollection();
+        int index = 0;
+        while (index < favourites.getNumberJourneys()) {
+            favourites.deleteJourney(index);
+        }
+
+        SharedPreferences prefs = context.getSharedPreferences("FavouriteJourneyCollection", MODE_PRIVATE);
+
+        while (!prefs.getString("FavouriteJourney"+index, "").equals("")) {
+            Gson journeyData = new Gson();
+            String jsonJourneyData = prefs.getString("FavouriteJourney" + index, null);
+            Journey journey = journeyData.fromJson(jsonJourneyData, Journey.class);
+            favourites.addJourney(journey);
+            index++;
+        }
+    }
+
+    public static void saveFavouriteJourneys(Context context) {
+        CarbonModel model = CarbonModel.getInstance();
+        JourneyCollection favourites = model.getFavouriteJourneyCollection();
+        SharedPreferences prefs = context.getSharedPreferences("FavouriteJourneyCollection", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        for (int i = 0; i < favourites.getNumberJourneys(); i++) {
+            Gson journeyData = new Gson();
+            String jsonJourneyData = journeyData.toJson(favourites.getJourneyAtIndex(i));
+            editor.putString("FavouriteJourney"+i, jsonJourneyData);
+        }
+        editor.commit();
+        editor.apply();
+    }
+
     //////////////////
     // Saving Utility
     /////////////////
