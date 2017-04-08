@@ -678,7 +678,6 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainMenuActivity_Alternate.this, AboutActivity.class));
-                finish();
             }
         });
     }
