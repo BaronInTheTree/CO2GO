@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.example.sasha.carbontracker.R;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -28,6 +29,8 @@ public class LineGraphActivity extends AppCompatActivity {
 
     private LineChart lineChart;
     CarbonModel model = CarbonModel.getInstance();
+    private final int AVERAGE_CO2_GRAMS_CANADIAN_CURRENT = 56438;
+    private final int AVERAGE_CO2_GRAMS_CANADIAN_TARGET = 35068;
 
     ArrayList<Integer> colorList = new ArrayList<>();
     int currentColor = 0;
@@ -47,6 +50,14 @@ public class LineGraphActivity extends AppCompatActivity {
 
         XAxis xAxis = lineChart.getXAxis();
         YAxis yAxis = lineChart.getAxisLeft();
+
+        LimitLine avgCO2Current = new LimitLine(model.getTreeUnit().getUnitValueGraphs(AVERAGE_CO2_GRAMS_CANADIAN_CURRENT));
+        LimitLine avgCO2Target = new LimitLine(model.getTreeUnit().getUnitValueGraphs(AVERAGE_CO2_GRAMS_CANADIAN_TARGET));
+        avgCO2Current.setLineWidth(5);
+        avgCO2Target.setLineWidth(5);
+
+        yAxis.addLimitLine(avgCO2Current);
+        yAxis.addLimitLine(avgCO2Target);
 
         colorList.add(Color.RED);
         colorList.add(Color.BLUE);
