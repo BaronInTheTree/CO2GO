@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.UI.MainMenuActivity;
 import ca.cmpt276.carbonTracker.UI.Notification;
 
@@ -128,7 +129,7 @@ public class NotificationCaller {
         stackBuilder.addParentStack(MainMenuActivity.class);
 
         // replace with add journey activity if that exists
-        Intent intent = new Intent(context, MainMenuActivity.class);
+        Intent intent = new Intent(context, MainMenuActivity_Alternate.class);
         stackBuilder.addNextIntent(intent);
         PendingIntent pendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -143,7 +144,7 @@ public class NotificationCaller {
         stackBuilder.addParentStack(MainMenuActivity.class);
 
         // change to adding bill activity
-        Intent intent = new Intent(context, MainMenuActivity.class);
+        Intent intent = new Intent(context, MainMenuActivity_Alternate.class);
         stackBuilder.addNextIntent(intent);
         PendingIntent pendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -162,7 +163,7 @@ public class NotificationCaller {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainMenuActivity.class);
 
-        Intent intent = new Intent(context, MainMenuActivity.class);
+        Intent intent = new Intent(context, MainMenuActivity_Alternate.class);
         stackBuilder.addNextIntent(intent);
         PendingIntent pendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
