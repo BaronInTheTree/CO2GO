@@ -122,7 +122,7 @@ public class ModifyCarActivity extends AppCompatActivity {
         displayFuelType.setText("" + modelInstance.getSelectedCar().getFuelType());
 
         TextView displayFuelEconomy = (TextView) findViewById(R.id.textViewDisplayFuelEconomy);
-        displayFuelEconomy.setText("" + modelInstance.getSelectedCar().getAvgLitersPer100KM());
+        displayFuelEconomy.setText("" + String.format("%.2f", modelInstance.getSelectedCar().getAvgLitersPer100KM()));
     }
 
     private void setupActionBar() {

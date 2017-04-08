@@ -1,5 +1,14 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import com.example.sasha.carbontracker.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -139,14 +148,16 @@ public class JourneyCollection {
 
     public List<String> getJourneyList() {
         List<String> journeys = new ArrayList<>();
+        CarbonModel model = CarbonModel.getInstance();
 
         for (Journey journey : journeyCollection) {
-            journeys.add(journey.getDateString()
+            journeys.add(DateHandler.dateFormat.format(journey.getDateTime())
                     + "\n" + journey.getTransportation().getNickname()
                     + ", " + journey.getType()
-                    + "\n" + journey.getRoute().getName() + ": "
+                    + " || " + journey.getRoute().getName() + ": "
                     + journey.getRoute().getTotalDistanceKM() + "km"
-                    + "\n" + String.format("%.2f",journey.getEmissionsKM()) + "g CO2");
+                    + "\n" + String.format("%.2f", TreeUnit.convertToTrees(journey.getEmissionsKM()))
+                    + model.getTreeUnit().getUnitTypeList());
         }
         return journeys;
     }
@@ -154,18 +165,46 @@ public class JourneyCollection {
     public List<String> getJourneyListTrees() {
         List<String> journeys = new ArrayList<>();
 
+        CarbonModel model = CarbonModel.getInstance();
+
         for (Journey journey : journeyCollection) {
-            journeys.add(journey.getDateString()
+            journeys.add(DateHandler.dateFormat.format(journey.getDateTime())
                     + "\n" + journey.getTransportation().getNickname()
                     + ", " + journey.getType()
-                    + "\n" + journey.getRoute().getName() + ": "
+                    + " || " + journey.getRoute().getName() + ": "
                     + journey.getRoute().getTotalDistanceKM() + "km"
-                    + "\n" + String.format("%.2f", TreeUnit.convertToTrees(journey.getEmissionsKM())) + " Trees");
+                    + " || " + String.format("%.2f", TreeUnit.convertToTrees(journey.getEmissionsKM()))
+                    + " " + model.getTreeUnit().getUnitTypeList());
         }
         return journeys;
     }
 
     public Journey getJourneyAtIndex(int index) {
         return journeyCollection.get(index);
+    }
+
+    public ArrayAdapter<Journey> getArrayAdapter(Context context) {
+        JourneyCollection.JourneyCollectionAdapter adapter = new JourneyCollection.JourneyCollectionAdapter(context);
+        return adapter;
+    }
+
+    private class JourneyCollectionAdapter extends ArrayAdapter<Journey> {
+        JourneyCollectionAdapter(Context context) {
+            super(context, R.layout.journey_list, journeyCollection);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View routeView = convertView; // Check if we have a view
+            if (routeView == null) {
+                routeView = LayoutInflater.from(getContext()).inflate(R.layout.journey_list, parent, false);
+            }
+
+            String current = getJourneyList().get(position);
+            TextView routeText = (TextView) routeView.findViewById(R.id.journeyListViewText);
+            routeText.setText(current);
+
+            return routeView;
+        }
     }
 }

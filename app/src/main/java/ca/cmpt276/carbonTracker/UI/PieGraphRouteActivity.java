@@ -25,7 +25,7 @@ import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.EmissionCollection;
 
-import static ca.cmpt276.carbonTracker.UI.CalendarDialog.selectedDate;
+import static ca.cmpt276.carbonTracker.UI.CalendarDialogMainMenu.selectedDate;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.dayMode;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.monthMode;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.yearMode;

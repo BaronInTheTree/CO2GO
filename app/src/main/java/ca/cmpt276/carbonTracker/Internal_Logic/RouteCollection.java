@@ -72,12 +72,12 @@ public class RouteCollection {
     }
 
     public ArrayAdapter<Route> getArrayAdapter(Context context) {
-        RouteCollectionAdapter adapter = new RouteCollectionAdapter(context);
+        JourneyCollectionAdapter adapter = new JourneyCollectionAdapter(context);
         return adapter;
     }
 
-    private class RouteCollectionAdapter extends ArrayAdapter<Route> {
-        RouteCollectionAdapter(Context context) {
+    private class JourneyCollectionAdapter extends ArrayAdapter<Route> {
+        JourneyCollectionAdapter(Context context) {
             super(context, R.layout.route_list, routeCollection);
         }
 

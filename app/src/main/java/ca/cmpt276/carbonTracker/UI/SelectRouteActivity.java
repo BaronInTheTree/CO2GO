@@ -90,35 +90,8 @@ public class SelectRouteActivity extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.listOfRoutes);
         list.clearChoices();
         list.setAdapter(adapter);
-        registerClickCallback();
         registerForContextMenu(list);
         saveRoutes(this);
-    }
-
-    private void registerClickCallback() {
-        final CarbonModel model = CarbonModel.getInstance();
-        ListView list = (ListView) findViewById(R.id.listOfRoutes);
-
-        /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-                final Route routeToUse = model.getRouteCollection().getRouteAtIndex(i);
-                AlertDialog.Builder builder = new AlertDialog.Builder(SelectRouteActivity.this);
-                builder.setTitle("Confirm");
-                builder.setMessage("Are you sure you want to use Route " +
-                        routeToUse.getName() + "?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        model.setSelectedRoute(routeToUse);
-                        startActivity(new Intent(SelectRouteActivity.this, JourneyInformationActivity.class));
-                        finish();
-                    }
-                });
-                builder.setNegativeButton("No", null);
-                builder.show();
-            }
-        });*/
     }
 
     @Override

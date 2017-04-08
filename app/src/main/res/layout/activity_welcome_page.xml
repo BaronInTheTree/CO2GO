@@ -12,16 +12,18 @@
     tools:context="ca.cmpt276.carbonTracker.UI.WelcomePageActivity">
 
     <Button
-        android:text="@string/enter"
+        android:id="@+id/enter_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/enter_btn"
-        android:layout_marginBottom="25dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp" />
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_default_green"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/enter"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView"

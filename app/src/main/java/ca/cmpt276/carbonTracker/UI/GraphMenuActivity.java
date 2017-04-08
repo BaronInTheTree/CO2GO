@@ -34,7 +34,7 @@ public class GraphMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dayMode = true;
                 FragmentManager manager = getSupportFragmentManager();
-                CalendarDialog caldialog = new CalendarDialog();
+                CalendarDialogMainMenu caldialog = new CalendarDialogMainMenu();
                 caldialog.show(manager,getResources().getString(R.string.calendarModeDialog));
             }
         });

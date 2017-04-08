@@ -39,10 +39,8 @@ import ca.cmpt276.carbonTracker.Internal_Logic.Skytrain;
 import ca.cmpt276.carbonTracker.Internal_Logic.SkytrainDB;
 import ca.cmpt276.carbonTracker.Internal_Logic.Transportation;
 import ca.cmpt276.carbonTracker.Internal_Logic.WalkBike;
-import ca.cmpt276.carbonTracker.UI.CalendarDialog;
-import ca.cmpt276.carbonTracker.UI.EditCarActivity;
-
-import static ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate.gPerKG;
+import ca.cmpt276.carbonTracker.UI.CalendarDialogAddEditJourney;
+import ca.cmpt276.carbonTracker.UI.CalendarDialogMainMenu;
 
 public class AddJourneyActivity_Alternate extends AppCompatActivity {
 
@@ -60,7 +58,6 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
     private int departureStationIndex;
     private int arrivalStationIndex;
     private List<Double> lineDistances;
-    private String unit = "kg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +89,13 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
     }
 
     private void registerAsObserver() {
-        CalendarDialog.addObserver(new CalendarObserver() {
+        CalendarDialogAddEditJourney.addObserver(new CalendarObserver() {
             @Override
             public void updateGraphs() {
-                currentDate = CalendarDialog.selectedDate;
+                currentDate = CalendarDialogAddEditJourney.selectedDate;
+                System.out.println("20.2: currentDate = " + currentDate);
                 setupDateText();
+                setupSummaryText();
             }
         });
     }
@@ -137,7 +136,7 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getSupportFragmentManager();
-                CalendarDialog dialog = new CalendarDialog();
+                CalendarDialogAddEditJourney dialog = new CalendarDialogAddEditJourney();
                 dialog.show(manager,getResources().getString(R.string.calendarModeDialog));
             }
         });
@@ -611,6 +610,7 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
 
     private void setupSummaryText() {
         selectedJourney = createJourney();
+        System.out.println("TST 20.3: selectedJourney Date = " + selectedJourney.getDateTime());
 
         TextView distance = (TextView) findViewById(R.id.textViewSummaryDistance);
         distance.setText("Distance:   " + selectedRoute.getTotalDistanceKM() + " km");
@@ -659,9 +659,11 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
                 }
                 if (validInput) {
                     model.addNewJourney(selectedJourney);
+                    System.out.println("TST 2.4: Added Journey Date = " + model.getJourneyCollection().getJourneyAtIndex(model.getJourneyCollection().getSize() - 1).getDateTime());
                     if (favorite) {
-                        // ADD TO FAVORITES
+                        model.getFavouriteJourneyCollection().addJourney(selectedJourney);
                     }
+                    SaveData.saveJourneys(AddJourneyActivity_Alternate.this);
                     startActivity(new Intent(AddJourneyActivity_Alternate.this, MainMenuActivity_Alternate.class));
                 }
                 else {
@@ -689,7 +691,7 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         });
     }
 
-    public Journey createJourney() {
+    private Journey createJourney() {
         if (transportType.equals(TransportType.CAR)){
             Journey journey = new Journey(selectedTransportation, selectedRoute, currentDate,
                     Journey.Type.CAR);

@@ -20,9 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 import com.github.mikephil.charting.charts.PieChart;
@@ -48,12 +46,11 @@ import ca.cmpt276.carbonTracker.Internal_Logic.Car;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
 import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
+import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
 import ca.cmpt276.carbonTracker.Internal_Logic.Route;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
-import ca.cmpt276.carbonTracker.UI.CalendarDialog;
+import ca.cmpt276.carbonTracker.UI.CalendarDialogMainMenu;
 import ca.cmpt276.carbonTracker.UI.JourneyListActivity;
-import ca.cmpt276.carbonTracker.UI.MainMenuActivity;
-import ca.cmpt276.carbonTracker.UI.ModifyCarActivity;
 import ca.cmpt276.carbonTracker.UI.SelectRouteActivity;
 import ca.cmpt276.carbonTracker.UI.SelectTransportationActivity;
 import ca.cmpt276.carbonTracker.UI.UtilityListActivity;
@@ -94,6 +91,10 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setupTipsText();
         setupAddViewButtons();
         setupLineGraphButton();
+
+        for (Journey journey : model.getJourneyCollection().getJourneys()) {
+            System.out.println("TST 30.0: Journey Date = " + journey.getDateTime());
+        }
     }
 
     private void setupSingleDayButton() {
@@ -196,7 +197,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getSupportFragmentManager();
-                CalendarDialog dialog = new CalendarDialog();
+                CalendarDialogMainMenu dialog = new CalendarDialogMainMenu();
                 dialog.show(manager,getResources().getString(R.string.calendarModeDialog));
             }
         });
@@ -213,7 +214,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getSupportFragmentManager();
-                CalendarDialog dialog = new CalendarDialog();
+                CalendarDialogMainMenu dialog = new CalendarDialogMainMenu();
                 dialog.show(manager,getResources().getString(R.string.calendarModeDialog));
             }
         });
@@ -469,10 +470,10 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
     }
 
     private void registerAsObserver() {
-        CalendarDialog.addObserver(new CalendarObserver() {
+        CalendarDialogMainMenu.addObserver(new CalendarObserver() {
             @Override
             public void updateGraphs() {
-                currentDate = CalendarDialog.selectedDate;
+                currentDate = CalendarDialogMainMenu.selectedDate;
                 if (dateType.equals(DateType.SINGLE)) {
                     setupSingleDateText();
                 }
@@ -632,6 +633,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                intent.putExtra("Caller", "MainMenu");
                 startActivity(intent);
                 finish();
             }

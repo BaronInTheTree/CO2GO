@@ -22,7 +22,7 @@ import ca.cmpt276.carbonTracker.Internal_Logic.DateHandler;
  * Created by song on 2017-03-26.
  */
 
-public class CalendarDialog extends AppCompatDialogFragment {
+public class CalendarDialogMainMenu extends AppCompatDialogFragment {
     private static int year_x, month_x, day_x;
     public static Date selectedDate;
     public static ArrayList<CalendarObserver> observers = new ArrayList<>();

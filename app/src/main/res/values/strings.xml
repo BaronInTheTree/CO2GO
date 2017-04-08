@@ -80,7 +80,7 @@
     <string name="billEndDay">Save Bill</string>
     <string name="utilityUsage">Utility Usage</string>
     <string name="select_an_utility_or_add_a_new">Select an utility or add a new</string>
-    <string name="add_utility">Add utility</string>
+    <string name="add_utility">Add Utility</string>
     <string name="utility_summary">Utility Summary</string>
     <string name="utilitySummaryNickname">NickName:</string>
     <string name="utility_nickname">Nickname</string>
@@ -208,4 +208,8 @@
     <string name="list_of_utilities">List of Utilities</string>
     <string name="click_for_details_hold_for_options">Click for Details. Hold for Options</string>
     <string name="co2_trees">CO2 / TREES</string>
+    <string name="list_of_journeys">List of Journeys</string>
+    <string name="click_and_hold_a_journey_for_options">Click and hold a Journey for Options</string>
+    <string name="_99_99_9999">99/99/9999</string>
+    <string name="edit_journey">Edit Journey</string>
 </resources>
