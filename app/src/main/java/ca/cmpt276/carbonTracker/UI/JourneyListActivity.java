@@ -11,8 +11,11 @@ import android.widget.ListView;
 
 import com.example.sasha.carbontracker.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity;
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 
@@ -31,7 +34,12 @@ public class JourneyListActivity extends AppCompatActivity {
 
     private void populateJourneyList() {
         // Create list of items
-        final List<String> journeyList = modelInstance.getJourneyCollection().getJourneyList();
+        List<String> journeyList = new ArrayList<>();
+        if (modelInstance.getTreeUnit().getTreeUnitStatus()) {
+            journeyList = modelInstance.getJourneyCollection().getJourneyListTrees();
+        } else {
+            journeyList = modelInstance.getJourneyCollection().getJourneyList();
+        }
         // Build adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,           // Context for activity
@@ -58,6 +66,7 @@ public class JourneyListActivity extends AppCompatActivity {
                 final int index = position;
                 modelInstance.getJourneyCollection().deleteJourney(index);
                 SaveData.saveJourneys(JourneyListActivity.this);
+
                 populateJourneyList();
                 return false;
             }
@@ -69,9 +78,15 @@ public class JourneyListActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(JourneyListActivity.this, MainMenuActivity.class));
+                startActivity(new Intent(JourneyListActivity.this, MainMenuActivity_Alternate.class));
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(JourneyListActivity.this, MainMenuActivity_Alternate.class));
+        finish();
     }
 }

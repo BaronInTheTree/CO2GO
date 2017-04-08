@@ -1,6 +1,5 @@
 package ca.cmpt276.carbonTracker.UI;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,26 +22,27 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 
 /**
- * The FootprintGraphActivity takes all journeys from the JourneyCollection in the Carbon Model
+ * The PieGraphAllJourneysActivity takes all journeys from the JourneyCollection in the Carbon Model
  * and creates a graph that the user is able to interact with and view the output in a more visual
  * representation.
  *
  * @author Team Teal
  */
 
-public class FootprintGraphActivity extends AppCompatActivity {
+public class PieGraphAllJourneysActivity extends AppCompatActivity {
 
     private final String tableLabel = "CO2 Emission of Journeys (in gram)";
+    private final String tableLabelTree = "CO2 Emission of Journeys (in Tree Units)";
 
     CarbonModel currentInstance = CarbonModel.getInstance();
     String journeys[] = currentInstance.getJourneyCollection().getJourneyDescription();
-
     int emissions[] = currentInstance.getJourneyCollection().getJourneyEmission();
+    CarbonModel cm = CarbonModel.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_footprint_graph);
+        setContentView(R.layout.activity_all_journeys_graph);
 
         setupPieChart();
         setupButtons();
@@ -50,11 +50,16 @@ public class FootprintGraphActivity extends AppCompatActivity {
 
     private void setupPieChart() {
         List<PieEntry> pieEntries = new ArrayList<>();
+        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
+
         for (int i = 0; i < emissions.length; i++) {
-            pieEntries.add(new PieEntry((float) emissions[i]));
+            pieEntries.add(new PieEntry((cm.getTreeUnit().getUnitValueGraphs(emissions[i]))));
         }
 
-        PieDataSet dataSet = new PieDataSet(pieEntries, tableLabel);
+        if (cm.getTreeUnit().getTreeUnitStatus()) {
+            dataSet = new PieDataSet(pieEntries, tableLabelTree);
+        }
+
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setSliceSpace(2);
         dataSet.setValueTextSize(12);
@@ -74,7 +79,7 @@ public class FootprintGraphActivity extends AppCompatActivity {
                 if (e == null)
                     return;
 
-                Toast.makeText(FootprintGraphActivity.this,
+                Toast.makeText(PieGraphAllJourneysActivity.this,
                         journeys[(int) h.getX()], Toast.LENGTH_SHORT).show();
             }
 
@@ -86,13 +91,11 @@ public class FootprintGraphActivity extends AppCompatActivity {
     }
 
     private void setupButtons() {
-        Button toTable_btn = (Button) findViewById(R.id.toTable_btn);
-        toTable_btn.setOnClickListener(new View.OnClickListener() {
+        Button back_btn = (Button) findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(FootprintGraphActivity.this, FootprintTableActivity.class));
-
             }
         });
     }

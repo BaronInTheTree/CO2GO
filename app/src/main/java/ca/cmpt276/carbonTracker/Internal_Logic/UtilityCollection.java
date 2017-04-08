@@ -56,7 +56,7 @@ public class UtilityCollection {
     public double getTotalEmissionsForPeriod(int days) {
         double totalEmissions = 0;
         for (Utility utility : utilityList) {
-            totalEmissions = totalEmissions + utility.getUsageForPeriod(days);
+            totalEmissions = totalEmissions + utility.getTotalCO2();
         }
         return totalEmissions;
     }
@@ -80,14 +80,14 @@ public class UtilityCollection {
 
     private class UtilityCollectionAdapter extends ArrayAdapter<Utility> {
         UtilityCollectionAdapter(Context context) {
-            super(context, R.layout.listview_format, utilityList);
+            super(context, R.layout.route_list, utilityList);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View utilityView = convertView; // Check if we have a view
             if (utilityView == null) {
-                utilityView = LayoutInflater.from(getContext()).inflate(R.layout.listview_format, parent, false);
+                utilityView = LayoutInflater.from(getContext()).inflate(R.layout.route_list, parent, false);
             }
 
             Utility current = utilityList.get(position);

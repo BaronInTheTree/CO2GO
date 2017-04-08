@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /**
@@ -43,6 +44,7 @@ public class WelcomePageActivity extends AppCompatActivity {
         SaveData.loadJourneys(this);
         SaveData.loadUtilities(this);
         SaveData.loadTips(this);
+        SaveData.loadTreeUnit(this);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -61,7 +63,7 @@ public class WelcomePageActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WelcomePageActivity.this, MainMenuActivity.class));
+                startActivity(new Intent(WelcomePageActivity.this, MainMenuActivity_Alternate.class));
                 finish();
             }
         });

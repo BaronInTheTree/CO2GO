@@ -1,10 +1,10 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import ca.cmpt276.carbonTracker.UI.MonthYearSummary;
 
 /**
  * The CarbonModel is the singleton class that is the main facade of the CarbonTracker app. It
@@ -17,6 +17,7 @@ import ca.cmpt276.carbonTracker.UI.MonthYearSummary;
 public class CarbonModel {
     private static CarbonModel instance = new CarbonModel();
     private JourneyCollection journeyCollection;
+    private JourneyCollection favouriteJourneyCollection;
     private CarCollection carCollection;
     private RouteCollection routeCollection;
     private CarData carData;
@@ -27,6 +28,7 @@ public class CarbonModel {
     private UtilityCollection utilityCollection;
     private DateHandler dateHandler;
     private MonthYearSummary summary;
+    private TreeUnit treeUnit;
 
     public static CarbonModel getInstance() {
         if (instance == null) {
@@ -38,6 +40,7 @@ public class CarbonModel {
 
     private CarbonModel() {
         journeyCollection = new JourneyCollection();
+        favouriteJourneyCollection = new JourneyCollection();
         carCollection = new CarCollection();
         routeCollection = new RouteCollection();
         carData = new CarData();
@@ -45,6 +48,7 @@ public class CarbonModel {
         dateHandler = new DateHandler();
         utilityCollection = new UtilityCollection();
         summary = new MonthYearSummary();
+        treeUnit = new TreeUnit();
     }
 
     public void addNewJourney(Journey newJourney) {
@@ -61,6 +65,10 @@ public class CarbonModel {
 
     public JourneyCollection getJourneyCollection() {
         return journeyCollection;
+    }
+
+    public JourneyCollection getFavouriteJourneyCollection() {
+        return favouriteJourneyCollection;
     }
 
     public CarCollection getCarCollection() {
@@ -147,5 +155,9 @@ public class CarbonModel {
 
     public List<String> getUtilityFuel() {
         return utilityCollection.getUtilityFuelList();
+    }
+
+    public TreeUnit getTreeUnit() {
+        return treeUnit;
     }
 }

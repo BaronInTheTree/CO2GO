@@ -1,5 +1,6 @@
 package ca.cmpt276.carbonTracker.Internal_Logic;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +23,7 @@ public class DateHandler {
     private int currentYear;
     private int currentMonth; // 0-11
     private int currentDay;
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public DateHandler() {
         yearList = new ArrayList<>();
@@ -38,9 +40,23 @@ public class DateHandler {
         return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 
-    public int totalDaysInMonth(int year, int month) {
-        Calendar calendar = new GregorianCalendar(year, month, 1);
+    public static int totalDaysInMonth(int year, int month) {
+        Calendar calendar = new GregorianCalendar(year, month - 1, 1);
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+    }
+
+    public static String convertDateToString(Date date) {
+        return dateFormat.format(date);
+    }
+
+    public static Date convertStringToDate(String dateString) {
+        try {
+            return DateHandler.dateFormat.parse(dateString);
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private void initializeCurrentDate() {
@@ -70,6 +86,31 @@ public class DateHandler {
         }
     }
 
+    public static Date createDate(int year, int month, int day) {
+        try {
+            String dateString = year + "-" + month + "-" + day;
+            return DateHandler.dateFormat.parse(dateString);
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Date getDateLastMonth(Date currentDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DATE, -27);
+        return calendar.getTime();
+    }
+
+    public static Date getDateLastYear(Date currentDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DATE, -364);
+        return calendar.getTime();
+    }
+
     public List<String> getYearList() {
         return yearList;
     }
@@ -92,5 +133,21 @@ public class DateHandler {
 
     public int getCurrentDay() {
         return currentDay;
+    }
+
+    public static int getYearOfDate(Date date) {
+        return Integer.parseInt(new SimpleDateFormat("yyyy").format(date));
+    }
+
+    public static int getMonthOfDate(Date date) {
+        return Integer.parseInt(new SimpleDateFormat("MM").format(date));
+    }
+
+    public static int getDayOfDate(Date date) {
+        return Integer.parseInt(new SimpleDateFormat("dd").format(date));
+    }
+
+    public static boolean areDatesEqual(Date date1, Date date2) {
+        return dateFormat.format(date1).equals(dateFormat.format(date2));
     }
 }

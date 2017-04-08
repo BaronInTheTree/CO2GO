@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 /*
  * Utility class contains data like nickname, fuel used, timespan and
@@ -20,7 +21,7 @@ public class Utility {
     private String nickname;
     private boolean naturalGas;
     private boolean electricity;
-    private double timespan;
+    private int timespan;
     private String startDateString;
     private String endDateString;
     private int usage;
@@ -61,60 +62,7 @@ public class Utility {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        // Break up into individual ints (months are indexed at 1 not 0)
-        int startYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(startingDate));
-        int startMonth = Integer.parseInt(new SimpleDateFormat("MM").format(startingDate)) - 1;
-        int startDay = Integer.parseInt(new SimpleDateFormat("dd").format(startingDate));
-
-        int endYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(endingDate));
-        int endMonth = Integer.parseInt(new SimpleDateFormat("MM").format(endingDate)) - 1;
-        int endDay = Integer.parseInt(new SimpleDateFormat("dd").format(endingDate));
-
-        int monthDiff = endMonth - startMonth;
-        int totalDays = 0;
-
-        if (endYear == startYear) {
-            if (endMonth == startMonth) {
-                totalDays += (endDay - startDay + 1);
-            } else {
-
-                totalDays += endDay; // endMonth/endDay to endMonth/01
-
-                // startMonth/startDay to startMonth/end of startMonth
-                Calendar startMonthCal = new GregorianCalendar(startYear, startMonth, 1);
-                totalDays += (startMonthCal.getActualMaximum(Calendar.DAY_OF_MONTH) - startDay + 1);
-
-                for (int m = monthDiff; m > 1; m--) {
-                    Calendar calendar = new GregorianCalendar(startYear, endMonth - m + 1, 1);
-                    totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                }
-            }
-        } else {
-            // Sum from endMonth/Day to first day of endYear
-            totalDays += endDay;
-            for (int m = endMonth - 1; m > 0; m--) {
-                Calendar calendar = new GregorianCalendar(endYear, m, 1);
-                totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-            }
-            // Sum from startMonth/Day to last day of startYear
-            Calendar startMonthCal = new GregorianCalendar(startYear, startMonth, 1);
-            totalDays += (startMonthCal.getActualMaximum(Calendar.DAY_OF_MONTH) - startDay + 1);
-            for (int m = startMonth + 1; m < 12; m++) {
-                Calendar calendar = new GregorianCalendar(startYear, m, 1);
-                totalDays += calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-            }
-
-            // Add for multiple years
-            for (int y = endYear - 1; y >= startYear + 1; y--) {
-                if (y % 4 == 0) {
-                    totalDays += 366;
-                } else {
-                    totalDays += 365;
-                }
-            }
-        }
-        timespan = totalDays;
+        timespan = (int) DateHandler.getDateDiff(startingDate, endingDate, TimeUnit.DAYS);
     }
 
     public String getNickname() {
@@ -149,7 +97,7 @@ public class Utility {
         return endDateString;
     }
 
-    public double getTimespan() {
+    public int getTimespan() {
         return timespan;
     }
 
@@ -159,13 +107,6 @@ public class Utility {
 
     public int getUsage() {
         return usage;
-    }
-
-    public int getUsageForPeriod(int days) {
-        // Makes sure difference in days is always positive
-        days = Math.abs(days);
-
-        return usage / days;
     }
 
     public double getUsagePerDay() {
@@ -194,15 +135,27 @@ public class Utility {
         }
     }
 
-    public double getTotalC02(int days) {
+    public double getTotalCO2() {
+        if (naturalGas) {
+            return usage * NATURAL_GAS_CO2_EMISSION;
+        }
+        else {
+            return usage * ELECTRICITY_CO2_EMISSION;
+        }
+    }
+
+    public double getCO2PerDay() {
         // Makes sure difference in days is always positive
-        days = Math.abs(days);
 
         if (naturalGas) {
-            return getUsageForPeriod(days) * NATURAL_GAS_CO2_EMISSION;
+            return getUsagePerDay() * NATURAL_GAS_CO2_EMISSION;
         } else {
-            return getUsageForPeriod(days) * ELECTRICITY_CO2_EMISSION;
+            return getUsagePerDay() * ELECTRICITY_CO2_EMISSION;
         }
+    }
+
+    public float getCO2PerDayPerPerson(){
+        return (float)getCO2PerDay()/numPeople;
     }
 
     public String displayToList() {

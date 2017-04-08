@@ -7,11 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.sasha.carbontracker.R;
 
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
+import ca.cmpt276.carbonTracker.Internal_Logic.MonthYearSummary;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 
 /**
@@ -31,7 +35,29 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         setUpButtons();
+        setUpToggle();
         SaveData.loadTips(this);
+    }
+
+    private void setUpToggle() {
+        Switch unitToggle = (Switch) findViewById(R.id.treeUnitToggle);
+        if (CarbonModel.getInstance().getTreeUnit().getTreeUnitStatus() == true) {
+            unitToggle.setChecked(true);
+        }
+        unitToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(true);
+                    Toast.makeText(MainMenuActivity.this, "on", Toast.LENGTH_SHORT).show();
+                    SaveData.saveTreeUnit(MainMenuActivity.this);
+                } else {
+                    CarbonModel.getInstance().getTreeUnit().setTreeUnitStatus(false);
+                    Toast.makeText(MainMenuActivity.this, "off", Toast.LENGTH_SHORT).show();
+                    SaveData.saveTreeUnit(MainMenuActivity.this);
+                }
+            }
+        });
     }
 
     private void setUpButtons() {
@@ -55,7 +81,7 @@ public class MainMenuActivity extends AppCompatActivity {
         footprint_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuActivity.this, FootprintTableActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, GraphMenuActivity.class));
             }
         });
 
@@ -63,9 +89,12 @@ public class MainMenuActivity extends AppCompatActivity {
         tip_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = modelInstance.getTips().getGeneralTip(summary);
+                String message = modelInstance.getTips().getGeneralTip(getApplicationContext(),summary);
                 Toast.makeText(MainMenuActivity.this, message, Toast.LENGTH_LONG).show();
                 SaveData.saveTips(MainMenuActivity.this);
+//                startActivity(new Intent(MainMenuActivity.this, MonthlyEmissionGraphActivity.class));
+//                startActivity(new Intent(MainMenuActivity.this, YearlyEmissionLineGraphActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, MainMenuActivity_Alternate.class));
             }
         });
 
@@ -97,4 +126,22 @@ public class MainMenuActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    // Test button code for easy testing of model on MainMenuActivity
+    /*
+    private void setupTestButton() {
+        Button test = (Button) findViewById(R.id.buttonTest);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<DayData> dayDataList = DayData.getDayDataWithinInterval(DateHandler.createDate(2016, 03, 20), new Date());
+                String info = "";
+                for (DayData dayData : dayDataList) {
+                    info = info + dayData.getInfo();
+                }
+                Toast.makeText(MainMenuActivity.this, info, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    */
 }

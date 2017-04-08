@@ -14,6 +14,8 @@ import com.example.sasha.carbontracker.R;
 
 import java.util.List;
 
+import ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity;
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 /**
@@ -207,6 +209,7 @@ public class EditJourneyActivity extends AppCompatActivity {
                 selectedJourney.setTransport(selectedTransport);
                 selectedJourney.setRoute(selectedRoute);
                 selectedJourney.setDate(selectedYear, selectedMonth, selectedDay);
+
                 startActivity(new Intent(EditJourneyActivity.this, JourneyListActivity.class));
                 finish();
             }
@@ -224,5 +227,9 @@ public class EditJourneyActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EditJourneyActivity.this, JourneyListActivity.class));
+        finish();
+    }
 }

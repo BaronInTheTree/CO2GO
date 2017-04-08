@@ -8,6 +8,7 @@ package ca.cmpt276.carbonTracker.Internal_Logic;
  */
 
 public class Tip {
+
     private String tipContent;  // the actual content of tip
 
     public Tip(String content){

@@ -1,4 +1,4 @@
-package ca.cmpt276.carbonTracker.UI;
+package ca.cmpt276.carbonTracker.Internal_Logic;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -6,10 +6,6 @@ import java.util.concurrent.TimeUnit;
 import ca.cmpt276.carbonTracker.Internal_Logic.*;
 
 import static ca.cmpt276.carbonTracker.Internal_Logic.DateHandler.getDateDiff;
-import static ca.cmpt276.carbonTracker.Internal_Logic.TipCollection.BIKEWALK;
-import static ca.cmpt276.carbonTracker.Internal_Logic.TipCollection.BUS;
-import static ca.cmpt276.carbonTracker.Internal_Logic.TipCollection.CAR;
-import static ca.cmpt276.carbonTracker.Internal_Logic.TipCollection.SKYTRAIN;
 
 /**
  * Created by song on 2017-03-22.
@@ -78,38 +74,38 @@ public class MonthYearSummary {
             initializeJourneys();
             for (Journey journey:journeys.getJourneys()){
                 if (getDateDiff(journey.getDateTime(),today, TimeUnit.DAYS)<=365){
-                    if (journey.getTransportType()==CAR) {
+                    if (journey.getType()== Journey.Type.CAR) {
                         yearCarEmission+=journey.getEmissionsKM();
                         yearCarDistance+=journey.getDistance();
                     }
-                    if (journey.getTransportType()==BUS) {
+                    if (journey.getType()== Journey.Type.BUS) {
                         yearBusEmission+=journey.getEmissionsKM();
                         yearBusDistance+=journey.getDistance();
                     }
-                    if (journey.getTransportType()==SKYTRAIN) {
+                    if (journey.getType()== Journey.Type.SKYTRAIN) {
                         yearSkytrainEmission+=journey.getEmissionsKM();
                         yearSkytrainDistance+=journey.getDistance();
                     }
-                    if (journey.getTransportType()==BIKEWALK) {
+                    if (journey.getType()== Journey.Type.WALK_BIKE) {
                         yearWalkBikeDistance+=journey.getEmissionsKM();
                         yearWalkBikeDistance+=journey.getDistance();
                     }
                 }
 
                 if (getDateDiff(journey.getDateTime(),today, TimeUnit.DAYS)<=28){
-                    if (journey.getTransportType()==CAR) {
+                    if (journey.getType()== Journey.Type.CAR) {
                         monthCarEmission+=journey.getEmissionsKM();
                         monthCarDistance+=journey.getDistance();
                     }
-                    if (journey.getTransportType()==BUS) {
+                    if (journey.getType()== Journey.Type.BUS) {
                         monthBusEmission+=journey.getEmissionsKM();
                         monthBusDistance+=journey.getDistance();
                     }
-                    if (journey.getTransportType()==SKYTRAIN) {
+                    if (journey.getType()== Journey.Type.SKYTRAIN) {
                         monthSkytrainEmission+=journey.getEmissionsKM();
                         monthSkytrainDistance+=journey.getDistance();
                     }
-                    if (journey.getTransportType()==BIKEWALK) {
+                    if (journey.getType()== Journey.Type.WALK_BIKE) {
                         monthWalkBikeDistance+=journey.getEmissionsKM();
                         monthWalkBikeDistance+=journey.getDistance();
                     }

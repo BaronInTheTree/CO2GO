@@ -35,14 +35,12 @@ public class JourneyCollection {
 
     public void deleteJourney(int index) {
         journeyCollection.remove(index);
+        //CarbonModel model = CarbonModel.getInstance();
+        //model.getDayDataCollection().updateJourneyDates();
     }
 
     private void sortJourneysByDate() {
         Collections.sort(journeyCollection);
-    }
-
-    public void editJourney(int index) {
-        journeyCollection.get(index);
     }
 
     public List<Journey> getJourneys() {return journeyCollection;}
@@ -148,7 +146,21 @@ public class JourneyCollection {
                     + ", " + journey.getType()
                     + "\n" + journey.getRoute().getName() + ": "
                     + journey.getRoute().getTotalDistanceKM() + "km"
-                    + "\n" + journey.getEmissionsKM() + "g CO2");
+                    + "\n" + String.format("%.2f",journey.getEmissionsKM()) + "g CO2");
+        }
+        return journeys;
+    }
+
+    public List<String> getJourneyListTrees() {
+        List<String> journeys = new ArrayList<>();
+
+        for (Journey journey : journeyCollection) {
+            journeys.add(journey.getDateString()
+                    + "\n" + journey.getTransportation().getNickname()
+                    + ", " + journey.getType()
+                    + "\n" + journey.getRoute().getName() + ": "
+                    + journey.getRoute().getTotalDistanceKM() + "km"
+                    + "\n" + String.format("%.2f", TreeUnit.convertToTrees(journey.getEmissionsKM())) + " Trees");
         }
         return journeys;
     }
