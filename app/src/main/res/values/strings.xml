@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CarbonTracker</string>
+    <string name="app_name">CO2Go</string>
     <string name="see_table_view">See Table View</string>
     <string name="see_graph_view">See Graph View</string>
     <string name="back_to_main_page">Back to Main Page</string>
@@ -108,6 +108,13 @@
     <string name="graphModeDialog">graphModeDialog</string>
     <string name="calendarModeDialog">calendarModeDialog</string>
     <string name="graphModeDialogTitle">Graph Mode Selector</string>
+    <string name="trees">Trees</string>
+    <string name="units">Units</string>
+    <string name="co2">CO2</string>
+    <string name="website"><a href='http://www.cs.sfu.ca/CourseCentral/276/bfraser/'>Website</a></string>
+    <string name="_2017_by_team_teal">© 2017 by Team Teal</string>
+    <string name="credits">Credits</string>
+    <string name="about">About</string>
 
     <string name="generalTip1_1">Your total driving distance within last 4 weeks are\u0020</string>
     <string name="generalTip1_2">km, consider to take more bus or skytrain in the future.</string>
@@ -167,9 +174,6 @@
     <string name="utilityTip6_2">g. If your fridge or stove is old, consider replace it with new ones with higher energy efficiency.</string>
     <string name="utilityTip7_2">g, Consider to use energy saving light bulbs wherever possible.</string>
 
-    <string name="trees">Trees</string>
-    <string name="units">Units</string>
-    <string name="co2">CO2</string>
     <string name="toolbar_add_route">Add Route</string>
     <string name="confirm_favorite"><![CDATA[Confirm & Favorite]]></string>
     <string name="select_icon">Select Icon</string>
