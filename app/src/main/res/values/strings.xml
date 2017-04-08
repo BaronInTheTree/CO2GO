@@ -174,6 +174,7 @@
     <string name="utilityTip6_2">g. If your fridge or stove is old, consider replace it with new ones with higher energy efficiency.</string>
     <string name="utilityTip7_2">g, Consider to use energy saving light bulbs wherever possible.</string>
 
+
     <string name="toolbar_add_route">Add Route</string>
     <string name="confirm_favorite"><![CDATA[Confirm & Favorite]]></string>
     <string name="select_icon">Select Icon</string>
@@ -212,6 +213,10 @@
     <string name="list_of_utilities">List of Utilities</string>
     <string name="click_for_details_hold_for_options">Click for Details. Hold for Options</string>
     <string name="co2_trees">CO2 / TREES</string>
+
+    <string name="no_journeys_added_today_notification">No journeys entered today, would you like to add one?</string>
+    <string name="no_bill_added_notification">No utility bill added in 1.5 months, please add one.</string>
+    <string name="default_notification_message">Would you like to add another journey?</string>
     <string name="list_of_journeys">List of Journeys</string>
     <string name="click_and_hold_a_journey_for_options">Click and hold a Journey for Options</string>
     <string name="_99_99_9999">99/99/9999</string>
