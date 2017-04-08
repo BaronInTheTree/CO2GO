@@ -5,6 +5,8 @@ import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.sasha.carbontracker.R;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -131,7 +133,7 @@ public class NotificationCaller {
         PendingIntent pendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String message = "No journeys entered today, would you like to add one?";
+        String message = context.getString(R.string.no_journeys_added_today_notification);
 
         Notification journeyNotification = new Notification(context, message, pendingIntent);
     }
@@ -146,7 +148,7 @@ public class NotificationCaller {
         PendingIntent pendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String message = "No utility bill added in 1.5 months, please add one.";
+        String message = context.getString(R.string.no_bill_added_notification);
 
         Notification utilityNotification = new Notification(context, message, pendingIntent);
 
@@ -165,8 +167,8 @@ public class NotificationCaller {
         PendingIntent pendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String string1 = "Would you like to add another journey?";
+        String message = context.getString(R.string.default_notification_message);
 
-        Notification notification = new Notification(context, string1, pendingIntent);
+        Notification notification = new Notification(context, message, pendingIntent);
     }
 }

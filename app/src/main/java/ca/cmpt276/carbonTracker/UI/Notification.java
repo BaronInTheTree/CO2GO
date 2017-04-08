@@ -20,8 +20,8 @@ public class Notification {
 
         NotificationCompat.Builder builder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.notification_icon)
-                        .setContentTitle("My test notification")
+                        .setSmallIcon(R.drawable.notification_logo2)
+                        .setContentTitle("CO2Go")
                         .setContentText(message);
 
         // A notification plays sounds and vibrates when it is displayed

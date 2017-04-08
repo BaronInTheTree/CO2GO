@@ -208,4 +208,7 @@
     <string name="list_of_utilities">List of Utilities</string>
     <string name="click_for_details_hold_for_options">Click for Details. Hold for Options</string>
     <string name="co2_trees">CO2 / TREES</string>
+    <string name="no_journeys_added_today_notification">No journeys entered today, would you like to add one?</string>
+    <string name="no_bill_added_notification">No utility bill added in 1.5 months, please add one.</string>
+    <string name="default_notification_message">Would you like to add another journey?</string>
 </resources>
