@@ -49,6 +49,7 @@ import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
 import ca.cmpt276.carbonTracker.Internal_Logic.Route;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
+import ca.cmpt276.carbonTracker.UI.AboutActivity;
 import ca.cmpt276.carbonTracker.UI.CalendarDialogMainMenu;
 import ca.cmpt276.carbonTracker.UI.JourneyListActivity;
 import ca.cmpt276.carbonTracker.UI.SelectRouteActivity;
@@ -91,6 +92,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setupTipsText();
         setupAddViewButtons();
         setupLineGraphButton();
+        setupAboutButton();
 
         for (Journey journey : model.getJourneyCollection().getJourneys()) {
             System.out.println("TST 30.0: Journey Date = " + journey.getDateTime());
@@ -668,6 +670,17 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         } else {
             finish();
         }
+    }
+
+    private void setupAboutButton() {
+        Button about = (Button) findViewById(R.id.buttonAbout);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenuActivity_Alternate.this, AboutActivity.class));
+                finish();
+            }
+        });
     }
 }
 

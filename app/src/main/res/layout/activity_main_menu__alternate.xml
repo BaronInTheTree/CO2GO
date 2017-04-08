@@ -386,6 +386,16 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/buttonAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_default_brown"
+                android:text="@string/aboutbutton"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
 
         </LinearLayout>
     </ScrollView>
