@@ -19,7 +19,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="Back" />
+        android:text="@string/back" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"

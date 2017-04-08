@@ -1,158 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity">
+    tools:context="ca.cmpt276.carbonTracker.UI.UtilitySummaryActivity"
+    android:orientation="vertical"
+    android:background="@mipmap/dam2">
 
-    <TextView
-        android:id="@+id/utilitySummary"
+    <include
+        android:id="@+id/mainMenu_toolBar"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/utility_summary"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        layout="@layout/toolbar_layout" />
 
-    <TextView
-        android:id="@+id/utilitySummaryNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/utilitySummary"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="34dp"
-        android:text="@string/utilitySummaryNickname"
-        android:textSize="18sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/background_rectangle_55"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/utilityNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/utilitySummaryNickname"
-        android:layout_alignBottom="@+id/utilitySummaryNickname"
-        android:layout_marginLeft="47dp"
-        android:layout_marginStart="47dp"
-        android:layout_toEndOf="@+id/utilityStartingDate"
-        android:layout_toRightOf="@+id/utilityStartingDate"
-        android:text="@string/utility_nickname"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/utilitySummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_weight="0.5"
+            android:text="@string/utility_summary"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/utilityFuel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/utilitySummaryNickname"
-        android:layout_alignStart="@+id/utilitySummaryNickname"
-        android:layout_below="@+id/utilitySummaryNickname"
-        android:layout_marginTop="31dp"
-        android:text="@string/utilityFuel"
-        android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_default_brown"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/utilitySummaryFuel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/utilityUsage"
-        android:layout_alignLeft="@+id/utilityNickname"
-        android:layout_alignStart="@+id/utilityNickname"
-        android:text="@string/utilitySummaryFuel"
-        android:textSize="18sp" />
+            <TextView
+                android:id="@+id/utilitySummaryNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/nickname"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/utilityUsage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/utilityFuel"
-        android:layout_alignStart="@+id/utilityFuel"
-        android:layout_below="@+id/utilityFuel"
-        android:layout_marginTop="37dp"
-        android:text="@string/utilitySummaryUsage"
-        android:textSize="18sp" />
+            <TextView
+                android:id="@+id/utilityNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utility_nickname"
+                android:textAlignment="textEnd"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
 
-    <TextView
-        android:id="@+id/utilitySummaryUsage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/utilityUsage"
-        android:layout_alignBottom="@+id/utilityUsage"
-        android:layout_alignLeft="@+id/utilitySummaryFuel"
-        android:layout_alignStart="@+id/utilitySummaryFuel"
-        android:text="@string/utilitySummaryUsage"
-        android:textSize="18sp" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/utilityStartingDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/utilityUsage"
-        android:layout_alignStart="@+id/utilityUsage"
-        android:layout_below="@+id/utilityUsage"
-        android:layout_marginTop="38dp"
-        android:text="@string/utilityStartingDate"
-        android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_default_brown"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/utilitySummaryStartingDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/utilityEndingDate"
-        android:layout_alignLeft="@+id/utilitySummaryFuel"
-        android:layout_alignStart="@+id/utilitySummaryFuel"
-        android:text="@string/utilitySummaryStartingDate"
-        android:textSize="18sp" />
+            <TextView
+                android:id="@+id/utilityFuel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilityFuel"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/utilityEndingDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/utilityStartingDate"
-        android:layout_alignStart="@+id/utilityStartingDate"
-        android:layout_below="@+id/utilityStartingDate"
-        android:layout_marginTop="33dp"
-        android:text="@string/utilityEndingDate"
-        android:textSize="18sp" />
+            <TextView
+                android:id="@+id/utilitySummaryFuel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilitySummaryFuel"
+                android:textAlignment="textEnd"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
 
-    <TextView
-        android:id="@+id/utilitySummaryEndingDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/utilityEndingDate"
-        android:layout_alignBottom="@+id/utilityEndingDate"
-        android:layout_alignLeft="@+id/utilitySummaryStartingDate"
-        android:layout_alignStart="@+id/utilitySummaryStartingDate"
-        android:text="@string/utilitySummaryEndingDate"
-        android:textSize="18sp" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/utilityNumPeople"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/utilityEndingDate"
-        android:layout_alignStart="@+id/utilityEndingDate"
-        android:layout_below="@+id/utilityEndingDate"
-        android:layout_marginTop="33dp"
-        android:text="@string/utilityNumPeople"
-        android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_default_brown"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/utilitySummaryNumPeople"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/utilityNumPeople"
-        android:layout_alignLeft="@+id/utilitySummaryEndingDate"
-        android:layout_alignStart="@+id/utilitySummaryEndingDate"
-        android:text="@string/utilitySummaryNumPeople"
-        android:textSize="18sp" />
+            <TextView
+                android:id="@+id/utilityUsage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilitySummaryUsage"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/utilitySummaryOkayButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="48dp"
-        android:layout_toEndOf="@+id/utilityStartingDate"
-        android:layout_toRightOf="@+id/utilityStartingDate"
-        android:text="@string/utilitySummaryOkay" />
-</RelativeLayout>
+            <TextView
+                android:id="@+id/utilitySummaryUsage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilitySummaryUsage"
+                android:textAlignment="textEnd"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_default_brown"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/utilityStartingDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilityStartingDate"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/utilitySummaryStartingDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilitySummaryStartingDate"
+                android:textAlignment="textEnd"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_default_brown"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/utilityEndingDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilityEndingDate"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/utilitySummaryEndingDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilitySummaryEndingDate"
+                android:textAlignment="textEnd"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_default_brown"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/utilityNumPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilityNumPeople"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/utilitySummaryNumPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/utilitySummaryNumPeople"
+                android:textAlignment="textEnd"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/utilitySummaryOkayButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/button_default_green"
+            android:text="@string/back" />
+    </LinearLayout>
+</LinearLayout>

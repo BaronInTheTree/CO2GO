@@ -14,6 +14,8 @@ import com.example.sasha.carbontracker.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cmpt276.carbonTracker.AlternateUI.AddCarActivity;
+import ca.cmpt276.carbonTracker.AlternateUI.MainMenuActivity_Alternate;
 import ca.cmpt276.carbonTracker.Internal_Logic.CarbonModel;
 import ca.cmpt276.carbonTracker.Internal_Logic.SaveData;
 
@@ -76,9 +78,15 @@ public class JourneyListActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(JourneyListActivity.this, MainMenuActivity.class));
+                startActivity(new Intent(JourneyListActivity.this, MainMenuActivity_Alternate.class));
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(JourneyListActivity.this, MainMenuActivity_Alternate.class));
+        finish();
     }
 }

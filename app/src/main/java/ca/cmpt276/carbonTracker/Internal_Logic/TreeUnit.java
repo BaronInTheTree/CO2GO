@@ -12,10 +12,11 @@ public class TreeUnit {
     private boolean isTreeUnitEnabled;
     private static final double CO2_TO_TREE = 44.12; // grams of CO2 to Trees
     private static final float CO2_TO_TREE_GRAPH = (float)44.12;
-    private static final String CO2 = "g CO2";
-    private static final String EMISSION= "Emission (g):";
+    private static final String CO2 = "kg CO2";
+    private static final String EMISSION= "Emission (kg):";
     private static final String TREES_COLON = "Trees:";
     private static final String TREES = "Trees";
+    private static final int G_PER_KG = 1000;
 
     public TreeUnit () {
         this.isTreeUnitEnabled = false;
@@ -52,14 +53,14 @@ public class TreeUnit {
         if (isTreeUnitEnabled) {
             return emission/ CO2_TO_TREE;
         }
-        return emission;
+        return emission / G_PER_KG;
     }
 
     public float getUnitValueGraphs(float emission) {
         if (isTreeUnitEnabled) {
             return emission/ CO2_TO_TREE_GRAPH;
         }
-        return emission;
+        return emission / G_PER_KG;
     }
 
     public static double convertToTrees(double emission) {

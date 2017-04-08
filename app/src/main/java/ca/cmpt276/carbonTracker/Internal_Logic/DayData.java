@@ -69,7 +69,7 @@ public class DayData {
     public float getRouteEmissions_KM(Route route) {
         float emissions = 0;
         for (Journey journey : journeyList) {
-            if (journey.getRoute().equals(route)) {
+            if (journey.getRoute().getName().equals(route.getName())) {
                 emissions += journey.getEmissionsKM();
             }
         }
@@ -170,42 +170,50 @@ public class DayData {
         return yearData;
     }
 
-    public static float getWeeklyElectricityEmissions(ArrayList<DayData> weekData) {
+    public static float getTotalElectricityEmissions(ArrayList<DayData> dayDataList) {
         float emissions = 0;
-        for (DayData dayData : weekData) {
+        for (DayData dayData : dayDataList) {
             emissions += dayData.getElectricityEmissions();
         }
         return emissions;
     }
 
-    public static float getWeeklyGasEmissions(ArrayList<DayData> weekData) {
+    public static float getTotalGasEmissions(ArrayList<DayData> dayDataList) {
         float emissions = 0;
-        for (DayData dayData : weekData) {
+        for (DayData dayData : dayDataList) {
             emissions += dayData.getNaturalGasEmissions();
         }
         return emissions;
     }
 
-    public static float getWeeklyBusEmissions(ArrayList<DayData> weekData) {
+    public static float getTotalBusEmissions(ArrayList<DayData> dayDataList) {
         float emissions = 0;
-        for (DayData dayData : weekData) {
+        for (DayData dayData : dayDataList) {
             emissions += dayData.getTransportTypeEmissions_KM(Journey.Type.BUS);
         }
         return emissions;
     }
 
-    public static float getWeeklySkytrainEmissions(ArrayList<DayData> weekData) {
+    public static float getTotalSkytrainEmissions(ArrayList<DayData> dayDataList) {
         float emissions = 0;
-        for (DayData dayData : weekData) {
+        for (DayData dayData : dayDataList) {
             emissions += dayData.getTransportTypeEmissions_KM(Journey.Type.SKYTRAIN);
         }
         return emissions;
     }
 
-    public static float getWeeklyCarEmissions(ArrayList<DayData> weekData, Car car) {
+    public static float getTotalCarEmissions(ArrayList<DayData> dayDataList, Car car) {
         float emissions = 0;
-        for (DayData dayData : weekData) {
+        for (DayData dayData : dayDataList) {
             emissions += dayData.getCarEmissions_KM(car);
+        }
+        return emissions;
+    }
+
+    public static float getTotalRouteEmissions(ArrayList<DayData> dayDataList, Route route) {
+        float emissions = 0;
+        for (DayData dayData : dayDataList) {
+            emissions += dayData.getRouteEmissions_KM(route);
         }
         return emissions;
     }
