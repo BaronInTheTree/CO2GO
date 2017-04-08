@@ -218,4 +218,10 @@ public class ModifyCarActivity extends AppCompatActivity {
     public static Intent makeIntent(Context context) {
         return new Intent(context, ModifyCarActivity.class);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ModifyCarActivity.this, SelectTransportationActivity.class));
+        finish();
+    }
 }

@@ -238,5 +238,9 @@ public class UtilityListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(UtilityListActivity.this, MainMenuActivity_Alternate.class));
+        finish();
+    }
 }

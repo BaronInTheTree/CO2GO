@@ -1,7 +1,9 @@
 package ca.cmpt276.carbonTracker.AlternateUI;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ActionMenuView;
@@ -360,5 +362,11 @@ public class AddCarActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddCarActivity.this, MainMenuActivity_Alternate.class));
+        finish();
     }
 }

@@ -713,4 +713,10 @@ public class AddJourneyActivity_Alternate extends AppCompatActivity {
         return emptyList;
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddJourneyActivity_Alternate.this, MainMenuActivity_Alternate.class));
+        finish();
+    }
+
 }

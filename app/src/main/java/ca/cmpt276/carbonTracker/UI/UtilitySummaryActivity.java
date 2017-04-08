@@ -181,4 +181,10 @@ public class UtilitySummaryActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(UtilitySummaryActivity.this, UtilityListActivity.class));
+        finish();
+    }
 }

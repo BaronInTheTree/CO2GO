@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import com.example.sasha.carbontracker.R;
 import com.github.mikephil.charting.charts.LineChart;
@@ -143,4 +144,10 @@ public class LineGraphActivity extends AppCompatActivity {
     // For all Journeys, compare dates. If on date, add to day's TypeTotal
     // For all Utilities, if date falls between start and end date, add dailyUsage to day's Utilities
     // Add line point for each lineType for that day (x-value)
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(LineGraphActivity.this, MainMenuActivity_Alternate.class));
+        finish();
+    }
 }

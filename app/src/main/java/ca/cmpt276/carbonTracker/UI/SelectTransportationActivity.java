@@ -229,4 +229,10 @@ public class SelectTransportationActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(SelectTransportationActivity.this, MainMenuActivity_Alternate.class));
+        finish();
+    }
 }

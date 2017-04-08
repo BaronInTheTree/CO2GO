@@ -393,4 +393,10 @@ public class EditCarActivity extends AppCompatActivity {
     public static Intent makeIntent(Context context) {
         return new Intent(context, EditCarActivity.class);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EditCarActivity.this, SelectTransportationActivity.class));
+        finish();
+    }
 }

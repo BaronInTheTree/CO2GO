@@ -1,9 +1,11 @@
 package ca.cmpt276.carbonTracker.AlternateUI;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ActionMenuView;
@@ -562,7 +564,17 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
                 return true;
             }
             case android.R.id.home: {
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity_Alternate.this);
+                builder.setTitle("Warning");
+                builder.setMessage("Are you sure you want to quit the app?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
                 return true;
             }
         }
@@ -634,6 +646,26 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
 
         Button tips = (Button) findViewById(R.id.buttonTipsMainMenu);
         tips.setText(spannableString);
+    }
+
+    @Override
+    public void onBackPressed() {
+        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+        if (backStackEntryCount == 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity_Alternate.this);
+            builder.setTitle("Warning");
+            builder.setMessage("Are you sure you want to quit the app?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.setNegativeButton("No", null);
+            builder.show();
+        } else {
+            finish();
+        }
     }
 }
 

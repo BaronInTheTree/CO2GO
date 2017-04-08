@@ -516,4 +516,10 @@ public class EditUtilityActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EditUtilityActivity.this, UtilityListActivity.class));
+        finish();
+    }
 }

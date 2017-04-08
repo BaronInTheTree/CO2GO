@@ -254,4 +254,10 @@ public class SelectRouteActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(SelectRouteActivity.this, MainMenuActivity_Alternate.class));
+        finish();
+    }
 }

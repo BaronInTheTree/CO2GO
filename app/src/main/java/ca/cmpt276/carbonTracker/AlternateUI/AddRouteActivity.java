@@ -279,4 +279,10 @@ public class AddRouteActivity extends AppCompatActivity implements TextWatcher {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddRouteActivity.this, MainMenuActivity_Alternate.class));
+        finish();
+    }
+
 }
