@@ -64,7 +64,8 @@ public class Journey implements Comparable<Journey> {
     public int compareTo(Journey journey) {
         if (getDateTime() == null || journey.getDateTime() == null)
             return 0;
-        return getDateTime().compareTo(journey.getDateTime());
+//        return getDateTime().compareTo(journey.getDateTime());
+        return journey.getDateTime().compareTo(getDateTime());
     }
 
     public Route getRoute() {

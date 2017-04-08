@@ -147,6 +147,7 @@ public class JourneyCollection {
     }
 
     public List<String> getJourneyList() {
+        sortJourneysByDate();
         List<String> journeys = new ArrayList<>();
         CarbonModel model = CarbonModel.getInstance();
 
