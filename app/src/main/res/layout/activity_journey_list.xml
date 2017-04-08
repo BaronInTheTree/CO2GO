@@ -1,36 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.cmpt276.carbonTracker.UI.JourneyListActivity">
+    tools:context="ca.cmpt276.carbonTracker.UI.JourneyListActivity"
+    android:orientation="vertical"
+    android:background="@mipmap/rainforest">
 
-    <TextView
-        android:id="@+id/textViewJourneyList"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/mainMenu_toolBar"
         android:layout_height="wrap_content"
-        android:text="@string/click_to_edit_hold_to_delete"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="match_parent"
+        layout="@layout/toolbar_layout"/>
 
-    <ListView
-        android:id="@+id/listViewJourneys"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textViewJourneyList"
-        android:layout_above="@+id/buttonBack_journeyList" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/background_rectangle_40"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textViewJourneyList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/list_of_journeys"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonBack_journeyList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/textViewJourneyList"
-        android:layout_toStartOf="@+id/textViewJourneyList"
-        android:layout_marginBottom="14dp" />
+        <TextView
+            android:id="@+id/textViewSelectMakeEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/click_and_hold_a_journey_for_options"
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
-</RelativeLayout>
+        <ListView
+            android:id="@+id/listViewJourneys"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button_default_brown" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonBack_journeyList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_selected_red"
+                android:text="@string/back" />
+
+            <Button
+                android:id="@+id/journeyList_addJourney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_default_green"
+                android:text="@string/add_journey" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

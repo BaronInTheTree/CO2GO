@@ -24,7 +24,7 @@ import ca.cmpt276.carbonTracker.Internal_Logic.DayData;
 import ca.cmpt276.carbonTracker.Internal_Logic.Journey;
 import ca.cmpt276.carbonTracker.Internal_Logic.Utility;
 
-import static ca.cmpt276.carbonTracker.UI.CalendarDialog.selectedDate;
+import static ca.cmpt276.carbonTracker.UI.CalendarDialogMainMenu.selectedDate;
 import static ca.cmpt276.carbonTracker.UI.GraphMenuActivity.dayMode;
 
 public class PieGraphDayJourneyActivity extends AppCompatActivity {

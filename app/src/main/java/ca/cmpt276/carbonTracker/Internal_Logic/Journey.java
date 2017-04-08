@@ -123,6 +123,10 @@ public class Journey implements Comparable<Journey> {
         }
     }
 
+    public void setDate(Date dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public String getYearString() {
         return new SimpleDateFormat("yyyy").format(dateTime);
     }
