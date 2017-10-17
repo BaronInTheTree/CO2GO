@@ -89,7 +89,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         setupRouteFilterButton();
         setupVehicleFilterButton();
         setupActionBar();
-        setupTipsText();
+        //setupTipsText(); remove tip from main screen
         setupAddViewButtons();
         setupLineGraphButton();
         setupAboutButton();
@@ -642,6 +642,8 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         });
     }
 
+    // remove tip from main screen
+    /*
     private void setupTipsText() {
         String tip = "Tip:\n" + model.getTips().getGeneralTip(MainMenuActivity_Alternate.this, model.getSummary());
         SpannableString spannableString = new SpannableString(tip);
@@ -651,6 +653,7 @@ public class MainMenuActivity_Alternate extends AppCompatActivity {
         Button tips = (Button) findViewById(R.id.buttonTipsMainMenu);
         tips.setText(spannableString);
     }
+    */
 
     @Override
     public void onBackPressed() {
